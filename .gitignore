@@ -18,6 +18,9 @@
 *.bat
 *.wsdt
 *.out
+*.pbi
+*.cout
+*.zip
 *.rprj
 *.sim
 *.map
