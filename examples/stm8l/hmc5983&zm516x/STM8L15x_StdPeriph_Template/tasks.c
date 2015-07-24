@@ -120,7 +120,7 @@ PROCESS_THREAD(zigbee_comunication, ev, data)
   GPIO_Init(GPIOB,GPIO_Pin_2,GPIO_Mode_Out_PP_High_Fast);       // SLEEP
   GPIO_Init(GPIOB,GPIO_Pin_1,GPIO_Mode_Out_PP_High_Fast);       // DEF
   GPIO_Init(GPIOD,GPIO_Pin_0,GPIO_Mode_Out_PP_Low_Fast);       // DIR
-  
+#if 0 
   GPIO_WriteBit(GPIOB, GPIO_Pin_1, RESET);
   GPIO_WriteBit(GPIOB, GPIO_Pin_5, RESET);
   
@@ -133,7 +133,7 @@ PROCESS_THREAD(zigbee_comunication, ev, data)
   PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
   
   GPIO_WriteBit(GPIOB, GPIO_Pin_1, SET);
-  
+#endif
   SYSCFG_REMAPPinConfig(REMAP_Pin_USART1TxRxPortC,ENABLE);
   CLK_PeripheralClockConfig(CLK_Peripheral_USART1, ENABLE);
   /* USART configured as follow:
@@ -156,7 +156,7 @@ PROCESS_THREAD(zigbee_comunication, ev, data)
   
   /* Enable USART */
   USART_Cmd(USART1, ENABLE);
-  
+#if 0 
   PUTSTRING("Now config ZM516X\r\n");
 
 readLocalInfo:
@@ -207,7 +207,7 @@ readLocalInfo:
   etimer_set(&et, CLOCK_SECOND / CLOCK_SECOND);
   PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
   GPIO_WriteBit(GPIOB,GPIO_Pin_5,SET);
-  
+#endif
   process_start(&hmc5983_work, NULL);
   while(1)
   {
@@ -282,8 +282,9 @@ PROCESS_THREAD(hmc5983_work, ev, data)
     if(sensor == &button_sensor) {
       //PRINTF("Button Press\n");
       //leds_toggle(LEDS_GREEN);
-    
+      DISABLE_INTERRUPTS();
       Multiple_read_HMC5983();
+      ENABLE_INTERRUPTS();
       x=BUF[0] << 8 | BUF[1]; //Combine MSB and LSB of X Data output register
       z=BUF[2] << 8 | BUF[3]; //Combine MSB and LSB of Z Data output register
       y=BUF[4] << 8 | BUF[5]; //Combine MSB and LSB of Y Data output register
