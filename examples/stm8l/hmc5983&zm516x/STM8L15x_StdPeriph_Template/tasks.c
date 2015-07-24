@@ -156,6 +156,9 @@ PROCESS_THREAD(zigbee_comunication, ev, data)
   
   /* Enable USART */
   //USART_Cmd(USART1, ENABLE);
+    
+  USART_Cmd(USART1, ENABLE);
+  //USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
 #if 0 
   PUTSTRING("Now config ZM516X\r\n");
 
@@ -208,6 +211,7 @@ readLocalInfo:
   PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
   GPIO_WriteBit(GPIOB,GPIO_Pin_5,SET);
 #endif
+  //uart_send_byte(5,"hello");
   process_start(&hmc5983_work, NULL);
   while(1)
   {
@@ -255,25 +259,23 @@ PROCESS_THREAD(hmc5983_work, ev, data)
   /*!< LM75_I2C Init */
   I2C_Cmd(I2C1, ENABLE);
   
-  GPIO_Init(GPIOB,GPIO_Pin_7,GPIO_Mode_In_FL_No_IT);       // DRDY
-  
   Init_HMC5983();
   
-  PUTSTRING("Now config HMC5983\r\n");
+  //PUTSTRING("Now config HMC5983\r\n");
   
-  ida = Single_Read_HMC5983(0x0a);
-  idb = Single_Read_HMC5983(0x0b);
-  idc = Single_Read_HMC5983(0x0c);
+  //ida = Single_Read_HMC5983(0x0a);
+  //idb = Single_Read_HMC5983(0x0b);
+  //idc = Single_Read_HMC5983(0x0c);
   
   /*uart_send_byte(12,"chip id is :");
   uart_send_byte(1,&ida);
   uart_send_byte(1,&idb);
   uart_send_byte(1,&idc);
   uart_send_byte(2,"\r\n");*/
-  GPIO_Init(GPIOB,GPIO_Pin_7,GPIO_Mode_In_FL_IT);       // DRDY
-  EXTI_SetPinSensitivity(EXTI_Pin_7, EXTI_Trigger_Falling);
   USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
-  USART_Cmd(USART1, ENABLE);
+  EXTI_SetPinSensitivity(EXTI_Pin_7, EXTI_Trigger_Falling);
+  GPIO_Init(GPIOB,GPIO_Pin_7,GPIO_Mode_In_FL_IT);       // DRDY
+  
   while(1)
   {
     //etimer_set(&et, CLOCK_SECOND / 10);

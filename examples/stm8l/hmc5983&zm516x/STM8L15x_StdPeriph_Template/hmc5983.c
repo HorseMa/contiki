@@ -267,6 +267,6 @@ void Multiple_read_HMC5983(void)
 void Init_HMC5983(void)
 {
      Single_Write_HMC5983(0x00,0x0c);  //
-     Single_Write_HMC5983(0x02,0x00);  //
      Single_Write_HMC5983(0x01,0x00);  //
+     Single_Write_HMC5983(0x02,0x00);  //
 }
