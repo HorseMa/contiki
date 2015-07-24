@@ -75,7 +75,7 @@ static int x,y,z;
 PROCESS(hello_world_process, "Hello world process");
 PROCESS(zigbee_comunication, "zigbee communication process");
 PROCESS(hmc5983_work, "hmc 5983 work");
-AUTOSTART_PROCESSES(&hello_world_process,&zigbee_comunication);
+AUTOSTART_PROCESSES(&zigbee_comunication);
 /*---------------------------------------------------------------------------*/
 
 PROCESS_THREAD(hello_world_process, ev, data)
@@ -149,13 +149,13 @@ PROCESS_THREAD(zigbee_comunication, ev, data)
 
   /* Enable the USART Receive interrupt: this interrupt is generated when the USART
     receive data register is not empty */
-  USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
+  //USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
   /* Enable the USART Transmit complete interrupt: this interrupt is generated when the USART
     transmit Shift Register is empty */
   //USART_ITConfig(USART1, USART_IT_TC, ENABLE);
   
   /* Enable USART */
-  USART_Cmd(USART1, ENABLE);
+  //USART_Cmd(USART1, ENABLE);
 #if 0 
   PUTSTRING("Now config ZM516X\r\n");
 
@@ -272,7 +272,8 @@ PROCESS_THREAD(hmc5983_work, ev, data)
   uart_send_byte(2,"\r\n");*/
   GPIO_Init(GPIOB,GPIO_Pin_7,GPIO_Mode_In_FL_IT);       // DRDY
   EXTI_SetPinSensitivity(EXTI_Pin_7, EXTI_Trigger_Falling);
-  
+  USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
+  USART_Cmd(USART1, ENABLE);
   while(1)
   {
     //etimer_set(&et, CLOCK_SECOND / 10);
