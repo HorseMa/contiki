@@ -408,12 +408,14 @@ INTERRUPT_HANDLER(USART1_RX_TIM5_CC_IRQHandler,28)
     /* In order to detect unexpected events during development,
        it is recommended to set a breakpoint on the following instruction.
     */
+  static unsigned char state = 1;
   DISABLE_INTERRUPTS();
   ENERGEST_ON(ENERGEST_TYPE_IRQ);
   USART_ClearITPendingBit(USART1,USART_IT_RXNE);
+#if 0
   uarttimeout = 0;
   stUartRcv.buf[stUartRcv.index ++] = USART_ReceiveData8(USART1);
-#if 0
+
   if(stUartRcv.index == 1)
   {
     //timer_set(&timeout,CLOCK_SECOND / CLOCK_SECOND);
@@ -435,15 +437,50 @@ INTERRUPT_HANDLER(USART1_RX_TIM5_CC_IRQHandler,28)
     }
   }
 #endif
-  
-  if(stUartRcv.index >= 128)
+  switch(state)
+  {
+    case 1:
+      if(USART_ReceiveData8(USART1) == 'g')
+      {
+        state = 2;
+      }
+      else
+      {
+        state = 1;
+      }
+      break;
+    case 2:
+      if(USART_ReceiveData8(USART1) == 'e')
+      {
+        state = 3;
+      }
+      else
+      {
+        state = 1;
+      }
+      break;
+    case 3:
+      if(USART_ReceiveData8(USART1) == 't')
+      {
+        state = 1;
+        process_post(&zigbee_comunication, PROCESS_EVENT_MSG, &stUartRcv);
+      }
+      else
+      {
+        state = 1;
+      }
+      break;
+    default:
+      break;
+  }
+  /*if(stUartRcv.index % 3 == 0)
   {
     stUartRcv.len = stUartRcv.index;
     stUartRcv.index = 0;
     // send these data to task
     process_post(&zigbee_comunication, PROCESS_EVENT_MSG, &stUartRcv);
     
-  }
+  }*/
   ENERGEST_OFF(ENERGEST_TYPE_IRQ);
   ENABLE_INTERRUPTS();
 }

@@ -212,8 +212,8 @@ readLocalInfo:
   while(1)
   {
     PROCESS_WAIT_EVENT_UNTIL(ev == PROCESS_EVENT_MSG);
-    pdata = (struct st_UartRcv *)data;
-    if(memcmp(pdata->buf,"get",3) == 0)
+    //pdata = (struct st_UartRcv *)data;
+    //if(memcmp(pdata->buf,"get",3) == 0)
     {
       *(int*)&usart_buf[0] = x;
       *(int*)&usart_buf[2] = y;

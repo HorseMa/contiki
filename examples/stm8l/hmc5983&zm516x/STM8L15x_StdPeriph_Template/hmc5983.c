@@ -1,20 +1,20 @@
 #include "hmc5983.h"
 #include "stm8l15x.h"
 
-BYTE BUF[8];                         //接收数据缓存区      	
-unsigned char ge,shi,bai,qian,wan;           //显示变量
+BYTE BUF[8];
+unsigned char ge,shi,bai,qian,wan;
 
 //*********************************************************
 void Conversion(unsigned int temp_data)  
 {  
   wan=temp_data/10000+0x30 ;
-  temp_data=temp_data%10000;   //取余运算
+  temp_data=temp_data%10000;
   qian=temp_data/1000+0x30 ;
-  temp_data=temp_data%1000;    //取余运算
+  temp_data=temp_data%1000;
   bai=temp_data/100+0x30   ;
-  temp_data=temp_data%100;     //取余运算
+  temp_data=temp_data%100;
   shi=temp_data/10+0x30    ;
-  temp_data=temp_data%10;      //取余运算
+  temp_data=temp_data%10;
   ge=temp_data+0x30; 	
 }
 
@@ -65,11 +65,11 @@ void Single_Write_HMC5983(unsigned char RegName,unsigned char RegValue)
   I2C_GenerateSTOP(I2C1, ENABLE);
 
 #if 0
-  HMC5883_Start();                  //起始信号
-  HMC5883_SendByte(SlaveAddress);   //发送设备地址+写信号
-  HMC5883_SendByte(REG_Address);    //内部寄存器地址，请参考中文pdf 
-  HMC5883_SendByte(REG_data);       //内部寄存器数据，请参考中文pdf
-  HMC5883_Stop();                   //发送停止信号
+  HMC5883_Start();
+  HMC5883_SendByte(SlaveAddress);
+  HMC5883_SendByte(REG_Address);
+  HMC5883_SendByte(REG_data);
+  HMC5883_Stop();
 #endif
 }
 
@@ -146,14 +146,14 @@ unsigned char Single_Read_HMC5983(unsigned char RegName)
   return (RegValue);
 #if 0
   uchar REG_data;
-    HMC5883_Start();                          //起始信号
-    HMC5883_SendByte(SlaveAddress);           //发送设备地址+写信号
-    HMC5883_SendByte(REG_Address);                   //发送存储单元地址，从0开始	
-    HMC5883_Start();                          //起始信号
-    HMC5883_SendByte(SlaveAddress+1);         //发送设备地址+读信号
-    REG_data=HMC5883_RecvByte();              //读出寄存器数据
-    HMC5883_SendACK(1);   
-    HMC5883_Stop();                           //停止信号
+    HMC5883_Start();
+    HMC5883_SendByte(SlaveAddress);
+    HMC5883_SendByte(REG_Address);	
+    HMC5883_Start();
+    HMC5883_SendByte(SlaveAddress+1);
+    REG_data=HMC5883_RecvByte();
+    HMC5883_SendACK(1);
+    HMC5883_Stop();
     return REG_data; 
 #endif
 }
@@ -242,30 +242,31 @@ void Multiple_read_HMC5983(void)
   
 #if 0  
   uchar i;
-    HMC5883_Start();                          //起始信号
-    HMC5883_SendByte(SlaveAddress);           //发送设备地址+写信号
-    HMC5883_SendByte(0x03);                   //发送存储单元地址，从0x3开始	
-    HMC5883_Start();                          //起始信号
-    HMC5883_SendByte(SlaveAddress+1);         //发送设备地址+读信号
-	 for (i=0; i<6; i++)                      //连续读取6个地址数据，存储中BUF
+    HMC5883_Start();
+    HMC5883_SendByte(SlaveAddress);
+    HMC5883_SendByte(0x03);
+    HMC5883_Start();
+    HMC5883_SendByte(SlaveAddress+1);
+	 for (i=0; i<6; i++)
     {
-        BUF[i] = HMC5883_RecvByte();          //BUF[0]存储数据
+        BUF[i] = HMC5883_RecvByte();
         if (i == 5)
         {
-           HMC5883_SendACK(1);                //最后一个数据需要回NOACK
+           HMC5883_SendACK(1);
         }
         else
         {
-          HMC5883_SendACK(0);                //回应ACK
+          HMC5883_SendACK(0);
        }
    }
-    HMC5883_Stop();                          //停止信号
+    HMC5883_Stop();
     Delay5ms();
 #endif
 }
 
 void Init_HMC5983(void)
 {
+     Single_Write_HMC5983(0x00,0x0c);  //
      Single_Write_HMC5983(0x02,0x00);  //
      Single_Write_HMC5983(0x01,0x00);  //
 }
