@@ -101,10 +101,10 @@ rtimer_arch_schedule(rtimer_clock_t t)
 }
 /*---------------------------------------------------------------------------*/
 /* avoid referencing bits, we don't call code which use them */
-#pragma save
+/*#pragma save
 #if CC_CONF_OPTIMIZE_STACK_SIZE
 #pragma exclude bits
-#endif
+#endif*/
 void
 rtimer_isr(void)// __interrupt(T1_VECTOR)
 {
@@ -122,4 +122,4 @@ rtimer_isr(void)// __interrupt(T1_VECTOR)
   T1IE = 1; /* Acknowledge Timer 1 Interrupts */
 #endif
 }
-#pragma restore
+//#pragma restore

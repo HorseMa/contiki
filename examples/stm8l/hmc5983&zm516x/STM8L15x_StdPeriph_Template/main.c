@@ -29,6 +29,7 @@
 #include "stm8l15x.h"
 #include "contiki.h"
 #include "contiki-lib.h"
+#include "button-sensor.h"
 /** @addtogroup STM8L15x_StdPeriph_Template
   * @{
   */
@@ -74,8 +75,8 @@ void main(void)
   /* start services */
   process_start(&etimer_process, NULL);
   //ctimer_init();
-  //process_start(&sensors_process, NULL);
-  //BUTTON_SENSOR_ACTIVATE();
+  process_start(&sensors_process, NULL);
+  BUTTON_SENSOR_ACTIVATE();
   //ADC_SENSOR_ACTIVATE();
   
   energest_init();

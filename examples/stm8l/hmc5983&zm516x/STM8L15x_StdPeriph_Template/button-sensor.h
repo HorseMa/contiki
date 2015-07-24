@@ -77,15 +77,15 @@ extern const struct sensors_sensor button_1_sensor;
 #endif /* BUTTON_SENSOR_ON */
 
 /* Define macros for buttons */
-#define BUTTON_READ(b)           1//PORT_READ(BUTTON##b##_PORT, BUTTON##b##_PIN)
+#define BUTTON_READ(b)           GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_7)//PORT_READ(BUTTON##b##_PORT, BUTTON##b##_PIN)
 #define BUTTON_FUNC_GPIO(b)      //PORT_FUNC_GPIO(BUTTON##b##_PORT, BUTTON##b##_PIN)
 #define BUTTON_DIR_INPUT(b)      //PORT_DIR_INPUT(BUTTON##b##_PORT, BUTTON##b##_PIN)
-#define BUTTON_IRQ_ENABLED(b)    1//PORT_IRQ_ENABLED(BUTTON##b##_PORT, BUTTON##b##_PIN)
-#define BUTTON_IRQ_CHECK(b)      1//PORT_IRQ_CHECK(BUTTON##b##_PORT, BUTTON##b##_PIN)
-#define BUTTON_IRQ_ENABLE(b)     //PORT_IRQ_ENABLE(BUTTON##b##_PORT, BUTTON##b##_PIN)
-#define BUTTON_IRQ_DISABLE(b)    //PORT_IRQ_DISABLE(BUTTON##b##_PORT, BUTTON##b##_PIN)
-#define BUTTON_IRQ_FLAG_OFF(b)   //PORT_IRQ_FLAG_OFF(BUTTON##b##_PORT, BUTTON##b##_PIN)
-#define BUTTON_IRQ_ON_PRESS(b)   //PORT_IRQ_EDGE_RISE(BUTTON##b##_PORT, BUTTON##b##_PIN)
-#define BUTTON_IRQ_ON_RELEASE(b) //PORT_IRQ_EDGE_FALL(BUTTON##b##_PORT, BUTTON##b##_PIN)
+#define BUTTON_IRQ_ENABLED(b)    (GPIOB->CR2 & GPIO_Pin_7)//PORT_IRQ_ENABLED(BUTTON##b##_PORT, BUTTON##b##_PIN)
+#define BUTTON_IRQ_CHECK(b)      EXTI_GetITStatus(EXTI_IT_PortB)//PORT_IRQ_CHECK(BUTTON##b##_PORT, BUTTON##b##_PIN)
+#define BUTTON_IRQ_ENABLE(b)     (GPIOB->CR2 |= GPIO_Pin_7)//PORT_IRQ_ENABLE(BUTTON##b##_PORT, BUTTON##b##_PIN)
+#define BUTTON_IRQ_DISABLE(b)    GPIOB->CR2 &= (uint8_t)(~(GPIO_Pin_7))//PORT_IRQ_DISABLE(BUTTON##b##_PORT, BUTTON##b##_PIN)
+#define BUTTON_IRQ_FLAG_OFF(b)   EXTI_ClearITPendingBit(EXTI_IT_Pin7);//PORT_IRQ_FLAG_OFF(BUTTON##b##_PORT, BUTTON##b##_PIN)
+#define BUTTON_IRQ_ON_PRESS(b)   EXTI_SetPinSensitivity(EXTI_Pin_7, EXTI_Trigger_Falling)//PORT_IRQ_EDGE_RISE(BUTTON##b##_PORT, BUTTON##b##_PIN)
+#define BUTTON_IRQ_ON_RELEASE(b) EXTI_SetPinSensitivity(EXTI_Pin_7, EXTI_Trigger_Rising)//PORT_IRQ_EDGE_FALL(BUTTON##b##_PORT, BUTTON##b##_PIN)
 
 #endif /* BUTTON_SENSOR_H_ */

@@ -1,4 +1,5 @@
 #include "contiki.h"
+#include "button-sensor.h"
 #include "tasks.h"
 #include "stm8l15x_it.h"
 #include "uart_recv.h"
@@ -61,9 +62,9 @@ struct dev_info{
 static struct dev_info stDevInfo;
 static unsigned char usart_buf[128];
 static unsigned char const read_local_cfg[5] = {0xAB,0XBC,0XCD,0XD1,0X0A};
-static unsigned char const write_local_cfg[3 + 1 + 2 + 65 + 1] = {0xAB,0XBC,0XCD,0XD6,}; 
-static unsigned char const set_dest_addr[6] = {0xde,0xdf,0xef,0XD2,0X20,0x01};
-
+//static unsigned char const write_local_cfg[3 + 1 + 2 + 65 + 1] = {0xAB,0XBC,0XCD,0XD6,}; 
+//static unsigned char const set_dest_addr[6] = {0xde,0xdf,0xef,0XD2,0X20,0x01};
+static int x,y,z;
 /*void usart_send_bytes(unsigned char *bytes, int len)
 {
   int i;
@@ -93,11 +94,13 @@ PROCESS_THREAD(hello_world_process, ev, data)
 void uart_send_byte(int len,unsigned char *data)
 {
   int i = 0;
+  GPIO_WriteBit(GPIOD, GPIO_Pin_0, SET);
   for(i = 0;i < len;i ++)
   {
     while(USART_GetFlagStatus(USART1,USART_FLAG_TXE) != SET);
     USART_SendData8(USART1,data[i]);
   }
+  GPIO_WriteBit(GPIOD, GPIO_Pin_0, RESET);
 }
 PROCESS_THREAD(zigbee_comunication, ev, data)
 {
@@ -116,6 +119,7 @@ PROCESS_THREAD(zigbee_comunication, ev, data)
   GPIO_Init(GPIOB,GPIO_Pin_3,GPIO_Mode_Out_PP_High_Fast);       // WAKEUP
   GPIO_Init(GPIOB,GPIO_Pin_2,GPIO_Mode_Out_PP_High_Fast);       // SLEEP
   GPIO_Init(GPIOB,GPIO_Pin_1,GPIO_Mode_Out_PP_High_Fast);       // DEF
+  GPIO_Init(GPIOD,GPIO_Pin_0,GPIO_Mode_Out_PP_Low_Fast);       // DIR
   
   GPIO_WriteBit(GPIOB, GPIO_Pin_1, RESET);
   GPIO_WriteBit(GPIOB, GPIO_Pin_5, RESET);
@@ -142,8 +146,6 @@ PROCESS_THREAD(zigbee_comunication, ev, data)
   */
   USART_Init(USART1, (uint32_t)115200, USART_WordLength_8b, USART_StopBits_1,
                    USART_Parity_No, (USART_Mode_TypeDef)(USART_Mode_Tx | USART_Mode_Rx));
-  //USART_ClockInit(USART1,USART_Clock_Disable,USART_CPOL_Low,USART_CPHA_2Edge,USART_LastBit_Disable); //配置USART1->CR3
-      //串口时钟初始化配置  
 
   /* Enable the USART Receive interrupt: this interrupt is generated when the USART
     receive data register is not empty */
@@ -209,9 +211,19 @@ readLocalInfo:
   process_start(&hmc5983_work, NULL);
   while(1)
   {
-    etimer_set(&et, CLOCK_SECOND / 10);
-    PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
-    memcpy(usart_buf,"hello!\r\n",8);
+    PROCESS_WAIT_EVENT_UNTIL(ev == PROCESS_EVENT_MSG);
+    pdata = (struct st_UartRcv *)data;
+    if(memcmp(pdata->buf,"get",3) == 0)
+    {
+      *(int*)&usart_buf[0] = x;
+      *(int*)&usart_buf[2] = y;
+      *(int*)&usart_buf[4] = z;
+      usart_buf[6] = 0xff - (usart_buf[0] + usart_buf[1] + usart_buf[2] + usart_buf[3] + usart_buf[4] + usart_buf[5]);
+      uart_send_byte(7,usart_buf);
+    }
+    //etimer_set(&et, CLOCK_SECOND / 10);
+    //PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
+    //memcpy(usart_buf,"hello!\r\n",8);
     
     //uart_send_byte(8,usart_buf);
   }
@@ -221,8 +233,9 @@ readLocalInfo:
 
 PROCESS_THREAD(hmc5983_work, ev, data)
 {
-  static struct etimer et;
-  static int x,y,z,xinit,yinit,zinit;
+  //static struct etimer et;
+  struct sensors_sensor *sensor;
+  //static unsigned char wbuf[7];
   //double angle;
   unsigned char ida,idb,idc;
   PROCESS_BEGIN();
@@ -252,118 +265,35 @@ PROCESS_THREAD(hmc5983_work, ev, data)
   idb = Single_Read_HMC5983(0x0b);
   idc = Single_Read_HMC5983(0x0c);
   
-  uart_send_byte(12,"chip id is :");
+  /*uart_send_byte(12,"chip id is :");
   uart_send_byte(1,&ida);
   uart_send_byte(1,&idb);
   uart_send_byte(1,&idc);
-  uart_send_byte(2,"\r\n");
-  
-  Multiple_read_HMC5983();      //连续读出数据，存储在BUF中
-  etimer_set(&et, CLOCK_SECOND / 10);
-  PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
-  Multiple_read_HMC5983();      //连续读出数据，存储在BUF中
-  //---------显示X轴
-  x=BUF[0] << 8 | BUF[1]; //Combine MSB and LSB of X Data output register
-  z=BUF[2] << 8 | BUF[3]; //Combine MSB and LSB of Z Data output register
-  y=BUF[4] << 8 | BUF[5]; //Combine MSB and LSB of Y Data output register
-  xinit = x;
-  yinit = y;
-  zinit = z;
+  uart_send_byte(2,"\r\n");*/
+  GPIO_Init(GPIOB,GPIO_Pin_7,GPIO_Mode_In_FL_IT);       // DRDY
+  EXTI_SetPinSensitivity(EXTI_Pin_7, EXTI_Trigger_Falling);
   
   while(1)
   {
-    etimer_set(&et, CLOCK_SECOND / 10);
-    PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
-
-    Multiple_read_HMC5983();      //连续读出数据，存储在BUF中
-    //---------显示X轴
-    x=BUF[0] << 8 | BUF[1]; //Combine MSB and LSB of X Data output register
-    z=BUF[2] << 8 | BUF[3]; //Combine MSB and LSB of Z Data output register
-    y=BUF[4] << 8 | BUF[5]; //Combine MSB and LSB of Y Data output register
+    //etimer_set(&et, CLOCK_SECOND / 10);
+    //PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
+    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event);
+    sensor = (struct sensors_sensor *)data;
+    if(sensor == &button_sensor) {
+      //PRINTF("Button Press\n");
+      //leds_toggle(LEDS_GREEN);
     
-    //angle= (atan2((double)y,(double)x) * (180 / 3.14159265) + 180) * 10; // angle in degrees
-    //Conversion((unsigned int)angle);       //计算数据和显示
-    Conversion((unsigned int)abs(x));       //计算数据和显示
-    uart_send_byte(2,"x:");
-    if(x < 0)
-    {
-      uart_send_byte(1,"-");
+      Multiple_read_HMC5983();
+      x=BUF[0] << 8 | BUF[1]; //Combine MSB and LSB of X Data output register
+      z=BUF[2] << 8 | BUF[3]; //Combine MSB and LSB of Z Data output register
+      y=BUF[4] << 8 | BUF[5]; //Combine MSB and LSB of Y Data output register
+    
+      /**(int*)&wbuf[0] = x;
+      *(int*)&wbuf[2] = y;
+      *(int*)&wbuf[4] = z;
+      wbuf[6] = 0xff - (wbuf[0] + wbuf[1] + wbuf[2] + wbuf[3] + wbuf[4] + wbuf[5]);
+      uart_send_byte(7,wbuf);*/
     }
-    else
-    {
-      uart_send_byte(1,"+");
-    }
-    uart_send_byte(1,&wan);
-    uart_send_byte(1,&qian);
-    uart_send_byte(1,&bai);
-    uart_send_byte(1,&shi);
-    uart_send_byte(1,&ge);
-    uart_send_byte(2,"\r\n");
-    Conversion((unsigned int)abs(y));       //计算数据和显示
-    uart_send_byte(2,"y:");
-    if(y < 0)
-    {
-      uart_send_byte(1,"-");
-    }
-    else
-    {
-      uart_send_byte(1,"+");
-    }
-    uart_send_byte(1,&wan);
-    uart_send_byte(1,&qian);
-    uart_send_byte(1,&bai);
-    uart_send_byte(1,&shi);
-    uart_send_byte(1,&ge);
-    uart_send_byte(2,"\r\n");
-    Conversion((unsigned int)abs(z));       //计算数据和显示
-    uart_send_byte(2,"z:");
-    if(z < 0)
-    {
-      uart_send_byte(1,"-");
-    }
-    else
-    {
-      uart_send_byte(1,"+");
-    }
-    uart_send_byte(1,&wan);
-    uart_send_byte(1,&qian);
-    uart_send_byte(1,&bai);
-    uart_send_byte(1,&shi);
-    uart_send_byte(1,&ge);
-    uart_send_byte(2,"\r\n");
-    
-    Conversion((unsigned int)abs(x - xinit));       //计算数据和显示
-    uart_send_byte(14,"x axis abs is:");
-
-    uart_send_byte(1,&wan);
-    uart_send_byte(1,&qian);
-    uart_send_byte(1,&bai);
-    uart_send_byte(1,&shi);
-    uart_send_byte(1,&ge);
-    uart_send_byte(2,"\r\n");
-    
-    
-    Conversion((unsigned int)abs(y - yinit));       //计算数据和显示
-    uart_send_byte(14,"y axis abs is:");
- 
-    uart_send_byte(1,&wan);
-    uart_send_byte(1,&qian);
-    uart_send_byte(1,&bai);
-    uart_send_byte(1,&shi);
-    uart_send_byte(1,&ge);
-    uart_send_byte(2,"\r\n");
-    
-    
-    
-    Conversion((unsigned int)abs(z - zinit));       //计算数据和显示
-    uart_send_byte(14,"z axis abs is:");
-    uart_send_byte(1,&wan);
-    uart_send_byte(1,&qian);
-    uart_send_byte(1,&bai);
-    uart_send_byte(1,&shi);
-    uart_send_byte(1,&ge);
-    uart_send_byte(2,"\r\n");
-    uart_send_byte(2,"\r\n");
   }
   PROCESS_EXIT();
   PROCESS_END();

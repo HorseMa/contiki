@@ -12,11 +12,6 @@
 *.pdf
 *.rapp
 *.o
-*.dbgdt
-*.dni
-*.wspos
-*.bat
-*.wsdt
 *.out
 *.pbi
 *.cout

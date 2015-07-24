@@ -55,7 +55,7 @@ status_b1(int type)
   switch(type) {
   case SENSORS_ACTIVE:
   case SENSORS_READY:
-    return BUTTON_IRQ_ENABLED(1);
+    return 1;//BUTTON_IRQ_ENABLED(1);
   }
   return 0;
 }
@@ -65,20 +65,20 @@ configure_b1(int type, int value)
 {
   switch(type) {
   case SENSORS_HW_INIT:
-    BUTTON_IRQ_ON_PRESS(1);
-    BUTTON_FUNC_GPIO(1);
-    BUTTON_DIR_INPUT(1);
+    //BUTTON_IRQ_ON_PRESS(1);
+    //BUTTON_FUNC_GPIO(1);
+    //BUTTON_DIR_INPUT(1);
     return 1;
   case SENSORS_ACTIVE:
-    if(value) {
-      if(!BUTTON_IRQ_ENABLED(1)) {
-        timer_set(&debouncetimer, 0);
-        BUTTON_IRQ_FLAG_OFF(1);
-        BUTTON_IRQ_ENABLE(1);
-      }
-    } else {
-      BUTTON_IRQ_DISABLE(1);
-    }
+    //if(value) {
+      //if(!BUTTON_IRQ_ENABLED(1)) {
+        //timer_set(&debouncetimer, 0);
+        //BUTTON_IRQ_FLAG_OFF(1);
+        //BUTTON_IRQ_ENABLE(1);
+     // }
+    //} else {
+      //BUTTON_IRQ_DISABLE(1);
+    //}
     return 1;
   }
   return 0;
@@ -93,24 +93,24 @@ configure_b1(int type, int value)
   * @param  None
   * @retval None
   */
-INTERRUPT_HANDLER(EXTIB_G_IRQHandler,6)
+INTERRUPT_HANDLER(EXTI7_IRQHandler,15)
 {
     /* In order to detect unexpected events during development,
        it is recommended to set a breakpoint on the following instruction.
     */
   DISABLE_INTERRUPTS();
   ENERGEST_ON(ENERGEST_TYPE_IRQ);
-
+  EXTI_ClearITPendingBit(EXTI_IT_Pin7);
   /* This ISR is for the entire port. Check if the interrupt was caused by our
    * button's pin. */
-  if(BUTTON_IRQ_CHECK(1)) {
-    if(timer_expired(&debouncetimer)) {
-      timer_set(&debouncetimer, CLOCK_SECOND / 8);
+  //if(BUTTON_IRQ_CHECK(1)) {
+    //if(timer_expired(&debouncetimer)) {
+    //  timer_set(&debouncetimer, CLOCK_SECOND / 8);
       sensors_changed(&button_sensor);
-    }
-  }
+    //}
+  //}
 
-  BUTTON_IRQ_FLAG_OFF(1);
+  //BUTTON_IRQ_FLAG_OFF(1);
 
   ENERGEST_OFF(ENERGEST_TYPE_IRQ);
   ENABLE_INTERRUPTS();
