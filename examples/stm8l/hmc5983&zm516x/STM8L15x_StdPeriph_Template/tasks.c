@@ -219,11 +219,20 @@ readLocalInfo:
     //pdata = (struct st_UartRcv *)data;
     //if(memcmp(pdata->buf,"get",3) == 0)
     {
-      *(int*)&usart_buf[0] = x;
-      *(int*)&usart_buf[2] = y;
-      *(int*)&usart_buf[4] = z;
-      usart_buf[6] = 0xff - (usart_buf[0] + usart_buf[1] + usart_buf[2] + usart_buf[3] + usart_buf[4] + usart_buf[5]);
-      uart_send_byte(7,usart_buf);
+      usart_buf[0] = 0xAA;
+      usart_buf[1] = 0xBB;
+      usart_buf[2] = 0xCC;
+      *(int*)&usart_buf[3] = x;
+      *(int*)&usart_buf[5] = y;
+      *(int*)&usart_buf[7] = z;
+      usart_buf[9] = 0;
+      for(i = 0;i < 10;i ++)
+      {
+        usart_buf[9] += usart_buf[i];
+      }
+      
+      usart_buf[9] = 0xff - usart_buf[9];
+      uart_send_byte(10,usart_buf);
     }
     //etimer_set(&et, CLOCK_SECOND / 10);
     //PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
@@ -250,7 +259,7 @@ PROCESS_THREAD(hmc5983_work, ev, data)
   I2C_DeInit(I2C1);
 
   /* I2C configuration */
-  I2C_Init(I2C1, 300000, 0x00, I2C_Mode_SMBusHost,
+  I2C_Init(I2C1, 400000, 0x00, I2C_Mode_SMBusHost,
            I2C_DutyCycle_2, I2C_Ack_Enable, I2C_AcknowledgedAddress_7bit);
 
   /*!< Enable SMBus Alert interrupt */
