@@ -72,13 +72,13 @@ static int x,y,z;
   USART_SendData8(USART1,bytes[i]);
 }*/
 /*---------------------------------------------------------------------------*/
-PROCESS(hello_world_process, "Hello world process");
+//PROCESS(hello_world_process, "Hello world process");
 PROCESS(zigbee_comunication, "zigbee communication process");
 PROCESS(hmc5983_work, "hmc 5983 work");
 AUTOSTART_PROCESSES(&zigbee_comunication);
 /*---------------------------------------------------------------------------*/
 
-PROCESS_THREAD(hello_world_process, ev, data)
+/*PROCESS_THREAD(hello_world_process, ev, data)
 {
   static struct etimer et;
   PROCESS_BEGIN();
@@ -89,18 +89,18 @@ PROCESS_THREAD(hello_world_process, ev, data)
   }
   PROCESS_EXIT();
   PROCESS_END();
-}
+}*/
 
 void uart_send_byte(int len,unsigned char *data)
 {
   int i = 0;
-  GPIO_WriteBit(GPIOD, GPIO_Pin_0, SET);
+  //GPIO_WriteBit(GPIOD, GPIO_Pin_0, SET);
   for(i = 0;i < len;i ++)
   {
     while(USART_GetFlagStatus(USART1,USART_FLAG_TXE) != SET);
     USART_SendData8(USART1,data[i]);
   }
-  GPIO_WriteBit(GPIOD, GPIO_Pin_0, RESET);
+  //GPIO_WriteBit(GPIOD, GPIO_Pin_0, RESET);
 }
 PROCESS_THREAD(zigbee_comunication, ev, data)
 {
@@ -215,6 +215,8 @@ readLocalInfo:
   process_start(&hmc5983_work, NULL);
   while(1)
   {
+    //etimer_set(&et, CLOCK_SECOND);
+    //PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
     PROCESS_WAIT_EVENT_UNTIL(ev == PROCESS_EVENT_MSG);
     //pdata = (struct st_UartRcv *)data;
     //if(memcmp(pdata->buf,"get",3) == 0)
@@ -226,13 +228,19 @@ readLocalInfo:
       *(int*)&usart_buf[5] = y;
       *(int*)&usart_buf[7] = z;
       usart_buf[9] = 0;
-      for(i = 0;i < 10;i ++)
+      for(i = 0;i < 9;i ++)
       {
         usart_buf[9] += usart_buf[i];
       }
       
       usart_buf[9] = 0xff - usart_buf[9];
+      GPIO_WriteBit(GPIOD, GPIO_Pin_0, SET);
+      etimer_set(&et, CLOCK_SECOND / 20);
+      PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
       uart_send_byte(10,usart_buf);
+      etimer_set(&et, CLOCK_SECOND / 100);
+      PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
+      GPIO_WriteBit(GPIOD, GPIO_Pin_0, RESET);
     }
     //etimer_set(&et, CLOCK_SECOND / 10);
     //PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
@@ -246,7 +254,7 @@ readLocalInfo:
 
 PROCESS_THREAD(hmc5983_work, ev, data)
 {
-  //static struct etimer et;
+  static struct etimer et;
   struct sensors_sensor *sensor;
   //static unsigned char wbuf[7];
   //double angle;
@@ -282,16 +290,16 @@ PROCESS_THREAD(hmc5983_work, ev, data)
   uart_send_byte(1,&idc);
   uart_send_byte(2,"\r\n");*/
   USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
-  EXTI_SetPinSensitivity(EXTI_Pin_7, EXTI_Trigger_Falling);
+  //EXTI_SetPinSensitivity(EXTI_Pin_7, EXTI_Trigger_Falling);
   GPIO_Init(GPIOB,GPIO_Pin_7,GPIO_Mode_In_FL_IT);       // DRDY
   
   while(1)
   {
-    //etimer_set(&et, CLOCK_SECOND / 10);
-    //PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
-    PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event);
+    etimer_set(&et, CLOCK_SECOND / 10);
+    PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
+    //PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event);
     sensor = (struct sensors_sensor *)data;
-    if(sensor == &button_sensor) {
+    //if(sensor == &button_sensor) {
       //PRINTF("Button Press\n");
       //leds_toggle(LEDS_GREEN);
       DISABLE_INTERRUPTS();
@@ -306,7 +314,7 @@ PROCESS_THREAD(hmc5983_work, ev, data)
       *(int*)&wbuf[4] = z;
       wbuf[6] = 0xff - (wbuf[0] + wbuf[1] + wbuf[2] + wbuf[3] + wbuf[4] + wbuf[5]);
       uart_send_byte(7,wbuf);*/
-    }
+    //}
   }
   PROCESS_EXIT();
   PROCESS_END();

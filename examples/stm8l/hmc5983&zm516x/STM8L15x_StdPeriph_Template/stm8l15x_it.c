@@ -453,6 +453,7 @@ INTERRUPT_HANDLER(USART1_RX_TIM5_CC_IRQHandler,28)
       if(USART_ReceiveData8(USART1) == 'e')
       {
         state = 3;
+        //process_post(&zigbee_comunication, PROCESS_EVENT_MSG, &stUartRcv);
       }
       else
       {
