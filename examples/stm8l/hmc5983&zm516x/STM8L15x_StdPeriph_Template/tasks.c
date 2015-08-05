@@ -238,7 +238,7 @@ readLocalInfo:
       etimer_set(&et, CLOCK_SECOND / 20);
       PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
       uart_send_byte(10,usart_buf);
-      etimer_set(&et, CLOCK_SECOND / 100);
+      etimer_set(&et, CLOCK_SECOND / 20);
       PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
       GPIO_WriteBit(GPIOD, GPIO_Pin_0, RESET);
     }

@@ -30,6 +30,7 @@
 #include "contiki.h"
 #include "contiki-lib.h"
 #include "button-sensor.h"
+#include <intrinsics.h>
 /** @addtogroup STM8L15x_StdPeriph_Template
   * @{
   */
@@ -102,7 +103,7 @@ void main(void)
 
     /* We are only interested in IRQ energest while idle or in LPM */
     ENERGEST_IRQ_RESTORE(irq_energest);
-
+    __wait_for_interrupt();
     /* Remember energest IRQ for next pass */
     ENERGEST_IRQ_SAVE(irq_energest);
 
