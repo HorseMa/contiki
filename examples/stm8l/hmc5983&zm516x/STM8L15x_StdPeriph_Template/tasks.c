@@ -295,7 +295,7 @@ PROCESS_THREAD(hmc5983_work, ev, data)
   
   while(1)
   {
-    etimer_set(&et, CLOCK_SECOND / 10);
+    etimer_set(&et, CLOCK_SECOND * 1);
     PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
     //PROCESS_WAIT_EVENT_UNTIL(ev == sensors_event);
     sensor = (struct sensors_sensor *)data;
