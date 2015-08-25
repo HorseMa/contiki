@@ -14,7 +14,7 @@
 typedef unsigned short clock_time_t;
 #define MAX_TICKS (~((clock_time_t)0) / 2)
 /* Defines tick counts for a second. */
-#define CLOCK_CONF_SECOND   128
+#define CLOCK_CONF_SECOND   1024
 
 //#include "models.h"
 #define CCIF
