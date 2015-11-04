@@ -65,6 +65,7 @@ static unsigned char const read_local_cfg[5] = {0xAB,0XBC,0XCD,0XD1,0X0A};
 //static unsigned char const write_local_cfg[3 + 1 + 2 + 65 + 1] = {0xAB,0XBC,0XCD,0XD6,}; 
 //static unsigned char const set_dest_addr[6] = {0xde,0xdf,0xef,0XD2,0X20,0x01};
 static int x,y,z;
+static unsigned char flg = 0;
 /*void usart_send_bytes(unsigned char *bytes, int len)
 {
   int i;
@@ -220,6 +221,7 @@ readLocalInfo:
     PROCESS_WAIT_EVENT_UNTIL(ev == PROCESS_EVENT_MSG);
     //pdata = (struct st_UartRcv *)data;
     //if(memcmp(pdata->buf,"get",3) == 0)
+    if(flg)
     {
       usart_buf[0] = 0xAA;
       usart_buf[1] = 0xBB;
@@ -308,7 +310,7 @@ PROCESS_THREAD(hmc5983_work, ev, data)
       x=BUF[0] << 8 | BUF[1]; //Combine MSB and LSB of X Data output register
       z=BUF[2] << 8 | BUF[3]; //Combine MSB and LSB of Z Data output register
       y=BUF[4] << 8 | BUF[5]; //Combine MSB and LSB of Y Data output register
-    
+      flg = 1;
       /**(int*)&wbuf[0] = x;
       *(int*)&wbuf[2] = y;
       *(int*)&wbuf[4] = z;
