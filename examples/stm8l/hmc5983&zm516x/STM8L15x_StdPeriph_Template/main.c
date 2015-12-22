@@ -86,7 +86,11 @@ void main(void)
   autostart_start(autostart_processes);
 
   //watchdog_start();
-
+   IWDG_WriteAccessCmd(IWDG_WriteAccess_Enable);//启动寄存器读写
+   IWDG_SetPrescaler(IWDG_Prescaler_256);//40K时钟32分频
+   IWDG_SetReload(255);                 //计数器数值
+   IWDG_ReloadCounter();             //重启计数器
+   IWDG_Enable();                       //启动看门狗
   /* Infinite loop */
   while (1)
   {
@@ -103,6 +107,7 @@ void main(void)
 
     /* We are only interested in IRQ energest while idle or in LPM */
     ENERGEST_IRQ_RESTORE(irq_energest);
+    IWDG_ReloadCounter();//重启计数器（喂狗）
     __wait_for_interrupt();
     /* Remember energest IRQ for next pass */
     ENERGEST_IRQ_SAVE(irq_energest);

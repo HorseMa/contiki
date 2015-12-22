@@ -236,6 +236,8 @@ readLocalInfo:
       }
       
       usart_buf[9] = 0xff - usart_buf[9];
+      etimer_set(&et, CLOCK_SECOND / 20);
+      PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
       GPIO_WriteBit(GPIOD, GPIO_Pin_0, SET);
       etimer_set(&et, CLOCK_SECOND / 20);
       PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
@@ -269,7 +271,7 @@ PROCESS_THREAD(hmc5983_work, ev, data)
   I2C_DeInit(I2C1);
 
   /* I2C configuration */
-  I2C_Init(I2C1, 400000, 0x00, I2C_Mode_SMBusHost,
+  I2C_Init(I2C1, 4000, 0x00, I2C_Mode_SMBusHost,
            I2C_DutyCycle_2, I2C_Ack_Enable, I2C_AcknowledgedAddress_7bit);
 
   /*!< Enable SMBus Alert interrupt */
