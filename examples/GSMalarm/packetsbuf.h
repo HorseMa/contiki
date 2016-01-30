@@ -3,7 +3,7 @@
 
 
 #define MAX_PACKET_NUM    2
-#define BUF_SIZE          70
+#define BUF_SIZE          90
 
 struct st_Packet
 {
@@ -14,7 +14,6 @@ struct st_Packet
   unsigned char data[BUF_SIZE];
 };
 typedef struct st_Packet* pst_Packet;
-
 void pktbuf_init(void);
 pst_Packet pktbuf_alloc(void);
 void pktbuf_free(pst_Packet pkt);

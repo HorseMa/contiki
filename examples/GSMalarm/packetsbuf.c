@@ -11,6 +11,7 @@ void pktbuf_init(void)
     stPacket[i].used = FALSE;
     stPacket[i].len = 0;
     stPacket[i].offset = 0;
+    memset(stPacket[i].data,0,BUF_SIZE);
   }
 }
 

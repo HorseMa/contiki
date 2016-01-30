@@ -12,14 +12,15 @@
 //#define ledBlink(tLedId id, unsigned int duty, unsigned char percentage);
 
 void eepromInit(void);
-void eepromWriteBytes(unsigned char *eepromAddr,unsigned char *bytes,unsigned char cnt);
-void eepromReadBytes(unsigned char *eepromAddr,unsigned char *bytes,unsigned char cnt);
+void eepromWriteBytes(uint32_t eepromAddr,unsigned char *bytes,unsigned char cnt);
+void eepromReadBytes(uint32_t eepromAddr,unsigned char *bytes,unsigned char cnt);
 void clockInit(void);
 void gpioInit(void);
 void spiInit(void);
 void timerInit(void);
 void uartInit(void);
 void UART2_SendString(u8* Data);
+void UART2_SendBytes(u8 *bytes,u8 len);
 void watchdog_start(void);
 void watchdog_periodic(void);
 

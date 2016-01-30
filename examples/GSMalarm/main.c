@@ -35,7 +35,7 @@ void main(void)
   uartInit();
   rtimer_init();
   //vRadio_Init();
-  //pktbuf_init();
+  pktbuf_init();
   //globalInit();
   //stack_poison();
 

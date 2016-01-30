@@ -26,6 +26,7 @@
 #include "contiki.h"
 #include "bsp.h"
 #include "global.h"
+#include "packetsbuf.h"
 #include <math.h>
 #include <stdlib.h>
 /** @addtogroup Template_Project
@@ -278,6 +279,7 @@ INTERRUPT_HANDLER(TIM1_CAP_COM_IRQHandler, 12)
   * @param  None
   * @retval None
   */
+ void packet_over_poll(void);
 extern void clock_isr(void);
  INTERRUPT_HANDLER(TIM2_UPD_OVF_BRK_IRQHandler, 13)
  {
@@ -288,6 +290,7 @@ extern void clock_isr(void);
    ENERGEST_ON(ENERGEST_TYPE_IRQ);
    TIM2_ClearFlag(TIM2_FLAG_UPDATE);
    clock_isr();
+   packet_over_poll();
    ENERGEST_OFF(ENERGEST_TYPE_IRQ);
    ENABLE_INTERRUPTS();
  }
@@ -394,38 +397,55 @@ INTERRUPT_HANDLER(I2C_IRQHandler, 19)
   * @param  None
   * @retval None
   */
+static pst_Packet pstPacket = NULL;
+static clock_time_t count = 0;// = clock_time();
+void packet_over_poll(void)
+{
+  if(!(NULL == pstPacket))
+  {
+    if(abs(count - clock_time()) > CLOCK_SECOND / 50)
+    {
+      pstPacket->len = pstPacket->offset;
+      process_post(&uartRecv_process,PROCESS_EVENT_MSG,(process_data_t)(pstPacket));
+      pstPacket = NULL;
+    }
+  }
+}
  INTERRUPT_HANDLER(UART2_RX_IRQHandler, 21)
  {
     /* In order to detect unexpected events during development,
        it is recommended to set a breakpoint on the following instruction.
     */
-  static st_UartBuf stUartBuf;
-  static clock_time_t count = 0;// = clock_time();
+  DISABLE_INTERRUPTS();
+  ENERGEST_ON(ENERGEST_TYPE_IRQ);
+  UART2_ClearITPendingBit(UART2_IT_RXNE);    //清中断标志
+  if(NULL == pstPacket)
+  {
+    pstPacket = pktbuf_alloc();
+    if(NULL == pstPacket)
+    {
+      return;
+    }
+  }
+  
   /* 读取接收到的数据,当读完数据后自动取消RXNE的中断标志位 */
-  if(stUartBuf.len == 0)
+  if(pstPacket->offset == 0)
   {
     count = clock_time();
   }
-  stUartBuf.buf[stUartBuf.len++] = UART2_ReceiveData8();
-  if((stUartBuf.len >= 50) || (abs(count - clock_time()) > CLOCK_SECOND / 50))
+  pstPacket->data[pstPacket->offset ++] = UART2_ReceiveData8();
+  if(pstPacket->offset >= BUF_SIZE)
   {
-    process_post(&uartRecv_process,PROCESS_EVENT_MSG,(process_data_t)(&stUartBuf));
-    stUartBuf.len = 0;
+    pstPacket->len = pstPacket->offset;
+    process_post(&uartRecv_process,PROCESS_EVENT_MSG,(process_data_t)(pstPacket));
+    pstPacket = NULL;
   }
-  //if(Res=='$')
+  else
   {
-    //recive_start_flag=1;
+    count = clock_time();
   }
-  //if(Res=='&')
-  {
-    //recive_start_flag=0;
-    //recive_stop_flag=1;
-    //recive_jishu=0;
-  }
-  //if(recive_start_flag==1)
-  {
-    //recive_buffer[recive_jishu++]=Res;
-  }
+  ENERGEST_OFF(ENERGEST_TYPE_IRQ);
+  ENABLE_INTERRUPTS();
 }
 #endif /* STM8S105 or STM8AF626x */
 

@@ -11,24 +11,24 @@ void eepromInit(void)
   FLASH_SetProgrammingTime(FLASH_PROGRAMTIME_STANDARD);
 }
 
-void eepromWriteBytes(unsigned char *eepromAddr,unsigned char *bytes,unsigned char cnt)
+void eepromWriteBytes(uint32_t eepromAddr,unsigned char *bytes,unsigned char cnt)
 {
   unsigned char u8Loop;
   FLASH_Unlock(FLASH_MEMTYPE_DATA);
   for(u8Loop = 0;u8Loop < cnt;u8Loop ++)
   {
-    FLASH_ProgramByte((unsigned long)eepromAddr + (unsigned long)u8Loop, bytes[u8Loop]);
+    FLASH_ProgramByte((uint32_t)eepromAddr + u8Loop, bytes[u8Loop]);
   }
   FLASH_Lock(FLASH_MEMTYPE_DATA);
 }
 
-void eepromReadBytes(unsigned char *eepromAddr,unsigned char *bytes,unsigned char cnt)
+void eepromReadBytes(uint32_t eepromAddr,unsigned char *bytes,unsigned char cnt)
 {
   unsigned char u8Loop;
   FLASH_Unlock(FLASH_MEMTYPE_DATA);
   for(u8Loop = 0;u8Loop < cnt;u8Loop ++)
   {
-    bytes[u8Loop] = FLASH_ReadByte((unsigned long)eepromAddr + (unsigned long)u8Loop);
+    bytes[u8Loop] = FLASH_ReadByte(eepromAddr + (unsigned long)u8Loop);
   }
   FLASH_Lock(FLASH_MEMTYPE_DATA);
 }
@@ -48,7 +48,8 @@ void clockInit(void)
 void gpioInit(void)
 {
   
-  GPIO_Init(GPIOB, GPIO_PIN_1, GPIO_MODE_IN_PU_NO_IT );
+  GPIO_Init(GPIOB, GPIO_PIN_1, GPIO_MODE_IN_PU_NO_IT );//315模块报警信号输入脚
+  GPIO_Init(GPIOB, GPIO_PIN_0, GPIO_MODE_OUT_PP_LOW_FAST );//GPRS 复位
 }
 
 void timerInit(void)
@@ -92,10 +93,10 @@ void uartInit(void)
 	 */
 
 
-  UART2_Init((u32)9600, UART2_WORDLENGTH_8D, UART2_STOPBITS_1, \
+  UART2_Init((u32)115200, UART2_WORDLENGTH_8D, UART2_STOPBITS_1, \
   UART2_PARITY_NO, UART2_SYNCMODE_CLOCK_DISABLE, UART2_MODE_TXRX_ENABLE);
 
-  UART2_ITConfig(UART2_IT_RXNE_OR, ENABLE); //开启接收中断
+  UART2_ITConfig(UART2_IT_RXNE, ENABLE); //开启接收中断
   UART2_Cmd(ENABLE);
 }
 
@@ -125,5 +126,12 @@ void UART2_SendString(u8* Data)
     UART2_SendByte(Data[i]);	/* 循环调用发送一个字符函数 */
     i++;
   }
+}
+
+void UART2_SendBytes(u8 *bytes,u8 len)//发送指定长度16进制数据
+{
+  u8 i=0;
+  for(i=0;i<len;i++)
+  UART2_SendByte(*(bytes+i));
 }
 

@@ -83,7 +83,7 @@
         </option>
         <option>
           <name>GenStackSize</name>
-          <state>0x80</state>
+          <state>0x100</state>
         </option>
         <option>
           <name>GenHeapSize</name>
@@ -1876,6 +1876,9 @@
     <name>User</name>
     <file>
       <name>$PROJ_DIR$\main.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\packetsbuf.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\stm8s_it.c</name>

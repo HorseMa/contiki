@@ -37,11 +37,6 @@ typedef struct{
   unsigned char airpower;
 }st_ModuleCfg,pst_ModuleCfg;
 
-typedef struct{
-  unsigned char buf[50];
-  unsigned char len;
-}st_UartBuf,*pst_UartBuf;
-
 PROCESS_NAME(uartRecv_process);
 PROCESS_NAME(read_gpio_process);
 #endif

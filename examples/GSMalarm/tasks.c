@@ -11,6 +11,8 @@
 process_event_t ev_checkradio;
 process_event_t ev_radio_rcv;
 
+unsigned char phone_num[11];
+unsigned char alarm_enable = TRUE;
 PROCESS(read_gpio_process,"read_gpio");
 PROCESS(uartRecv_process,"uartRecv");
 
@@ -24,11 +26,14 @@ PROCESS_THREAD(read_gpio_process, ev, data)
   {
     etimer_set(&et_blink, CLOCK_SECOND / 2);
     PROCESS_WAIT_EVENT();
-    if((ev == PROCESS_EVENT_TIMER) && (1))
+    if((ev == PROCESS_EVENT_TIMER) && (alarm_enable == TRUE))
     {
       if(GPIO_ReadInputPin(GPIOB,GPIO_PIN_1)!=0)
       {
         // alarm report
+        UART2_SendString("ATD");
+        UART2_SendBytes(phone_num,11);
+        UART2_SendString(";\r\n");
       }
       else
       {
@@ -41,115 +46,183 @@ PROCESS_THREAD(read_gpio_process, ev, data)
 PROCESS_THREAD(uartRecv_process, ev, data)
 { 
   static struct etimer et_blink;
+  static pst_Packet pstPacket;
+  static char *p = NULL;
+  //static unsigned char buf[BUF_SIZE] = {0};
   PROCESS_BEGIN();
-baudrate_matching:
-  UART2_SendString("AT");
-  etimer_set(&et_blink, CLOCK_SECOND / 2);
+  eepromReadBytes(0x4010,&alarm_enable,1);
+  eepromReadBytes(0x4011,phone_num,11);
+  GPIO_WriteLow(GPIOB, GPIO_PIN_0);
+  etimer_set(&et_blink, CLOCK_SECOND / 10);
   PROCESS_WAIT_EVENT();
-  if(ev == PROCESS_EVENT_TIMER)
+  GPIO_WriteHigh(GPIOB, GPIO_PIN_0);
+  etimer_set(&et_blink, CLOCK_SECOND * 6);
+  PROCESS_WAIT_EVENT();
+  while(1)//匹配波特率
   {
-    goto baudrate_matching;
-  }
-  else if(ev == PROCESS_EVENT_MSG)
-  {
-    if(0 == memcmp(((pst_UartBuf)data)->buf,"AT",2))
+    if(ev != PROCESS_EVENT_MSG)
     {
-      // 波特率匹配成功
+      UART2_SendString("AT");
+      etimer_set(&et_blink, CLOCK_SECOND / 2);
+      PROCESS_WAIT_EVENT();
     }
     else
     {
-      goto baudrate_matching;
+      pstPacket = data;
+      if(strstr((char const *)(((pst_Packet)data)->data),"AT"))
+      {
+        // 波特率匹配成功
+        pktbuf_free((pst_Packet)data);
+        ev = PROCESS_EVENT_TIMER;
+        break;
+      }
+      else
+      {
+        pktbuf_free((pst_Packet)data);
+        ev = PROCESS_EVENT_TIMER;
+      }
     }
   }
-  else
+  /*while(1)//关闭回显
   {
-    goto baudrate_matching;
-  }
-close_echo:
-  UART2_SendString("ATEO");//关闭回显
-  etimer_set(&et_blink, CLOCK_SECOND / 2);
-  PROCESS_WAIT_EVENT();
-  if(ev == PROCESS_EVENT_TIMER)
-  {
-    goto close_echo;
-  }
-  else if(ev == PROCESS_EVENT_MSG)
-  {
-    if(0 == memcmp(((pst_UartBuf)data)->buf,"AT",2))
+    if(ev != PROCESS_EVENT_MSG)
     {
-      // 关闭回显成功
+      UART2_SendString("ATEO\r\n");
+      etimer_set(&et_blink, CLOCK_SECOND / 2);
+      PROCESS_WAIT_EVENT();
     }
     else
     {
-      goto close_echo;
+      pstPacket = data;
+      if(strstr((char const *)(((pst_Packet)data)->data),"OK"))
+      {
+        // 波特率匹配成功
+        pktbuf_free((pst_Packet)data);
+        ev = PROCESS_EVENT_TIMER;
+        break;
+      }
+      else
+      {
+        pktbuf_free((pst_Packet)data);
+        ev = PROCESS_EVENT_TIMER;
+      }
     }
-  }
-  else
-  {
-    goto close_echo;
-  }
-set_msg_report_mode:
-  UART2_SendString("AT+CMGF=1\r\n");//设置短消息为文本模式
+  }*/
   etimer_set(&et_blink, CLOCK_SECOND / 2);
   PROCESS_WAIT_EVENT();
-  if(ev == PROCESS_EVENT_TIMER)
+  while(1)//设置短信为文本模式
   {
-    goto set_msg_report_mode;
-  }
-  else if(ev == PROCESS_EVENT_MSG)
-  {
-    if(0 == memcmp(((pst_UartBuf)data)->buf,"AT",2))
+    if(ev != PROCESS_EVENT_MSG)
     {
-      // 设置成功
+      UART2_SendString("AT+CMGF=1\r\n");
+      etimer_set(&et_blink, CLOCK_SECOND / 2);
+      PROCESS_WAIT_EVENT();
     }
     else
     {
-      goto set_msg_report_mode;
+      pstPacket = data;
+      if(strstr((char const *)(((pst_Packet)data)->data),"OK"))
+      {
+        // 波特率匹配成功
+        pktbuf_free((pst_Packet)data);
+        ev = PROCESS_EVENT_TIMER;
+        break;
+      }
+      else
+      {
+        pktbuf_free((pst_Packet)data);
+        ev = PROCESS_EVENT_TIMER;
+      }
     }
   }
-  else
+  while(1)//设置短信URC自动上报
   {
-    goto set_msg_report_mode;
-  }
-set_msg_report_auto:
-  UART2_SendString("AT+CNMI=2,2,0,1,1\r\n");//设置新短消息URC上报模式
-  etimer_set(&et_blink, CLOCK_SECOND / 2);
-  PROCESS_WAIT_EVENT();
-  if(ev == PROCESS_EVENT_TIMER)
-  {
-    goto set_msg_report_auto;
-  }
-  else if(ev == PROCESS_EVENT_MSG)
-  {
-    if(0 == memcmp(((pst_UartBuf)data)->buf,"OK",2))
+    if(ev != PROCESS_EVENT_MSG)
     {
-      // 设置成功
+      UART2_SendString("AT+CNMI=2,2,0,1,1\r\n");
+      etimer_set(&et_blink, CLOCK_SECOND / 2);
+      PROCESS_WAIT_EVENT();
     }
     else
     {
-      goto set_msg_report_auto;
+      pstPacket = data;
+      if(strstr((char const *)(((pst_Packet)data)->data),"OK"))
+      {
+        // 波特率匹配成功
+        pktbuf_free((pst_Packet)data);
+        ev = PROCESS_EVENT_TIMER;
+        break;
+      }
+      else
+      {
+        pktbuf_free((pst_Packet)data);
+        ev = PROCESS_EVENT_TIMER;
+      }
     }
   }
-  else
+  /*while(1)//拨打电话
   {
-    goto set_msg_report_auto;
-  }
+    if(ev != PROCESS_EVENT_MSG)
+    {
+      UART2_SendString("ATD18701872013;\r\n");
+      etimer_set(&et_blink, CLOCK_SECOND / 2);
+      PROCESS_WAIT_EVENT();
+    }
+    else
+    {
+      pstPacket = data;
+      if(strstr((char const *)(((pst_Packet)data)->data),"OK"))
+      {
+        // 拨打成功成功
+        pktbuf_free((pst_Packet)data);
+        ev = PROCESS_EVENT_TIMER;
+        break;
+      }
+      else
+      {
+        pktbuf_free((pst_Packet)data);
+        ev = PROCESS_EVENT_TIMER;
+      }
+    }
+  }*/
 
   while(1) {
     PROCESS_WAIT_EVENT();
     if(ev == PROCESS_EVENT_MSG)
     {
-      if(0 == memcmp(((pst_UartBuf)data)->buf,"369237shouji",12))
+      pstPacket = data;
+      if(p = strstr((const char *)(pstPacket->data),"369237shouji"))
       {
+        memcpy(phone_num,p + 12,11);
+        eepromWriteBytes(0x4011,phone_num,11);
       }
-      else if(0 == memcmp(((pst_UartBuf)data)->buf,"369237kaien",11))
+      else if(p = strstr((const char *)(pstPacket->data),"369237kaien"))
       {
-        
+        if(*(p + 11) == 'Y')
+        {
+          alarm_enable = TRUE;
+          eepromWriteBytes(0x4010,&alarm_enable,1);
+        }
+        else
+        {
+          alarm_enable = FALSE;
+          eepromWriteBytes(0x4010,&alarm_enable,1);
+        }
+      }
+      else if(p = strstr((const char *)(pstPacket->data),"boda"))
+      {
+        if(alarm_enable == TRUE)
+        {
+          UART2_SendString("ATD");
+          UART2_SendBytes(phone_num,11);
+          UART2_SendString(";\r\n");
+        }
       }
       else
       {
         
       }
+      pktbuf_free((pst_Packet)data);
     }
   }
   
