@@ -403,7 +403,7 @@ void packet_over_poll(void)
 {
   if(!(NULL == pstPacket))
   {
-    if(abs(count - clock_time()) > CLOCK_SECOND / 50)
+    if(abs(count - clock_time()) > CLOCK_SECOND / 64)
     {
       pstPacket->len = pstPacket->offset;
       process_post(&uartRecv_process,PROCESS_EVENT_MSG,(process_data_t)(pstPacket));
@@ -434,7 +434,7 @@ void packet_over_poll(void)
     count = clock_time();
   }
   pstPacket->data[pstPacket->offset ++] = UART2_ReceiveData8();
-  if(pstPacket->offset >= BUF_SIZE)
+  if(pstPacket->offset >= (BUF_SIZE - 2))
   {
     pstPacket->len = pstPacket->offset;
     process_post(&uartRecv_process,PROCESS_EVENT_MSG,(process_data_t)(pstPacket));

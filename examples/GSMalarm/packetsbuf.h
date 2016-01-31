@@ -3,7 +3,7 @@
 
 
 #define MAX_PACKET_NUM    2
-#define BUF_SIZE          90
+#define BUF_SIZE          0x80
 
 struct st_Packet
 {

@@ -13,10 +13,43 @@ process_event_t ev_radio_rcv;
 
 unsigned char phone_num[11];
 unsigned char alarm_enable = TRUE;
+
+PROCESS(led_process,"led state");
 PROCESS(read_gpio_process,"read_gpio");
 PROCESS(uartRecv_process,"uartRecv");
 
-AUTOSTART_PROCESSES(&read_gpio_process,&uartRecv_process);
+AUTOSTART_PROCESSES(&led_process,&uartRecv_process);
+
+PROCESS_THREAD(led_process, ev, data)
+{ 
+  static struct etimer et_blink;
+  static unsigned char revert = 0;
+  PROCESS_BEGIN();
+  while(1)
+  {
+    (revert)?GPIO_WriteHigh(GPIOD, GPIO_PIN_7):GPIO_WriteLow(GPIOD, GPIO_PIN_7);
+    revert ^= 1;
+    etimer_set(&et_blink, CLOCK_SECOND / 5);
+    PROCESS_WAIT_EVENT();
+    if(ev == PROCESS_EVENT_TIMER)
+    {
+      continue;
+    }
+    else
+    {
+      break;
+    }
+  }
+  while(1)
+  {
+    (revert)?GPIO_WriteHigh(GPIOD, GPIO_PIN_7):GPIO_WriteLow(GPIOD, GPIO_PIN_7);
+    etimer_set(&et_blink, CLOCK_SECOND / 2);
+    PROCESS_WAIT_EVENT();
+  }
+  
+  PROCESS_END();
+}
+
 
 PROCESS_THREAD(read_gpio_process, ev, data)
 { 
@@ -24,7 +57,7 @@ PROCESS_THREAD(read_gpio_process, ev, data)
   PROCESS_BEGIN();
   while(1)
   {
-    etimer_set(&et_blink, CLOCK_SECOND / 2);
+    etimer_set(&et_blink, CLOCK_SECOND * 1);
     PROCESS_WAIT_EVENT();
     if((ev == PROCESS_EVENT_TIMER) && (alarm_enable == TRUE))
     {
@@ -34,6 +67,8 @@ PROCESS_THREAD(read_gpio_process, ev, data)
         UART2_SendString("ATD");
         UART2_SendBytes(phone_num,11);
         UART2_SendString(";\r\n");
+        etimer_set(&et_blink, CLOCK_SECOND * 10);
+        PROCESS_WAIT_EVENT();
       }
       else
       {
@@ -185,7 +220,8 @@ PROCESS_THREAD(uartRecv_process, ev, data)
       }
     }
   }*/
-
+  process_start(&read_gpio_process,NULL);
+  process_post(&led_process,PROCESS_EVENT_MSG,NULL);
   while(1) {
     PROCESS_WAIT_EVENT();
     if(ev == PROCESS_EVENT_MSG)
@@ -196,7 +232,7 @@ PROCESS_THREAD(uartRecv_process, ev, data)
         memcpy(phone_num,p + 12,11);
         eepromWriteBytes(0x4011,phone_num,11);
       }
-      else if(p = strstr((const char *)(pstPacket->data),"369237kaien"))
+      if(p = strstr((const char *)(pstPacket->data),"369237kaien"))
       {
         if(*(p + 11) == 'Y')
         {
@@ -209,7 +245,7 @@ PROCESS_THREAD(uartRecv_process, ev, data)
           eepromWriteBytes(0x4010,&alarm_enable,1);
         }
       }
-      else if(p = strstr((const char *)(pstPacket->data),"boda"))
+      if(p = strstr((const char *)(pstPacket->data),"boda"))
       {
         if(alarm_enable == TRUE)
         {
