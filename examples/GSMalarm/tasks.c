@@ -67,7 +67,8 @@ PROCESS_THREAD(read_gpio_process, ev, data)
         UART2_SendString("ATD");
         UART2_SendBytes(phone_num,11);
         UART2_SendString(";\r\n");
-        etimer_set(&et_blink, CLOCK_SECOND * 10);
+        GPIO_WriteLow(GPIOC, GPIO_PIN_1);
+        etimer_set(&et_blink, CLOCK_SECOND * 40);
         PROCESS_WAIT_EVENT();
       }
       else

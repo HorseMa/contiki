@@ -26,6 +26,7 @@
 #include "contiki.h"
 #include "bsp.h"
 #include "global.h"
+#include "lib/ringbuf.h"
 /** @addtogroup Template_Project
   * @{
   */
@@ -284,10 +285,29 @@ extern void clock_isr(void);
   /* In order to detect unexpected events during development,
      it is recommended to set a breakpoint on the following instruction.
   */
+   static int cnt = 0;
+   int tmp = 0;
    DISABLE_INTERRUPTS();
    ENERGEST_ON(ENERGEST_TYPE_IRQ);
    TIM2_ClearFlag(TIM2_FLAG_UPDATE);
    clock_isr();
+   tmp = ringbuf_size(&uartRcvRingBuf);
+   tmp = ringbuf_elements(&uartRcvRingBuf);
+   if(tmp != cnt)
+   {
+     cnt = ringbuf_elements(&uartRcvRingBuf);
+     if(cnt >= 63)
+     {
+       process_post(&uartRecv_process,PROCESS_EVENT_MSG,NULL);
+     }
+   }
+   else
+   {
+     if(cnt != 0)
+     {
+      process_post(&uartRecv_process,PROCESS_EVENT_MSG,NULL);
+     }
+   }
    ENERGEST_OFF(ENERGEST_TYPE_IRQ);
    ENABLE_INTERRUPTS();
  }
@@ -348,18 +368,7 @@ extern void clock_isr(void);
   ENERGEST_ON(ENERGEST_TYPE_IRQ);
   if(UART1_GetFlagStatus(UART1_FLAG_TXE))
   {
-    //UART1_ClearFlag(UART1_FLAG_TXE);
-    if(pstUartTxBuf->offset < pstUartTxBuf->len)
-    {
-      UART1_SendData8(pstUartTxBuf->data[pstUartTxBuf->offset ++]);
-    }
-    else
-    {
-      UART1_ITConfig(UART1_IT_TXE, DISABLE);
-      pktbuf_free(pstUartTxBuf);
-      process_post(&uartSend_process,ev_uartSendOver,NULL);
-      pstUartTxBuf = NULL;
-    }
+    UART1_ClearFlag(UART1_FLAG_TXE);
   }
   ENERGEST_OFF(ENERGEST_TYPE_IRQ);
   ENABLE_INTERRUPTS();
@@ -375,6 +384,15 @@ extern void clock_isr(void);
     /* In order to detect unexpected events during development,
        it is recommended to set a breakpoint on the following instruction.
     */
+  DISABLE_INTERRUPTS();
+  ENERGEST_ON(ENERGEST_TYPE_IRQ);
+  if(UART1_GetFlagStatus(UART1_FLAG_RXNE))
+  {
+    UART1_ClearFlag(UART1_FLAG_RXNE);
+    ringbuf_put(&uartRcvRingBuf, UART1_ReceiveData8());
+  }
+  ENERGEST_OFF(ENERGEST_TYPE_IRQ);
+  ENABLE_INTERRUPTS();
  }
 #endif /*STM8S208 or STM8S207 or STM8S103 or STM8S903 or STM8AF62Ax or STM8AF52Ax */
 

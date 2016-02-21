@@ -27,14 +27,15 @@ typedef enum{
 }en_UartStopBit,pen_UartStopBit;
 
 typedef struct{
-  unsigned long uartbaudrate;
-  unsigned char uartdatabit;
+  unsigned char uartbaudrate;
   unsigned char uartparitybit;
+  unsigned char uartdatabit;
   unsigned char uartstopbit;
   
-  unsigned long airbaudrate;
-  unsigned char airchannel;
-  unsigned char airpower;
+  unsigned char airbaudrate;
+  unsigned char airchannel[2];
+  unsigned char destAddr[4];
+  unsigned char mode;
 }st_ModuleCfg,pst_ModuleCfg;
 
 typedef enum{
@@ -45,13 +46,20 @@ typedef enum{
 }en_RadioState,pen_RadioState;
 
 extern st_ModuleCfg stModuleCfg;
+extern const st_ModuleCfg stModuleCfgInRom;
+extern const char *hardwareversion;
+extern const char *softwareversion;
+extern const char *sn ;
 extern en_RadioState enRadioState;
 extern process_event_t ev_checkradio;
 extern process_event_t ev_radio_rcv;
 extern process_event_t ev_uartSendOver;
 extern process_event_t ev_uartRecvPkg;
-extern pst_Packet pstUartTxBuf;
-extern pst_Packet pstUartRxBuf;
+
+extern struct ringbuf uartRcvRingBuf;
+extern struct ringbuf radioRcvRingBuf;
+
+extern unsigned char mode;
 
 void globalInit(void);
 PROCESS_NAME(checkradio_process);

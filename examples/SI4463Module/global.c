@@ -1,75 +1,48 @@
 #include "global.h"
+#include "contiki.h"
+#include "lib/ringbuf.h"
 
+struct ringbuf uartRcvRingBuf;
+struct ringbuf radioRcvRingBuf;
+
+unsigned char uartRcv[128] = {0};
+unsigned char radioRcv[128] = {0};
 
 st_ModuleCfg stModuleCfg;
-en_RadioState enRadioState;
-pst_Packet pstUartTxBuf;
-pst_Packet pstUartRxBuf;
+const st_ModuleCfg stModuleCfgInRom = 
+{
+  .uartbaudrate = 1,
+  .uartparitybit = 1,
+  .uartdatabit = 1,
+  .uartstopbit = 1,
+  .airbaudrate = 1,
+  .airchannel = {'0','0'},
+  .destAddr = {'F','F','F','F'},
+  .mode = 1,
+};
+const char *hardwareversion = "MJ-MD1U10010";
+const char *softwareversion = "MJ-MD1U10010";
+const char *sn = "201602160001";
 
+en_RadioState enRadioState;
+
+unsigned char mode = 1;
 process_event_t ev_uartSendOver;
 process_event_t ev_uartRecvPkg;
 
-LIST(ls_radio_tx);
-LIST(ls_radio_rx);
-
-LIST(ls_uart_tx);
-LIST(ls_uart_rx);
-
 void globalInit(void)
 {
-  stModuleCfg.uartbaudrate = 9600;
+  stModuleCfg.uartbaudrate = 0;
   stModuleCfg.uartdatabit = UART_DATA_BIT_8;
   stModuleCfg.uartparitybit = UART_PARITY_NO;
   stModuleCfg.uartstopbit = UART_STOPBITS_1;
   
   stModuleCfg.airbaudrate = 10000;
-  stModuleCfg.airchannel = 0;
-  stModuleCfg.airpower = 0x7f;
+  stModuleCfg.airchannel[0] = 0;
   
   enRadioState = RADIO_IN_IDLE;
-  
-  list_init(ls_radio_tx);
-  list_init(ls_radio_rx);
-  list_init(ls_uart_tx);
-  list_init(ls_uart_rx);
-}
-
-pst_Packet radioGetPktFromTxList(void)
-{
-  return list_pop(ls_radio_tx);
-}
-
-void radioAddPktToTxList(pst_Packet pstPacket)
-{
-  list_add(ls_radio_tx,pstPacket);
-}
-
-pst_Packet radioGetPktFromRxList(void)
-{
-  return list_pop(ls_radio_rx);
-}
-
-void radioAddPktToRxList(pst_Packet pstPacket)
-{
-  list_add(ls_radio_rx,pstPacket);
-}
-
-pst_Packet uartGetPktFromTxList(void)
-{
-  return list_pop(ls_uart_tx);
-}
-
-void uartAddPktToTxList(pst_Packet pstPacket)
-{
-  list_add(ls_uart_tx,pstPacket);
-}
-
-pst_Packet uartGetPktFromRxList(void)
-{
-  return list_pop(ls_uart_rx);
-}
-
-void uartAddPktToRxList(pst_Packet pstPacket)
-{
-  list_add(ls_uart_rx,pstPacket);
+  DISABLE_INTERRUPTS();
+  ringbuf_init(&uartRcvRingBuf, uartRcv, 128);
+  ringbuf_init(&radioRcvRingBuf, radioRcv, 128);
+  ENABLE_INTERRUPTS();
 }

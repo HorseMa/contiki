@@ -19,6 +19,7 @@ void gpioInit(void);
 void spiInit(void);
 void timerInit(void);
 void uartInit(void);
+void uartSendBytes(unsigned char *data,unsigned char len);
 void watchdog_start(void);
 void watchdog_periodic(void);
 void uart_tx_start(pst_Packet);

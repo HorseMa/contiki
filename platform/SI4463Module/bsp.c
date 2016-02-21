@@ -99,13 +99,25 @@ void uartInit(void)
   GPIO_Init(GPIOD, GPIO_PIN_6, GPIO_MODE_IN_PU_NO_IT);  // SPI_SCLK output
   //UART1_DeInit();
   /* Configure the UART1 */
-  UART1_Init((uint32_t)115200, UART1_WORDLENGTH_8D, UART1_STOPBITS_1, UART1_PARITY_NO,
+  UART1_Init((uint32_t)9600, UART1_WORDLENGTH_8D, UART1_STOPBITS_1, UART1_PARITY_NO,
   UART1_SYNCMODE_CLOCK_DISABLE, UART1_MODE_TXRX_ENABLE);
   /* Enable UART1 Transmit interrupt*/
   //UART1_ITConfig(UART1_IT_TXE, ENABLE);
-  UART1_ITConfig(UART1_IT_RXNE_OR, ENABLE);
+  UART1_ITConfig(UART1_IT_RXNE, ENABLE);
   //UART1_ITConfig(UART1_IT_TXE, ENABLE);
   UART1_Cmd(ENABLE);
+}
+
+void uartSendBytes(unsigned char *data,unsigned char len)
+{
+  unsigned char loop = 0;
+  for(loop = 0;loop < len;loop ++)
+  {
+    UART1_SendData8(data[loop]);
+	
+    /* µÈ´ý´«Êä½áÊø */
+    while (UART1_GetFlagStatus(UART1_FLAG_TXE) == RESET);
+  }
 }
 
 void watchdog_start(void)
@@ -118,35 +130,8 @@ void watchdog_periodic(void)
   
 }
 
-void uart_tx_start(pst_Packet pstPacket)
-{
-  //pstUartTxBuf = pstPacket;
-  UART1_SendData8(pstPacket->data[0]);
-  pstPacket->offset += 1;
-  UART1_ITConfig(UART1_IT_TXE, ENABLE);
-}
-
-void uart_tx(pst_Packet pstPacket)
-{
-  if(pstPacket != NULL);
-  {
-    uartAddPktToTxList(pstPacket);
-  }
-  if(pstUartTxBuf == NULL)
-  {
-    process_post(&uartSend_process,ev_uartSendOver,NULL);
-  }
-}
-
 void debug_info_print(char const * str)
 {
-  pst_Packet pstPacket = pktbuf_alloc();
-  if(pstPacket != NULL)
-  {
-    pstPacket->offset = 0;
-    pstPacket->len = strlen(str);
-    memcpy(&pstPacket->data,str,pstPacket->len);
-    uart_tx(pstPacket);
-  }
+  
 }
 

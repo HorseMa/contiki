@@ -741,28 +741,4 @@ void si446x_agc_override(U8 AGC_OVERRIDE)
 }
 
 #endif /* RADIO_DRIVER_FULL_SUPPORT */
-void reConfigPktHandler(void)
-{
-  Pro2Cmd[0] = 0x11;
-  Pro2Cmd[1] = 0x12;
-  Pro2Cmd[2] = 0x0C;
-  Pro2Cmd[3] = 0x08;
-  Pro2Cmd[4] = 0x22;
-  Pro2Cmd[5] = 0x01;
-  Pro2Cmd[6] = 0x00;
-  Pro2Cmd[7] = 0x30;
-  Pro2Cmd[8] = 0x30;
-  Pro2Cmd[9] = 0x00;
-  Pro2Cmd[10] = 0x01;
-  Pro2Cmd[11] = 0x04;
-  Pro2Cmd[12] = 0x80;
-  Pro2Cmd[13] = 0x1F;
-  Pro2Cmd[14] = 0xFF;
-  Pro2Cmd[15] = 0x00;
-
-
-  radio_comm_SendCmd( 0x10, Pro2Cmd );
-}
-
-
 #endif /* RADIO_DRIVER_EXTENDED_SUPPORT */

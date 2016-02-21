@@ -8,6 +8,8 @@
 #include <string.h>
 #include "global.h"
 #include "bsp.h"
+#include "lib/ringbuf.h"
+
 process_event_t ev_checkradio;
 process_event_t ev_radio_rcv;
 
@@ -22,7 +24,6 @@ AUTOSTART_PROCESSES(&blink_process, &checkradio_process,&radio_rcv_process,&uart
 PROCESS_THREAD(blink_process, ev, data)
 { 
   static struct etimer et_blink;
-  pst_Packet pstPacket;
   PROCESS_BEGIN();
   vRadio_StartRX();
   while(1) {
@@ -60,16 +61,14 @@ PROCESS_THREAD(checkradio_process, ev, data)
 
 PROCESS_THREAD(radio_rcv_process, ev, data)
 { 
-  static pst_Packet pstPacket;
   PROCESS_BEGIN();
   ev_radio_rcv = process_alloc_event();
   while(1) {
     PROCESS_WAIT_EVENT_UNTIL(ev == ev_radio_rcv);
-    while((pstPacket = radioGetPktFromRxList()) != NULL)
+    while(NULL)
     {
       /*if(memcmp(pstPacket->data,"hello",5))
         ledToggle();*/
-      pktbuf_free(pstPacket);
     }
   }
 
@@ -83,15 +82,8 @@ PROCESS_THREAD(uartSend_process, ev, data)
   PROCESS_BEGIN();
   while(1)
   {
-    PROCESS_WAIT_EVENT_UNTIL(ev == ev_uartSendOver);
-    if(pstUartTxBuf != NULL)
-    {
-      continue;
-    }
-    if((pstUartTxBuf = uartGetPktFromTxList()) != NULL)
-    {
-      uart_tx_start(pstUartTxBuf);
-    }
+    PROCESS_WAIT_EVENT_UNTIL(ev == PROCESS_EVENT_TIMER);
+    
   }
   
   PROCESS_END();
@@ -99,12 +91,46 @@ PROCESS_THREAD(uartSend_process, ev, data)
 
 
 PROCESS_THREAD(uartRecv_process, ev, data)
-{ 
-  static pst_Packet pstPacket;
+{
+  static unsigned char cmd[50] = {0};
+  int loop = 0;
+  unsigned char cnt;
   PROCESS_BEGIN();
+  uartSendBytes("hello",6);
   while(1)
   {
-    PROCESS_WAIT_EVENT_UNTIL(ev == ev_uartRecvPkg);
+    PROCESS_WAIT_EVENT_UNTIL(ev == PROCESS_EVENT_MSG);
+    DISABLE_INTERRUPTS();
+    cnt = ringbuf_elements(&uartRcvRingBuf);
+    for(loop = 0;loop < cnt;loop ++)
+    {
+      cmd[loop] = ringbuf_get(&uartRcvRingBuf);
+    }
+    cmd[loop] = '\0';
+    ENABLE_INTERRUPTS();
+    if(mode == 1)
+    {
+      if(strstr((char const *)cmd,"get"))
+      {
+        memcpy(cmd,&stModuleCfgInRom,sizeof(st_ModuleCfg));
+        memcpy(cmd + sizeof(st_ModuleCfg),hardwareversion,strlen(hardwareversion));
+        memcpy(cmd + sizeof(st_ModuleCfg) + strlen(hardwareversion),softwareversion,strlen(softwareversion));
+        memcpy(cmd + sizeof(st_ModuleCfg) + strlen(hardwareversion) + strlen(softwareversion),sn,strlen(sn));
+        memcpy(cmd + sizeof(st_ModuleCfg) + strlen(hardwareversion) + strlen(softwareversion) + strlen(sn),'\0',1);
+        uartSendBytes(cmd,sizeof(st_ModuleCfg) + strlen(hardwareversion) + strlen(softwareversion) + strlen(sn) + 1);
+      }
+      else if(strstr((char const *)cmd,"factory reset"))
+      {
+      }
+      else
+      {
+        
+      }
+    }
+    else
+    {
+      
+    }
   }
   
   PROCESS_END();
