@@ -28,15 +28,16 @@ void main(void)
 {
   /* Hardware initialization */
   eepromInit();
-  clockInit();
   gpioInit();
+  globalInit();
+  clockInit();
   timerInit();
   spiInit();
   uartInit();
   rtimer_init();
   vRadio_Init();
   //pktbuf_init();
-  globalInit();
+  
   //stack_poison();
 
   /* Init LEDs here */

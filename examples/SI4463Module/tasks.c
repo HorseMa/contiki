@@ -112,7 +112,13 @@ PROCESS_THREAD(uartRecv_process, ev, data)
     {
       if(strstr((char const *)cmd,"get"))
       {
+        uint8_t cfg[sizeof(st_ModuleCfg) + 7];
+        eepromReadBytes((unsigned char *)0x4000,cfg,sizeof(st_ModuleCfg) + 7);
         memcpy(cmd,&stModuleCfgInRom,sizeof(st_ModuleCfg));
+        if(*(uint32_t*)cfg != 0xffffffff)
+        {
+          memcpy(cmd,&cfg[7],18 - 6);
+        }
         memcpy(cmd + sizeof(st_ModuleCfg),hardwareversion,strlen(hardwareversion));
         memcpy(cmd + sizeof(st_ModuleCfg) + strlen(hardwareversion),softwareversion,strlen(softwareversion));
         memcpy(cmd + sizeof(st_ModuleCfg) + strlen(hardwareversion) + strlen(softwareversion),sn,strlen(sn));
@@ -129,7 +135,7 @@ PROCESS_THREAD(uartRecv_process, ev, data)
       else if(strstr((char const *)cmd,"cfg set"))
       {
         //eepromEarase();
-        eepromWriteBytes((unsigned char*)0x4000,cmd + 7,cnt - 7);
+        eepromWriteBytes((unsigned char*)0x4000,cmd,cnt);
       }
     }
     else

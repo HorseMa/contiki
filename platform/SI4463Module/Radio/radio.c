@@ -202,7 +202,7 @@ void vRadio_StartRX()
    si446x_fifo_info(0x03);
 
   /* Start Receiving packet, channel 0, START immediately, Packet length used or not according to packetLength */
-  si446x_start_rx(stModuleCfg.airchannel[0], 0u, 0,
+  si446x_start_rx(stModuleParam.airChannel, 0u, 0,
                   SI446X_CMD_START_RX_ARG_RXTIMEOUT_STATE_ENUM_NOCHANGE,
                   SI446X_CMD_START_RX_ARG_RXVALID_STATE_ENUM_READY,
                   SI446X_CMD_START_RX_ARG_RXINVALID_STATE_ENUM_RX );
@@ -255,6 +255,6 @@ void vRadio_StartTx_Variable_Packet(pst_Packet pstPacket)
     pstPacket->offset += 62;
   }
   /* Start sending packet, channel 0, START immediately */
-   si446x_start_tx(stModuleCfg.airchannel[0], 0x80, pstPacket->len);
+   si446x_start_tx(stModuleParam.airChannel, 0x80, pstPacket->len);
  
 }

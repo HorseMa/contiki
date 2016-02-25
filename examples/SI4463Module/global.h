@@ -3,6 +3,8 @@
 #include "list.h"
 #include "contiki.h"
 #include "packetsbuf.h"
+#include "stm8s_conf.h"
+#include "stm8s.h"
 
 #ifndef NULL
 #define NULL      0
@@ -38,6 +40,17 @@ typedef struct{
   unsigned char mode;
 }st_ModuleCfg,pst_ModuleCfg;
 
+typedef struct{
+  uint32_t BaudRate;
+  UART1_WordLength_TypeDef WordLength;
+  UART1_StopBits_TypeDef StopBits;
+  UART1_Parity_TypeDef Parity;
+  uint32_t airBaudRate;
+  uint8_t airChannel;
+  uint16_t destAddr;
+  uint8_t mode;
+}st_ModuleParam,pst_ModuleParam;
+
 typedef enum{
   RADIO_IN_IDLE,
   RADIO_IN_RX,
@@ -45,8 +58,9 @@ typedef enum{
   RADIO_IN_SLEEP
 }en_RadioState,pen_RadioState;
 
-extern st_ModuleCfg stModuleCfg;
+//extern st_ModuleCfg stModuleCfg;
 extern const st_ModuleCfg stModuleCfgInRom;
+extern st_ModuleParam stModuleParam;
 extern const char *hardwareversion;
 extern const char *softwareversion;
 extern const char *sn ;

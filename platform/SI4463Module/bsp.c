@@ -61,7 +61,7 @@ void gpioInit(void)
   /* Config GPIO */
   GPIO_Init(GPIOB, GPIO_PIN_5, GPIO_MODE_IN_PU_NO_IT); // CONFIG pin
   GPIO_Init(GPIOB, GPIO_PIN_4, GPIO_MODE_IN_PU_NO_IT); // SLEEP pin
-  GPIO_Init(GPIOB, GPIO_PIN_4, GPIO_MODE_IN_PU_NO_IT); // test pin
+  GPIO_Init(GPIOD, GPIO_PIN_1, GPIO_MODE_IN_PU_NO_IT); // test pin
   
   GPIO_Init(GPIOD, GPIO_PIN_3, GPIO_MODE_IN_FL_NO_IT); // RF_GPIO
   GPIO_Init(GPIOD, GPIO_PIN_4, GPIO_MODE_IN_FL_NO_IT); // RF_GPIO
@@ -101,12 +101,19 @@ void spiInit(void)
 
 void uartInit(void)
 {
+  //GPIO_ReadInputPin(GPIOD, GPIO_PIN_1);// read test pin
+  //GPIO_ReadInputPin(GPIOB, GPIO_PIN_5);// read cfg pin
+  //GPIO_ReadInputPin(GPIOB, GPIO_PIN_4);// read sleep pin
   /* UART1 initial*/
   GPIO_Init(GPIOD, GPIO_PIN_5, GPIO_MODE_OUT_PP_HIGH_FAST); // SPI_CS output high
   GPIO_Init(GPIOD, GPIO_PIN_6, GPIO_MODE_IN_PU_NO_IT);  // SPI_SCLK output
   //UART1_DeInit();
   /* Configure the UART1 */
-  UART1_Init((uint32_t)9600, UART1_WORDLENGTH_8D, UART1_STOPBITS_1, UART1_PARITY_NO,
+  if(1) // only when cfg pin is low
+    UART1_Init(9600, UART1_WORDLENGTH_8D, UART1_STOPBITS_1, UART1_PARITY_NO,
+  UART1_SYNCMODE_CLOCK_DISABLE, UART1_MODE_TXRX_ENABLE);
+  else
+    UART1_Init(stModuleParam.BaudRate, stModuleParam.WordLength, stModuleParam.StopBits, stModuleParam.Parity,
   UART1_SYNCMODE_CLOCK_DISABLE, UART1_MODE_TXRX_ENABLE);
   /* Enable UART1 Transmit interrupt*/
   //UART1_ITConfig(UART1_IT_TXE, ENABLE);
