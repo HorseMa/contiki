@@ -14,6 +14,7 @@
 void eepromInit(void);
 void eepromWriteBytes(unsigned char *eepromAddr,unsigned char *bytes,unsigned char cnt);
 void eepromReadBytes(unsigned char *eepromAddr,unsigned char *bytes,unsigned char cnt);
+void eepromEarase(void);
 void clockInit(void);
 void gpioInit(void);
 void spiInit(void);

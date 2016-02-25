@@ -33,6 +33,13 @@ void eepromReadBytes(unsigned char *eepromAddr,unsigned char *bytes,unsigned cha
   FLASH_Lock(FLASH_MEMTYPE_DATA);
 }
 
+void eepromEarase(void)
+{
+  FLASH_Unlock(FLASH_MEMTYPE_DATA);
+  FLASH_EraseBlock(10, FLASH_MEMTYPE_DATA);
+  FLASH_Lock(FLASH_MEMTYPE_DATA);
+}
+
 void clockInit(void)
 {
   /* Turn on internal high speed clock and use it */

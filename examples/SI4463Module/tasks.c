@@ -121,10 +121,15 @@ PROCESS_THREAD(uartRecv_process, ev, data)
       }
       else if(strstr((char const *)cmd,"factory reset"))
       {
+        //eepromEarase();
+        cmd[0] = 0xff;
+        for(loop = 0;loop < 100;loop ++)
+        eepromWriteBytes((unsigned char*)(0x4000 + loop),cmd,1);
       }
-      else
+      else if(strstr((char const *)cmd,"cfg set"))
       {
-        
+        //eepromEarase();
+        eepromWriteBytes((unsigned char*)0x4000,cmd + 7,cnt - 7);
       }
     }
     else
