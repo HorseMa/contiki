@@ -92,7 +92,7 @@ PROCESS_THREAD(uartSend_process, ev, data)
 
 PROCESS_THREAD(uartRecv_process, ev, data)
 {
-  static unsigned char cmd[50] = {0};
+  static unsigned char cmd[64] = {0};
   int loop = 0;
   unsigned char cnt;
   PROCESS_BEGIN();
@@ -137,6 +137,10 @@ PROCESS_THREAD(uartRecv_process, ev, data)
         //eepromEarase();
         eepromWriteBytes((unsigned char*)0x4000,cmd,cnt);
       }
+    }
+    else if(mode == 2)
+    {
+      vRadio_StartTx_Variable_Packet(cmd, cnt);
     }
     else
     {

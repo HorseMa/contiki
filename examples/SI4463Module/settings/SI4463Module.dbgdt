@@ -38,7 +38,7 @@
         <expressions>
           
           
-        <item>cmd</item><item></item></expressions>
+        <item>cmd</item><item/></expressions>
         <col-names>
           
           

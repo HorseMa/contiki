@@ -51,7 +51,7 @@ void  vRadio_Init(void);
 U8    bRadio_Check_Tx_RX(void);
 void  vRadio_StartRX(void);
 U8    bRadio_Check_Ezconfig(U16);
-void  vRadio_StartTx_Variable_Packet(pst_Packet);
+void vRadio_StartTx_Variable_Packet(unsigned char *bytes, unsigned char len);
 void radioTxQueueRoutin(void);
 
 #endif /* RADIO_H_ */

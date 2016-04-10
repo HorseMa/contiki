@@ -57,7 +57,7 @@ PROCESS_THREAD(read_gpio_process, ev, data)
   PROCESS_BEGIN();
   while(1)
   {
-    etimer_set(&et_blink, CLOCK_SECOND * 1);
+    etimer_set(&et_blink, CLOCK_SECOND / 2);
     PROCESS_WAIT_EVENT();
     if((ev == PROCESS_EVENT_TIMER) && (alarm_enable == TRUE))
     {
@@ -91,6 +91,7 @@ PROCESS_THREAD(uartRecv_process, ev, data)
   eepromReadBytes(0x4011,phone_num,11);
   GPIO_WriteLow(GPIOB, GPIO_PIN_0);
   etimer_set(&et_blink, CLOCK_SECOND / 10);
+  process_start(&read_gpio_process,NULL);
   PROCESS_WAIT_EVENT();
   GPIO_WriteHigh(GPIOB, GPIO_PIN_0);
   etimer_set(&et_blink, CLOCK_SECOND * 6);
@@ -222,7 +223,7 @@ PROCESS_THREAD(uartRecv_process, ev, data)
       }
     }
   }*/
-  process_start(&read_gpio_process,NULL);
+  //process_start(&read_gpio_process,NULL);
   process_post(&led_process,PROCESS_EVENT_MSG,NULL);
   while(1) {
     PROCESS_WAIT_EVENT();

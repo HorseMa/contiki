@@ -16,6 +16,7 @@
 #include "packetsbuf.h"
 #include "bsp.h"
 #include "global.h"
+#include "lib/ringbuf.h"
 /*****************************************************************************
  *  Local Macros & Definitions
  *****************************************************************************/
@@ -106,7 +107,8 @@ void vRadio_Init(void)
 
 U8 bRadio_Check_Tx_RX(void)
 {
-  DEBUG_INFO_PRINT("int\r\n");
+  static unsigned char data[64];
+  unsigned char loop = 0;
   if (radio_hal_NirqLevel() == 0)
   {
       /* Read ITs, clear pending ones */
@@ -114,7 +116,6 @@ U8 bRadio_Check_Tx_RX(void)
 
       if (Si446xCmd.GET_INT_STATUS.CHIP_PEND & SI446X_CMD_GET_CHIP_STATUS_REP_CMD_ERROR_PEND_BIT)
       {
-        DEBUG_INFO_PRINT("cmd err\r\n");
       	/* State change to */
       	si446x_change_state(SI446X_CMD_CHANGE_STATE_ARG_NEW_STATE_ENUM_SLEEP);
 	
@@ -122,64 +123,44 @@ U8 bRadio_Check_Tx_RX(void)
       	si446x_fifo_info(0x03);
       
 	/* State change to */
-        vRadio_StartRX();
-        //si446x_change_state(SI446X_CMD_CHANGE_STATE_ARG_NEW_STATE_ENUM_RX);
+        si446x_change_state(SI446X_CMD_CHANGE_STATE_ARG_NEW_STATE_ENUM_RX);
         return 0;
       }
       if (Si446xCmd.GET_INT_STATUS.PH_PEND & SI446X_CMD_GET_INT_STATUS_REP_CRC_ERROR_PEND_BIT)
       {
-        DEBUG_INFO_PRINT("crc err\r\n");
       	/* Reset FIFO */
       	si446x_fifo_info(0x03);
+        /* State change to */
+        si446x_change_state(SI446X_CMD_CHANGE_STATE_ARG_NEW_STATE_ENUM_RX);
         return 0;
       }
       if(Si446xCmd.GET_INT_STATUS.PH_PEND & SI446X_CMD_GET_INT_STATUS_REP_TX_FIFO_ALMOST_EMPTY_PEND_BIT)
       {
-        DEBUG_INFO_PRINT("empty\r\n");
-        si446x_fifo_info(0x00);
-          //si446x_write_tx_fifo(Si446xCmd.FIFO_INFO.TX_FIFO_SPACE, &radio_pkg_tx->data[radio_pkg_tx->offset]);
-          //si446x_write_tx_fifo(radio_pkg_tx->len - radio_pkg_tx->offset, &radio_pkg_tx->data[radio_pkg_tx->offset]);
       }
       if(Si446xCmd.GET_INT_STATUS.PH_PEND & SI446X_CMD_GET_INT_STATUS_REP_PACKET_SENT_PEND_BIT)
       {
-        DEBUG_INFO_PRINT("sentover\r\n");
-        //vRadio_StartRX(0,0);
-        //si446x_change_state(SI446X_CMD_CHANGE_STATE_ARG_NEW_STATE_ENUM_RX);
-        return SI446X_CMD_GET_INT_STATUS_REP_PACKET_SENT_PEND_BIT;
+        si446x_change_state(SI446X_CMD_CHANGE_STATE_ARG_NEW_STATE_ENUM_RX);
       }
       if(Si446xCmd.GET_MODEM_STATUS.MODEM_PEND & SI446X_CMD_GET_MODEM_STATUS_REP_PREAMBLE_DETECT_PEND_BIT)
       {
-        DEBUG_INFO_PRINT("prea\r\n");
-        enRadioState = RADIO_IN_RX;
       }
       if(Si446xCmd.GET_MODEM_STATUS.MODEM_PEND & SI446X_CMD_GET_MODEM_STATUS_REP_INVALID_PREAMBLE_PEND_BIT)
       {
-        DEBUG_INFO_PRINT("inprea\r\n");
       }
       if(Si446xCmd.GET_MODEM_STATUS.MODEM_PEND & SI446X_CMD_GET_MODEM_STATUS_REP_SYNC_DETECT_PEND_BIT)
       {
-        DEBUG_INFO_PRINT("sync\r\n");
-        ledTurnOn();
       }
       if(Si446xCmd.GET_INT_STATUS.PH_PEND & SI446X_CMD_GET_INT_STATUS_REP_RX_FIFO_ALMOST_FULL_PEND_BIT)
       {
-        DEBUG_INFO_PRINT("full\r\n");
-        /* Get payload length */
-        si446x_fifo_info(0x00);
-        //si446x_read_rx_fifo(Si446xCmd.FIFO_INFO.RX_FIFO_COUNT, &radio_pkg_rx->data[radio_pkg_rx->offset]);
       }
       if(Si446xCmd.GET_INT_STATUS.PH_PEND & SI446X_CMD_GET_INT_STATUS_REP_PACKET_RX_PEND_BIT)
       {
-        DEBUG_INFO_PRINT("rcv\r\n");
         /* Get payload length */
         si446x_fifo_info(0x00);
-        //si446x_read_rx_fifo(Si446xCmd.FIFO_INFO.RX_FIFO_COUNT, &radio_pkg_rx->data[radio_pkg_rx->offset]);
-        return SI446X_CMD_GET_INT_STATUS_REP_PACKET_RX_PEND_BIT;
+        si446x_read_rx_fifo(Si446xCmd.FIFO_INFO.RX_FIFO_COUNT, data);
+        for(loop = 0;loop < Si446xCmd.FIFO_INFO.RX_FIFO_COUNT;loop ++)
+          ringbuf_put(&radioRcvRingBuf, data[loop]);
       }
-
-
-      
-
   }
 
   return 0;
@@ -216,20 +197,8 @@ void vRadio_StartRX()
  *  @note
  *
  */
-void vRadio_StartTx_Variable_Packet(pst_Packet pstPacket)
+void vRadio_StartTx_Variable_Packet(unsigned char *bytes, unsigned char len)
 {
-  if(enRadioState != RADIO_IN_IDLE)
-  {
-    if(pstPacket != NULL)
-    {
-      radioAddPktToTxList(pstPacket);
-    }
-    return;
-  }
-  DEBUG_INFO_PRINT("radio tx\r\n");
-  enRadioState = RADIO_IN_TX;
-  pstPacket->offset = 0;
-  ledTurnOn();
   /* Leave RX state */
   si446x_change_state(SI446X_CMD_CHANGE_STATE_ARG_NEW_STATE_ENUM_READY);
 
@@ -240,21 +209,10 @@ void vRadio_StartTx_Variable_Packet(pst_Packet pstPacket)
   si446x_fifo_info(0x03);
 
   /* Fill the TX fifo with datas */
-  //radio_pkg_tx->len += 1;
-  si446x_write_tx_fifo(1, &pstPacket->len);
-  pstPacket->len += 1;
   
-  if(pstPacket->len <= 62)
-  {
-    si446x_write_tx_fifo(pstPacket->len, pstPacket->data);
-    pstPacket->offset += pstPacket->len;
-  }
-  else
-  {
-    si446x_write_tx_fifo(62, pstPacket->data);
-    pstPacket->offset += 62;
-  }
+  si446x_write_tx_fifo(len, bytes);
+
   /* Start sending packet, channel 0, START immediately */
-   si446x_start_tx(stModuleParam.airChannel, 0x80, pstPacket->len);
+   si446x_start_tx(stModuleParam.airChannel, 0x80, len);
  
 }
