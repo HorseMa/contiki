@@ -16,7 +16,7 @@ void Delay_s( uint32 time_s );
 void Delay_us(uint32 time_us);
 void Delay_ms(uint32 time_ms);
 
-int putchar(int ch);
+//int putchar(int ch);
 //int getchar(void);
 
 

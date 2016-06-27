@@ -1,6 +1,6 @@
 #ifndef _DHCP_H_
 #define _DHCP_H_
-
+#include "Types.h"
 
 
 
@@ -133,6 +133,9 @@ enum
    endOption               = 255
 };
 
+typedef unsigned char uint8;
+typedef unsigned long uint32;
+typedef unsigned short uint16;
 typedef struct _RIP_MSG
 {
    uint8  op; 

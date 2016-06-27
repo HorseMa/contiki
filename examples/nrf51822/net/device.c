@@ -1,13 +1,16 @@
 
 #include "config.h"
-#include "w5500/socket.h"
+#include "socket.h"
 #include "util.h"
-#include "w5500/w5500.h"
+#include "w5500.h"
 #include "device.h"
-#include "at24c16.h"
+//#include "at24c16.h"
 
 #include <stdio.h> 
 #include <string.h>
+#include "bps.h"
+#include "nrf_gpio.h"
+//#include <RTL.h>                      /* RTX kernel functions & defines      */
 
 CONFIG_MSG  ConfigMsg, RecvMsg;
 
@@ -19,20 +22,23 @@ uint8 pub_buf[1460];
 
 void Reset_W5500(void)
 {
-  GPIO_ResetBits(GPIOB, WIZ_RESET);
-  Delay_us(500);  
-  GPIO_SetBits(GPIOB, WIZ_RESET);
-  Delay_ms(1600);
+	nrf_gpio_pin_clear(W5500_RST);
+  //os_dly_wait(OS_TICK);	
+	nrf_gpio_pin_set(W5500_RST);
+  //os_dly_wait(1600 / OS_TICK);
 }
 //reboot 
 void reboot(void)
 {
+	#if 0
   pFunction Jump_To_Application;
   uint32 JumpAddress;
   JumpAddress = *(vu32*) (0x00000004);
   Jump_To_Application = (pFunction) JumpAddress;
   Jump_To_Application();
+	#endif
 }
+#if 0
 void USART1_Init(void)
 {
   USART_InitTypeDef USART_InitStructure;
@@ -61,7 +67,7 @@ void USART1_Init(void)
   USART_Cmd(USART1, ENABLE);
 }
 
-
+#endif
 
 void set_network(void)
 {
@@ -100,7 +106,7 @@ void write_config_to_eeprom(void)
   for (i = 0, j = 0; i < (uint8)(sizeof(ConfigMsg)-4);i++) 
   {
     data = *(uint8 *)(ConfigMsg.mac+j);
-    at24c16_write(dAddr, data);
+    //at24c16_write(dAddr, data);
     dAddr += 1;
     j +=1;
   }
@@ -139,7 +145,7 @@ void get_config(void)
   uint8 tmp=0;
   for (uint16 i =0; i < CONFIG_MSG_LEN; i++) 
   {
-    tmp=at24c16_read(i);
+    //tmp=at24c16_read(i);
     *(ConfigMsg.mac+i) = tmp;
   }
   if((ConfigMsg.mac[0]==0xff)&&(ConfigMsg.mac[1]==0xff)&&(ConfigMsg.mac[2]==0xff)&&(ConfigMsg.mac[3]==0xff)&&(ConfigMsg.mac[4]==0xff)&&(ConfigMsg.mac[5]==0xff))

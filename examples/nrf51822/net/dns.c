@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "stm32f10x.h"
+#include "nrf.h"
 //#include "delay.h"
 #include "util.h"
 #include "w5200/w5200.h"

@@ -8,18 +8,25 @@
 #include <stdio.h>
 #include <string.h>
 #include "config.h"
-#include "W5500\SPI2.h"
-#include "W5500\w5500.h"
-#include "W5500\socket.h"
+#include "spi_master.h"
+#include "w5500.h"
+#include "socket.h"
+#include "nrf_gpio.h"
 
 #ifdef __DEF_IINCHIP_PPP__
    #include "md5.h"
 #endif
 
+//#define SPI2_SendByte(x) spi_master_tx_rx(spi_base_address, 1, &x, uint8_t *rx_data)
+
 static uint8 I_STATUS[MAX_SOCK_NUM];
 static uint16 SSIZE[MAX_SOCK_NUM]; /**< Max Tx buffer size by each channel */
 static uint16 RSIZE[MAX_SOCK_NUM]; /**< Max Rx buffer size by each channel */
-
+static uint32_t *spi_base_address;
+void spi_w5500_init(void)
+{
+	spi_base_address = spi_master_init(SPI0, SPI_MODE0, 0);
+}
 uint8 getISR(uint8 s)
 {
   return I_STATUS[s];
@@ -39,15 +46,16 @@ uint16 getIINCHIP_TxMAX(uint8 s)
 }
 void IINCHIP_CSoff(void)
 {
-  WIZ_CS(LOW);
+  nrf_gpio_pin_clear(WIZ_SCS);
 }
 void IINCHIP_CSon(void)
 {
-   WIZ_CS(HIGH);
+   nrf_gpio_pin_set(WIZ_SCS);
 }
-u8  IINCHIP_SpiSendData(uint8 dat)
+uint8  IINCHIP_SpiSendData(uint8 dat)
 {
-   return(SPI2_SendByte(dat));
+   spi_master_tx_rx(spi_base_address, 1, &dat, &dat);
+		return dat;
 }
 
 void IINCHIP_WRITE( uint32 addrbsb,  uint8 data)
@@ -70,7 +78,7 @@ uint8 IINCHIP_READ(uint32 addrbsb)
    IINCHIP_SpiSendData( (addrbsb & 0x00FF0000)>>16);// Address byte 1
    IINCHIP_SpiSendData( (addrbsb & 0x0000FF00)>> 8);// Address byte 2
    IINCHIP_SpiSendData( (addrbsb & 0x000000F8))    ;// Data read command and Read data length 1
-   data = IINCHIP_SpiSendData(0x00);             // Data read (read 1byte data)
+   data = IINCHIP_SpiSendData(data);             // Data read (read 1byte data)
    IINCHIP_CSon();                               // CS=1,  SPI end
    IINCHIP_ISR_ENABLE();                         // Interrupt Service Routine Enable
    return data;    

@@ -1,10 +1,10 @@
 #ifndef _CONFIG_H_
 #define _CONFIG_H_
 
-#include "stm32f10x.h"
+#include "nrf.h"
 #include "Types.h"
 #include "device.h"
-
+#if 0
 //=================================================
 // Port define 
 
@@ -54,32 +54,32 @@
 #define PB13                            GPIO_Pin_13
 #define PB14                            GPIO_Pin_14
 #define PB15                            GPIO_Pin_15
+#endif
+
+#define WIZ_SCS			        23	// out
+#define WIZ_SCLK			24	// out
+#define WIZ_MISO			25	// in
+#define WIZ_MOSI			28	// out
 
 
-#define WIZ_SCS			        PB12	// out
-#define WIZ_SCLK			PB13	// out
-#define WIZ_MISO			PB14	// in
-#define WIZ_MOSI			PB15	// out
-
-
-#define WIZ_RESET		        PB9	// out
-
+#define WIZ_RESET		        30	// out
+#if 0
 //eeprom  PB
 
 #define I2C_SCK	                        PB6  //out
 #define I2C_SDA	                        PB7  //bidirection
-
+#endif
 
 
 //
-
+#if 0
 // Port C
 #define PC6                             GPIO_Pin_6
 #define PC13				GPIO_Pin_13	//
 #define PC14				GPIO_Pin_14	//
 #define PC15				GPIO_Pin_15	//
-
-#define WIZ_INT			        PC6	// in
+#endif
+#define WIZ_INT			        29	// in
 //Port D
 
 //=================================================

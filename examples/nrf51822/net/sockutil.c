@@ -9,7 +9,7 @@
 #include <string.h>
 
 #include "types.h"
-#include "W5500\w5500.h"
+#include "w5500.h"
 #include "util.h"
 #include "sockutil.h"
 
@@ -128,7 +128,7 @@ unsigned int GetDestPort(
 	return port;
 }
 
-
+#if 0
 /**
 @brief	htons function converts a unsigned short from host to TCP/IP network byte order (which is big-endian).
 @return 	the value in TCP/IP network byte order
@@ -189,7 +189,7 @@ unsigned long ntohl(unsigned long netlong)
 	return netlong;
 #endif		
 }
-
+#endif
 // destip : BigEndian
 u_char CheckDestInLocal(u_long destip)
 {
@@ -338,21 +338,23 @@ void GetNetConfig(void)
 {
 	u_char addr[6];
 	u_long iaddr;
+	#if 0
 	printf("\r\n================================================\r\n");
 	printf("       Net Config Information\r\n");
 	printf("================================================\r\n");
+	#endif
 	GetMacAddress(addr);
-	printf("MAC ADDRESS      : 0x%02X.0x%02X.0x%02X.0x%02X.0x%02X.0x%02X\r\n",addr[0],addr[1],addr[2],addr[3],addr[4],addr[5]);
+	//printf("MAC ADDRESS      : 0x%02X.0x%02X.0x%02X.0x%02X.0x%02X.0x%02X\r\n",addr[0],addr[1],addr[2],addr[3],addr[4],addr[5]);
 	
 	iaddr = GetSubMask();
-	printf("SUBNET MASK      : %s\r\n",inet_ntoa(iaddr));
+	//printf("SUBNET MASK      : %s\r\n",inet_ntoa(iaddr));
 
 	iaddr = GetGWAddress();
-	printf("G/W IP ADDRESS   : %s\r\n",inet_ntoa(iaddr));
+	//printf("G/W IP ADDRESS   : %s\r\n",inet_ntoa(iaddr));
 
 	iaddr = GetIPAddress();
-	printf("LOCAL IP ADDRESS : %s\r\n",inet_ntoa(iaddr));
-	printf("================================================\r\n");		
+	//printf("LOCAL IP ADDRESS : %s\r\n",inet_ntoa(iaddr));
+	//printf("================================================\r\n");		
 }
 
 #endif
