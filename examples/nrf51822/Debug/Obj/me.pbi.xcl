@@ -10,6 +10,10 @@ C:\contiki\examples\nrf51822/../../cpu/nrf51822
 -I
 C:\contiki\examples\nrf51822/../../cpu/nrf51822/nrf51822
 -I
+C:\contiki\examples\nrf51822/../../cpu/nrf51822/nrf51822/timer
+-I
+C:\contiki\examples\nrf51822/../../cpu/nrf51822/nrf51822/simple_timer
+-I
 C:\contiki\examples\nrf51822/../../core/sys
 -I
 C:\contiki\examples\nrf51822/../../core/lib
@@ -30,6 +34,10 @@ C:\contiki\cpu\nrf51822
 -I
 C:\contiki\cpu\nrf51822\nrf51822
 -I
+C:\contiki\cpu\nrf51822\nrf51822\timer
+-I
+C:\contiki\cpu\nrf51822\nrf51822\simple_timer
+-I
 C:\contiki\core\sys
 -I
 C:\contiki\core\lib
@@ -38,6 +46,7 @@ C:\contiki\platform\nrf51822
 -I
 C:\contiki\platform\nrf51822
 -DAUTOSTART_ENABLE=1
+-DNRF51=1
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0

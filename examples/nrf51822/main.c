@@ -1,6 +1,7 @@
 
 #include "contiki.h"
 #include "lib/random.h"
+#include "app_simple_timer.h"
 //#include "bsp.h"
 
 /*---------------------------------------------------------------------------*/
@@ -21,12 +22,26 @@ static unsigned long irq_energest = 0;
 #define ENERGEST_IRQ_SAVE(a) do {} while(0)
 #define ENERGEST_IRQ_RESTORE(a) do {} while(0)
 #endif
+      
+#define TIMEOUT_VALUE                    7812                          /**< 50 mseconds timer time-out value. */
 
+extern void clockInit(void);
+extern void clock_isr(void);//
+void timeout_handler(void * p_context)
+{
+  clock_isr();
+}
 void main(void)
 {
   /* Hardware initialization */
   //eepromInit();
-  //clockInit();
+  clockInit();
+  
+  app_simple_timer_init();
+  app_simple_timer_start(APP_SIMPLE_TIMER_MODE_REPEATED, 
+                                       timeout_handler, 
+                                       TIMEOUT_VALUE, 
+                                       NULL); 
   //gpioInit();
   //timerInit();
   //spiInit();

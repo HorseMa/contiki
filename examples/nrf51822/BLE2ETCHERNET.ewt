@@ -2316,6 +2316,30 @@
   </configuration>
   <group>
     <name>Cpu</name>
+    <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\app_error.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\simple_timer\app_simple_timer.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_delay.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_drv_common.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\timer\nrf_drv_timer.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\radio_config.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\system_nrf51.c</name>
+    </file>
   </group>
   <group>
     <name>OS-Core</name>
@@ -2441,6 +2465,9 @@
     <name>User</name>
     <file>
       <name>$PROJ_DIR$\main.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\stm32f10x_it.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\tasks.c</name>

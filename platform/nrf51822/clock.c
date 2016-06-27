@@ -112,8 +112,8 @@ clock_init(void)
 void
 clock_isr(void)// __interrupt(ST_VECTOR)
 {
-  DISABLE_INTERRUPTS();
-  ENERGEST_ON(ENERGEST_TYPE_IRQ);
+  //DISABLE_INTERRUPTS();
+  //ENERGEST_ON(ENERGEST_TYPE_IRQ);
 
   /*
    * Read value of the ST0:ST1:ST2, add TICK_VAL and write it back.
@@ -136,14 +136,15 @@ clock_isr(void)// __interrupt(ST_VECTOR)
 #if CLOCK_CONF_STACK_FRIENDLY
   sleep_flag = 1;
 #else
-  if(etimer_pending()
-      && (etimer_next_expiration_time() - count - 1) > MAX_TICKS) {
+  if(etimer_pending())
+      //&& (etimer_next_expiration_time() - count - 1) > MAX_TICKS) {
+  {
     etimer_request_poll();
   }
 #endif
   
   //STIF = 0; /* IRCON.STIF */
-  ENERGEST_OFF(ENERGEST_TYPE_IRQ);
-  ENABLE_INTERRUPTS();
+  //ENERGEST_OFF(ENERGEST_TYPE_IRQ);
+  //ENABLE_INTERRUPTS();
 }
 /*---------------------------------------------------------------------------*/
