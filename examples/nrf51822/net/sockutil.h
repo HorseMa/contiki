@@ -22,7 +22,7 @@ char VerifyIPAddress(char* src, uint8 * ip);
 unsigned long GetDestAddr(SOCKET s);			/* Output destination IP address of appropriate channel */
 
 unsigned int GetDestPort(SOCKET s);			/* Output destination port number of appropriate channel */
-#if 0
+#if 1
 unsigned short htons( unsigned short hostshort);	/* htons function converts a unsigned short from host to TCP/IP network byte order (which is big-endian).*/
 
 unsigned long htonl(unsigned long hostlong);		/* htonl function converts a unsigned long from host to TCP/IP network byte order (which is big-endian). */

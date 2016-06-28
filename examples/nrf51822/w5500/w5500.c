@@ -47,15 +47,18 @@ uint16 getIINCHIP_TxMAX(uint8 s)
 void IINCHIP_CSoff(void)
 {
   nrf_gpio_pin_clear(WIZ_SCS);
+  //nrf_delay_ms(1);
 }
 void IINCHIP_CSon(void)
 {
-   nrf_gpio_pin_set(WIZ_SCS);
+  //nrf_delay_ms(1);
+  nrf_gpio_pin_set(WIZ_SCS);
 }
 uint8  IINCHIP_SpiSendData(uint8 dat)
 {
-   spi_master_tx_rx(spi_base_address, 1, &dat, &dat);
-		return dat;
+    uint8 temp;
+   spi_master_tx_rx(spi_base_address, 1, &dat, &temp);
+		return temp;
 }
 
 void IINCHIP_WRITE( uint32 addrbsb,  uint8 data)

@@ -2,7 +2,7 @@
 
 <project>
   <fileVersion>2</fileVersion>
-  <fileChecksum>1259542200</fileChecksum>
+  <fileChecksum>3248183591</fileChecksum>
   <configuration>
     <name>Debug</name>
     <outputs>
@@ -212,20 +212,56 @@
       <file>$PROJ_DIR$\Debug\Obj\random.o</file>
       <file>$PROJ_DIR$\Debug\Obj\mmem.o</file>
       <file>$PROJ_DIR$\Debug\Obj\sensors.pbi</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\bps.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\bps.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\bps.o</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\spi_master_config.h</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\core_cm0.h</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\system_nrf51.h</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf51_deprecated.h</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\bps.h</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\common.h</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_delay.h</file>
+      <file>$PROJ_DIR$\net\device.c</file>
+      <file>$PROJ_DIR$\net\dhcp.c</file>
+      <file>$PROJ_DIR$\net\util.c</file>
+      <file>$PROJ_DIR$\net\sockutil.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\device.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\dhcp.o</file>
+      <file>$PROJ_DIR$\net\dns.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\dns.o</file>
+      <file>$PROJ_DIR$\net\device.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\device.pbi</file>
+      <file>$PROJ_DIR$\net\socket.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\sockutil.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\sockutil.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\util.pbi</file>
+      <file>$PROJ_DIR$\net\Types.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\util.o</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf51.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\dhcp.pbi</file>
+      <file>$PROJ_DIR$\spi_master\spi_master.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\spi_master.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\spi_master.pbi</file>
+      <file>$PROJ_DIR$\net\util.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\dns.pbi</file>
+      <file>$PROJ_DIR$\net\config.h</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\core_cmFunc.h</file>
       <file>$TOOLKIT_DIR$\inc\c\cmsis_iar.h</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\core_cmInstr.h</file>
+      <file>$PROJ_DIR$\net\sockutil.h</file>
+      <file>$PROJ_DIR$\net\dhcp.h</file>
+      <file>$PROJ_DIR$\net\dns.h</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_gpio.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdarg.h</file>
+      <file>$PROJ_DIR$\spi_master\spi_master_config.h</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf51_bitfields.h</file>
       <file>$PROJ_DIR$\stm32f10x_it.c</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\arm_startup_nrf51.s</file>
       <file>$PROJ_DIR$\Debug\Obj\arm_startup_nrf51.o</file>
       <file>$PROJ_DIR$\Debug\Obj\stm32f10x_it.o</file>
       <file>$PROJ_DIR$\Debug\Obj\stm32f10x_it.pbi</file>
+      <file>$PROJ_DIR$\spi_master\spi_master.h</file>
       <file>$PROJ_DIR$\Debug\Obj\iar_startup_nrf51.o</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\system_nrf51.c</file>
@@ -251,9 +287,42 @@
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_drv_common.c</file>
       <file>$PROJ_DIR$\Debug\Obj\nrf_drv_common.o</file>
       <file>$PROJ_DIR$\Debug\Obj\nrf_drv_common.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\SPI2.o</file>
+      <file>$PROJ_DIR$\w5500\SPI2.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\socket.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\md5.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\SPI2.pbi</file>
+      <file>$PROJ_DIR$\w5500\md5.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\socket.o</file>
+      <file>$PROJ_DIR$\w5500\w5500.c</file>
+      <file>$PROJ_DIR$\w5500\socket.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\w5500.pbi</file>
+      <file>$PROJ_DIR$\w5500\md5.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\w5500.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\md5.pbi</file>
+      <file>$PROJ_DIR$\w5500\w5500.h</file>
+      <file>$PROJ_DIR$\w5500\socket.h</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\app_error.c</file>
       <file>$PROJ_DIR$\Debug\Obj\app_error.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\app_error.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\dhcp.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\app_simple_timer.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\nrf_delay.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\nrf_drv_common.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\app_error.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\radio_config.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\nrf_drv_timer.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\socket.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\util.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\device.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\tasks.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\spi_master.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\w5500.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\bps.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\system_nrf51.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\md5.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\sockutil.__cstat.et</file>
+      <file>$TOOLKIT_DIR$\config\linker\NordicSemi\nRF51422_QFAA.icf</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_timer.h</file>
       <file>$TOOLKIT_DIR$\inc\c\stddef.h</file>
     </outputs>
@@ -277,7 +346,7 @@
       <inputs>
         <tool>
           <name>ILINK</name>
-          <file> 26 36 247 234 47 180 54 198 53 175 39 69 65 157 220 4 196 189 27 160 187 204 49 106 243 231 154 61 71 107 203 178 43 67 174 166 55 224 31 60 155 182 194 30 190</file>
+          <file> 316 36 298 270 47 180 54 208 198 53 175 39 220 221 69 65 157 256 4 196 189 284 27 160 187 204 49 106 279 267 154 61 71 107 203 178 43 67 174 166 287 227 235 55 260 31 60 155 231 292 182 194 30 190</file>
         </tool>
       </inputs>
     </file>
@@ -292,15 +361,19 @@
           <name>ICCARM</name>
           <file> 106</file>
         </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 301</file>
+        </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 80 84 213 112 87 72 214 207 51 90 111 79 81 78 76 210 208 206 42 211 212 75 209</file>
+          <file> 80 84 242 112 87 72 249 211 51 90 111 79 81 78 76 232 212 210 42 240 241 75 215</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 75 80 51 81 84 72 78 76 87 79 111 112 210 206 42 213 212 90 211 207 214 208 209</file>
+          <file> 75 80 51 81 84 72 78 76 87 79 111 112 232 210 42 242 241 90 240 211 249 212 215</file>
         </tool>
       </inputs>
     </file>
@@ -315,15 +388,19 @@
           <name>ICCARM</name>
           <file> 107</file>
         </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 304</file>
+        </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 213 80 210 72 112 208 207 51 84 90 209 214 111 206 42 211 81 78 76 212 109</file>
+          <file> 242 80 232 72 112 212 211 51 84 90 215 249 111 210 42 240 81 78 76 241 109</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 109 209 112 210 206 42 80 51 81 84 72 78 76 213 212 90 211 207 214 208 111</file>
+          <file> 109 215 112 232 210 42 80 51 81 84 72 78 76 242 241 90 240 211 249 212 111</file>
         </tool>
       </inputs>
     </file>
@@ -346,7 +423,7 @@
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 80 51 81 100 42 78 72 90 84 176 76</file>
+          <file> 80 100 42 72 90 51 81 78 84 176 76</file>
         </tool>
         <tool>
           <name>ICCARM</name>
@@ -515,7 +592,7 @@
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 80 81 90 72 100 42 51 78 84 153 76</file>
+          <file> 80 81 90 51 72 100 42 78 84 153 76</file>
         </tool>
         <tool>
           <name>ICCARM</name>
@@ -569,7 +646,7 @@
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 161 48 74 80 100 199 63 1 32 99 59 44 93 29 90 76 51 165 89 97 96 98 94 95 9 42 81 78 84 72 87 35</file>
+          <file> 161 95 80 100 199 98 9 42 32 99 59 44 96 94 89 76 51 165 97 48 63 74 93 1 29 90 81 78 84 72 87 35</file>
         </tool>
         <tool>
           <name>ICCARM</name>
@@ -703,7 +780,7 @@
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 42 51 78 84 80 21 89 100 90 81 72 5 76 87</file>
+          <file> 42 51 78 84 21 80 89 100 90 81 72 5 76 87</file>
         </tool>
         <tool>
           <name>ICCARM</name>
@@ -757,7 +834,7 @@
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 95 80 25 100 42 78 84 156 51 81 72 44 143 98 9 93 74 29 164 90 76 59 199 201 96 94 89 63 168 193 24 87 35 48 99 1 32 165 161</file>
+          <file> 80 95 25 42 156 76 51 59 199 44 100 143 98 9 93 74 29 164 90 81 78 84 72 201 96 94 89 63 168 193 24 87 35 48 99 1 32 165 161</file>
         </tool>
         <tool>
           <name>ICCARM</name>
@@ -946,7 +1023,7 @@
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 72 80 32 42 63 51 81 161 100 74 90 78 84 89 165 76 99 93</file>
+          <file> 72 32 42 63 51 81 80 161 100 74 90 78 84 89 165 76 99 93</file>
         </tool>
         <tool>
           <name>ICCARM</name>
@@ -1019,15 +1096,19 @@
           <name>ICCARM</name>
           <file> 31</file>
         </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 309</file>
+        </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 63 93 100 90 76 51 213 109 99 29 78 199 206 212 28 74 1 80 197 44 210 96 98 94 95 59 9 89 42 81 161 48 84 72 32 165 87 35 207 211</file>
+          <file> 63 89 72 100 224 94 87 210 44 109 96 59 51 81 80 242 90 249 213 232 239 226 98 95 9 42 78 84 93 74 35 230 111 197 28 255 244 243 294 99 1 29 76 32 165 161 199 211 240 241 259 112 212 48</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 48 96 100 90 80 42 51 81 84 72 78 76 98 63 93 165 161 32 94 99 89 95 74 59 199 9 1 29 197 28 44 87 35 109 210 206 213 212 211 207</file>
+          <file> 48 96 100 90 80 42 51 81 84 72 78 76 98 63 93 165 161 32 94 99 89 95 74 59 199 9 1 29 197 213 28 44 87 35 109 232 210 242 241 240 211 255 259 224 244 230 239 112 249 212 111 243 294 226</file>
         </tool>
       </inputs>
     </file>
@@ -1131,11 +1212,11 @@
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 95 63 98 9 81 51 100 96 94 59 42 161 99 74 93 1 90 80 78 76 199 48 89 84 72 32 165 5 29 227</file>
+          <file> 95 63 98 9 81 51 100 96 94 59 42 161 99 74 93 1 90 80 78 76 199 48 89 84 72 32 165 5 29 263</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 48 96 100 90 80 42 51 81 84 72 78 76 98 63 93 165 161 32 94 99 89 95 74 59 199 9 1 29 5 227</file>
+          <file> 48 96 100 90 80 42 51 81 84 72 78 76 98 63 93 165 161 32 94 99 89 95 74 59 199 9 1 29 5 263</file>
         </tool>
       </inputs>
     </file>
@@ -1167,15 +1248,196 @@
       </inputs>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\bps.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 207</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 208</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 312</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 249 241 78 76 42 210 246 80 81 51 240 84 72 232 211 242 90 259 213 209</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 259 42 80 51 81 84 72 78 76 246 232 210 242 241 90 240 211 249 213 209</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\net\device.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 225</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 220</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 308</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 76 51 246 224 249 242 90 80 232 237 44 230 111 210 226 294 75 213 215 112 212 211 42 240 81 78 84 72 241 87 239 79 35</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 239 112 232 210 42 80 51 81 84 72 78 76 242 241 90 240 211 249 212 111 230 224 226 237 294 75 87 79 44 35 213 246 215</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\net\dhcp.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 233</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 221</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 299</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 72 237 80 226 81 112 212 240 241 210 230 239 244 87 78 84 51 224 232 211 42 44 294 243 79 76 35 249 111 242 90 75</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 75 80 51 81 84 72 78 76 87 79 44 35 239 112 232 210 42 242 241 90 240 211 249 212 111 230 224 226 294 244 243 237</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\net\util.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 229</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 231</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 307</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 51 80 247 230 111 210 87 75 249 242 76 90 79 237 44 112 224 232 212 211 42 240 81 78 84 72 241 35 239</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 239 112 232 210 42 80 51 81 84 72 78 76 242 241 90 240 211 249 212 111 230 224 237 75 87 79 44 35</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\net\sockutil.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 228</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 227</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 315</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 80 51 76 35 237 230 87 44 294 243 79 75 81 78 84 72</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 75 80 51 81 84 72 78 76 87 79 44 35 230 294 237 243</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\net\dns.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 238</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 223</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 78 79 232 51 230 243 80 42 237 87 211 21 76 35 212 240 241 210 224 44 112 245 81 84 72 249 111 242 90 75 239</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\spi_master\spi_master.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 236</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 235</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 310</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 211 259 112 212 248 51 84 246 80 72 232 242 90 42 215 214 81 78 76 249 111 210 240 241 255</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 255 259 42 80 51 81 84 72 78 76 215 112 232 210 242 241 90 240 211 249 212 111 246 214 248</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
       <name>$PROJ_DIR$\stm32f10x_it.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 219</file>
+          <file> 254</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 218</file>
+          <file> 253</file>
         </tool>
       </outputs>
     </file>
@@ -1184,7 +1446,7 @@
       <outputs>
         <tool>
           <name>AARM</name>
-          <file> 217</file>
+          <file> 252</file>
         </tool>
       </outputs>
     </file>
@@ -1193,7 +1455,7 @@
       <outputs>
         <tool>
           <name>AARM</name>
-          <file> 220</file>
+          <file> 256</file>
         </tool>
       </outputs>
     </file>
@@ -1202,21 +1464,25 @@
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 225</file>
+          <file> 261</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 224</file>
+          <file> 260</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 313</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 210 80 72 206 42 211 212 112 51 84 208 223 81 78 76 214 207 213 90 111</file>
+          <file> 232 80 72 210 42 240 241 112 51 84 212 259 81 78 76 249 211 242 90 111</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 42 80 51 81 84 72 78 76 223 112 210 206 213 212 90 211 207 214 208 111</file>
+          <file> 42 80 51 81 84 72 78 76 259 112 232 210 242 241 90 240 211 249 212 111</file>
         </tool>
       </inputs>
     </file>
@@ -1225,21 +1491,25 @@
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 228</file>
+          <file> 264</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 231</file>
+          <file> 267</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 305</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 212 206 76 51 80 111 238 248 249 208 211 237 223 42 87 210 207 112 100 240 241 29 226 235 81 78 84 72 214 213 90 236 199 229 59</file>
+          <file> 241 210 76 51 80 111 274 317 318 212 240 273 259 42 87 232 211 112 100 276 277 29 262 271 81 78 84 72 249 242 90 272 199 265 59</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 229 223 226 248 249 80 51 81 84 72 78 76 87 42 112 210 206 213 212 90 211 207 214 208 111 235 236 240 237 241 238 29 59 100 199</file>
+          <file> 265 259 262 317 318 80 51 81 84 72 78 76 87 42 112 232 210 242 241 90 240 211 249 212 111 271 272 276 273 277 274 29 59 100 199</file>
         </tool>
       </inputs>
     </file>
@@ -1248,21 +1518,25 @@
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 230</file>
+          <file> 266</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 234</file>
+          <file> 270</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 300</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 80 213 90 51 223 214 229 76 111 206 112 44 42 81 78 84 72 210 208 207 211 212 226 227 87 35</file>
+          <file> 76 51 42 259 275 111 210 80 271 273 265 249 242 90 112 274 317 44 81 78 84 72 232 212 211 240 241 262 263 272 318 87 35</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 227 42 80 51 81 84 72 78 76 112 210 206 213 212 90 211 207 214 208 111 237 238 239 223 236 248 249 87 229 226 235 44 35</file>
+          <file> 263 42 80 51 81 84 72 78 76 112 232 210 242 241 90 240 211 249 212 111 273 274 275 259 272 317 318 87 265 262 271 44 35</file>
         </tool>
       </inputs>
     </file>
@@ -1271,21 +1545,125 @@
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 244</file>
+          <file> 280</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 243</file>
+          <file> 279</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 302</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 80 78 76 42 111 212 214 206 211 81 51 240 112 210 208 207 213 84 72 90 241 236</file>
+          <file> 80 78 76 42 111 241 249 210 240 81 51 276 112 232 212 211 242 84 72 90 277 272</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 241 112 210 206 42 80 51 81 84 72 78 76 213 212 90 211 207 214 208 111 240 236</file>
+          <file> 277 112 232 210 42 80 51 81 84 72 78 76 242 241 90 240 211 249 212 111 276 272</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\w5500\SPI2.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 285</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 281</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 35 44 295 80 81 51 78 294 75 87 76 21 84 72 79</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\w5500\w5500.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 290</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 292</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 311</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 80 87 78 84 224 211 42 294 51 232 239 246 81 72 112 212 240 241 210 249 44 255 295 79 76 35 230 111 242 90 75 259</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 75 80 51 81 84 72 78 76 87 79 44 35 239 112 232 210 42 242 241 90 240 211 249 212 111 230 224 255 259 294 295 246</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\w5500\socket.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 283</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 287</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 306</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 240 212 295 80 78 84 241 210 51 75 232 211 42 81 72 112 87 239 294 237 249 111 242 76 90 224 230 79</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 112 232 210 42 80 51 81 84 72 78 76 242 241 90 240 211 249 212 111 239 230 224 75 87 79 294 295 237</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\w5500\md5.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 293</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 284</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 314</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 286 80 230 51 76 44 87 35 81 78 84 72</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 44 80 51 81 84 72 78 76 87 35 230 286</file>
         </tool>
       </inputs>
     </file>
@@ -1294,21 +1672,25 @@
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 246</file>
+          <file> 297</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 247</file>
+          <file> 298</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 303</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 207 208 51 84 90 111 210 213 80 72 223 239 237 214 206 42 211 81 78 76 212 112 236</file>
+          <file> 211 212 51 84 90 111 232 242 80 72 259 275 273 249 210 42 240 81 78 76 241 112 272</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 112 210 206 42 80 51 81 84 72 78 76 213 212 90 211 207 214 208 111 239 223 236 237</file>
+          <file> 112 232 210 42 80 51 81 84 72 78 76 242 241 90 240 211 249 212 111 275 259 272 273</file>
         </tool>
       </inputs>
     </file>
@@ -1317,7 +1699,15 @@
       <tool>ICCARM</tool>
     </forcedrebuild>
     <forcedrebuild>
+      <name>$PROJ_DIR$\net\dns.c</name>
+      <tool>ICCARM</tool>
+    </forcedrebuild>
+    <forcedrebuild>
       <name>$PROJ_DIR$\stm32f10x_it.c</name>
+      <tool>ICCARM</tool>
+    </forcedrebuild>
+    <forcedrebuild>
+      <name>$PROJ_DIR$\w5500\SPI2.c</name>
       <tool>ICCARM</tool>
     </forcedrebuild>
     <forcedrebuild>

@@ -10,6 +10,8 @@
 #include <string.h>
 #include "bps.h"
 #include "nrf_gpio.h"
+#include "nrf_delay.h"
+
 //#include <RTL.h>                      /* RTX kernel functions & defines      */
 
 CONFIG_MSG  ConfigMsg, RecvMsg;
@@ -23,8 +25,10 @@ uint8 pub_buf[1460];
 void Reset_W5500(void)
 {
 	nrf_gpio_pin_clear(W5500_RST);
+        nrf_delay_ms(1);
   //os_dly_wait(OS_TICK);	
 	nrf_gpio_pin_set(W5500_RST);
+        nrf_delay_ms(1600);
   //os_dly_wait(1600 / OS_TICK);
 }
 //reboot 

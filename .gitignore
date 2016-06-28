@@ -12,6 +12,7 @@
 *.pdf
 *.rapp
 *.o
+examples/nrf51822/Debug/
 *.out
 *.pbi
 *.cout

@@ -32,7 +32,7 @@ char* inet_ntoa_pad(unsigned long addr)
 {
 	static char addr_str[16];
 	memset(addr_str,0,16);
-	printf(addr_str,"%03d.%03d.%03d.%03d",(int)(addr>>24 & 0xFF),(int)(addr>>16 & 0xFF),(int)(addr>>8 & 0xFF),(int)(addr & 0xFF));
+	//printf(addr_str,"%03d.%03d.%03d.%03d",(int)(addr>>24 & 0xFF),(int)(addr>>16 & 0xFF),(int)(addr>>8 & 0xFF),(int)(addr & 0xFF));
 	return addr_str;
 }
 
@@ -128,7 +128,7 @@ unsigned int GetDestPort(
 	return port;
 }
 
-#if 0
+#if 1
 /**
 @brief	htons function converts a unsigned short from host to TCP/IP network byte order (which is big-endian).
 @return 	the value in TCP/IP network byte order
@@ -338,11 +338,14 @@ void GetNetConfig(void)
 {
 	u_char addr[6];
 	u_long iaddr;
+        u_long temp;
 	#if 0
 	printf("\r\n================================================\r\n");
 	printf("       Net Config Information\r\n");
 	printf("================================================\r\n");
 	#endif
+        temp = IINCHIP_READ(0x001900);
+        temp = IINCHIP_READ(0x001A00);
 	GetMacAddress(addr);
 	//printf("MAC ADDRESS      : 0x%02X.0x%02X.0x%02X.0x%02X.0x%02X.0x%02X\r\n",addr[0],addr[1],addr[2],addr[3],addr[4],addr[5]);
 	

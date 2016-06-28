@@ -10,7 +10,7 @@
 #include "types.h"
 
 
-
+#if 0
 void Systick_Init (uint8 SYSCLK);
 void Delay_s( uint32 time_s );
 void Delay_us(uint32 time_us);
@@ -18,7 +18,7 @@ void Delay_ms(uint32 time_ms);
 
 //int putchar(int ch);
 //int getchar(void);
-
+#endif
 
 uint16 ATOI(char* str,uint16 base); 			/* Convert a string to integer number */
 uint32 ATOI32(char* str,uint16 base); 			/* Convert a string to integer number */

@@ -23,6 +23,7 @@ static u16 fac_ms=0;//ms延时倍乘数
 //初始化延迟函数
 //SYSTICK的时钟固定为HCLK时钟的1/8
 //SYSCLK:系统时钟
+#if 0
 void Systick_Init (unsigned char SYSCLK)
 {
 	#if 0
@@ -77,6 +78,7 @@ void Delay_us( uint32 time_us )
 	SysTick->VAL =0X00;       //清空计数器	 
 	#endif
 }
+#endif
 
 #if 0
 int putchar(int ch)

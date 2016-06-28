@@ -2463,6 +2463,48 @@
   </group>
   <group>
     <name>User</name>
+    <group>
+      <name>net</name>
+      <file>
+        <name>$PROJ_DIR$\net\device.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\net\dhcp.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\net\dns.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\net\sockutil.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\net\util.c</name>
+      </file>
+    </group>
+    <group>
+      <name>spi_master</name>
+      <file>
+        <name>$PROJ_DIR$\spi_master\spi_master.c</name>
+      </file>
+    </group>
+    <group>
+      <name>w5500</name>
+      <file>
+        <name>$PROJ_DIR$\w5500\md5.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\w5500\socket.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\w5500\SPI2.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\w5500\w5500.c</name>
+      </file>
+    </group>
+    <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\bps.c</name>
+    </file>
     <file>
       <name>$PROJ_DIR$\main.c</name>
     </file>

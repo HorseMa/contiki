@@ -347,7 +347,7 @@ uint8 IINCHIP_READ(uint32 addrbsb);
 uint16 wiz_write_buf(uint32 addrbsb,uint8* buf,uint16 len);
 uint16 wiz_read_buf(uint32 addrbsb, uint8* buf,uint16 len);
 
-
+void spi_w5500_init(void);
 void iinchip_init(void); // reset iinchip
 void sysinit(uint8 * tx_size, uint8 * rx_size); // setting tx/rx buf size
 uint8 getISR(uint8 s);

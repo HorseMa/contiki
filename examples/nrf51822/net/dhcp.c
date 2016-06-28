@@ -10,7 +10,6 @@
 #include "dhcp.h"
 #include "sockutil.h"
 #include "util.h"//delay
-#include "RTL.h"
 //#define DHCP_DEBUG
 
 uint8*  SRC_MAC_ADDR   =  EXTERN_DHCP_MAC;    // Local MAC address
