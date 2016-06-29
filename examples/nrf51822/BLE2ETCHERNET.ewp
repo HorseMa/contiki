@@ -2135,7 +2135,13 @@
       <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\bps.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\mai_no_os.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\main.c</name>
+      <excluded>
+        <configuration>Debug</configuration>
+      </excluded>
     </file>
     <file>
       <name>$PROJ_DIR$\stm32f10x_it.c</name>

@@ -468,7 +468,8 @@ uint8 parseDHCPMSG(uint16 length)
       break;
     case dhcpIPaddrLeaseTime :
       opt_len = *p++;
-      dhcp_lease_time = ntohl(*((uint32*)p));
+      uint32 temp = p[0] + p[1] * 0x100 + p[2] * 0x10000 + p[3] * 0x1000000;
+      dhcp_lease_time = ntohl(temp);
 #ifdef DHCP_DEBUG			
       printf("dhcpIPaddrLeaseTime : %d\r\n", dhcp_lease_time);
 #endif			
