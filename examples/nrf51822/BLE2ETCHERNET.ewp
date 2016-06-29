@@ -89,7 +89,7 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state>nRF51422-QFAA	NordicSemi nRF51422-QFAA</state>
+          <state>nRF51822-QFAA	NordicSemi nRF51822-QFAA</state>
         </option>
         <option>
           <name>GenLowLevelInterface</name>
@@ -149,7 +149,7 @@
         </option>
         <option>
           <name>GFPUDeviceSlave</name>
-          <state>nRF51422-QFAA	NordicSemi nRF51422-QFAA</state>
+          <state>nRF51822-QFAA	NordicSemi nRF51822-QFAA</state>
         </option>
         <option>
           <name>FPU2</name>
@@ -739,7 +739,7 @@
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state>$TOOLKIT_DIR$\config\linker\NordicSemi\nRF51822_CEAA.icf</state>
+          <state>$TOOLKIT_DIR$\config\linker\NordicSemi\nRF51422_QFAA.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>
@@ -2136,12 +2136,12 @@
     </file>
     <file>
       <name>$PROJ_DIR$\mai_no_os.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\main.c</name>
       <excluded>
         <configuration>Debug</configuration>
       </excluded>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\main.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\stm32f10x_it.c</name>

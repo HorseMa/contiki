@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=-1088818481
+Checksum=1256731713
 [CodeCoverage]
 Enabled=_ 0
 [Exceptions]
@@ -179,10 +179,19 @@ ShowTiming=1
 [Disassemble mode]
 mode=0
 [Breakpoints2]
-Bp0=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\core\sys\etimer.c}.141.3" 0 0 1 "" 0 "" 0
-Bp1=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\platform\nrf51822\clock.c}.150.1" 0 0 1 "" 0 "" 0
-Bp2=_ 1 "EMUL_CODE" "{$PROJ_DIR$\spi_master\spi_master.c}.135.13" 0 0 1 "" 0 "" 0
-Count=3
+Bp0=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\platform\nrf51822\clock.c}.150.1" 0 0 1 "" 0 "" 0
+Bp1=_ 0 "EMUL_CODE" "{$PROJ_DIR$\spi_master\spi_master.c}.135.13" 0 0 1 "" 0 "" 0
+Bp2=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s}.177.1" 0 0 1 "" 0 "" 0
+Bp3=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s}.173.1" 0 0 1 "" 0 "" 0
+Bp4=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s}.165.1" 0 0 1 "" 0 "" 0
+Bp5=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s}.160.1" 0 0 1 "" 0 "" 0
+Bp6=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s}.150.1" 0 0 1 "" 0 "" 0
+Bp7=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s}.185.1" 0 0 1 "" 0 "" 0
+Bp8=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s}.201.1" 0 0 1 "" 0 "" 0
+Bp9=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.50.3" 0 0 1 "" 0 "" 0
+Bp10=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.156.7" 0 0 1 "" 0 "" 0
+Bp11=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.91.5" 0 0 1 "" 0 "" 0
+Count=12
 [Aliases]
 Count=0
 SuppressDialog=0

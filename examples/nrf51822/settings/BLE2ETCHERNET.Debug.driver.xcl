@@ -6,11 +6,11 @@
 
 "-p" 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\CONFIG\debugger\NordicSemi\nRF51422-QFAA.ddf" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\CONFIG\debugger\NordicSemi\nRF51822-QFAA.ddf" 
 
 "--semihosting" 
 
-"--device=nRF51422-QFAA" 
+"--device=nRF51822-QFAA" 
 
 "--drv_communication=USB0" 
 
