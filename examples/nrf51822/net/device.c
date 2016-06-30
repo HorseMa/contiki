@@ -28,7 +28,7 @@ void Reset_W5500(void)
         nrf_delay_ms(1);
   //os_dly_wait(OS_TICK);	
 	nrf_gpio_pin_set(W5500_RST);
-        nrf_delay_ms(1600);
+        nrf_delay_ms(16);
   //os_dly_wait(1600 / OS_TICK);
 }
 //reboot 
@@ -90,15 +90,15 @@ void set_network(void)
 
   getSIPR (ip);
 
-  printf("IP : %d.%d.%d.%d\r\n", ip[0],ip[1],ip[2],ip[3]);
+  //printf("IP : %d.%d.%d.%d\r\n", ip[0],ip[1],ip[2],ip[3]);
 
   getSUBR(ip);
 
-  printf("SN : %d.%d.%d.%d\r\n", ip[0],ip[1],ip[2],ip[3]);
+  //printf("SN : %d.%d.%d.%d\r\n", ip[0],ip[1],ip[2],ip[3]);
 
   getGAR(ip);
 
-  printf("GW : %d.%d.%d.%d\r\n", ip[0],ip[1],ip[2],ip[3]);
+  //printf("GW : %d.%d.%d.%d\r\n", ip[0],ip[1],ip[2],ip[3]);
  
 }
 

@@ -3,6 +3,8 @@
 
 #define W5500_CS 23
 #define W5500_RST 30
+#define LED3    00
+#define LED4    01
 #define HWFC           false
 	
 void gipo_init(void);

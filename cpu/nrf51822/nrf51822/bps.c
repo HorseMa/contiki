@@ -19,8 +19,10 @@ void gipo_init(void)
 	//nrf_gpio_pin_set(SPI_PSELMISO0);
 	nrf_gpio_cfg_output(SPI_PSELSS0);
 	nrf_gpio_pin_set(SPI_PSELSS0);
-
-
+        nrf_gpio_cfg_output(LED3);
+	nrf_gpio_pin_set(LED3);
+        nrf_gpio_cfg_output(LED4);
+	nrf_gpio_pin_set(LED4);
 }
 
 void led_on(void)
