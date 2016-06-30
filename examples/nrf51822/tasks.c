@@ -13,6 +13,8 @@
 #include "radio_config.h"
 #include "w5500.h"
 #include "socket.h"
+#include "nrf_gpio.h"
+
 process_event_t ev_checkradio;
 process_event_t ev_radio_rcv;
 
@@ -42,9 +44,12 @@ PROCESS_THREAD(led_process, ev, data)
 
   while(1)
   {
+    nrf_gpio_pin_set(LED3);
     etimer_set(&et_blink, CLOCK_SECOND / 5);
     PROCESS_WAIT_EVENT();
-
+    nrf_gpio_pin_clear(LED3);
+    etimer_set(&et_blink, CLOCK_SECOND / 5);
+    PROCESS_WAIT_EVENT();
   }
   
   PROCESS_END();
@@ -67,11 +72,15 @@ PROCESS_THREAD(read_gpio_process, ev, data)
   {
     gipo_init();
     spi_w5500_init();
-    Reset_W5500();
+    nrf_gpio_pin_clear(W5500_RST);
+    etimer_set(&et_blink, CLOCK_SECOND / 100);
+    PROCESS_WAIT_EVENT();
+    nrf_gpio_pin_set(W5500_RST);
+    etimer_set(&et_blink, CLOCK_SECOND * 2);
+    PROCESS_WAIT_EVENT();
+
     set_default(); 
-    //set_network();
-	//os_dly_wait(10);
-    //GetNetConfig();
+
     init_dhcp_client();
     
     do{
@@ -92,7 +101,6 @@ PROCESS_THREAD(read_gpio_process, ev, data)
       {
       }
     }while(dhcpret != DHCP_RET_UPDATE);
-    //PROCESS_WAIT_EVENT();
 #if 1
     set_network();
     setRTR(2000);/*设置溢出时间值*/
@@ -101,6 +109,9 @@ PROCESS_THREAD(read_gpio_process, ev, data)
     getSUBR(ip);
     getGAR(ip);
     while(1){
+      etimer_set(&et_blink, CLOCK_SECOND / 2);
+      PROCESS_WAIT_EVENT();
+
       ret = getSn_SR(SOCK_SERVER);
       //switch(getSn_SR(0))/*??socket0???*/
       {
@@ -144,8 +155,10 @@ PROCESS_THREAD(uartRecv_process, ev, data)
 
   while(1)//匹配波特率
   {
+      nrf_gpio_pin_set(LED4);
       etimer_set(&et_blink, CLOCK_SECOND / 2);
       PROCESS_WAIT_EVENT_UNTIL(ev == PROCESS_EVENT_TIMER);
+      nrf_gpio_pin_set(LED4);
       etimer_set(&et_blink, CLOCK_SECOND / 2);
       PROCESS_WAIT_EVENT_UNTIL(ev == PROCESS_EVENT_TIMER);
   }

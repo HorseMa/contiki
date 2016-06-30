@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=-2136574863
+Checksum=782778411
 [CodeCoverage]
 Enabled=_ 0
 [Exceptions]
@@ -160,23 +160,6 @@ Fmt1={W}1:temp	4	0
 [Trace1]
 Enabled=0
 ShowSource=1
-[Log file]
-LoggingEnabled=_ 0
-LogFile=_ ""
-Category=_ 0
-[TermIOLog]
-LoggingEnabled=_ 0
-LogFile=_ ""
-[DriverProfiling]
-Enabled=0
-Mode=1
-Graph=0
-Symbiont=0
-Exclusions=
-[CallStackLog]
-Enabled=0
-[CallStackStripe]
-ShowTiming=1
 [Disassemble mode]
 mode=0
 [Breakpoints2]
@@ -189,6 +172,23 @@ Bp5=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s
 Bp6=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s}.185.1" 0 0 1 "" 0 "" 0
 Bp7=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s}.201.1" 0 0 1 "" 0 "" 0
 Count=8
+[Log file]
+LoggingEnabled=_ 0
+LogFile=_ ""
+Category=_ 0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
 [Aliases]
 Count=0
 SuppressDialog=0
+[DriverProfiling]
+Enabled=0
+Mode=1
+Graph=0
+Symbiont=0
+Exclusions=
+[CallStackLog]
+Enabled=0
+[CallStackStripe]
+ShowTiming=1

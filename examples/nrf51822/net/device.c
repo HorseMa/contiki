@@ -28,7 +28,7 @@ void Reset_W5500(void)
         nrf_delay_ms(1);
   //os_dly_wait(OS_TICK);	
 	nrf_gpio_pin_set(W5500_RST);
-        nrf_delay_ms(16);
+        nrf_delay_ms(1600);
   //os_dly_wait(1600 / OS_TICK);
 }
 //reboot 
