@@ -122,10 +122,7 @@ PROCESS_THREAD(read_gpio_process, ev, data)
             send(SOCK_SERVER,buffer,len);/*W5500?Server????*/
           }
         }
-        if(ret == SOCK_CLOSE_WAIT)/*socket??????*/
-        {
-        }
-        if(ret == SOCK_CLOSED)/*socket??*/
+        if((ret == SOCK_CLOSED) || (ret == SOCK_CLOSE_WAIT))/*socket??*/
         {
           while(!socket(SOCK_SERVER,Sn_MR_TCP,anyport++,Sn_MR_ND));/*??socket0?????*/
         }

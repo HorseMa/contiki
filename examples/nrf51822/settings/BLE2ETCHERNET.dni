@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=1858498633
+Checksum=1458407453
 [CodeCoverage]
 Enabled=_ 0
 [Exceptions]
@@ -170,10 +170,9 @@ Bp4=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s
 Bp5=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s}.150.1" 0 0 1 "" 0 "" 0
 Bp6=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s}.185.1" 0 0 1 "" 0 "" 0
 Bp7=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s}.201.1" 0 0 1 "" 0 "" 0
-Bp8=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.113.11" 0 0 1 "" 0 "" 0
-Bp9=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.109.11" 0 0 1 "" 0 "" 0
-Bp10=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.122.13" 0 0 1 "" 0 "" 0
-Count=11
+Bp8=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.122.13" 0 0 1 "" 0 "" 0
+Bp9=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.107.9" 0 0 1 "" 0 "" 0
+Count=10
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
