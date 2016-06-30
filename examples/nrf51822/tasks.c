@@ -54,13 +54,17 @@ PROCESS_THREAD(led_process, ev, data)
 PROCESS_THREAD(read_gpio_process, ev, data)
 { 
   static struct etimer et_blink;
+  static uint8 ip[4];
+  static uint8 pc_ip[4]={10,51,11,177};/*??????IP??*/
+  uint16_t anyport=0x8888;/*????????????*/
+  uint16_t len=0;
+  static unsigned char buffer[100];
+  uint8 ret;
+  uint8_t dhcpret=0;
+
   PROCESS_BEGIN();
   while(1)
   {
-    uint8_t pc_ip[4]={192,168,1,101};/*??????IP??*/
-    uint16_t anyport=3000;/*????????????*/
-    uint16_t len=0;
-    unsigned char buffer[100];
     gipo_init();
     spi_w5500_init();
     Reset_W5500();
@@ -69,7 +73,7 @@ PROCESS_THREAD(read_gpio_process, ev, data)
 	//os_dly_wait(10);
     //GetNetConfig();
     init_dhcp_client();
-    uint8_t dhcpret=0;
+    
     do{
       etimer_set(&et_blink, CLOCK_SECOND / 2);
       PROCESS_WAIT_EVENT();
@@ -88,58 +92,48 @@ PROCESS_THREAD(read_gpio_process, ev, data)
       {
       }
     }while(dhcpret != DHCP_RET_UPDATE);
-    PROCESS_WAIT_EVENT();
-#if 0
-	while(1)
-  {
-		uint8_t dhcpret=0;
-		do{
-			//os_dly_wait(10);
-			dhcpret = check_DHCP_state(SOCK_DHCP);
-			switch(dhcpret)
-			{
-				case DHCP_RET_NONE:
-					break;
-				case DHCP_RET_TIMEOUT:
-					break;
-				case DHCP_RET_UPDATE:
-					break;
-				case DHCP_RET_CONFLICT:
-					os_dly_wait(10);
-				default:
-					break;
-			}
-		}while(dhcpret != DHCP_RET_UPDATE);
-		while(1){
-			switch(getSn_SR(0))/*??socket0???*/
-			{
-				case SOCK_INIT:/*socket?????*/
-					connect(0, pc_ip ,6001);/*?TCP?????????????*/ 
-					break;
-				case SOCK_ESTABLISHED:/*socket????*/
-					if(getSn_IR(0) & Sn_IR_CON)
-					{
-							setSn_IR(0, Sn_IR_CON);/*Sn_IR??0??1*/
+    //PROCESS_WAIT_EVENT();
+#if 1
+    set_network();
+    setRTR(2000);/*设置溢出时间值*/
+    setRCR(3);/*设置最大重新发送次数*/
+    getSIPR (ip);
+    getSUBR(ip);
+    getGAR(ip);
+    while(1){
+      ret = getSn_SR(SOCK_SERVER);
+      //switch(getSn_SR(0))/*??socket0???*/
+      {
+        if(ret == SOCK_INIT)/*socket?????*/
+        {
+          connect(SOCK_SERVER, pc_ip ,0x8888);/*?TCP?????????????*/ 
+        }
+        if(ret == SOCK_ESTABLISHED)/*socket????*/
+        {
+          if(getSn_IR(SOCK_SERVER) & Sn_IR_CON)
+          {
+            setSn_IR(SOCK_SERVER, Sn_IR_CON);/*Sn_IR??0??1*/
           }
         
-					len=getSn_RX_RSR(0);/*len?????????*/
-					if(len>0)
-					{
-            recv(0,buffer,len);/*W5500????Sever???*/
-            send(0,buffer,len);/*W5500?Server????*/
+          len=getSn_RX_RSR(SOCK_SERVER);/*len?????????*/
+          if(len>0)
+          {
+            recv(SOCK_SERVER,buffer,len);/*W5500????Sever???*/
+            send(SOCK_SERVER,buffer,len);/*W5500?Server????*/
           }
-					break;
-				case SOCK_CLOSE_WAIT:/*socket??????*/
-					break;
-				case SOCK_CLOSED:/*socket??*/
-					socket(0,Sn_MR_TCP,anyport++,Sn_MR_ND);/*??socket0?????*/
-					break;
-			}
-		}
+        }
+        if(ret == SOCK_CLOSE_WAIT)/*socket??????*/
+        {
+        }
+        if(ret == SOCK_CLOSED)/*socket??*/
+        {
+          while(!socket(SOCK_SERVER,Sn_MR_TCP,anyport++,Sn_MR_ND));/*??socket0?????*/
+        }
+      }
   }
 #endif
 
-    etimer_set(&et_blink, CLOCK_SECOND / 2);
+    //etimer_set(&et_blink, CLOCK_SECOND / 2);
     PROCESS_WAIT_EVENT();
 
   }

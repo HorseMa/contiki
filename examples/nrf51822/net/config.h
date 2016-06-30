@@ -127,6 +127,7 @@ extern CONFIG_MSG  ConfigMsg, RecvMsg;
 
 #define SOCK_DHCP             0
 #define SOCK_HTTP             1
+#define SOCK_SERVER             2
 
 #define AppBackAddress          0x08020000 //from 128K
 #define ConfigAddr		0x0800FC00
