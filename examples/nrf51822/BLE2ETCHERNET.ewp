@@ -183,6 +183,7 @@
           <name>CCDefines</name>
           <state>AUTOSTART_ENABLE=1</state>
           <state>NRF51</state>
+          <state>RADIO_DRIVER_EXTENDED_SUPPORT</state>
         </option>
         <option>
           <name>CCPreprocFile</name>
@@ -325,7 +326,7 @@
           <state>$PROJ_DIR$/../../core/sys\</state>
           <state>$PROJ_DIR$/../../core/lib\</state>
           <state>$PROJ_DIR$/../../platform/nrf51822\</state>
-          <state>$PROJ_DIR$/../../platform/nrf51822\</state>
+          <state>$PROJ_DIR$/../../platform/nrf51822/Radio\</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -2133,6 +2134,24 @@
       </file>
       <file>
         <name>$PROJ_DIR$\net\util.c</name>
+      </file>
+    </group>
+    <group>
+      <name>radio</name>
+      <file>
+        <name>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio_comm.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio_hal.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\platform\nrf51822\Radio\si446x_api_lib.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\platform\nrf51822\Radio\si446x_nirq.c</name>
       </file>
     </group>
     <group>
