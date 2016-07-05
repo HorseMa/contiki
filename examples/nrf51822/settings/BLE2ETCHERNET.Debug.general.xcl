@@ -2,7 +2,7 @@
 
 "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\bin\armjlink2.dll" 
 
-"C:\contiki\examples\nrf51822\Debug\Exe\BLE2ETCHERNET.out" 
+"Z:\обть\BLE2ETHERNET\contiki\examples\nrf51822\Debug\Exe\BLE2ETCHERNET.out" 
 
 --plugin "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\bin\armbat.dll" 
 

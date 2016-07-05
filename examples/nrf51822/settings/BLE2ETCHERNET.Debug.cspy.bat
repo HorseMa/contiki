@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\common\bin\cspybat" -f "C:\contiki\examples\nrf51822\settings\BLE2ETCHERNET.Debug.general.xcl" --backend -f "C:\contiki\examples\nrf51822\settings\BLE2ETCHERNET.Debug.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\common\bin\cspybat" -f "Z:\下载\BLE2ETHERNET\contiki\examples\nrf51822\settings\BLE2ETCHERNET.Debug.general.xcl" --backend -f "Z:\下载\BLE2ETHERNET\contiki\examples\nrf51822\settings\BLE2ETCHERNET.Debug.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\common\bin\cspybat" -f "C:\contiki\examples\nrf51822\settings\BLE2ETCHERNET.Debug.general.xcl" "--debug_file=%~1" --backend -f "C:\contiki\examples\nrf51822\settings\BLE2ETCHERNET.Debug.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\common\bin\cspybat" -f "Z:\下载\BLE2ETHERNET\contiki\examples\nrf51822\settings\BLE2ETCHERNET.Debug.general.xcl" "--debug_file=%~1" --backend -f "Z:\下载\BLE2ETHERNET\contiki\examples\nrf51822\settings\BLE2ETCHERNET.Debug.driver.xcl" 
 
 @echo off 
 :end

@@ -22,24 +22,24 @@
 
 void radio_configure()
 {
-  // 收发器配置
-//  NRF_RADIO->TXPOWER = (RADIO_TXPOWER_TXPOWER_Pos4dBm << RADIO_TXPOWER_TXPOWER_Pos);  //设定发射功率，这里是4DBm
-//  NRF_RADIO->FREQUENCY = 8UL;                                                         //设定收发器工作的信道，这里为2.4008GHZ
-//  NRF_RADIO->MODE = (RADIO_MODE_MODE_Nrf_2Mbit << RADIO_MODE_MODE_Pos);               //工作模式
-	  NRF_RADIO->TXPOWER = (RADIO_TXPOWER_TXPOWER_0dBm << RADIO_TXPOWER_TXPOWER_Pos);  //设定发射功率，这里是0DBm
-  NRF_RADIO->FREQUENCY =100UL;                                                         //设定收发器工作的信道，这里为2.440GHZ
-//  NRF_RADIO->MODE = (RADIO_MODE_MODE_Nrf_2Mbit << RADIO_MODE_MODE_Pos);               //工作模式
+  // ê?·￠?÷????
+//  NRF_RADIO->TXPOWER = (RADIO_TXPOWER_TXPOWER_Pos4dBm << RADIO_TXPOWER_TXPOWER_Pos);  //éè?¨·￠é?1|?ê￡??aà?ê?4DBm
+//  NRF_RADIO->FREQUENCY = 8UL;                                                         //éè?¨ê?·￠?÷1¤×÷μ?D?μà￡??aà??a2.4008GHZ
+//  NRF_RADIO->MODE = (RADIO_MODE_MODE_Nrf_2Mbit << RADIO_MODE_MODE_Pos);               //1¤×÷?￡ê?
+	  NRF_RADIO->TXPOWER = (RADIO_TXPOWER_TXPOWER_0dBm << RADIO_TXPOWER_TXPOWER_Pos);  //éè?¨·￠é?1|?ê￡??aà?ê?0DBm
+  NRF_RADIO->FREQUENCY =100UL;                                                         //éè?¨ê?·￠?÷1¤×÷μ?D?μà￡??aà??a2.440GHZ
+//  NRF_RADIO->MODE = (RADIO_MODE_MODE_Nrf_2Mbit << RADIO_MODE_MODE_Pos);               //1¤×÷?￡ê?
 NRF_RADIO->MODE = (RADIO_MODE_MODE_Nrf_1Mbit << RADIO_MODE_MODE_Pos);
-  // 设定地址
-//  NRF_RADIO->PREFIX0 = 0xC4C3C2E7UL;  // 逻辑地址      51822[31:24] = 2401[24:31]
-//  NRF_RADIO->PREFIX1 = 0xC5C6C7C8UL;  // 逻辑地址设定
-	NRF_RADIO->PREFIX0 = 0x23C343E7UL;  // 逻辑地址      51822[31:24] = 2401[24:31]
-  NRF_RADIO->PREFIX1 = 0x13E363A3UL;  // 逻辑地址设定
-  NRF_RADIO->BASE0   = 0xE7E7E7E7UL;  // 逻辑地址
-  NRF_RADIO->BASE1   = 0x43434343UL;  // 逻辑地址设定
-  NRF_RADIO->TXADDRESS = 0x01UL;      // 发送地址设定   通道0
-//  NRF_RADIO->RXADDRESSES = 0x01UL;    // 接收地址设定  通道0
- NRF_RADIO->RXADDRESSES = (1<<0);     // 接收地址设定  通道0  1111 1111
+  // éè?¨μ??·
+//  NRF_RADIO->PREFIX0 = 0xC4C3C2E7UL;  // ???-μ??·      51822[31:24] = 2401[24:31]
+//  NRF_RADIO->PREFIX1 = 0xC5C6C7C8UL;  // ???-μ??·éè?¨
+	NRF_RADIO->PREFIX0 = 0x23C343E7UL;  // ???-μ??·      51822[31:24] = 2401[24:31]
+  NRF_RADIO->PREFIX1 = 0x13E363A3UL;  // ???-μ??·éè?¨
+  NRF_RADIO->BASE0   = 0xE7E7E7E7UL;  // ???-μ??·
+  NRF_RADIO->BASE1   = 0x43434343UL;  // ???-μ??·éè?¨
+  NRF_RADIO->TXADDRESS = 0x01UL;      // ·￠?íμ??·éè?¨   í¨μà0
+//  NRF_RADIO->RXADDRESSES = 0x01UL;    // ?óê?μ??·éè?¨  í¨μà0
+ NRF_RADIO->RXADDRESSES = (1<<0);     // ?óê?μ??·éè?¨  í¨μà0  1111 1111
 	
   // Packet configuration
   NRF_RADIO->PCNF0 = (PACKET0_S1_SIZE << RADIO_PCNF0_S1LEN_Pos) |
@@ -53,16 +53,16 @@ NRF_RADIO->MODE = (RADIO_MODE_MODE_Nrf_1Mbit << RADIO_MODE_MODE_Pos);
                       (PACKET1_STATIC_LENGTH << RADIO_PCNF1_STATLEN_Pos)           |
                       (PACKET1_PAYLOAD_SIZE << RADIO_PCNF1_MAXLEN_Pos); 
 
-  // CRC设定
-  NRF_RADIO->CRCCNF = (RADIO_CRCCNF_LEN_Two << RADIO_CRCCNF_LEN_Pos); // 2字节CRC
+  // CRCéè?¨
+  NRF_RADIO->CRCCNF = (RADIO_CRCCNF_LEN_Two << RADIO_CRCCNF_LEN_Pos); // 2×??úCRC
   if ((NRF_RADIO->CRCCNF & RADIO_CRCCNF_LEN_Msk) == (RADIO_CRCCNF_LEN_Two << RADIO_CRCCNF_LEN_Pos))
   {
-    NRF_RADIO->CRCINIT = 0xFFFFUL;      // CRC计算中初始值     
+    NRF_RADIO->CRCINIT = 0xFFFFUL;      // CRC?????D3?ê??μ     
     NRF_RADIO->CRCPOLY = 0x11021UL;     // CRC poly: x^16+x^12^x^5+1
   }
   else if ((NRF_RADIO->CRCCNF & RADIO_CRCCNF_LEN_Msk) == (RADIO_CRCCNF_LEN_One << RADIO_CRCCNF_LEN_Pos))
   {
-    NRF_RADIO->CRCINIT = 0xFFUL;        // CRC计算中初始值     
+    NRF_RADIO->CRCINIT = 0xFFUL;        // CRC?????D3?ê??μ     
     NRF_RADIO->CRCPOLY = 0x107UL;       // CRC poly: x^8+x^2^x^1+1
   }
   
