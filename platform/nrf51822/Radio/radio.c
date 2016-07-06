@@ -79,6 +79,7 @@ void vRadio_PowerUp(void)
 void vRadio_Init(void)
 {
   U16 wDelay;
+  si4463_spi_init();
   /* Power Up the radio chip */
   vRadio_PowerUp();
   si446x_part_info();

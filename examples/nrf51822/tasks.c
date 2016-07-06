@@ -18,6 +18,7 @@
 #include "app_uart.h"
 #include <stdio.h>
 #include <string.h>
+#include "radio.h"
 
 
 process_event_t ev_checkradio;
@@ -29,8 +30,9 @@ static char str[100];
 PROCESS(led_process,"led state");
 PROCESS(read_gpio_process,"read_gpio");
 PROCESS(uartRecv_process,"uartRecv");
+PROCESS(si4463_process,"si4463");
 
-AUTOSTART_PROCESSES(&led_process,&uartRecv_process,&read_gpio_process);
+AUTOSTART_PROCESSES(&led_process,&uartRecv_process,&read_gpio_process,&si4463_process);
 
 void clockInit(void)
 {
@@ -243,3 +245,24 @@ PROCESS_THREAD(uartRecv_process, ev, data)
   PROCESS_END();
 }
 
+PROCESS_THREAD(si4463_process, ev, data)
+{
+  static struct etimer et_blink;
+  PROCESS_BEGIN();
+  ev_checkradio = process_alloc_event();
+
+  spi_master_init(SPI1, SPI_MODE0, 0);
+  vRadio_Init();
+  si4463_irq_cfg();
+  vRadio_StartRX();
+  
+  while(1)
+  {
+    /*etimer_set(&et_blink, CLOCK_SECOND / 5);
+    PROCESS_WAIT_EVENT();
+    vRadio_StartTx_Variable_Packet("hello",5);*/
+    PROCESS_WAIT_EVENT_UNTIL(ev == ev_checkradio);
+    bRadio_Check_Tx_RX();
+  }
+  PROCESS_END();
+}

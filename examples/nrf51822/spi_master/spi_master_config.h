@@ -21,10 +21,10 @@
 #define SPI_PSELSS0               23   /*!< GPIO pin number for Slave Select           */
 
 /*  SPI1 */
-#define SPI_PSELSCK1              29   /*!< GPIO pin number for SPI clock              */
-#define SPI_PSELMOSI1             21   /*!< GPIO pin number for Master Out Slave In    */
-#define SPI_PSELMISO1             23   /*!< GPIO pin number for Master In Slave Out    */
-#define SPI_PSELSS1               28   /*!< GPIO pin number for Slave Select           */
+#define SPI_PSELSCK1              12   /*!< GPIO pin number for SPI clock              */
+#define SPI_PSELMOSI1             10   /*!< GPIO pin number for Master Out Slave In    */
+#define SPI_PSELMISO1             11   /*!< GPIO pin number for Master In Slave Out    */
+#define SPI_PSELSS1               9   /*!< GPIO pin number for Slave Select           */
 
 //#define DEBUG
 #ifdef DEBUG

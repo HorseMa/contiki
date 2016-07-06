@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=1701297995
+Checksum=1328118037
 [CodeCoverage]
 Enabled=_ 0
 [Exceptions]
@@ -180,20 +180,22 @@ ShowTiming=1
 [Disassemble mode]
 mode=0
 [Breakpoints2]
-Bp0=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\platform\nrf51822\clock.c}.150.1" 0 0 1 "" 0 "" 0
-Bp1=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s}.177.1" 0 0 1 "" 0 "" 0
-Bp2=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s}.173.1" 0 0 1 "" 0 "" 0
-Bp3=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s}.165.1" 0 0 1 "" 0 "" 0
-Bp4=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s}.160.1" 0 0 1 "" 0 "" 0
-Bp5=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s}.150.1" 0 0 1 "" 0 "" 0
-Bp6=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s}.185.1" 0 0 1 "" 0 "" 0
-Bp7=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s}.201.1" 0 0 1 "" 0 "" 0
-Bp8=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.243.1" 0 0 1 "" 0 "" 0
-Bp9=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s}.185.1" 0 0 1 "" 0 "" 0
-Bp10=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.243.3" 0 0 1 "" 0 "" 0
-Bp11=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_uart.c}.266.11" 0 0 1 "" 0 "" 0
-Bp12=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.156.5" 0 0 1 "" 0 "" 0
-Count=13
+Bp0=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.150.1" 0 0 1 "" 0 "" 0
+Bp1=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.177.1" 0 0 1 "" 0 "" 0
+Bp2=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.173.1" 0 0 1 "" 0 "" 0
+Bp3=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.165.1" 0 0 1 "" 0 "" 0
+Bp4=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.160.1" 0 0 1 "" 0 "" 0
+Bp5=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.150.1" 0 0 1 "" 0 "" 0
+Bp6=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.185.1" 0 0 1 "" 0 "" 0
+Bp7=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.201.1" 0 0 1 "" 0 "" 0
+Bp8=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.245.1" 0 0 1 "" 0 "" 0
+Bp9=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.185.1" 0 0 1 "" 0 "" 0
+Bp10=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..}.245.3" 0 0 1 "" 0 "" 0
+Bp11=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..}.266.11" 0 0 1 "" 0 "" 0
+Bp12=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.158.5" 0 0 1 "" 0 "" 0
+Bp13=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio.c}.158.9" 0 0 1 "" 0 "" 0
+Bp14=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio.c}.131.8" 0 0 1 "" 0 "" 0
+Count=15
 [Aliases]
 Count=0
 SuppressDialog=0

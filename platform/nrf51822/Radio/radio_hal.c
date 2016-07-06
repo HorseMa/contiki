@@ -16,6 +16,10 @@
 #include "compiler_defs.h"
 #include "si446x_defs.h"
 #include "nrf51.h"
+#include "bps.h"
+#include "nrf_gpio.h"
+#include <spi_master.h>
+#include "spi_master_config.h"
 
 
 
@@ -30,73 +34,61 @@
                 /* ======================================= *
                  *      L O C A L   F U N C T I O N S      *
                  * ======================================= */
-
+static uint32_t *spi_base_address;
                 /* ======================================= *
                  *     P U B L I C   F U N C T I O N S     *
                  * ======================================= */
-
+void si4463_spi_init(void)
+{
+  spi_base_address = spi_master_init(SPI1, SPI_MODE0, 0);
+}
 void radio_hal_AssertShutdown(void)
 {
-    //GPIO_WriteHigh(GPIOC, GPIO_PIN_3);
+  nrf_gpio_pin_set(SI4463_CEN);
 }
 
 void radio_hal_DeassertShutdown(void)
 {
-    //GPIO_WriteLow(GPIOC, GPIO_PIN_3);
+  nrf_gpio_pin_clear(SI4463_CEN);
 }
 
 void radio_hal_ClearNsel(void)
 {
-    //GPIO_WriteLow(GPIOA, GPIO_PIN_3);
+  nrf_gpio_pin_clear(SPI_PSELSS1);
 }
 
 void radio_hal_SetNsel(void)
 {
-    //GPIO_WriteHigh(GPIOA, GPIO_PIN_3);
+  nrf_gpio_pin_set(SPI_PSELSS1);
 }
 
 BIT radio_hal_NirqLevel(void)
 {
-    //return GPIO_ReadInputPin(GPIOC, GPIO_PIN_4);
+  return nrf_gpio_pin_read(SI4463_INT);
 }
 
 U8 SPI_RW(U8 byte)
 {
-  //while(SPI_GetFlagStatus(SPI_FLAG_TXE) == RESET);
-  //SPI_SendData(byte);
-  /* Wait to receive a byte */
-  //while(SPI_GetFlagStatus(SPI_FLAG_RXNE) == RESET);
-  //return SPI_ReceiveData();
+  uint8_t temp;
+  spi_master_tx_rx(spi_base_address, 1, &byte, &temp);
+  return temp;
 }
 void radio_hal_SpiWriteByte(U8 byteToWrite)
 {
-  /*while(SPI_GetFlagStatus(SPI_FLAG_TXE) == RESET);
-  SPI_SendData(byteToWrite);
-  while(SPI_GetFlagStatus(SPI_FLAG_RXNE) == RESET);
-  SPI_ReceiveData();*/
   SPI_RW(byteToWrite);
 }
 
 U8 radio_hal_SpiReadByte(void)
 {
-  /*while(SPI_GetFlagStatus(SPI_FLAG_TXE) == RESET);
-  SPI_SendData(0xff);
-   Wait to receive a byte 
-  while(SPI_GetFlagStatus(SPI_FLAG_RXNE) == RESET);
-  return SPI_ReceiveData();*/
-
   return SPI_RW(0xff);
 }
-//static U8 flg = 0;
 void radio_hal_SpiWriteData(U8 byteCount, U8* pData)
 {
   U8 u8Loop = 0;
-  //flg = 1;
   for(u8Loop = 0; u8Loop < byteCount; u8Loop ++)
   {
     radio_hal_SpiWriteByte(pData[u8Loop]);
   }
-  //flg = 0;
 }
 
 void radio_hal_SpiReadData(U8 byteCount, U8* pData)

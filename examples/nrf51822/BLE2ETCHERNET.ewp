@@ -1948,6 +1948,9 @@
       </excluded>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_gpiote.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\simple_timer\app_simple_timer.c</name>
     </file>
     <file>

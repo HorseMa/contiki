@@ -27,7 +27,7 @@
                 /* ======================================= *
                  *  F U N C T I O N   P R O T O T Y P E S  *
                  * ======================================= */
-
+void si4463_spi_init(void);
 void radio_hal_AssertShutdown(void);
 void radio_hal_DeassertShutdown(void);
 void radio_hal_ClearNsel(void);

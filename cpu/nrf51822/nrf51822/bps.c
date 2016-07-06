@@ -19,12 +19,36 @@ void gipo_init(void)
 	//nrf_gpio_pin_set(SPI_PSELMISO0);
 	nrf_gpio_cfg_output(SPI_PSELSS0);
 	nrf_gpio_pin_set(SPI_PSELSS0);
+        nrf_gpio_cfg_output(SPI_PSELSCK1);
+	nrf_gpio_pin_set(SPI_PSELSCK1);
+	nrf_gpio_cfg_output(SPI_PSELMOSI1);
+	nrf_gpio_pin_set(SPI_PSELMOSI1);
+        nrf_gpio_cfg_input(SPI_PSELMISO1,GPIO_PIN_CNF_PULL_Disabled);
+	//nrf_gpio_pin_set(SPI_PSELMISO1);
+	nrf_gpio_cfg_output(SPI_PSELSS1);
+	nrf_gpio_pin_set(SPI_PSELSS1);
+
         nrf_gpio_cfg_output(LED3);
 	nrf_gpio_pin_set(LED3);
         nrf_gpio_cfg_output(LED4);
 	nrf_gpio_pin_set(LED4);
+        nrf_gpio_cfg_input(SI4463_INT,GPIO_PIN_CNF_PULL_Disabled);
+        nrf_gpio_cfg_output(SI4463_CEN);
+        nrf_gpio_pin_set(SI4463_CEN);
 }
 
+void si4463_irq_cfg(void)
+{
+  NVIC_EnableIRQ(GPIOTE_IRQn);
+  //配置工作模式为event
+  //选择一个引脚作为event来源
+  //配置该event的触发源为翻转
+  NRF_GPIOTE->CONFIG[0] =  (GPIOTE_CONFIG_MODE_Event << GPIOTE_CONFIG_MODE_Pos)
+  | (SI4463_INT << GPIOTE_CONFIG_PSEL_Pos)
+  | (GPIOTE_CONFIG_POLARITY_HiToLo << GPIOTE_CONFIG_POLARITY_Pos);
+  //开启4路GPIOTE通道中的IN0通道的中断
+  NRF_GPIOTE->INTENSET  = GPIOTE_INTENSET_IN0_Set << GPIOTE_INTENSET_IN0_Pos;/** @brief Function for handling the GPIOTE interrupt which is triggered on pin 0 change.*/
+}
 void led_on(void)
 {
 	//nrf_gpio_pin_clear(LED_1);
