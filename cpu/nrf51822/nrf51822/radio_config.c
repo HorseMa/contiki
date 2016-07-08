@@ -12,6 +12,10 @@
 
 #include "radio_config.h"
 #include "nrf_delay.h"
+#include "sys/energest.h"
+#include "nrf_drv_common.h"
+#include "contiki.h"
+
 
 #define PACKET0_S1_SIZE                  (0UL)  //!< 此例程我们不理会
 #define PACKET0_S0_SIZE                  (0UL)  //!< 此例程我们不理会
@@ -65,8 +69,40 @@ NRF_RADIO->MODE = (RADIO_MODE_MODE_Nrf_1Mbit << RADIO_MODE_MODE_Pos);
     NRF_RADIO->CRCINIT = 0xFFUL;        // CRC?????D3?ê??μ     
     NRF_RADIO->CRCPOLY = 0x107UL;       // CRC poly: x^8+x^2^x^1+1
   }
-  
+  NRF_RADIO->INTENSET = RADIO_INTENSET_END_Enabled << RADIO_INTENSET_END_Pos;
+  //nrf_drv_common_irq_enable(RADIO_IRQn,1);
+  NVIC_SetPriority(RADIO_IRQn, 1);
+  NVIC_ClearPendingIRQ(RADIO_IRQn);
+  NVIC_EnableIRQ(RADIO_IRQn);
   nrf_delay_ms(3);
 }
 
+extern process_event_t ev_2_4g_rcv;
+PROCESS_NAME(led_process);
+
+void RADIO_IRQHandler(void)
+{
+  DISABLE_INTERRUPTS();
+  ENERGEST_ON(ENERGEST_TYPE_IRQ);
+  //nrf_delay_ms(3);
+  if(NRF_RADIO->EVENTS_END)
+  {
+    NRF_RADIO->EVENTS_END = 0;
+        //*((volatile uint32_t *)((uint8_t *)NRF_TIMERx + (uint32_t)timer_event)) = 0x0UL;
+    if (NRF_RADIO->CRCSTATUS == 1U)
+    {
+      NRF_RADIO->EVENTS_READY = 0U; 				 // ê??t×?±? ê?·￠?￡ê?×a??íê3é  ±ê????    
+      NRF_RADIO->TASKS_RXEN   = 1U;          // ê1?ü?óê?
+      //while(NRF_RADIO->EVENTS_READY == 0U)   // μè′y?óê?×?±?o?
+      {
+      }
+      process_post(&led_process,ev_2_4g_rcv,NULL);
+      NRF_RADIO->EVENTS_END = 0U;  					 // ?áê?ê??t			
+      NRF_RADIO->TASKS_START = 1U;           // ?aê?
+
+    }
+  }
+  ENERGEST_OFF(ENERGEST_TYPE_IRQ);
+  ENABLE_INTERRUPTS();
+}
 

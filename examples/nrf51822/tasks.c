@@ -23,6 +23,7 @@
 
 process_event_t ev_checkradio;
 process_event_t ev_radio_rcv;
+process_event_t ev_2_4g_rcv;
 
 unsigned char phone_num[11];
 uint8 pc_ip[4]={10,51,11,177};/*??????IP??*/
@@ -32,7 +33,7 @@ PROCESS(read_gpio_process,"read_gpio");
 PROCESS(uartRecv_process,"uartRecv");
 PROCESS(si4463_process,"si4463");
 
-AUTOSTART_PROCESSES(&led_process,&uartRecv_process,&read_gpio_process,&si4463_process);
+AUTOSTART_PROCESSES(&uartRecv_process,&led_process,&read_gpio_process,&si4463_process);
 
 void clockInit(void)
 {
@@ -60,6 +61,7 @@ PROCESS_THREAD(led_process, ev, data)
   static struct etimer et_blink;
   PROCESS_BEGIN();
   static unsigned char packet[10];
+  ev_2_4g_rcv = process_alloc_event();
   radio_configure();
   NRF_RADIO->PACKETPTR = (uint32_t)packet; // Set payload pointer
 
@@ -73,34 +75,14 @@ PROCESS_THREAD(led_process, ev, data)
 				
     NRF_RADIO->EVENTS_END = 0U;  					 // ?芍那?那??t			
     NRF_RADIO->TASKS_START = 1U;           // ?a那?
-    while(NRF_RADIO->EVENTS_END == 0U)     // ?車那?赤那㊣?
+    while(1)
     {
-      etimer_set(&et_blink, CLOCK_SECOND / 100);
-      PROCESS_WAIT_EVENT();
-    }
-
-				
-    if (NRF_RADIO->CRCSTATUS == 1U)        // CRCD㏒?谷赤“1y  2??CRCD㏒?谷
-    {
-      //if((packet[0]==100)&&(packet[1]==0x23)&&(packet[2]==0x4e)&&(packet[3]==0x0)&&(packet[4]==0x0)) 
-      {
-        //nrf_gpio_pin_clear(LED3);         // o足米?芍芍
-        //etimer_set(&et_blink, CLOCK_SECOND / 5);
-        //PROCESS_WAIT_EVENT();             
-        //nrf_gpio_pin_set(LED3);           // o足米??e
-						 
-        //simple_uart_putstring((const uint8_t *)&packet);
-					}
-      }
+      PROCESS_WAIT_EVENT_UNTIL(ev == ev_2_4g_rcv);
       memset(str,0,100);
       Hex2Str(packet,str,5);
       strcat(str,"\r\n");
       uart_put_string(str);
-      NRF_RADIO->EVENTS_DISABLED = 0U;       // 1?㊣?那??t  
-      NRF_RADIO->TASKS_DISABLE   = 1U;       // 1?㊣?那?﹞⊿?¯
-      while (NRF_RADIO->EVENTS_DISABLED == 0U)
-      {
-      }
+    }
   }
   
   PROCESS_END();
