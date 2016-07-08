@@ -22,6 +22,7 @@
 
 
 process_event_t ev_checkradio;
+process_event_t ev_checkw5500;
 process_event_t ev_radio_rcv;
 process_event_t ev_2_4g_rcv;
 
@@ -101,10 +102,12 @@ PROCESS_THREAD(read_gpio_process, ev, data)
   uint8_t dhcpret=0;
 
   PROCESS_BEGIN();
+  ev_checkw5500 = process_alloc_event();
   inet_addr_("10.51.11.177\0\n",pc_ip);
   while(1)
   {
     gipo_init();
+    w5500_irq_cfg();
     spi_w5500_init();
     nrf_gpio_pin_clear(W5500_RST);
     etimer_set(&et_blink, CLOCK_SECOND / 100);
@@ -116,7 +119,7 @@ PROCESS_THREAD(read_gpio_process, ev, data)
     set_default(); 
 
     init_dhcp_client();
-    
+    //PROCESS_WAIT_EVENT_UNTIL(ev == ev_checkw5500);
     do{
       etimer_set(&et_blink, CLOCK_SECOND / 2);
       PROCESS_WAIT_EVENT();
@@ -145,7 +148,7 @@ PROCESS_THREAD(read_gpio_process, ev, data)
     getSUBR(ip);
     getGAR(ip);
     while(1){
-      etimer_set(&et_blink, CLOCK_SECOND / 2);
+      etimer_set(&et_blink, CLOCK_SECOND / 100);
       PROCESS_WAIT_EVENT();
 
       ret = getSn_SR(SOCK_SERVER);

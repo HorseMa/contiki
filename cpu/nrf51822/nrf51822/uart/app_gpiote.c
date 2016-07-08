@@ -167,6 +167,8 @@ void GPIOTE_IRQHandler(void)
 #endif
 extern process_event_t ev_checkradio;
 PROCESS_NAME(si4463_process);
+extern process_event_t ev_checkw5500;
+PROCESS_NAME(read_gpio_process);
 
 void GPIOTE_IRQHandler(void)
 {
@@ -179,6 +181,13 @@ void GPIOTE_IRQHandler(void)
     NRF_GPIOTE->EVENTS_IN[0] = 0;
     process_post(&si4463_process,ev_checkradio,NULL);
   }
+  if ((NRF_GPIOTE->EVENTS_IN[1] == 1) && //判断中断是否来自GPIOTE通道0
+  (NRF_GPIOTE->INTENSET & GPIOTE_INTENSET_IN1_Msk))
+  {
+    NRF_GPIOTE->EVENTS_IN[1] = 0;
+    process_post(&read_gpio_process,ev_checkw5500,NULL);
+  }
+
   ENERGEST_OFF(ENERGEST_TYPE_IRQ);
   ENABLE_INTERRUPTS();
 }

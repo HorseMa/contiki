@@ -2,6 +2,7 @@
 #define _BPS_H_
 
 #define W5500_CS 23
+#define W5500_INT 29
 #define W5500_RST 30
 #define LED3    00
 #define LED4    01
@@ -18,5 +19,6 @@ void led_on(void);
 void led_off(void);
 void led_toggle(void);
 void si4463_irq_cfg(void);
+void w5500_irq_cfg(void);
 
 #endif

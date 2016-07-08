@@ -16,6 +16,7 @@ void gipo_init(void)
 	nrf_gpio_cfg_output(SPI_PSELMOSI0);
 	nrf_gpio_pin_set(SPI_PSELMOSI0);
         nrf_gpio_cfg_input(SPI_PSELMISO0,GPIO_PIN_CNF_PULL_Disabled);
+        nrf_gpio_cfg_input(W5500_INT,GPIO_PIN_CNF_PULL_Disabled);
 	//nrf_gpio_pin_set(SPI_PSELMISO0);
 	nrf_gpio_cfg_output(SPI_PSELSS0);
 	nrf_gpio_pin_set(SPI_PSELSS0);
@@ -35,6 +36,19 @@ void gipo_init(void)
         nrf_gpio_cfg_input(SI4463_INT,GPIO_PIN_CNF_PULL_Disabled);
         nrf_gpio_cfg_output(SI4463_CEN);
         nrf_gpio_pin_set(SI4463_CEN);
+}
+
+void w5500_irq_cfg(void)
+{
+  NVIC_EnableIRQ(GPIOTE_IRQn);
+  //配置工作模式为event
+  //选择一个引脚作为event来源
+  //配置该event的触发源为翻转
+  NRF_GPIOTE->CONFIG[1] =  (GPIOTE_CONFIG_MODE_Event << GPIOTE_CONFIG_MODE_Pos)
+  | (W5500_INT << GPIOTE_CONFIG_PSEL_Pos)
+  | (GPIOTE_CONFIG_POLARITY_HiToLo << GPIOTE_CONFIG_POLARITY_Pos);
+  //开启4路GPIOTE通道中的IN0通道的中断
+  NRF_GPIOTE->INTENSET  = GPIOTE_INTENSET_IN1_Set << GPIOTE_INTENSET_IN1_Pos;/** @brief Function for handling the GPIOTE interrupt which is triggered on pin 0 change.*/
 }
 
 void si4463_irq_cfg(void)

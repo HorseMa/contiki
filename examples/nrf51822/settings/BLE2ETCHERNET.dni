@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=1716905059
+Checksum=2084604516
 [CodeCoverage]
 Enabled=_ 0
 [Exceptions]
@@ -175,13 +175,13 @@ Bp8=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.245.1" 0 0 1 "" 0 "" 0
 Bp9=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.185.1" 0 0 1 "" 0 "" 0
 Bp10=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.245.3" 0 0 1 "" 0 "" 0
 Bp11=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.266.11" 0 0 1 "" 0 "" 0
-Bp12=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.140.5" 0 0 1 "" 0 "" 0
-Bp13=_ 0 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.250.1" 0 0 1 "" 0 "" 0
+Bp12=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.143.5" 0 0 1 "" 0 "" 0
+Bp13=_ 0 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.253.1" 0 0 1 "" 0 "" 0
 Bp14=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio.c}.160.9" 0 0 1 "" 0 "" 0
 Bp15=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio.c}.129.7" 0 0 1 "" 0 "" 0
 Bp16=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio.c}.129.7" 0 0 1 "" 0 "" 0
-Bp17=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\radio_config.c}.88.3" 0 0 1 "" 0 "" 0
-Bp18=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.84.7" 0 0 1 "" 0 "" 0
+Bp17=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.121.5" 0 0 1 "" 0 "" 0
+Bp18=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.124.7" 0 0 1 "" 0 "" 0
 Count=19
 [Log file]
 LoggingEnabled=_ 0
