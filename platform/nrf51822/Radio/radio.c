@@ -112,7 +112,7 @@ U8 bRadio_Check_Tx_RX(void)
   {
       /* Read ITs, clear pending ones */
       si446x_get_int_status(0u, 0u, 0u);
-
+#if 0
       if (Si446xCmd.GET_INT_STATUS.CHIP_PEND & SI446X_CMD_GET_CHIP_STATUS_REP_CMD_ERROR_PEND_BIT)
       {
       	/* State change to */
@@ -125,6 +125,7 @@ U8 bRadio_Check_Tx_RX(void)
         si446x_change_state(SI446X_CMD_CHANGE_STATE_ARG_NEW_STATE_ENUM_RX);
         return 0;
       }
+#endif
       if (Si446xCmd.GET_INT_STATUS.PH_PEND & SI446X_CMD_GET_INT_STATUS_REP_CRC_ERROR_PEND_BIT)
       {
       	/* Reset FIFO */
@@ -208,10 +209,10 @@ void vRadio_StartTx_Variable_Packet(unsigned char *bytes, unsigned char len)
   si446x_fifo_info(0x03);
 
   /* Fill the TX fifo with datas */
-  
+  si446x_write_tx_fifo(1, &len);
   si446x_write_tx_fifo(len, bytes);
 
   /* Start sending packet, channel 0, START immediately */
-   si446x_start_tx(0, 0x80, len);
+   si446x_start_tx(0, 0x80, len + 1);
  
 }

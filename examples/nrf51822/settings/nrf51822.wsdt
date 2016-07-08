@@ -29,7 +29,7 @@
     <Windows>
       
       
-    <Wnd0>
+    <Wnd2>
         <Tabs>
           <Tab>
             <Identity>TabID-32342-31003</Identity>
@@ -40,7 +40,7 @@
           
         <Tab><Identity>TabID-28185-25741</Identity><TabName>Debug Log</TabName><Factory>Debug-Log</Factory><Session/></Tab><Tab><Identity>TabID-6887-27946</Identity><TabName>Find in Files</TabName><Factory>Find-in-Files</Factory><Session/></Tab><Tab><Identity>TabID-30233-28857</Identity><TabName>Ambiguous Definitions</TabName><Factory>Select-Ambiguous-Definitions</Factory><Session/></Tab></Tabs>
         
-      <SelectedTab>0</SelectedTab></Wnd0><Wnd1>
+      <SelectedTab>0</SelectedTab></Wnd2><Wnd3>
         <Tabs>
           <Tab>
             <Identity>TabID-10323-31006</Identity>
@@ -48,24 +48,24 @@
             <Factory>Workspace</Factory>
             <Session>
               
-            <NodeDict><ExpandedNode>BLE2ETCHERNET</ExpandedNode><ExpandedNode>BLE2ETCHERNET/Cpu</ExpandedNode><ExpandedNode>BLE2ETCHERNET/Output</ExpandedNode><ExpandedNode>BLE2ETCHERNET/Platform</ExpandedNode><ExpandedNode>BLE2ETCHERNET/User</ExpandedNode><ExpandedNode>BLE2ETCHERNET/User/net</ExpandedNode><ExpandedNode>BLE2ETCHERNET/User/spi_master</ExpandedNode><ExpandedNode>BLE2ETCHERNET/User/w5500</ExpandedNode></NodeDict></Session>
+            <NodeDict><ExpandedNode>BLE2ETCHERNET</ExpandedNode><ExpandedNode>BLE2ETCHERNET/Cpu</ExpandedNode><ExpandedNode>BLE2ETCHERNET/Output</ExpandedNode><ExpandedNode>BLE2ETCHERNET/Platform</ExpandedNode><ExpandedNode>BLE2ETCHERNET/User</ExpandedNode><ExpandedNode>BLE2ETCHERNET/User/net</ExpandedNode><ExpandedNode>BLE2ETCHERNET/User/radio</ExpandedNode><ExpandedNode>BLE2ETCHERNET/User/radio/radio.c</ExpandedNode><ExpandedNode>BLE2ETCHERNET/User/radio/radio_hal.c</ExpandedNode><ExpandedNode>BLE2ETCHERNET/User/radio/si446x_api_lib.c</ExpandedNode><ExpandedNode>BLE2ETCHERNET/User/spi_master</ExpandedNode><ExpandedNode>BLE2ETCHERNET/User/tasks.c</ExpandedNode><ExpandedNode>BLE2ETCHERNET/User/w5500</ExpandedNode></NodeDict></Session>
           </Tab>
         </Tabs>
         
-      <SelectedTab>0</SelectedTab></Wnd1></Windows>
+      <SelectedTab>0</SelectedTab></Wnd3></Windows>
     <Editor>
       
       
       
       
-    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\cpu\nrf51822\nrf51822\bps.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>36</YPos2><SelStart2>1249</SelStart2><SelEnd2>1276</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\cpu\nrf51822\nrf51822\bps.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>1</YPos2><SelStart2>404</SelStart2><SelEnd2>418</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>Z:\&#x4e0B;&#x8F7D;\BLE2ETHERNET\contiki\examples\SI4463Module\tasks.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>128</YPos2><SelStart2>3525</SelStart2><SelEnd2>3525</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>Z:\&#x4e0B;&#x8F7D;\BLE2ETHERNET\contiki\examples\SI4463Module\stm8s_it.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>12</YPos2><SelStart2>1182</SelStart2><SelEnd2>1203</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>24</YPos2><SelStart2>1048</SelStart2><SelEnd2>1048</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\platform\nrf51822\Radio\si446x_api_lib.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>172</YPos2><SelStart2>5086</SelStart2><SelEnd2>5086</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\core\sys\process.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>285</YPos2><SelStart2>8685</SelStart2><SelEnd2>8685</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\tasks.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>222</YPos2><SelStart2>6615</SelStart2><SelEnd2>6615</SelEnd2></Tab><ActiveTab>7</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_gpiote.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>166</YPos2><SelStart2>6161</SelStart2><SelEnd2>6161</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\platform\nrf51822\Radio\radio.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>146</YPos2><SelStart2>4731</SelStart2><SelEnd2>4731</SelEnd2></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>24</YPos2><SelStart2>1048</SelStart2><SelEnd2>1048</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\platform\nrf51822\Radio\radio.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>9</XPos2><YPos2>147</YPos2><SelStart2>4938</SelStart2><SelEnd2>4938</SelEnd2></Tab><ActiveTab>1</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\core\sys\process.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>302</YPos2><SelStart2>8839</SelStart2><SelEnd2>8839</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\platform\nrf51822\Radio\si446x_defs.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>1967</YPos2><SelStart2>114496</SelStart2><SelEnd2>114496</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\platform\nrf51822\Radio\si446x_api_lib.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>184</YPos2><SelStart2>5447</SelStart2><SelEnd2>5447</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>C:\Program Files (x86)\Silabs\WDS3\DemoExample\Si446x_LongPacketTX\src\application\radio.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>185</YPos2><SelStart2>5890</SelStart2><SelEnd2>5890</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\tasks.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>222</YPos2><SelStart2>7377</SelStart2><SelEnd2>7377</SelEnd2></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
     <Positions>
       
       
       
       
       
-    <Top><Row0><Sizes><Toolbar-00DEE168><key>iaridepm.enu1</key></Toolbar-00DEE168></Sizes></Row0><Row1><Sizes/></Row1></Top><Left><Row0><Sizes><Wnd1><Rect><Top>-2</Top><Left>-2</Left><Bottom>430</Bottom><Right>290</Right><x>-2</x><y>-2</y><xscreen>200</xscreen><yscreen>199</yscreen><sizeHorzCX>138889</sizeHorzCX><sizeHorzCY>296131</sizeHorzCY><sizeVertCX>202778</sizeVertCX><sizeVertCY>642857</sizeVertCY></Rect></Wnd1></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd0><Rect><Top>-2</Top><Left>-2</Left><Bottom>197</Bottom><Right>1442</Right><x>-2</x><y>-2</y><xscreen>1444</xscreen><yscreen>199</yscreen><sizeHorzCX>1002778</sizeHorzCX><sizeHorzCY>296131</sizeHorzCY><sizeVertCX>138889</sizeVertCX><sizeVertCY>296131</sizeVertCY></Rect></Wnd0></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+    <Top><Row0><Sizes><Toolbar-039FE168><key>iaridepm.enu1</key></Toolbar-039FE168></Sizes></Row0><Row1><Sizes/></Row1></Top><Left><Row0><Sizes><Wnd3><Rect><Top>-2</Top><Left>-2</Left><Bottom>430</Bottom><Right>290</Right><x>-2</x><y>-2</y><xscreen>200</xscreen><yscreen>199</yscreen><sizeHorzCX>138889</sizeHorzCX><sizeHorzCY>296131</sizeHorzCY><sizeVertCX>202778</sizeVertCX><sizeVertCY>642857</sizeVertCY></Rect></Wnd3></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd2><Rect><Top>-2</Top><Left>-2</Left><Bottom>197</Bottom><Right>1442</Right><x>-2</x><y>-2</y><xscreen>1444</xscreen><yscreen>199</yscreen><sizeHorzCX>1002778</sizeHorzCX><sizeHorzCY>296131</sizeHorzCY><sizeVertCX>138889</sizeVertCX><sizeVertCY>296131</sizeVertCY></Rect></Wnd2></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
   </Desktop>
 </Workspace>
 

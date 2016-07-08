@@ -110,7 +110,7 @@ U8 si446x_configuration_init(const U8* pSetPropCmd)
       }
     }
   }
-
+  si446x_gpio_pin_cfg( 0, 0, 33|0x40, 32|0x40, 0, 0, 0 );
   return SI446X_SUCCESS;
 }
 
