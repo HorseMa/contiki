@@ -15,6 +15,7 @@
 #include "sys/energest.h"
 #include "nrf_drv_common.h"
 #include "contiki.h"
+#include <string.h>
 
 
 #define PACKET0_S1_SIZE                  (0UL)  //!< 此例程我们不理会
@@ -23,7 +24,7 @@
 #define PACKET1_BASE_ADDRESS_LENGTH      (4UL)  //!< base address长度设定
 #define PACKET1_STATIC_LENGTH            (5UL)  //!< 每次发送固定长度为4个字节的数据包
 #define PACKET1_PAYLOAD_SIZE             (5UL)  //!< 保持最大数据长度跟STALEN一致
-
+unsigned char packet[10];
 void radio_configure()
 {
   // ê?·￠?÷????
@@ -69,6 +70,8 @@ NRF_RADIO->MODE = (RADIO_MODE_MODE_Nrf_1Mbit << RADIO_MODE_MODE_Pos);
     NRF_RADIO->CRCINIT = 0xFFUL;        // CRC?????D3?ê??μ     
     NRF_RADIO->CRCPOLY = 0x107UL;       // CRC poly: x^8+x^2^x^1+1
   }
+  NRF_RADIO->PACKETPTR = (uint32_t)packet; // Set payload pointer
+
   NRF_RADIO->INTENSET = RADIO_INTENSET_END_Enabled << RADIO_INTENSET_END_Pos;
   //nrf_drv_common_irq_enable(RADIO_IRQn,1);
   NVIC_SetPriority(RADIO_IRQn, 1);
@@ -79,9 +82,12 @@ NRF_RADIO->MODE = (RADIO_MODE_MODE_Nrf_1Mbit << RADIO_MODE_MODE_Pos);
 
 extern process_event_t ev_2_4g_rcv;
 PROCESS_NAME(led_process);
+extern unsigned char tags_local[200][5];
+extern int tags_index;
 
 void RADIO_IRQHandler(void)
 {
+  int i = 0;
   DISABLE_INTERRUPTS();
   ENERGEST_ON(ENERGEST_TYPE_IRQ);
   //nrf_delay_ms(3);
@@ -96,7 +102,23 @@ void RADIO_IRQHandler(void)
       //while(NRF_RADIO->EVENTS_READY == 0U)   // μè′y?óê?×?±?o?
       {
       }
-      process_post(&led_process,ev_2_4g_rcv,NULL);
+      for(i = 0;i < 200;i++)
+      {
+        if(!memcmp(packet,tags_local[i],4))
+        {
+          memcpy(tags_local[i],packet,5);
+          break;
+        }
+      }
+      if(i == 200)
+      {
+        memcpy(tags_local[tags_index++],packet,5);
+        if(tags_index >= 200)
+        {
+            tags_index = 0;
+        }
+      }
+      //process_post(&led_process,ev_2_4g_rcv,NULL);
       NRF_RADIO->EVENTS_END = 0U;  					 // ?áê?ê??t			
       NRF_RADIO->TASKS_START = 1U;           // ?aê?
 

@@ -57,14 +57,18 @@ void Hex2Str( const char *sSrc,  char *sDest, int nSrcLen )
     }  
     return ;  
 }  
+unsigned char tags_local[200][5];
+int tags_index = 0;
+//unsigned char packet[10];
+
 PROCESS_THREAD(led_process, ev, data)
 { 
   static struct etimer et_blink;
+  int i = 0;
   PROCESS_BEGIN();
   static unsigned char packet[10];
   ev_2_4g_rcv = process_alloc_event();
   radio_configure();
-  NRF_RADIO->PACKETPTR = (uint32_t)packet; // Set payload pointer
 
   while(1)
   {
@@ -78,11 +82,28 @@ PROCESS_THREAD(led_process, ev, data)
     NRF_RADIO->TASKS_START = 1U;           // ?a¨º?
     while(1)
     {
-      PROCESS_WAIT_EVENT_UNTIL(ev == ev_2_4g_rcv);
-      memset(str,0,100);
-      Hex2Str(packet,str,5);
-      strcat(str,"\r\n");
-      uart_put_string(str);
+      PROCESS_WAIT_EVENT();
+      /*PROCESS_WAIT_EVENT_UNTIL(ev == ev_2_4g_rcv);
+      for(i = 0;i < 200;i++)
+      {
+        if(!memcmp(packet,tags_local[i],4))
+        {
+          memcpy(tags_local[i],packet,5);
+          break;
+        }
+      }
+      if(i == 200)
+      {
+        memcpy(tags_local[tags_index++],packet,5);
+        if(tags_index >= 200)
+        {
+            tags_index = 0;
+        }
+      }*/
+      //memset(str,0,100);
+      //Hex2Str(packet,str,5);
+      //strcat(str,"\r\n");
+      //uart_put_string(str);
     }
   }
   
@@ -148,7 +169,7 @@ PROCESS_THREAD(read_gpio_process, ev, data)
     getSUBR(ip);
     getGAR(ip);
     while(1){
-      etimer_set(&et_blink, CLOCK_SECOND / 100);
+      etimer_set(&et_blink, CLOCK_SECOND / 500);
       PROCESS_WAIT_EVENT();
 
       ret = getSn_SR(SOCK_SERVER);
@@ -167,7 +188,7 @@ PROCESS_THREAD(read_gpio_process, ev, data)
           {
             setSn_IR(SOCK_SERVER, Sn_IR_CON);/*Sn_IR??0??1*/
           }
-          send(SOCK_SERVER,str,strlen(str));
+          send(SOCK_SERVER,(uint8*)tags_local,200 * 5);
           len=getSn_RX_RSR(SOCK_SERVER);/*len?????????*/
           if(len>0)
           {
