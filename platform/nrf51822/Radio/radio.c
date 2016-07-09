@@ -17,6 +17,8 @@
 //#include "bsp.h"
 //#include "global.h"
 #include "lib/ringbuf.h"
+#include "contiki.h"
+
 /*****************************************************************************
  *  Local Macros & Definitions
  *****************************************************************************/
@@ -103,10 +105,13 @@ void vRadio_Init(void)
  *  @note
  *
  */
-
+U8 buffer_433m[64];
+extern process_event_t ev_checkw5500;
+PROCESS_NAME(read_gpio_process);
+extern U8 net_flag;
 U8 bRadio_Check_Tx_RX(void)
 {
-  static unsigned char data[64];
+  //static unsigned char data[64];
   unsigned char loop = 0;
   if (radio_hal_NirqLevel() == 0)
   {
@@ -157,7 +162,11 @@ U8 bRadio_Check_Tx_RX(void)
       {
         /* Get payload length */
         si446x_fifo_info(0x00);
-        si446x_read_rx_fifo(Si446xCmd.FIFO_INFO.RX_FIFO_COUNT, data);
+        si446x_read_rx_fifo(Si446xCmd.FIFO_INFO.RX_FIFO_COUNT, buffer_433m);
+        if(net_flag == 1)
+        process_post(&read_gpio_process,ev_checkw5500,NULL);
+        si446x_change_state(SI446X_CMD_CHANGE_STATE_ARG_NEW_STATE_ENUM_RX);
+
         //for(loop = 0;loop < Si446xCmd.FIFO_INFO.RX_FIFO_COUNT;loop ++)
           //ringbuf_put(&radioRcvRingBuf, data[loop]);
       }

@@ -18,6 +18,7 @@
 #include "nrf_drv_gpiote.h"
 #include "sys/energest.h"
 #include "util.h"
+#include <string.h>
 
 #define FIFO_LENGTH(F) (F.write_pos - F.read_pos) /**< Macro to calculate length of a FIFO. */
 #define UART_INSTANCE_GPIOTE_BASE 0x00FF          /**< Define the base for UART instance ID when flow control is used. The userid from GPIOTE will be used with padded 0xFF at LSB for easy converting the instance id to GPIOTE id. */
@@ -239,6 +240,8 @@ static void gpiote_uart_event_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polar
  *          is received, or in case of error when receiving a byte.
  */
 extern uint8_t pc_ip[];
+void uart_put_string(const char str[]);
+
 void UART0_IRQHandler(void)
 {
     static uint8_t buf[50];

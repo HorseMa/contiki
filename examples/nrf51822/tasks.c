@@ -110,7 +110,8 @@ PROCESS_THREAD(led_process, ev, data)
   PROCESS_END();
 }
 
-
+extern U8 buffer_433m[64];
+uint8 net_flag = 0;
 PROCESS_THREAD(read_gpio_process, ev, data)
 { 
   static struct etimer et_blink;
@@ -121,6 +122,8 @@ PROCESS_THREAD(read_gpio_process, ev, data)
   static unsigned char buffer[100];
   uint8 ret;
   uint8_t dhcpret=0;
+  static int i = 0;
+  static int cnt = 0;
 
   PROCESS_BEGIN();
   ev_checkw5500 = process_alloc_event();
@@ -128,7 +131,7 @@ PROCESS_THREAD(read_gpio_process, ev, data)
   while(1)
   {
     gipo_init();
-    w5500_irq_cfg();
+    //w5500_irq_cfg();
     spi_w5500_init();
     nrf_gpio_pin_clear(W5500_RST);
     etimer_set(&et_blink, CLOCK_SECOND / 100);
@@ -142,9 +145,22 @@ PROCESS_THREAD(read_gpio_process, ev, data)
     init_dhcp_client();
     //PROCESS_WAIT_EVENT_UNTIL(ev == ev_checkw5500);
     do{
-      etimer_set(&et_blink, CLOCK_SECOND / 2);
+      etimer_set(&et_blink, CLOCK_SECOND / 10);
+      //for(i = 0;i < 200;i += 12)
       PROCESS_WAIT_EVENT();
-      uart_put_string("get local addr\r\n");
+      if(cnt > 50)
+      {
+        vRadio_StartTx_Variable_Packet((uint8*)tags_local[i],10 * 5);
+        i += 10;
+        if(i == 200)
+          i = 0;
+      }
+      else
+      {
+        cnt ++;
+      }
+
+      //uart_put_string("get local addr\r\n");
       dhcpret = check_DHCP_state(SOCK_DHCP);
       if(dhcpret == DHCP_RET_NONE)
       {
@@ -168,10 +184,18 @@ PROCESS_THREAD(read_gpio_process, ev, data)
     getSIPR (ip);
     getSUBR(ip);
     getGAR(ip);
+    //vRadio_StartRX();
     while(1){
-      etimer_set(&et_blink, CLOCK_SECOND / 500);
+      etimer_set(&et_blink, CLOCK_SECOND / 5);
       PROCESS_WAIT_EVENT();
-
+      if(ev == ev_checkw5500)
+      {
+        send(SOCK_SERVER,(uint8*)buffer_433m,10 * 5);
+      }
+      else
+      {
+        //continue;
+      }
       ret = getSn_SR(SOCK_SERVER);
       //switch(getSn_SR(0))/*??socket0???*/
       {
@@ -184,11 +208,14 @@ PROCESS_THREAD(read_gpio_process, ev, data)
         }
         if(ret == SOCK_ESTABLISHED)/*socket????*/
         {
+          net_flag  = 1;
+          //NVIC_DisableIRQ(RADIO_IRQn);
+          NRF_RADIO->INTENSET = RADIO_INTENSET_END_Disabled << RADIO_INTENSET_END_Pos;
           if(getSn_IR(SOCK_SERVER) & Sn_IR_CON)
           {
             setSn_IR(SOCK_SERVER, Sn_IR_CON);/*Sn_IR??0??1*/
           }
-          send(SOCK_SERVER,(uint8*)tags_local,200 * 5);
+          //send(SOCK_SERVER,(uint8*)tags_local,200 * 5);
           len=getSn_RX_RSR(SOCK_SERVER);/*len?????????*/
           if(len>0)
           {
@@ -198,10 +225,16 @@ PROCESS_THREAD(read_gpio_process, ev, data)
         }
         if(ret == SOCK_CLOSE_WAIT)
         {
+          net_flag = 0;
+          //NVIC_EnableIRQ(RADIO_IRQn);
+          NRF_RADIO->INTENSET = RADIO_INTENSET_END_Enabled << RADIO_INTENSET_END_Pos;
           while(!socket(SOCK_SERVER,Sn_MR_TCP,anyport++,Sn_MR_ND));
         }
         if(ret == SOCK_CLOSED)// || (ret == SOCK_CLOSE_WAIT))/*socket??*/
         {
+          net_flag = 0;
+          //NVIC_EnableIRQ(RADIO_IRQn);
+          NRF_RADIO->INTENSET = RADIO_INTENSET_END_Enabled << RADIO_INTENSET_END_Pos;
           while(!socket(SOCK_SERVER,Sn_MR_TCP,anyport++,Sn_MR_ND));/*??socket0?????*/
         }
       }

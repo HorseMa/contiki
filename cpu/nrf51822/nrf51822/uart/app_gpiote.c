@@ -19,6 +19,7 @@
 #include "nrf_gpio.h"
 #include "sys/energest.h"
 #include "contiki.h"
+#include "radio.h"
 
 
 /**@brief GPIOTE user type. */
@@ -179,6 +180,7 @@ void GPIOTE_IRQHandler(void)
   (NRF_GPIOTE->INTENSET & GPIOTE_INTENSET_IN0_Msk))
   {
     NRF_GPIOTE->EVENTS_IN[0] = 0;
+    //bRadio_Check_Tx_RX();
     process_post(&si4463_process,ev_checkradio,NULL);
   }
   if ((NRF_GPIOTE->EVENTS_IN[1] == 1) && //判断中断是否来自GPIOTE通道0
