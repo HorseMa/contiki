@@ -101,8 +101,8 @@ void RADIO_IRQHandler(void)
         //*((volatile uint32_t *)((uint8_t *)NRF_TIMERx + (uint32_t)timer_event)) = 0x0UL;
     if (NRF_RADIO->CRCSTATUS == 1U)
     {
-      NRF_RADIO->EVENTS_READY = 0U; 				 // 那??t℅?㊣? 那?﹞⊿?㏒那?℅a??赤那3谷  ㊣那????    
-      NRF_RADIO->TASKS_RXEN   = 1U;          // 那1?邦?車那?
+      //NRF_RADIO->EVENTS_READY = 0U; 				 // 那??t℅?㊣? 那?﹞⊿?㏒那?℅a??赤那3谷  ㊣那????    
+      //NRF_RADIO->TASKS_RXEN   = 1U;          // 那1?邦?車那?
       //while(NRF_RADIO->EVENTS_READY == 0U)   // 米豕∩y?車那?℅?㊣?o?
       {
       }
@@ -123,10 +123,10 @@ void RADIO_IRQHandler(void)
         }
       }
       //process_post(&led_process,ev_2_4g_rcv,NULL);
-      NRF_RADIO->EVENTS_END = 0U;  					 // ?芍那?那??t			
-      NRF_RADIO->TASKS_START = 1U;           // ?a那?
 
     }
+    NRF_RADIO->EVENTS_END = 0U;  					 // ?芍那?那??t			
+    NRF_RADIO->TASKS_START = 1U;           // ?a那?
   }
   ENERGEST_OFF(ENERGEST_TYPE_IRQ);
   ENABLE_INTERRUPTS();
