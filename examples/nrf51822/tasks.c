@@ -66,47 +66,13 @@ PROCESS_THREAD(led_process, ev, data)
   static struct etimer et_blink;
   int i = 0;
   PROCESS_BEGIN();
-  static unsigned char packet[10];
   ev_2_4g_rcv = process_alloc_event();
   radio_configure();
 
   while(1)
   {
-    NRF_RADIO->EVENTS_READY = 0U; 				 // 那??t℅?㊣? 那?﹞⊿?㏒那?℅a??赤那3谷  ㊣那????    
-    NRF_RADIO->TASKS_RXEN   = 1U;          // 那1?邦?車那?
-    while(NRF_RADIO->EVENTS_READY == 0U)   // 米豕∩y?車那?℅?㊣?o?
-    {
-    }
-				
-    NRF_RADIO->EVENTS_END = 0U;  					 // ?芍那?那??t			
-    NRF_RADIO->TASKS_START = 1U;           // ?a那?
-    while(1)
-    {
-      PROCESS_WAIT_EVENT();
-      /*PROCESS_WAIT_EVENT_UNTIL(ev == ev_2_4g_rcv);
-      for(i = 0;i < 200;i++)
-      {
-        if(!memcmp(packet,tags_local[i],4))
-        {
-          memcpy(tags_local[i],packet,5);
-          break;
-        }
-      }
-      if(i == 200)
-      {
-        memcpy(tags_local[tags_index++],packet,5);
-        if(tags_index >= 200)
-        {
-            tags_index = 0;
-        }
-      }*/
-      //memset(str,0,100);
-      //Hex2Str(packet,str,5);
-      //strcat(str,"\r\n");
-      //uart_put_string(str);
-    }
-  }
-  
+    PROCESS_WAIT_EVENT();
+  }  
   PROCESS_END();
 }
 

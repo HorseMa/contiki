@@ -72,12 +72,17 @@ NRF_RADIO->MODE = (RADIO_MODE_MODE_Nrf_1Mbit << RADIO_MODE_MODE_Pos);
   }
   NRF_RADIO->PACKETPTR = (uint32_t)packet; // Set payload pointer
 
-  NRF_RADIO->INTENSET = RADIO_INTENSET_END_Enabled << RADIO_INTENSET_END_Pos;
-  //nrf_drv_common_irq_enable(RADIO_IRQn,1);
-  NVIC_SetPriority(RADIO_IRQn, 1);
-  NVIC_ClearPendingIRQ(RADIO_IRQn);
+  NRF_RADIO->EVENTS_READY = 0U; 				 // 那??t℅?㊣? 那?﹞⊿?㏒那?℅a??赤那3谷  ㊣那????    
+  NRF_RADIO->TASKS_RXEN   = 1U;          // 那1?邦?車那?
+  while(NRF_RADIO->EVENTS_READY == 0U)   // 米豕∩y?車那?℅?㊣?o?
+  {
+  }
+  NRF_RADIO->EVENTS_END  = 0U;  					// ?芍那?那??t			
+  NRF_RADIO->TASKS_START = 1U;           // ?a那?
+		/*?D??那1?邦*/
+  NRF_RADIO->INTENSET  = 0x08;
   NVIC_EnableIRQ(RADIO_IRQn);
-  nrf_delay_ms(3);
+
 }
 
 extern process_event_t ev_2_4g_rcv;
@@ -93,7 +98,6 @@ void RADIO_IRQHandler(void)
   //nrf_delay_ms(3);
   if(NRF_RADIO->EVENTS_END)
   {
-    NRF_RADIO->EVENTS_END = 0;
         //*((volatile uint32_t *)((uint8_t *)NRF_TIMERx + (uint32_t)timer_event)) = 0x0UL;
     if (NRF_RADIO->CRCSTATUS == 1U)
     {
