@@ -154,7 +154,9 @@ void RADIO_IRQHandler(void)
           if((!memcmp(&packet[2],&tags_local[i][2],2)) && ((packet[4] & 0x0f) == (tags_local[i][4] & 0x0f)))
           {
             while(!NRF_RADIO->EVENTS_RSSIEND);
-            *(uint16*)packet = NRF_RADIO->RSSISAMPLE;
+            packet[0] = NRF_RADIO->RSSISAMPLE;
+            packet[1] = NRF_RADIO->RSSISAMPLE >> 8;
+            //*(uint16*)packet = NRF_RADIO->RSSISAMPLE;
             NRF_RADIO->EVENTS_RSSIEND = 0;
             memcpy(tags_local[i],packet,5);
             break;
@@ -166,7 +168,9 @@ void RADIO_IRQHandler(void)
           if(!memcmp(&packet[9 - 3],&tags_local[i][9 - 3],3))
           {
             while(!NRF_RADIO->EVENTS_RSSIEND);
-            *(uint16*)packet = NRF_RADIO->RSSISAMPLE;
+            packet[0] = NRF_RADIO->RSSISAMPLE;
+            packet[1] = NRF_RADIO->RSSISAMPLE >> 8;
+            //*(uint16*)packet = NRF_RADIO->RSSISAMPLE;
             NRF_RADIO->EVENTS_RSSIEND = 0;
             memcpy(tags_local[i],packet,9);
             break;

@@ -249,7 +249,7 @@ PROCESS_THREAD(ethernet_process, ev, data)
             DISABLE_INTERRUPTS();
             if(stDevCfg.tag_type)
             {
-              pkg->len = 7 + 1 + 5 * tags_cnt + 1;
+              pkg->len = 7 + 1 + 5 * tags_cnt;
               pkg->data[0] = tags_cnt;
               for(loop = 0;loop < tags_cnt;loop ++)
               {
@@ -258,7 +258,7 @@ PROCESS_THREAD(ethernet_process, ev, data)
             }
             else
             {
-              pkg->len = 7 + 1 + 9 * tags_cnt + 1;
+              pkg->len = 7 + 1 + 9 * tags_cnt;
               pkg->data[0] = tags_cnt;
               for(loop = 0;loop < tags_cnt;loop ++)
               {
