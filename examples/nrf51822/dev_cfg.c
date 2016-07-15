@@ -33,27 +33,27 @@ void read_cfg(void)
   pst_DevCfg pstDevCfg;
   pst_DefaultCfg pstDefaultCfg;
   memset(temp,1,1024);
-  ble_flash_page_erase(pg_num);
-  //ble_flash_page_read(pg_num,(uint32_t*)temp,(uint8_t*)&count);
-  memcpy(temp,(uint8*)addr,1024);
-  for(loop = 0;loop < 1024;loop ++)
+  //ble_flash_page_erase(pg_num);
+  ble_flash_page_read(pg_num,(uint32_t*)temp,(uint8_t*)&count);
+  //memcpy(temp,(uint8*)addr,1024);
+  /*for(loop = 0;loop < 1024;loop ++)
   {
     if(temp[loop] != 0xff)
     {
       break;
     }
-  }
-  pstDevCfg = (pst_DevCfg)addr;
-  pstDefaultCfg = (pst_DefaultCfg)((uint8*)addr + sizeof(st_DevCfg));
-  memcpy((uint8_t*)&stDevCfg,(uint8_t*)pstDevCfg,sizeof(st_DevCfg));
-  memcpy((uint8_t*)&stDefaultCfg,(uint8_t*)pstDefaultCfg,sizeof(st_DefaultCfg));
-
-  if(loop >= 1024)//初次上电，需要写入默认值
+  }*/
+  //pstDevCfg = (pst_DevCfg)addr;
+  //pstDefaultCfg = (pst_DefaultCfg)((uint8*)temp + sizeof(st_DevCfg));
+  memcpy((uint8_t*)&stDevCfg,(uint8_t*)temp,sizeof(st_DevCfg));
+  memcpy((uint8_t*)&stDefaultCfg,(uint8*)temp + sizeof(st_DevCfg),sizeof(st_DefaultCfg));
+  if(count == 0)
+  //if(loop >= 1024)//初次上电，需要写入默认值
   {
     stDevCfg.dev_id = 0x58;
     stDevCfg.tag_type = 1;
     stDefaultCfg.dev_id = 0x58;
-#if 0
+#if 1
     stDefaultCfg.local_ip[0] = 192;
     stDefaultCfg.local_ip[1] = 168;
     stDefaultCfg.local_ip[2] = 1;
@@ -87,6 +87,7 @@ void read_cfg(void)
     stDefaultCfg.local_ip[1] = 51;
     stDefaultCfg.local_ip[2] = 11;
     stDefaultCfg.local_ip[3] = 172;
+    stDefaultCfg.local_port = 32100;
     
     stDefaultCfg.sub[0] = 255;
     stDefaultCfg.sub[1] = 255;
