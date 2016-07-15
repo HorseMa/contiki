@@ -39,7 +39,7 @@ typedef struct eth_pkg_format
   uint8 data[2048 - 10];
 }st_EthPkgFormat,*pst_EthPkgFormat;
 
-
+void earase_cfg(void);
 void flash_init(void);
 void write_cfg(void);
 void read_cfg(void);

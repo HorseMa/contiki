@@ -102,7 +102,7 @@ PROCESS_THREAD(ethernet_process, ev, data)
   nrf_gpio_pin_set(W5500_RST);
   etimer_set(&et_ethernet, CLOCK_SECOND * 2);
   PROCESS_WAIT_EVENT();
-  read_cfg();
+  //read_cfg();
   set_default();
   while(1)
   {
@@ -180,6 +180,9 @@ PROCESS_THREAD(ethernet_process, ev, data)
           {
             pkg->sn = global_sn ++;
             memcpy((uint8_t*)&stDevCfg,pkg->data,sizeof(st_DevCfg) - 2);
+            memcpy(stDefaultCfg.server_ip,stDevCfg.server_ip,4);
+            stDefaultCfg.server_port = stDevCfg.server_port;
+            stDefaultCfg.dev_id = stDevCfg.dev_id;
             write_cfg();
             pkg->data[0] = 'o';
             pkg->data[0] = 'k';
@@ -195,8 +198,8 @@ PROCESS_THREAD(ethernet_process, ev, data)
           if(pkg->cmd == 0x44)//¶ÁÈ¡²ÎÊý
           {
             pkg->sn = global_sn ++;
-            memcpy(pkg->data,(uint8_t*)&stDevCfg,sizeof(st_DevCfg) - 1);
-            pkg->len = 7 + sizeof(st_DevCfg) - 1;
+            memcpy(pkg->data,(uint8_t*)&stDevCfg,sizeof(st_DevCfg) - 2);
+            pkg->len = 7 + sizeof(st_DevCfg) - 2;
             checksum = 0;
             for(loop = 0;loop < pkg->len - 1 + 4;loop++)
             {
@@ -234,7 +237,8 @@ PROCESS_THREAD(ethernet_process, ev, data)
             }
             *((uint8_t*)pkg + loop) = checksum;
             send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 4);
-
+            earase_cfg();
+            read_cfg();
           }
 
         }

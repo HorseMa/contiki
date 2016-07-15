@@ -20,9 +20,13 @@ void write_cfg(void)
   ble_flash_page_erase(pg_num);
   memcpy(temp,(uint8_t*)&stDevCfg,sizeof(st_DevCfg));
   memcpy(temp + sizeof(st_DevCfg),(uint8_t*)&stDefaultCfg,sizeof(st_DefaultCfg));
-  ble_flash_page_write(pg_num,(uint32_t*)&stDevCfg,(uint8_t)(sizeof(st_DevCfg) / 4) + (uint8_t)(sizeof(st_DefaultCfg) / 4));
+  ble_flash_page_write(pg_num,(uint32_t*)temp,(uint8_t)(sizeof(st_DevCfg) / 4) + (uint8_t)(sizeof(st_DefaultCfg) / 4));
 }
 
+void earase_cfg(void)
+{
+  ble_flash_page_erase(pg_num);
+}
 void read_cfg(void)
 {
   uint16 loop = 0;
