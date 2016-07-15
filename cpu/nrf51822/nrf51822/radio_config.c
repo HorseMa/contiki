@@ -47,6 +47,38 @@ NRF_RADIO->MODE = (RADIO_MODE_MODE_Nrf_1Mbit << RADIO_MODE_MODE_Pos);
 //  NRF_RADIO->RXADDRESSES = 0x01UL;    // ?¨®¨º?¦Ì??¡¤¨¦¨¨?¡§  ¨ª¡§¦Ì¨¤0
  NRF_RADIO->RXADDRESSES = (1<<0);     // ?¨®¨º?¦Ì??¡¤¨¦¨¨?¡§  ¨ª¡§¦Ì¨¤0  1111 1111
 	
+ if(stDevCfg.tag_type)
+ {
+    // Packet configuration
+    NRF_RADIO->PCNF0 = (PACKET0_S1_SIZE << RADIO_PCNF0_S1LEN_Pos) |
+                     (PACKET0_S0_SIZE << RADIO_PCNF0_S0LEN_Pos) |
+                     (PACKET0_PAYLOAD_SIZE << RADIO_PCNF0_LFLEN_Pos); 
+
+    // Packet configuration
+    NRF_RADIO->PCNF1 = (RADIO_PCNF1_WHITEEN_Disabled << RADIO_PCNF1_WHITEEN_Pos)    |
+                      (RADIO_PCNF1_ENDIAN_Big << RADIO_PCNF1_ENDIAN_Pos)           |
+                      (PACKET1_BASE_ADDRESS_LENGTH << RADIO_PCNF1_BALEN_Pos)       |
+                      (3 << RADIO_PCNF1_STATLEN_Pos)           |
+                      (3 << RADIO_PCNF1_MAXLEN_Pos); 
+
+ }
+ else
+ {
+    // Packet configuration
+    NRF_RADIO->PCNF0 = (PACKET0_S1_SIZE << RADIO_PCNF0_S1LEN_Pos) |
+                     (PACKET0_S0_SIZE << RADIO_PCNF0_S0LEN_Pos) |
+                     (PACKET0_PAYLOAD_SIZE << RADIO_PCNF0_LFLEN_Pos); 
+
+    // Packet configuration
+    NRF_RADIO->PCNF1 = (RADIO_PCNF1_WHITEEN_Disabled << RADIO_PCNF1_WHITEEN_Pos)    |
+                      (RADIO_PCNF1_ENDIAN_Big << RADIO_PCNF1_ENDIAN_Pos)           |
+                      (PACKET1_BASE_ADDRESS_LENGTH << RADIO_PCNF1_BALEN_Pos)       |
+                      (7 << RADIO_PCNF1_STATLEN_Pos)           |
+                      (7 << RADIO_PCNF1_MAXLEN_Pos); 
+
+
+ }
+# if 0
   // Packet configuration
   NRF_RADIO->PCNF0 = (PACKET0_S1_SIZE << RADIO_PCNF0_S1LEN_Pos) |
                      (PACKET0_S0_SIZE << RADIO_PCNF0_S0LEN_Pos) |
@@ -58,6 +90,7 @@ NRF_RADIO->MODE = (RADIO_MODE_MODE_Nrf_1Mbit << RADIO_MODE_MODE_Pos);
                       (PACKET1_BASE_ADDRESS_LENGTH << RADIO_PCNF1_BALEN_Pos)       |
                       (PACKET1_STATIC_LENGTH << RADIO_PCNF1_STATLEN_Pos)           |
                       (PACKET1_PAYLOAD_SIZE << RADIO_PCNF1_MAXLEN_Pos); 
+#endif
 
   // CRC¨¦¨¨?¡§
   NRF_RADIO->CRCCNF = (RADIO_CRCCNF_LEN_Two << RADIO_CRCCNF_LEN_Pos); // 2¡Á??¨²CRC
@@ -114,7 +147,7 @@ void RADIO_IRQHandler(void)
       //while(NRF_RADIO->EVENTS_READY == 0U)   // ¦Ì¨¨¡äy?¨®¨º?¡Á?¡À?o?
       {
       }
-      for(i = 0;i < 200;i++)
+      for(i = 0;i < tags_cnt;i++)
       {
         if(stDevCfg.tag_type)
         {
@@ -140,7 +173,7 @@ void RADIO_IRQHandler(void)
           }
         }
       }
-      if(i == 200)
+      if(i == tags_cnt)
       {
         while(!NRF_RADIO->EVENTS_RSSIEND);
         *(uint16*)packet = NRF_RADIO->RSSISAMPLE;
