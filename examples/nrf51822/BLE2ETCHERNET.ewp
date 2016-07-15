@@ -1963,6 +1963,9 @@
       </excluded>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\ble_flash.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s</name>
     </file>
     <file>
@@ -1979,6 +1982,9 @@
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\timer\nrf_drv_timer.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_soc.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\radio_config.c</name>
@@ -2183,6 +2189,9 @@
     </group>
     <file>
       <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\bps.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\dev_cfg.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\mai_no_os.c</name>

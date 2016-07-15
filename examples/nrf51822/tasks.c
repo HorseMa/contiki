@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "radio.h"
-
+#include "dev_cfg.h"
 
 process_event_t ev_checkradio;
 process_event_t ev_checkw5500;
@@ -33,8 +33,9 @@ PROCESS(led_process,"led state");
 PROCESS(read_gpio_process,"read_gpio");
 PROCESS(uartRecv_process,"uartRecv");
 PROCESS(si4463_process,"si4463");
+PROCESS(ethernet_process,"ethernet");
 
-AUTOSTART_PROCESSES(&uartRecv_process,&led_process,&read_gpio_process,&si4463_process);
+AUTOSTART_PROCESSES(&uartRecv_process,&led_process,&ethernet_process,&si4463_process);
 
 void clockInit(void)
 {
@@ -57,7 +58,7 @@ void Hex2Str( const char *sSrc,  char *sDest, int nSrcLen )
     }  
     return ;  
 }  
-unsigned char tags_local[200][5];
+unsigned char tags_local[200][9];
 int tags_index = 0;
 //unsigned char packet[10];
 
@@ -75,7 +76,237 @@ PROCESS_THREAD(led_process, ev, data)
   }  
   PROCESS_END();
 }
+uint8 tag_update = 0;
+extern int tags_cnt = 0;
 
+PROCESS_THREAD(ethernet_process, ev, data)
+{
+  static struct etimer et_ethernet;
+  uint8_t dhcpret = 0;
+  uint8 ret;
+  uint16_t len = 0;
+  static uint16_t loop = 0;
+  static uint8_t socket_buf[2048];
+  static pst_EthPkgFormat pkg;
+  uint8_t checksum;
+  static uint8_t heart_cnt = 0;
+  static uint8_t global_sn = 0;
+  PROCESS_BEGIN();
+  gipo_init();
+  //w5500_irq_cfg();
+  spi_w5500_init();
+  nrf_gpio_pin_clear(W5500_RST);
+  etimer_set(&et_ethernet, CLOCK_SECOND / 100);
+  PROCESS_WAIT_EVENT();
+  nrf_gpio_pin_set(W5500_RST);
+  etimer_set(&et_ethernet, CLOCK_SECOND * 2);
+  PROCESS_WAIT_EVENT();
+  read_cfg();
+  set_default();
+  while(1)
+  {
+    init_dhcp_client();
+    for(loop = 0;loop < 10;loop ++)
+    {
+      etimer_set(&et_ethernet, CLOCK_SECOND / 10);
+      PROCESS_WAIT_EVENT();
+      dhcpret = check_DHCP_state(SOCK_DHCP);
+      if(dhcpret == DHCP_RET_NONE)
+      {
+      }
+      if(dhcpret == DHCP_RET_TIMEOUT)
+      {
+      }
+      if(dhcpret == DHCP_RET_UPDATE)
+      {
+        break;
+      }
+      if(dhcpret == DHCP_RET_CONFLICT)
+      {
+      }
+    }
+    if(loop >= 5)
+    {
+      continue;
+    }
+    set_network();
+    setRTR(2000);/*设置溢出时间值*/
+    setRCR(3);/*设置最大重新发送次数*/
+    //getSIPR (ip);
+    //getSUBR(ip);
+    //getGAR(ip);
+    while(1)
+    {
+      etimer_set(&et_ethernet, CLOCK_SECOND / 2);
+      PROCESS_WAIT_EVENT();
+      heart_cnt ++;
+      ret = getSn_SR(SOCK_SERVER);
+      if(ret == SOCK_INIT)
+      {
+        connect(SOCK_SERVER, stDevCfg.server_ip ,stDevCfg.server_port);
+      }
+      if(ret == SOCK_ESTABLISHED)
+      {
+        if(getSn_IR(SOCK_SERVER) & Sn_IR_CON)
+        {
+          setSn_IR(SOCK_SERVER, Sn_IR_CON);
+        }
+        //send(SOCK_SERVER,(uint8*)tags_local,200 * 5);
+        len=getSn_RX_RSR(SOCK_SERVER);/*len?????????*/
+        pkg = (pst_EthPkgFormat)socket_buf;
+        if(len>0)
+        {
+          memset(socket_buf,0,2048);
+          recv(SOCK_SERVER,socket_buf,len);/*W5500????Sever???*/
+          if(pkg->head != 0x05040302)
+          {
+            continue;
+          }
+          checksum = 0;
+          for(loop = 0;loop < pkg->len - 1 + 4;loop ++)
+          {
+            checksum += *((uint8_t*)pkg + loop);
+          }
+          if(*((uint8_t*)pkg + loop) != checksum)
+          {
+            continue;
+          }
+          if(pkg->cmd == 0x43)//配置参数
+          {
+            pkg->sn = global_sn ++;
+            memcpy((uint8_t*)&stDevCfg,pkg->data,sizeof(st_DevCfg) - 2);
+            write_cfg();
+            pkg->data[0] = 'o';
+            pkg->data[0] = 'k';
+            pkg->len = 9;
+            checksum = 0;
+            for(loop = 0;loop < pkg->len - 1 + 4;loop++)
+            {
+              checksum += *((uint8_t*)pkg + loop);
+            }
+            *((uint8_t*)pkg + loop) = checksum;
+            send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 4);
+          }
+          if(pkg->cmd == 0x44)//读取参数
+          {
+            pkg->sn = global_sn ++;
+            memcpy(pkg->data,(uint8_t*)&stDevCfg,sizeof(st_DevCfg) - 1);
+            pkg->len = 7 + sizeof(st_DevCfg) - 1;
+            checksum = 0;
+            for(loop = 0;loop < pkg->len - 1 + 4;loop++)
+            {
+              checksum += *((uint8_t*)pkg + loop);
+            }
+            *((uint8_t*)pkg + loop) = checksum;
+            send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 4);
+
+          }
+          if(pkg->cmd == 0x45)//控制指令
+          {
+            pkg->sn = global_sn ++;
+            pkg->data[0] = 'o';
+            pkg->data[0] = 'k';
+            pkg->len = 9;
+            checksum = 0;
+            for(loop = 0;loop < pkg->len - 1 + 4;loop++)
+            {
+              checksum += *((uint8_t*)pkg + loop);
+            }
+            *((uint8_t*)pkg + loop) = checksum;
+            send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 4);
+
+          }
+          if(pkg->cmd == 0x46)//恢复出厂设置
+          {
+            pkg->sn = global_sn ++;
+            pkg->data[0] = 'o';
+            pkg->data[0] = 'k';
+            pkg->len = 9;
+            checksum = 0;
+            for(loop = 0;loop < pkg->len - 1 + 4;loop++)
+            {
+              checksum += *((uint8_t*)pkg + loop);
+            }
+            *((uint8_t*)pkg + loop) = checksum;
+            send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 4);
+
+          }
+
+        }
+        else
+        {
+          if(tag_update)//给服务器更新标签数据
+          {
+            pkg->head = 0x05040302;
+            pkg->dev_id = stDevCfg.dev_id;
+            pkg->sn = global_sn ++;
+            pkg->cmd = 0x41;
+            DISABLE_INTERRUPTS();
+            if(stDevCfg.tag_type)
+            {
+              pkg->len = 7 + 1 + 5 * tags_cnt + 1;
+              pkg->data[0] = tags_cnt;
+              for(loop = 0;loop < tags_cnt;loop ++)
+              {
+                memcpy(pkg->data + 1 + (5 * loop),tags_local[loop],5);
+              }
+            }
+            else
+            {
+              pkg->len = 7 + 1 + 9 * tags_cnt + 1;
+              pkg->data[0] = tags_cnt;
+              for(loop = 0;loop < tags_cnt;loop ++)
+              {
+                memcpy(pkg->data + 1 + (9 * loop),tags_local[loop],9);
+              }
+            }
+            memset(tags_local,0,sizeof(tags_local));
+            tags_cnt = 0;
+            tags_index = 0;
+            tag_update = 0;
+            ENABLE_INTERRUPTS();
+            checksum = 0;
+            for(loop = 0;loop < pkg->len - 1 + 4;loop++)
+            {
+              checksum += *((uint8_t*)pkg + loop);
+            }
+            *((uint8_t*)pkg + loop) = checksum;
+            send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 4);
+            heart_cnt = 0;
+          }
+          if((!tag_update) && (heart_cnt > 10))//在没有标签的情况下，每5秒发送一次心跳
+          {
+            pkg->head = 0x05040302;
+            pkg->dev_id = stDevCfg.dev_id;
+            pkg->sn = global_sn ++;
+            pkg->cmd = 0x42;
+            pkg->len = 7;
+            checksum = 0;
+            for(loop = 0;loop < pkg->len - 1 + 4;loop++)
+            {
+              checksum += *((uint8_t*)pkg + loop);
+            }
+            *((uint8_t*)pkg + loop) = checksum;
+            send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 4);
+            heart_cnt = 0;
+          }
+        }
+      }
+      if(ret == SOCK_CLOSE_WAIT)
+      {
+        while(!socket(SOCK_SERVER,Sn_MR_TCP,stDefaultCfg.local_port,Sn_MR_ND));
+      }
+      if(ret == SOCK_CLOSED)
+      {
+        while(!socket(SOCK_SERVER,Sn_MR_TCP,stDefaultCfg.local_port,Sn_MR_ND));/*??socket0?????*/
+      }
+    }
+  }
+  PROCESS_END();
+
+}
+
+    
 extern U8 buffer_433m[64];
 uint8 net_flag = 0;
 PROCESS_THREAD(read_gpio_process, ev, data)
@@ -92,6 +323,9 @@ PROCESS_THREAD(read_gpio_process, ev, data)
   static int cnt = 0;
 
   PROCESS_BEGIN();
+  memcpy(stDevCfg.server_ip,pc_ip,4);
+  write_cfg();
+  read_cfg();
   ev_checkw5500 = process_alloc_event();
   inet_addr_("10.51.11.177\0\n",pc_ip);
   while(1)

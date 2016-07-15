@@ -3,7 +3,7 @@
 #include "lib/random.h"
 #include "app_simple_timer.h"
 //#include "bsp.h"
-
+#include "dev_cfg.h"
 /*---------------------------------------------------------------------------*/
 #if CLOCK_CONF_STACK_FRIENDLY
 extern volatile __bit sleep_flag;
@@ -36,7 +36,8 @@ void main(void)
   /* Hardware initialization */
   //eepromInit();
   clockInit();
-  
+  flash_init();
+  read_cfg();
   app_simple_timer_init();
   app_simple_timer_start(APP_SIMPLE_TIMER_MODE_REPEATED, 
                                        timeout_handler, 

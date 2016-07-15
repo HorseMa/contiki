@@ -16,6 +16,7 @@
 #include "nrf_drv_common.h"
 #include "contiki.h"
 #include <string.h>
+#include "dev_cfg.h"
 
 
 #define PACKET0_S1_SIZE                  (0UL)  //!< 此例程我们不理会
@@ -70,7 +71,7 @@ NRF_RADIO->MODE = (RADIO_MODE_MODE_Nrf_1Mbit << RADIO_MODE_MODE_Pos);
     NRF_RADIO->CRCINIT = 0xFFUL;        // CRC?????D3?ê??μ     
     NRF_RADIO->CRCPOLY = 0x107UL;       // CRC poly: x^8+x^2^x^1+1
   }
-  NRF_RADIO->PACKETPTR = (uint32_t)packet; // Set payload pointer
+  NRF_RADIO->PACKETPTR = (uint32_t)(&packet[2]); // Set payload pointer
 
   NRF_RADIO->EVENTS_READY = 0U; 				 // ê??t×?±? ê?·￠?￡ê?×a??íê3é  ±ê????    
   NRF_RADIO->TASKS_RXEN   = 1U;          // ê1?ü?óê?
@@ -80,15 +81,17 @@ NRF_RADIO->MODE = (RADIO_MODE_MODE_Nrf_1Mbit << RADIO_MODE_MODE_Pos);
   NRF_RADIO->EVENTS_END  = 0U;  					// ?áê?ê??t			
   NRF_RADIO->TASKS_START = 1U;           // ?aê?
 		/*?D??ê1?ü*/
-  NRF_RADIO->INTENSET  = 0x08;
+  NRF_RADIO->INTENSET  = 0x8a;
   NVIC_EnableIRQ(RADIO_IRQn);
 
 }
 
 extern process_event_t ev_2_4g_rcv;
 PROCESS_NAME(led_process);
-extern unsigned char tags_local[200][5];
+extern unsigned char tags_local[200][9];
 extern int tags_index;
+extern int tags_cnt;
+extern uint8_t tag_update;
 
 void RADIO_IRQHandler(void)
 {
@@ -96,6 +99,11 @@ void RADIO_IRQHandler(void)
   DISABLE_INTERRUPTS();
   ENERGEST_ON(ENERGEST_TYPE_IRQ);
   //nrf_delay_ms(3);
+  if(NRF_RADIO->EVENTS_ADDRESS)
+  {
+    NRF_RADIO->TASKS_RSSISTART = 1;
+    NRF_RADIO->EVENTS_ADDRESS = 0;
+  }
   if(NRF_RADIO->EVENTS_END)
   {
         //*((volatile uint32_t *)((uint8_t *)NRF_TIMERx + (uint32_t)timer_event)) = 0x0UL;
@@ -108,20 +116,44 @@ void RADIO_IRQHandler(void)
       }
       for(i = 0;i < 200;i++)
       {
-        if(!memcmp(packet,tags_local[i],4))
+        if(stDevCfg.tag_type)
         {
-          memcpy(tags_local[i],packet,5);
-          break;
+          if((!memcmp(&packet[2],&tags_local[i][2],2)) && ((packet[4] & 0x0f) == (tags_local[i][4] & 0x0f)))
+          {
+            while(!NRF_RADIO->EVENTS_RSSIEND);
+            *(uint16*)packet = NRF_RADIO->RSSISAMPLE;
+            NRF_RADIO->EVENTS_RSSIEND = 0;
+            memcpy(tags_local[i],packet,5);
+            break;
+          }
+
+        }
+        else
+        {
+          if(!memcmp(&packet[9 - 3],&tags_local[i][9 - 3],3))
+          {
+            while(!NRF_RADIO->EVENTS_RSSIEND);
+            *(uint16*)packet = NRF_RADIO->RSSISAMPLE;
+            NRF_RADIO->EVENTS_RSSIEND = 0;
+            memcpy(tags_local[i],packet,9);
+            break;
+          }
         }
       }
       if(i == 200)
       {
+        while(!NRF_RADIO->EVENTS_RSSIEND);
+        *(uint16*)packet = NRF_RADIO->RSSISAMPLE;
+        NRF_RADIO->EVENTS_RSSIEND = 0;
         memcpy(tags_local[tags_index++],packet,5);
+        tags_cnt = tags_index;
         if(tags_index >= 200)
         {
             tags_index = 0;
         }
       }
+      tag_update = 1;
+
       //process_post(&led_process,ev_2_4g_rcv,NULL);
 
     }
