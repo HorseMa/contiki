@@ -11,6 +11,7 @@
 #include "bps.h"
 #include "nrf_gpio.h"
 #include "nrf_delay.h"
+#include "dev_cfg.h"
 
 //#include <RTL.h>                      /* RTX kernel functions & defines      */
 
@@ -119,10 +120,14 @@ void set_default(void)
 {
   
   uint8 mac[6]={0x00,0x08,0xdc,0x11,0x11,0x15};
-  uint8 lip[4]={192,168,10,111};
+  uint8 lip[4]={10,51,11,172};
   uint8 sub[4]={255,255,255,0};
-  uint8 gw[4]={192,168,10,1};
+  uint8 gw[4]={10,51,11,1};
   uint8 dns[4]={8,8,8,8};
+  memcpy(lip, stDefaultCfg.local_ip, 4);
+  memcpy(sub, stDefaultCfg.sub, 4);
+  memcpy(gw, stDefaultCfg.gw, 4);
+  memcpy(dns, stDefaultCfg.dns, 4);
   memcpy(ConfigMsg.lip, lip, 4);
   memcpy(ConfigMsg.sub, sub, 4);
   memcpy(ConfigMsg.gw,  gw, 4);

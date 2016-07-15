@@ -83,6 +83,7 @@ PROCESS_THREAD(ethernet_process, ev, data)
 {
   static struct etimer et_ethernet;
   uint8_t dhcpret = 0;
+  //static uint8_t localip[4] = {10,51,11,172};
   uint8 ret;
   uint16_t len = 0;
   static uint16_t loop = 0;
@@ -105,6 +106,7 @@ PROCESS_THREAD(ethernet_process, ev, data)
   set_default();
   while(1)
   {
+#if 0
     init_dhcp_client();
     for(loop = 0;loop < 10;loop ++)
     {
@@ -129,9 +131,12 @@ PROCESS_THREAD(ethernet_process, ev, data)
     {
       continue;
     }
+#endif
+    //memcpy(ConfigMsg.lip,localip,4);
+    //memcpy(ConfigMsg.lip,localip,4);
     set_network();
-    setRTR(2000);/*设置溢出时间值*/
-    setRCR(3);/*设置最大重新发送次数*/
+    //setRTR(2000);/*设置溢出时间值*/
+    //setRCR(3);/*设置最大重新发送次数*/
     //getSIPR (ip);
     //getSUBR(ip);
     //getGAR(ip);

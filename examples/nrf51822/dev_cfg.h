@@ -19,6 +19,9 @@ typedef struct default_cfg
 {
   uint16 dev_id;
   uint8 local_ip[4];
+  uint8 sub[4];
+  uint8 gw[4];
+  uint8 dns[4];
   uint16 local_port;
   uint8 server_ip[4];
   uint16 server_port;
