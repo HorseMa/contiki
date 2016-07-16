@@ -90,7 +90,7 @@ uint8 IINCHIP_READ(uint32 addrbsb)
 uint16 wiz_write_buf(uint32 addrbsb,uint8* buf,uint16 len)
 {
    uint16 idx = 0;
-   if(len == 0) printf("Unexpected2 length 0\r\n");
+   //if(len == 0) printf("Unexpected2 length 0\r\n");
 
    IINCHIP_ISR_DISABLE();
    IINCHIP_CSoff();                              // CS=0, SPI start
@@ -110,10 +110,10 @@ uint16 wiz_write_buf(uint32 addrbsb,uint8* buf,uint16 len)
 uint16 wiz_read_buf(uint32 addrbsb, uint8* buf,uint16 len)
 {
   uint16 idx = 0;
-  if(len == 0)
+  /*if(len == 0)
   {
     printf("Unexpected2 length 0\r\n");
-  }
+  }*/
 
   IINCHIP_ISR_DISABLE();
   //SPI MODE I/F
@@ -442,7 +442,7 @@ void send_data_processing(SOCKET s, uint8 *data, uint16 len)
 {
   if(len == 0)
   {
-    printf("CH: %d Unexpected1 length 0\r\n", s);
+    //printf("CH: %d Unexpected1 length 0\r\n", s);
     return;
   }
 
@@ -474,7 +474,7 @@ void recv_data_processing(SOCKET s, uint8 *data, uint16 len)
   
   if(len == 0)
   {
-    printf("CH: %d Unexpected2 length 0\r\n", s);
+    //printf("CH: %d Unexpected2 length 0\r\n", s);
     return;
   }
 

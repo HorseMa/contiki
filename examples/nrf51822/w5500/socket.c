@@ -12,9 +12,10 @@
 #include "w5500.h"
 #include "socket.h"
 #include "util.h"
-
-static uint16 local_port;
-extern uint16 sent_ptr;
+#include "contiki-conf.h"
+#include "dev_cfg.h"
+//static uint16 local_port;
+//extern uint16 sent_ptr;
 
 /**
 @brief   This Socket function initialize the channel in perticular mode, and set the port and wait for W5200 done it.
@@ -37,9 +38,9 @@ uint8 socket(SOCKET s, uint8 protocol, uint16 port, uint8 flag)
          IINCHIP_WRITE( Sn_PORT0(s) ,(uint8)((port & 0xff00) >> 8));
          IINCHIP_WRITE( Sn_PORT1(s) ,(uint8)(port & 0x00ff));
       } else {
-         local_port++; // if don't set the source port, set local_port number.
-         IINCHIP_WRITE(Sn_PORT0(s) ,(uint8)((local_port & 0xff00) >> 8));
-         IINCHIP_WRITE(Sn_PORT1(s) ,(uint8)(local_port & 0x00ff));
+         //stDefaultCfg.local_port; // if don't set the source port, set local_port number.
+         IINCHIP_WRITE(Sn_PORT0(s) ,(uint8)((stDefaultCfg.local_port & 0xff00) >> 8));
+         IINCHIP_WRITE(Sn_PORT1(s) ,(uint8)(stDefaultCfg.local_port & 0x00ff));
       }
       IINCHIP_WRITE( Sn_CR(s) ,Sn_CR_OPEN); // run sockinit Sn_CR
 
@@ -107,6 +108,7 @@ uint8 listen(SOCKET s)
 uint8 connect(SOCKET s, uint8 * addr, uint16 port)
 {
     uint8 ret;
+    DISABLE_INTERRUPTS();
     if
         (
             ((addr[0] == 0xFF) && (addr[1] == 0xFF) && (addr[2] == 0xFF) && (addr[3] == 0xFF)) ||
@@ -144,6 +146,7 @@ uint8 connect(SOCKET s, uint8 * addr, uint16 port)
             }
         }
     }
+    ENABLE_INTERRUPTS();
 
    return ret;
 }
@@ -203,7 +206,7 @@ uint16 send(SOCKET s, const uint8 * buf, uint16 len)
     status = IINCHIP_READ(Sn_SR(s));
     if ((status != SOCK_ESTABLISHED) && (status != SOCK_CLOSE_WAIT) )
     {
-      printf("SEND_OK Problem!!\r\n");
+      //printf("SEND_OK Problem!!\r\n");
       close(s);
       return 0;
     }
@@ -358,7 +361,7 @@ uint16 recvfrom(SOCKET s, uint8 * buf, uint16 len, uint8 * addr, uint16 *port)
         data_len = (data_len<<8) + head[1] - 2;
         if(data_len > 1514)
         {
-           printf("data_len over 1514\r\n");
+           //printf("data_len over 1514\r\n");
            while(1);
         }
 
@@ -441,8 +444,8 @@ uint16 macraw_recv( uint8 * buf, uint16 len )
 
       if(data_len > 1514)
       {
-         printf("data_len over 1514\r\n");
-         printf("\r\nptr: %X, data_len: %X", ptr, data_len);
+         //printf("data_len over 1514\r\n");
+         //printf("\r\nptr: %X, data_len: %X", ptr, data_len);
          //while(1);
          /** recommand : close and open **/
          close(sock_num); // Close the 0-th socket

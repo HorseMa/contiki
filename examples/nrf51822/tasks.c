@@ -303,11 +303,19 @@ PROCESS_THREAD(ethernet_process, ev, data)
       }
       if(ret == SOCK_CLOSE_WAIT)
       {
-        while(!socket(SOCK_SERVER,Sn_MR_TCP,stDefaultCfg.local_port,Sn_MR_ND));
+        while(!socket(SOCK_SERVER,Sn_MR_TCP,stDefaultCfg.local_port,Sn_MR_ND))
+        {
+          etimer_set(&et_ethernet, CLOCK_SECOND / 20);
+          PROCESS_WAIT_EVENT();
+        }
       }
       if(ret == SOCK_CLOSED)
       {
-        while(!socket(SOCK_SERVER,Sn_MR_TCP,stDefaultCfg.local_port,Sn_MR_ND));/*??socket0?????*/
+        while(!socket(SOCK_SERVER,Sn_MR_TCP,stDefaultCfg.local_port,Sn_MR_ND))
+        {
+          etimer_set(&et_ethernet, CLOCK_SECOND / 20);
+          PROCESS_WAIT_EVENT();
+        }
       }
     }
   }
