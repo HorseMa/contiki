@@ -4,6 +4,7 @@
 #include "app_simple_timer.h"
 //#include "bsp.h"
 #include "dev_cfg.h"
+#include "nrf_drv_wdt.h"
 /*---------------------------------------------------------------------------*/
 #if CLOCK_CONF_STACK_FRIENDLY
 extern volatile __bit sleep_flag;
@@ -31,10 +32,18 @@ void timeout_handler(void * p_context)
 {
   clock_isr();
 }
+
+void nrf_wdt_event_handler(void)
+{
+  return;
+}
+nrf_drv_wdt_channel_id m_channel_id;
 void main(void)
 {
   /* Hardware initialization */
   //eepromInit();
+  nrf_drv_wdt_config_t p_config;
+  
   clockInit();
   flash_init();
   read_cfg();
@@ -85,6 +94,12 @@ void main(void)
   //BUTTON_SENSOR_ACTIVATE();
   //ADC_SENSOR_ACTIVATE();
 #endif
+  p_config.behaviour = NRF_WDT_BEHAVIOUR_PAUSE_SLEEP_HALT;
+  p_config.reload_value = 3000;
+  p_config.interrupt_priority = 0;
+  nrf_drv_wdt_init(&p_config,nrf_wdt_event_handler);
+  nrf_drv_wdt_channel_alloc(&m_channel_id);
+  nrf_drv_wdt_enable();
   autostart_start(autostart_processes);
   //watchdog_start();
   while(1) {

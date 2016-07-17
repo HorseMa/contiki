@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=1957735644
+Checksum=-664336697
 [CodeCoverage]
 Enabled=_ 0
 [Exceptions]
@@ -166,31 +166,33 @@ ShowSource=1
 [Disassemble mode]
 mode=0
 [Breakpoints2]
-Bp0=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..}.150.1" 0 0 1 "" 0 "" 0
-Bp1=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..}.177.1" 0 0 1 "" 0 "" 0
+Bp0=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.150.1" 0 0 1 "" 0 "" 0
+Bp1=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.177.1" 0 0 1 "" 0 "" 0
 Bp2=_ 0 "EMUL_CODE" "{Z:\}.173.1" 0 0 1 "" 0 "" 0
 Bp3=_ 0 "EMUL_CODE" "{Z:\}.165.1" 0 0 1 "" 0 "" 0
 Bp4=_ 0 "EMUL_CODE" "{Z:\}.160.1" 0 0 1 "" 0 "" 0
 Bp5=_ 0 "EMUL_CODE" "{Z:\}.150.1" 0 0 1 "" 0 "" 0
 Bp6=_ 0 "EMUL_CODE" "{Z:\}.185.1" 0 0 1 "" 0 "" 0
-Bp7=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..}.201.1" 0 0 1 "" 0 "" 0
+Bp7=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.201.1" 0 0 1 "" 0 "" 0
 Bp8=_ 0 "EMUL_CODE" "{Z:\}.245.1" 0 0 1 "" 0 "" 0
-Bp9=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..}.185.1" 0 0 1 "" 0 "" 0
-Bp10=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..}.245.3" 0 0 1 "" 0 "" 0
-Bp11=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..}.266.11" 0 0 1 "" 0 "" 0
-Bp12=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio.c}.140.9" 0 0 1 "" 0 "" 0
-Bp13=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.357.5" 0 0 1 "" 0 "" 0
-Bp14=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.357.5" 0 0 1 "" 0 "" 0
-Bp15=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\radio_config.c}.174.13" 0 0 1 "" 0 "" 0
-Bp16=_ 0 "EMUL_CODE" "{}.20.3" 0 0 1 "" 0 "" 0
-Bp17=_ 0 "EMUL_CODE" "{}.53.5" 0 0 1 "" 0 "" 0
-Bp18=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.306.9" 0 0 1 "" 0 "" 0
-Bp19=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.151.9" 0 0 1 "" 0 "" 0
-Count=20
+Bp9=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.185.1" 0 0 1 "" 0 "" 0
+Bp10=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.245.3" 0 0 1 "" 0 "" 0
+Bp11=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.266.11" 0 0 1 "" 0 "" 0
+Bp12=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\radio_config.c}.174.13" 0 0 1 "" 0 "" 0
+Bp13=_ 0 "EMUL_CODE" "{}.20.3" 0 0 1 "" 0 "" 0
+Bp14=_ 0 "EMUL_CODE" "{}.53.5" 0 0 1 "" 0 "" 0
+Bp15=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.578.3" 0 0 1 "" 0 "" 0
+Bp16=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.153.9" 0 0 1 "" 0 "" 0
+Bp17=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.502.5" 0 0 1 "" 0 "" 0
+Bp18=_ 1 "EMUL_CODE" "{$PROJ_DIR$\main.c}.117.11" 0 0 1 "" 0 "" 0
+Count=19
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
 Category=_ 0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
 [Aliases]
 Count=0
 SuppressDialog=0
@@ -204,6 +206,3 @@ Exclusions=
 Enabled=0
 [CallStackStripe]
 ShowTiming=1
-[TermIOLog]
-LoggingEnabled=_ 0
-LogFile=_ ""

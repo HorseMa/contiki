@@ -1963,6 +1963,9 @@
       </excluded>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\app_util_platform.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\ble_flash.c</name>
     </file>
     <file>
@@ -1982,6 +1985,9 @@
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\timer\nrf_drv_timer.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_drv_wdt.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_soc.c</name>

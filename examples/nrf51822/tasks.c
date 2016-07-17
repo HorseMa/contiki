@@ -20,6 +20,7 @@
 #include <string.h>
 #include "radio.h"
 #include "dev_cfg.h"
+#include "nrf_drv_wdt.h"
 
 process_event_t ev_checkradio;
 process_event_t ev_checkw5500;
@@ -78,7 +79,8 @@ PROCESS_THREAD(led_process, ev, data)
 }
 uint8 tag_update = 0;
 extern int tags_cnt = 0;
-
+extern U8 buffer_433m[64];
+uint8 net_flag = 0;
 PROCESS_THREAD(ethernet_process, ev, data)
 {
   static struct etimer et_ethernet;
@@ -152,6 +154,8 @@ PROCESS_THREAD(ethernet_process, ev, data)
       }
       if(ret == SOCK_ESTABLISHED)
       {
+        net_flag = 1;
+        NVIC_DisableIRQ(RADIO_IRQn);
         if(getSn_IR(SOCK_SERVER) & Sn_IR_CON)
         {
           setSn_IR(SOCK_SERVER, Sn_IR_CON);
@@ -303,6 +307,8 @@ PROCESS_THREAD(ethernet_process, ev, data)
       }
       if(ret == SOCK_CLOSE_WAIT)
       {
+        net_flag = 0;
+        NVIC_EnableIRQ(RADIO_IRQn);
         while(!socket(SOCK_SERVER,Sn_MR_TCP,stDefaultCfg.local_port,Sn_MR_ND))
         {
           etimer_set(&et_ethernet, CLOCK_SECOND / 20);
@@ -311,6 +317,8 @@ PROCESS_THREAD(ethernet_process, ev, data)
       }
       if(ret == SOCK_CLOSED)
       {
+        net_flag = 0;
+        NVIC_EnableIRQ(RADIO_IRQn);
         while(!socket(SOCK_SERVER,Sn_MR_TCP,stDefaultCfg.local_port,Sn_MR_ND))
         {
           etimer_set(&et_ethernet, CLOCK_SECOND / 20);
@@ -324,8 +332,7 @@ PROCESS_THREAD(ethernet_process, ev, data)
 }
 
     
-extern U8 buffer_433m[64];
-uint8 net_flag = 0;
+
 PROCESS_THREAD(read_gpio_process, ev, data)
 { 
   static struct etimer et_blink;
@@ -469,7 +476,7 @@ void uart_event_handle(app_uart_evt_t * p_event)
 {
   
 }
-
+extern nrf_drv_wdt_channel_id m_channel_id;
 PROCESS_THREAD(uartRecv_process, ev, data)
 { 
   static struct etimer et_blink;
@@ -490,9 +497,13 @@ PROCESS_THREAD(uartRecv_process, ev, data)
   uart_put_string("NRF TEST!");
   while(1)//∆•≈‰≤®Ãÿ¬ 
   {
+    //nrf_drv_wdt_feed();
+    nrf_drv_wdt_channel_feed(m_channel_id);
     nrf_gpio_pin_clear(LED3);         // o®¨¶Ã?®¢®¢
     etimer_set(&et_blink, CLOCK_SECOND / 5);
     PROCESS_WAIT_EVENT();             
+    //nrf_drv_wdt_feed();
+    nrf_drv_wdt_channel_feed(m_channel_id);
     nrf_gpio_pin_set(LED3);
     etimer_set(&et_blink, CLOCK_SECOND / 5);
     PROCESS_WAIT_EVENT();
@@ -500,11 +511,17 @@ PROCESS_THREAD(uartRecv_process, ev, data)
   
   PROCESS_END();
 }
-
+extern uint8 buffer_433m[];
 PROCESS_THREAD(si4463_process, ev, data)
 {
   static struct etimer et_blink;
+  static uint8 buf[64];
+  //static uint8 tag_list_offset = 0;
   PROCESS_BEGIN();
+  for(uint8 loop = 0;loop < 64;loop ++)
+  {
+    buf[loop] = 'h';
+  }
   ev_checkradio = process_alloc_event();
 
   spi_master_init(SPI1, SPI_MODE0, 0);
@@ -514,11 +531,51 @@ PROCESS_THREAD(si4463_process, ev, data)
   
   while(1)
   {
-    /*etimer_set(&et_blink, CLOCK_SECOND / 5);
-    PROCESS_WAIT_EVENT();
-    vRadio_StartTx_Variable_Packet("hello",5);*/
-    PROCESS_WAIT_EVENT_UNTIL(ev == ev_checkradio);
-    bRadio_Check_Tx_RX();
+    //timer_set(&et_blink, CLOCK_SECOND / 5);
+    //PROCESS_WAIT_EVENT();
+    if(!net_flag)
+    {
+      etimer_set(&et_blink, CLOCK_SECOND / 5);
+      PROCESS_WAIT_EVENT();
+      if(ev == PROCESS_EVENT_TIMER);
+      {
+        if((tag_update) && (tags_cnt > 12))
+        {
+          DISABLE_INTERRUPTS();
+          if(stDevCfg.tag_type)
+          {
+            for(uint8 loop = 0;loop < 12;loop ++)
+            {
+              memcpy(buf + (5 * loop),tags_local[loop],5);
+            }
+          }
+          else
+          {
+            for(uint8 loop = 0;loop < 7;loop ++)
+            {
+              memcpy(buf + (9 * loop),tags_local[loop],9);
+            }
+          }
+          memset(tags_local,0,sizeof(tags_local));
+          tags_cnt = 0;
+          tags_index = 0;
+          tag_update = 0;
+          ENABLE_INTERRUPTS();
+          vRadio_StartTx_Variable_Packet(buf,64);
+          //PROCESS_WAIT_EVENT_UNTIL(ev == ev_checkradio);
+        }
+      }
+      if(ev == ev_checkradio)
+      {
+        bRadio_Check_Tx_RX();
+      }
+
+    }
+    else
+    {
+      PROCESS_WAIT_EVENT_UNTIL(ev == ev_checkradio);
+      bRadio_Check_Tx_RX();      
+    }
   }
   PROCESS_END();
 }

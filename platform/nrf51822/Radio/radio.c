@@ -18,7 +18,7 @@
 //#include "global.h"
 #include "lib/ringbuf.h"
 #include "contiki.h"
-
+#include "dev_cfg.h"
 /*****************************************************************************
  *  Local Macros & Definitions
  *****************************************************************************/
@@ -117,7 +117,7 @@ U8 bRadio_Check_Tx_RX(void)
   {
       /* Read ITs, clear pending ones */
       si446x_get_int_status(0u, 0u, 0u);
-#if 0
+#if 1
       if (Si446xCmd.GET_INT_STATUS.CHIP_PEND & SI446X_CMD_GET_CHIP_STATUS_REP_CMD_ERROR_PEND_BIT)
       {
       	/* State change to */
@@ -163,10 +163,35 @@ U8 bRadio_Check_Tx_RX(void)
         /* Get payload length */
         si446x_fifo_info(0x00);
         si446x_read_rx_fifo(Si446xCmd.FIFO_INFO.RX_FIFO_COUNT, buffer_433m);
-        if(net_flag == 1)
-        process_post(&read_gpio_process,ev_checkw5500,NULL);
+        //if(net_flag == 1)
+        //process_post(&read_gpio_process,ev_checkw5500,NULL);
         si446x_change_state(SI446X_CMD_CHANGE_STATE_ARG_NEW_STATE_ENUM_RX);
+extern unsigned char tags_local[200][9];
+extern int tags_index;
+extern int tags_cnt;
+extern uint8_t tag_update;
 
+        tag_update = 1;
+        if(stDevCfg.tag_type)
+        {
+          for(uint8 loop = 0;loop < 12;loop ++)
+          {
+            memcpy(tags_local[loop],buffer_433m + 5 * loop,5);
+          }
+          tags_cnt = 12;
+          tags_index = 12;
+          tag_update = 1;
+
+        }else
+        {
+          for(uint8 loop = 0;loop < 7;loop ++)
+          {
+            memcpy(tags_local[loop],buffer_433m + 9 * loop,9);
+          }
+          tags_cnt = 7;
+          tags_index = 7;
+          tag_update = 1;
+        }
         //for(loop = 0;loop < Si446xCmd.FIFO_INFO.RX_FIFO_COUNT;loop ++)
           //ringbuf_put(&radioRcvRingBuf, data[loop]);
       }
@@ -218,10 +243,10 @@ void vRadio_StartTx_Variable_Packet(unsigned char *bytes, unsigned char len)
   si446x_fifo_info(0x03);
 
   /* Fill the TX fifo with datas */
-  si446x_write_tx_fifo(1, &len);
+  //si446x_write_tx_fifo(1, &len);
   si446x_write_tx_fifo(len, bytes);
 
   /* Start sending packet, channel 0, START immediately */
-   si446x_start_tx(0, 0x80, len + 1);
+   si446x_start_tx(0, 0x80, len);
  
 }
