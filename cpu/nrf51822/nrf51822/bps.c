@@ -3,6 +3,9 @@
 #include "nrf_gpio.h"
 #include "bps.h"
 #include "spi_master_config.h" // This file must be in the application folder
+#include "radio.h"
+#include "spi_master.h"
+
 
 
 void gipo_init(void)
@@ -36,6 +39,8 @@ void gipo_init(void)
         nrf_gpio_cfg_input(SI4463_INT,GPIO_PIN_CNF_PULL_Disabled);
         nrf_gpio_cfg_output(SI4463_CEN);
         nrf_gpio_pin_set(SI4463_CEN);
+        spi_master_init(SPI1, SPI_MODE0, 0);
+        vRadio_Init();
 }
 
 void w5500_irq_cfg(void)

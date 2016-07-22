@@ -19,6 +19,8 @@
 #include "lib/ringbuf.h"
 #include "contiki.h"
 #include "dev_cfg.h"
+#include "tasks.h"
+#include "ad_hoc.h"
 /*****************************************************************************
  *  Local Macros & Definitions
  *****************************************************************************/
@@ -105,10 +107,7 @@ void vRadio_Init(void)
  *  @note
  *
  */
-U8 buffer_433m[64];
-extern process_event_t ev_checkw5500;
-PROCESS_NAME(read_gpio_process);
-extern U8 net_flag;
+static U8 buffer_433m[64];
 U8 bRadio_Check_Tx_RX(void)
 {
   //static unsigned char data[64];
@@ -145,6 +144,14 @@ U8 bRadio_Check_Tx_RX(void)
       if(Si446xCmd.GET_INT_STATUS.PH_PEND & SI446X_CMD_GET_INT_STATUS_REP_PACKET_SENT_PEND_BIT)
       {
         si446x_change_state(SI446X_CMD_CHANGE_STATE_ARG_NEW_STATE_ENUM_RX);
+        if(adhocGetWorkMode() == WORK_MODE_CENTER)
+        {
+          process_post(&si4463_center_process,ev_433_tx_over,NULL);
+        }
+        else
+        {
+          process_post(&si4463_enddev_process,ev_433_tx_over,NULL);
+        }
       }
       if(Si446xCmd.GET_MODEM_STATUS.MODEM_PEND & SI446X_CMD_GET_MODEM_STATUS_REP_PREAMBLE_DETECT_PEND_BIT)
       {
@@ -164,9 +171,16 @@ U8 bRadio_Check_Tx_RX(void)
         si446x_fifo_info(0x00);
         si446x_read_rx_fifo(Si446xCmd.FIFO_INFO.RX_FIFO_COUNT, buffer_433m);
         //if(net_flag == 1)
-        //process_post(&read_gpio_process,ev_checkw5500,NULL);
+        if(adhocGetWorkMode() == WORK_MODE_CENTER)
+        {
+          process_post(&si4463_center_process,ev_433_rx_over,buffer_433m);
+        }
+        else
+        {
+          process_post(&si4463_enddev_process,ev_433_rx_over,buffer_433m);
+        }
         si446x_change_state(SI446X_CMD_CHANGE_STATE_ARG_NEW_STATE_ENUM_RX);
-extern unsigned char tags_local[200][9];
+/*extern unsigned char tags_local[200][9];
 extern int tags_index;
 extern int tags_cnt;
 extern uint8_t tag_update;
@@ -191,7 +205,7 @@ extern uint8_t tag_update;
           tags_cnt = 7;
           tags_index = 7;
           tag_update = 1;
-        }
+        }*/
         //for(loop = 0;loop < Si446xCmd.FIFO_INFO.RX_FIFO_COUNT;loop ++)
           //ringbuf_put(&radioRcvRingBuf, data[loop]);
       }
@@ -208,7 +222,7 @@ extern uint8_t tag_update;
  *  @note
  *
  */
-void vRadio_StartRX()
+void vRadio_StartRX(U8 ch)
 {
   // Read ITs, clear pending ones
   si446x_get_int_status(0u, 0u, 0u);
@@ -217,7 +231,7 @@ void vRadio_StartRX()
    si446x_fifo_info(0x03);
 
   /* Start Receiving packet, channel 0, START immediately, Packet length used or not according to packetLength */
-  si446x_start_rx(0, 0u, 0,
+  si446x_start_rx(ch, 0u, 0,
                   SI446X_CMD_START_RX_ARG_RXTIMEOUT_STATE_ENUM_NOCHANGE,
                   SI446X_CMD_START_RX_ARG_RXVALID_STATE_ENUM_READY,
                   SI446X_CMD_START_RX_ARG_RXINVALID_STATE_ENUM_RX );
@@ -231,7 +245,7 @@ void vRadio_StartRX()
  *  @note
  *
  */
-void vRadio_StartTx_Variable_Packet(unsigned char *bytes, unsigned char len)
+void vRadio_StartTx_Variable_Packet(unsigned char channel, unsigned char *bytes, unsigned char len)
 {
   /* Leave RX state */
   si446x_change_state(SI446X_CMD_CHANGE_STATE_ARG_NEW_STATE_ENUM_READY);
@@ -247,6 +261,6 @@ void vRadio_StartTx_Variable_Packet(unsigned char *bytes, unsigned char len)
   si446x_write_tx_fifo(len, bytes);
 
   /* Start sending packet, channel 0, START immediately */
-   si446x_start_tx(0, 0x80, len);
+   si446x_start_tx(channel, 0x80, len);
  
 }

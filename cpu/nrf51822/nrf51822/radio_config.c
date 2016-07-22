@@ -17,6 +17,7 @@
 #include "contiki.h"
 #include <string.h>
 #include "dev_cfg.h"
+#include "tags_manage.h"
 
 
 #define PACKET0_S1_SIZE                  (0UL)  //!< 此例程我们不理会
@@ -121,10 +122,6 @@ NRF_RADIO->MODE = (RADIO_MODE_MODE_Nrf_1Mbit << RADIO_MODE_MODE_Pos);
 
 extern process_event_t ev_2_4g_rcv;
 PROCESS_NAME(led_process);
-extern unsigned char tags_local[200][9];
-extern int tags_index;
-extern int tags_cnt;
-extern uint8_t tag_update;
 
 void RADIO_IRQHandler(void)
 {
@@ -142,54 +139,11 @@ void RADIO_IRQHandler(void)
         //*((volatile uint32_t *)((uint8_t *)NRF_TIMERx + (uint32_t)timer_event)) = 0x0UL;
     if (NRF_RADIO->CRCSTATUS == 1U)
     {
-      //NRF_RADIO->EVENTS_READY = 0U; 				 // ê??t×?±? ê?·￠?￡ê?×a??íê3é  ±ê????    
-      //NRF_RADIO->TASKS_RXEN   = 1U;          // ê1?ü?óê?
-      //while(NRF_RADIO->EVENTS_READY == 0U)   // μè′y?óê?×?±?o?
-      {
-      }
-      for(i = 0;i < tags_cnt;i++)
-      {
-        if(stDevCfg.tag_type)
-        {
-          if((!memcmp(&packet[2],&tags_local[i][2],2)) && ((packet[4] & 0x0f) == (tags_local[i][4] & 0x0f)))
-          {
-            while(!NRF_RADIO->EVENTS_RSSIEND);
-            packet[0] = NRF_RADIO->RSSISAMPLE;
-            packet[1] = NRF_RADIO->RSSISAMPLE >> 8;
-            //*(uint16*)packet = NRF_RADIO->RSSISAMPLE;
-            NRF_RADIO->EVENTS_RSSIEND = 0;
-            memcpy(tags_local[i],packet,5);
-            break;
-          }
-
-        }
-        else
-        {
-          if(!memcmp(&packet[9 - 3],&tags_local[i][9 - 3],3))
-          {
-            while(!NRF_RADIO->EVENTS_RSSIEND);
-            packet[0] = NRF_RADIO->RSSISAMPLE;
-            packet[1] = NRF_RADIO->RSSISAMPLE >> 8;
-            //*(uint16*)packet = NRF_RADIO->RSSISAMPLE;
-            NRF_RADIO->EVENTS_RSSIEND = 0;
-            memcpy(tags_local[i],packet,9);
-            break;
-          }
-        }
-      }
-      if(i == tags_cnt)
-      {
-        while(!NRF_RADIO->EVENTS_RSSIEND);
-        *(uint16*)packet = NRF_RADIO->RSSISAMPLE;
-        NRF_RADIO->EVENTS_RSSIEND = 0;
-        memcpy(tags_local[tags_index++],packet,5);
-        tags_cnt = tags_index;
-        if(tags_index >= 200)
-        {
-            tags_index = 0;
-        }
-      }
-      tag_update = 1;
+      while(!NRF_RADIO->EVENTS_RSSIEND);
+      packet[0] = NRF_RADIO->RSSISAMPLE;
+      packet[1] = NRF_RADIO->RSSISAMPLE >> 8;
+      NRF_RADIO->EVENTS_RSSIEND = 0;
+      add_tags_2_4(packet);
 
       //process_post(&led_process,ev_2_4g_rcv,NULL);
 

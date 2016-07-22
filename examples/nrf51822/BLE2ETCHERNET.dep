@@ -2,7 +2,7 @@
 
 <project>
   <fileVersion>2</fileVersion>
-  <fileChecksum>1811982859</fileChecksum>
+  <fileChecksum>3448081965</fileChecksum>
   <configuration>
     <name>Debug</name>
     <outputs>
@@ -377,9 +377,23 @@
       <file>$PROJ_DIR$\Debug\Obj\nrf_drv_common.__cstat.et</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\core_cmInstr.h</file>
       <file>$PROJ_DIR$\Debug\Obj\tasks.__cstat.et</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\spi_master.h</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\app_util_platform.c</file>
       <file>$PROJ_DIR$\Debug\Obj\app_util_platform.o</file>
       <file>$PROJ_DIR$\Debug\Obj\app_util_platform.pbi</file>
+      <file>$PROJ_DIR$\tags_manage.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\tags_manage.o</file>
+      <file>$PROJ_DIR$\tags_manage.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\tags_manage.pbi</file>
+      <file>$PROJ_DIR$\tagsmanage.c</file>
+      <file>$PROJ_DIR$\dev_list.c</file>
+      <file>$PROJ_DIR$\dev_list.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\ad_hoc.o</file>
+      <file>$PROJ_DIR$\ad_hoc.c</file>
+      <file>$PROJ_DIR$\ad_hoc.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\ad_hoc.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\dev_list.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\dev_list.pbi</file>
     </outputs>
     <file>
       <name>$PROJ_DIR$\net\sockutil.c</name>
@@ -441,7 +455,7 @@
       <inputs>
         <tool>
           <name>ILINK</name>
-          <file> 180 140 92 54 241 37 372 122 93 33 330 59 255 119 212 258 71 43 99 343 214 247 205 80 105 57 206 62 249 102 110 126 117 202 97 133 69 44 68 116 103 31 143 237 225 251 220 47 94 238 56 120 98 172 217 108 128 256 132 51 13 253 23 38 164 203</file>
+          <file> 180 382 140 92 54 241 37 373 122 93 33 330 59 255 119 212 258 71 386 43 99 343 214 247 205 80 105 57 206 62 249 102 110 126 117 202 97 133 69 44 68 116 103 31 143 237 225 251 220 47 94 238 56 120 98 172 217 108 128 376 256 132 51 13 253 23 38 164 203</file>
         </tool>
       </inputs>
     </file>
@@ -618,11 +632,11 @@
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 171 367 129 167 10 60 193 87 152 357 363 96 156 369 344 163 314 181 24 88 218 356 364 91 182 160 179 176 155 148 144 161 188 18 359 239 189 150 346 196 178 345 169 3 351 360</file>
+          <file> 367 167 171 314 181 193 87 152 357 129 24 363 96 156 369 344 163 10 60 88 218 356 377 364 91 182 160 179 176 155 148 144 161 188 18 359 239 189 150 346 196 178 345 169 3 351 360</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 239 88 87 156 182 160 344 367 176 167 163 155 148 369 144 171 179 357 364 152 91 363 314 129 189 218 193 150 346 161 181 60 169 359 196 10 24 178 188 345 18 356 3 351 96 360</file>
+          <file> 239 88 87 156 182 160 344 367 176 167 163 155 148 369 144 171 179 357 364 152 91 363 314 129 189 218 193 150 346 161 181 60 169 359 196 10 24 178 188 345 18 356 3 351 96 360 377</file>
         </tool>
       </inputs>
     </file>
@@ -1717,11 +1731,11 @@
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 163 161 24 32 129 152 366 175 196 344 160 360 87 356 239 224 150 314 367 176 3 357 46 156 353 173 229 131 346 178 345 155 167 181 188 351 179 144 184 350 209 352 243 42 154 14 67 177 96 10 18 363 171 148 359 60 169 189 182 369 364 91 45 228 136 193 147 159 194</file>
+          <file> 181 136 32 345 155 167 188 182 360 175 377 346 160 367 356 239 224 178 87 364 171 46 156 353 173 229 131 150 196 314 24 176 163 344 161 129 369 91 3 184 209 352 243 42 154 14 67 177 96 384 381 10 18 363 148 359 60 169 189 351 357 179 144 152 366 193 350 45 228 147 159 194</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 193 150 129 171 344 160 367 176 167 163 155 148 346 161 181 60 169 359 196 10 24 178 188 314 189 345 18 363 209 46 352 356 3 351 239 156 182 369 144 179 357 243 184 175 42 360 353 87 364 152 91 154 14 173 67 32 177 350 229 45 224 228 96 131 147 366 136 194 159</file>
+          <file> 193 150 129 171 344 160 367 176 167 163 155 148 346 161 181 60 169 359 196 10 24 178 188 314 189 345 18 363 209 46 352 356 3 351 239 156 182 369 144 179 357 243 184 175 42 360 353 87 364 152 91 154 14 173 67 32 177 350 229 45 224 228 96 131 147 366 136 194 159 384 377 381</file>
         </tool>
       </inputs>
     </file>
@@ -1744,11 +1758,11 @@
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 24 96 369 228 129 314 224 184 357 344 155 167 144 181 254 215 156 176 163 160 10 363 60 211 22 34 193 171 182 179 367 148 161 188 18 359 150 346 196 178 345 169 189 360</file>
+          <file> 182 148 367 60 96 171 181 224 160 344 129 24 254 215 384 179 228 10 363 360 211 22 34 193 209 156 184 357 369 176 155 167 163 144 161 188 18 359 169 189 314 150 346 196 178 345</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 228 156 182 160 344 367 176 167 163 155 148 369 144 171 179 357 184 211 254 22 224 34 215 129 193 150 346 161 181 60 169 359 196 10 24 178 188 314 189 345 18 363 96 360</file>
+          <file> 228 156 182 160 344 367 176 167 163 155 148 369 144 171 179 357 184 211 254 22 224 34 215 129 193 150 346 161 181 60 169 359 196 10 24 178 188 314 189 345 18 363 96 360 209 384</file>
         </tool>
       </inputs>
     </file>
@@ -1825,11 +1839,11 @@
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 144 242 344 176 367 160 182 67 155 148 364 179 46 167 163 156 357 369 171 184</file>
+          <file> 167 369 367 242 156 171 67 371 344 163 357 184 160 46 224 176 155 148 364 182 179 144 228</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 184 160 344 367 176 167 163 155 148 67 156 182 369 144 171 179 357 364 46 242</file>
+          <file> 184 160 344 367 176 167 163 155 148 67 156 182 369 144 171 179 357 364 46 242 224 228 371</file>
         </tool>
       </inputs>
     </file>
@@ -1969,11 +1983,11 @@
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 373</file>
+          <file> 374</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 372</file>
+          <file> 373</file>
         </tool>
       </outputs>
       <inputs>
@@ -1984,6 +1998,75 @@
         <tool>
           <name>ICCARM</name>
           <file> 350 160 344 367 176 167 163 155 148 91 156 182 369 144 171 179 357</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\tags_manage.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 378</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 376</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 155 3 96 360 344 351 176 356 367 148 377 167 163</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 377 360 96 356 344 367 176 167 163 155 148 3 351</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\dev_list.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 387</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 386</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 360 381</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 381 360</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\ad_hoc.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 385</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 382</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 176 344 184 314 161 150 367 357 377 196 24 163 129 228 369 144 209 193 346 178 345 160 155 167 181 188 156 96 224 360 10 18 363 171 148 359 60 169 189 182 179 384</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 384 193 150 129 171 344 160 367 176 167 163 155 148 346 161 181 60 169 359 196 10 24 178 188 314 189 345 18 363 360 96 209 224 228 156 182 369 144 179 357 184 377</file>
         </tool>
       </inputs>
     </file>

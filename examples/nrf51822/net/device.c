@@ -85,7 +85,7 @@ void set_network(void)
   //Init. TX & RX Memory size of w5500
   sysinit(txsize, rxsize); /*初始化8个socket*/
   
-  setRTR(2000);/*设置溢出时间值*/
+  setRTR(5000);/*设置溢出时间值*/
   setRCR(3);/*设置最大重新发送次数*/
   
 

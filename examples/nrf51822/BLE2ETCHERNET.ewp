@@ -2194,10 +2194,16 @@
       </file>
     </group>
     <file>
+      <name>$PROJ_DIR$\ad_hoc.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\bps.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\dev_cfg.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\dev_list.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\mai_no_os.c</name>
@@ -2213,6 +2219,9 @@
       <excluded>
         <configuration>Debug</configuration>
       </excluded>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\tags_manage.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\tasks.c</name>
