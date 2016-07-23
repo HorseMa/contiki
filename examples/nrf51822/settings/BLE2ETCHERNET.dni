@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=-1491596011
+Checksum=-1097912887
 [CodeCoverage]
 Enabled=_ 0
 [Exceptions]
@@ -169,7 +169,7 @@ ShowSource=1
 mode=0
 [Breakpoints2]
 Bp0=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.150.1" 0 0 1 "" 0 "" 0
-Bp1=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..}.177.1" 0 0 1 "" 0 "" 0
+Bp1=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.177.1" 0 0 1 "" 0 "" 0
 Bp2=_ 0 "EMUL_CODE" "{Z:\}.173.1" 0 0 1 "" 0 "" 0
 Bp3=_ 0 "EMUL_CODE" "{Z:\}.165.1" 0 0 1 "" 0 "" 0
 Bp4=_ 0 "EMUL_CODE" "{Z:\}.160.1" 0 0 1 "" 0 "" 0
@@ -178,8 +178,8 @@ Bp6=_ 0 "EMUL_CODE" "{Z:\}.185.1" 0 0 1 "" 0 "" 0
 Bp7=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.201.1" 0 0 1 "" 0 "" 0
 Bp8=_ 0 "EMUL_CODE" "{Z:\}.245.1" 0 0 1 "" 0 "" 0
 Bp9=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.185.1" 0 0 1 "" 0 "" 0
-Bp10=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..}.245.3" 0 0 1 "" 0 "" 0
-Bp11=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\..}.266.11" 0 0 1 "" 0 "" 0
+Bp10=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.245.3" 0 0 1 "" 0 "" 0
+Bp11=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.266.11" 0 0 1 "" 0 "" 0
 Bp12=_ 0 "EMUL_CODE" "{}.20.3" 0 0 1 "" 0 "" 0
 Bp13=_ 0 "EMUL_CODE" "{}.53.5" 0 0 1 "" 0 "" 0
 Bp14=_ 0 "EMUL_CODE" "{$PROJ_DIR$\ad_hoc.c}.64.1" 0 0 1 "" 0 "" 0
@@ -187,11 +187,12 @@ Bp15=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tags_manage.c}.30.7" 0 0 1 "" 0 "" 0
 Bp16=_ 0 "EMUL_CODE" "{$PROJ_DIR$\ad_hoc.c}.64.1" 0 0 1 "" 0 "" 0
 Bp17=_ 0 "EMUL_CODE" "{$PROJ_DIR$\ad_hoc.c}.64.1" 0 0 1 "" 0 "" 0
 Bp18=_ 0 "EMUL_CODE" "{$PROJ_DIR$\ad_hoc.c}.64.1" 0 0 1 "" 0 "" 0
-Bp19=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.109.3" 0 0 1 "" 0 "" 0
-Bp20=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.288.7" 0 0 1 "" 0 "" 0
-Bp21=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.571.11" 0 0 1 "" 0 "" 0
-Bp22=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.538.5" 0 0 1 "" 0 "" 0
-Count=23
+Bp19=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.307.9" 0 0 1 "" 0 "" 0
+Bp20=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.593.5" 0 0 1 "" 0 "" 0
+Bp21=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.593.5" 0 0 1 "" 0 "" 0
+Bp22=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.574.7" 0 0 1 "" 0 "" 0
+Bp23=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.109.3" 0 0 1 "" 0 "" 0
+Count=24
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""

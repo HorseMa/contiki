@@ -158,6 +158,7 @@ PROCESS_THREAD(ethernet_process, ev, data)
     {
       //DISABLE_INTERRUPTS();
       // set destination IP
+      //set_network();
       IINCHIP_WRITE( Sn_DIPR0(SOCK_SERVER), stDevCfg.server_ip[0]);
       IINCHIP_WRITE( Sn_DIPR1(SOCK_SERVER), stDevCfg.server_ip[1]);
       IINCHIP_WRITE( Sn_DIPR2(SOCK_SERVER), stDevCfg.server_ip[2]);
@@ -168,9 +169,11 @@ PROCESS_THREAD(ethernet_process, ev, data)
       /* wait for completion */
       while ( IINCHIP_READ(Sn_CR(SOCK_SERVER) ) ) 
       {
-        etimer_set(&et_ethernet, CLOCK_SECOND / 100);
-        PROCESS_WAIT_EVENT();
+        //etimer_set(&et_ethernet, CLOCK_SECOND / 100);
+        //PROCESS_WAIT_EVENT();
       }
+      etimer_set(&et_ethernet, CLOCK_SECOND / 20);
+      PROCESS_WAIT_EVENT();
       while ( IINCHIP_READ(Sn_SR(SOCK_SERVER)) != SOCK_SYNSENT )
       {
         if(IINCHIP_READ(Sn_SR(SOCK_SERVER)) == SOCK_ESTABLISHED)
@@ -184,12 +187,23 @@ PROCESS_THREAD(ethernet_process, ev, data)
         }
         etimer_set(&et_ethernet, CLOCK_SECOND / 50);
         PROCESS_WAIT_EVENT();
+        loop ++;
+        if(loop > 50)
+        {
+          NVIC_SystemReset();
+        }
       }
       //ENABLE_INTERRUPTS();
     }
     
+#else
+    if(ret == SOCK_INIT)
+    {
+      DISABLE_INTERRUPTS();
+      connect(SOCK_SERVER, stDevCfg.server_ip ,stDevCfg.server_port);
+      ENABLE_INTERRUPTS();
+    }
 #endif
-    //connect(SOCK_SERVER, stDevCfg.server_ip ,stDevCfg.server_port);
     if(ret == SOCK_ESTABLISHED)
     {
       adhocSetWorkMode(WORK_MODE_CENTER);
