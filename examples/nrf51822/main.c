@@ -45,6 +45,7 @@ void main(void)
   nrf_drv_wdt_config_t p_config;
   
   clockInit();
+  gipo_init();
   flash_init();
   read_cfg();
   app_simple_timer_init();

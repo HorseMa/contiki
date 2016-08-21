@@ -56,13 +56,13 @@
 #define PB15                            GPIO_Pin_15
 #endif
 
-#define WIZ_SCS			        23	// out
-#define WIZ_SCLK			24	// out
-#define WIZ_MISO			25	// in
-#define WIZ_MOSI			28	// out
+#define WIZ_SCS			        07	// out
+#define WIZ_SCLK			06	// out
+#define WIZ_MISO			05	// in
+#define WIZ_MOSI			04	// out
 
 
-#define WIZ_RESET		        30	// out
+#define WIZ_RESET		        02	// out
 #if 0
 //eeprom  PB
 
@@ -79,7 +79,7 @@
 #define PC14				GPIO_Pin_14	//
 #define PC15				GPIO_Pin_15	//
 #endif
-#define WIZ_INT			        29	// in
+#define WIZ_INT			        03	// in
 //Port D
 
 //=================================================
