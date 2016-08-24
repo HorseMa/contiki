@@ -7,13 +7,14 @@
 
 static int tags_cnt_2_4 = 0;
 static int tags_cnt_433 = 0;
+static int tags_index_2_4 = 0;
+static int tags_index_433 = 0;
 
 static uint8 tags_2_4[MAX_TAGS_NUM][9] = {0};
 static uint8 tags_433[MAX_TAGS_NUM][9] = {0};
 
 uint8 add_tags_2_4(uint8 *tag)
 {
-  static int tags_index = 0;
   uint16 i = 0;
   for(i = 0;i < tags_cnt_2_4;i++)
   {
@@ -36,14 +37,14 @@ uint8 add_tags_2_4(uint8 *tag)
   }
   if(i == tags_cnt_2_4)
   {
-    memcpy(tags_2_4[tags_index++],tag,5);
-    if(tags_index > tags_cnt_2_4)
+    memcpy(tags_2_4[tags_index_2_4++],tag,5);
+    if(tags_index_2_4 > tags_cnt_2_4)
     {
-      tags_cnt_2_4 = tags_index;
+      tags_cnt_2_4 = tags_index_2_4;
     }
-    if(tags_index >= MAX_TAGS_NUM)
+    if(tags_index_2_4 >= MAX_TAGS_NUM)
     {
-      tags_index = 0;
+      tags_index_2_4 = 0;
     }
   }
   if(stDevCfg.tag_type)
@@ -82,6 +83,7 @@ uint16 get_tags_2_4(uint8 *buf,uint8 *cnt,uint8 limit)
       len = 0;
     }
     tags_index = 0;
+    tags_index_2_4 = 0;
     tags_cnt_2_4 = 0;
   }
   else
@@ -98,6 +100,7 @@ uint16 get_tags_2_4(uint8 *buf,uint8 *cnt,uint8 limit)
       if(tags_index >= tags_cnt_2_4)
       {
         tags_index = 0;
+        tags_index_2_4 = 0;
         tags_cnt_2_4 = 0;
       }
     }
@@ -113,6 +116,7 @@ uint16 get_tags_2_4(uint8 *buf,uint8 *cnt,uint8 limit)
       if(tags_index >= tags_cnt_2_4)
       {
         tags_index = 0;
+        tags_index_2_4 = 0;
         tags_cnt_2_4 = 0;
       }
     }
@@ -122,7 +126,6 @@ uint16 get_tags_2_4(uint8 *buf,uint8 *cnt,uint8 limit)
 
 uint8 add_tags_433(uint8 *tag)
 {
-  static int tags_index = 0;
   uint16 i = 0;
   for(i = 0;i < tags_cnt_433;i++)
   {
@@ -145,14 +148,14 @@ uint8 add_tags_433(uint8 *tag)
   }
   if(i == tags_cnt_433)
   {
-    memcpy(tags_433[tags_index++],tag,5);
-    if(tags_index > tags_cnt_433)
+    memcpy(tags_433[tags_index_433++],tag,5);
+    if(tags_index_433 > tags_cnt_433)
     {
-      tags_cnt_433 = tags_index;
+      tags_cnt_433 = tags_index_433;
     }
-    if(tags_index >= MAX_TAGS_NUM)
+    if(tags_index_433 >= MAX_TAGS_NUM)
     {
-      tags_index = 0;
+      tags_index_433 = 0;
     }
   }
   if(stDevCfg.tag_type)
@@ -191,6 +194,7 @@ uint16 get_tags_433(uint8 *buf,uint8 *cnt,uint8 limit)
       len = 0;
     }
     tags_index = 0;
+    tags_index_433 = 0;
     tags_cnt_433 = 0;
   }
   else
@@ -207,6 +211,7 @@ uint16 get_tags_433(uint8 *buf,uint8 *cnt,uint8 limit)
       if(tags_index >= tags_cnt_433)
       {
         tags_index = 0;
+        tags_index_433 = 0;
         tags_cnt_433 = 0;
       }
     }
@@ -222,6 +227,7 @@ uint16 get_tags_433(uint8 *buf,uint8 *cnt,uint8 limit)
       if(tags_index >= tags_cnt_433)
       {
         tags_index = 0;
+        tags_index_433 = 0;
         tags_cnt_433 = 0;
       }
     }

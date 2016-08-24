@@ -314,10 +314,10 @@
           <name>CCIncludePath2</name>
           <state>$PROJ_DIR$\</state>
           <state>$PROJ_DIR$/../../core\</state>
-          <state>$PROJ_DIR$/../../examples/nrf51822</state>
-          <state>$PROJ_DIR$/../../examples/nrf51822/net</state>
-          <state>$PROJ_DIR$/../../examples/nrf51822/spi_master</state>
-          <state>$PROJ_DIR$/../../examples/nrf51822/w5500</state>
+          <state>$PROJ_DIR$/../../examples/nrf51822\</state>
+          <state>$PROJ_DIR$/../../examples/nrf51822/net\</state>
+          <state>$PROJ_DIR$/../../examples/nrf51822/spi_master\</state>
+          <state>$PROJ_DIR$/../../examples/nrf51822/w5500\</state>
           <state>$PROJ_DIR$/../../cpu/nrf51822\</state>
           <state>$PROJ_DIR$/../../cpu/nrf51822/nrf51822\</state>
           <state>$PROJ_DIR$/../../cpu/nrf51822/nrf51822/uart\</state>

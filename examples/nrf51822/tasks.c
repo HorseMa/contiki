@@ -70,7 +70,7 @@ void Hex2Str( const char *sSrc,  char *sDest, int nSrcLen )
 unsigned char tags_local[200][9];
 int tags_index = 0;
 //unsigned char packet[10];
-
+extern nrf_drv_wdt_channel_id m_channel_id;
 PROCESS_THREAD(led_process, ev, data)
 { 
   static struct etimer et_blink;
@@ -81,7 +81,10 @@ PROCESS_THREAD(led_process, ev, data)
 
   while(1)
   {
-    PROCESS_WAIT_EVENT();
+    dev_list_timer_update();
+    //nrf_drv_wdt_channel_feed(m_channel_id);
+    etimer_set(&et_blink, CLOCK_SECOND / 5);
+    PROCESS_WAIT_EVENT();  
   }  
   PROCESS_END();
 }
@@ -174,6 +177,7 @@ PROCESS_THREAD(ethernet_process, ev, data)
       }
       etimer_set(&et_ethernet, CLOCK_SECOND / 20);
       PROCESS_WAIT_EVENT();
+      loop = 0;
       while ( IINCHIP_READ(Sn_SR(SOCK_SERVER)) != SOCK_SYNSENT )
       {
         if(IINCHIP_READ(Sn_SR(SOCK_SERVER)) == SOCK_ESTABLISHED)
@@ -380,7 +384,8 @@ void uart_event_handle(app_uart_evt_t * p_event)
 {
   
 }
-extern nrf_drv_wdt_channel_id m_channel_id;
+
+static uint16 center_addr = 0xffff;
 PROCESS_THREAD(uartRecv_process, ev, data)
 { 
   static struct etimer et_blink;
@@ -401,11 +406,27 @@ PROCESS_THREAD(uartRecv_process, ev, data)
   uart_put_string("NRF TEST!");
   while(1)//Æ¥Åä²¨ÌØÂÊ
   {
-    dev_list_timer_update();
-    nrf_drv_wdt_channel_feed(m_channel_id);
-    nrf_gpio_pin_toggle(LED3);         // o¨¬¦Ì?¨¢¨¢
-    etimer_set(&et_blink, CLOCK_SECOND / 5);
-    PROCESS_WAIT_EVENT();             
+    if(adhocGetWorkMode() == WORK_MODE_CENTER)
+    {
+      nrf_gpio_pin_toggle(LED3);         // o¨¬¦Ì?¨¢¨¢
+      etimer_set(&et_blink, CLOCK_SECOND / 5);
+      PROCESS_WAIT_EVENT();             
+    }
+    else
+    {
+      if(center_addr == 0xffff)// offline
+      {
+        nrf_gpio_pin_toggle(LED3);         // o¨¬¦Ì?¨¢¨¢
+        etimer_set(&et_blink, CLOCK_SECOND / 5);
+        PROCESS_WAIT_EVENT();  
+      }
+      else// online
+      {
+        nrf_gpio_pin_toggle(LED3);         // o¨¬¦Ì?¨¢¨¢
+        etimer_set(&et_blink, CLOCK_SECOND / 1);
+        PROCESS_WAIT_EVENT();  
+      }
+    }
   }
   
   PROCESS_END();
@@ -540,7 +561,7 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
   static uint8 buf[64];
   pst_PkgFormart pstPkgFormart;
   pst_PkgFormart pstPkgFormarttx = (pst_PkgFormart)buf;
-  static uint16 center_addr = 0xffff;
+
   PROCESS_BEGIN();
   while(1)
   {
@@ -609,13 +630,18 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
           pstPkgFormarttx->cmd = enDataRsp;
           pstPkgFormarttx->dest_addr = center_addr;
           pstPkgFormarttx->src_addr = stDevCfg.dev_id;
-          DISABLE_INTERRUPTS();
+          //DISABLE_INTERRUPTS();
+          NVIC_DisableIRQ(RADIO_IRQn);
           get_tags_2_4(&pstPkgFormarttx->data[1],&pstPkgFormarttx->data[0],FIX_LEN);
-          ENABLE_INTERRUPTS();
+          //ENABLE_INTERRUPTS();
           if(pstPkgFormarttx->data[0])
           {
             vRadio_StartTx_Variable_Packet(stDevCfg.net_433_channel,buf,64);
             //PROCESS_WAIT_EVENT();
+          }
+          else
+          {
+            NVIC_EnableIRQ(RADIO_IRQn);
           }
           
         }
@@ -628,13 +654,17 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
         pstPkgFormarttx->cmd = enDataRsp;
         pstPkgFormarttx->dest_addr = center_addr;
         pstPkgFormarttx->src_addr = stDevCfg.dev_id;
-        DISABLE_INTERRUPTS();
+        //DISABLE_INTERRUPTS();
         get_tags_2_4(&pstPkgFormarttx->data[1],&pstPkgFormarttx->data[0],FIX_LEN);
-        ENABLE_INTERRUPTS();
+        //ENABLE_INTERRUPTS();
         if(pstPkgFormarttx->data[0])
         {
           vRadio_StartTx_Variable_Packet(stDevCfg.net_433_channel,buf,64);
           //PROCESS_WAIT_EVENT();
+        }
+        else
+        {
+          NVIC_EnableIRQ(RADIO_IRQn);
         }
       }
     }

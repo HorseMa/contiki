@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=-1729243088
+Checksum=-1786436551
 [CodeCoverage]
 Enabled=_ 0
 [Exceptions]
@@ -165,23 +165,6 @@ Fmt3={W}1:temp	4	0
 [Trace1]
 Enabled=0
 ShowSource=1
-[Log file]
-LoggingEnabled=_ 0
-LogFile=_ ""
-Category=_ 0
-[TermIOLog]
-LoggingEnabled=_ 0
-LogFile=_ ""
-[DriverProfiling]
-Enabled=0
-Mode=1
-Graph=0
-Symbiont=0
-Exclusions=
-[CallStackLog]
-Enabled=0
-[CallStackStripe]
-ShowTiming=1
 [Disassemble mode]
 mode=0
 [Breakpoints2]
@@ -199,18 +182,33 @@ Bp10=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.245.3" 0 0 1 "" 0 "" 0
 Bp11=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.266.11" 0 0 1 "" 0 "" 0
 Bp12=_ 0 "EMUL_CODE" "{}.20.3" 0 0 1 "" 0 "" 0
 Bp13=_ 0 "EMUL_CODE" "{}.53.5" 0 0 1 "" 0 "" 0
-Bp14=_ 0 "EMUL_CODE" "{$PROJ_DIR$\ad_hoc.c}.64.1" 0 0 1 "" 0 "" 0
-Bp15=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tags_manage.c}.30.7" 0 0 1 "" 0 "" 0
-Bp16=_ 0 "EMUL_CODE" "{$PROJ_DIR$\ad_hoc.c}.64.1" 0 0 1 "" 0 "" 0
-Bp17=_ 0 "EMUL_CODE" "{$PROJ_DIR$\ad_hoc.c}.64.1" 0 0 1 "" 0 "" 0
-Bp18=_ 0 "EMUL_CODE" "{$PROJ_DIR$\ad_hoc.c}.64.1" 0 0 1 "" 0 "" 0
-Bp19=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.333.1" 0 0 1 "" 0 "" 0
-Bp20=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.626.1" 0 0 1 "" 0 "" 0
-Bp21=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.626.5" 0 0 1 "" 0 "" 0
-Bp22=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.625.5" 0 0 1 "" 0 "" 0
-Bp23=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.333.3" 0 0 1 "" 0 "" 0
-Bp24=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.445.7" 0 0 1 "" 0 "" 0
-Count=25
+Bp14=_ 0 "EMUL_CODE" "{$PROJ_DIR$\ad_hoc.c}.65.1" 0 0 1 "" 0 "" 0
+Bp15=_ 0 "EMUL_CODE" "{$PROJ_DIR$\ad_hoc.c}.65.1" 0 0 1 "" 0 "" 0
+Bp16=_ 0 "EMUL_CODE" "{$PROJ_DIR$\ad_hoc.c}.65.1" 0 0 1 "" 0 "" 0
+Bp17=_ 0 "EMUL_CODE" "{$PROJ_DIR$\ad_hoc.c}.65.1" 0 0 1 "" 0 "" 0
+Bp18=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.639.13" 0 0 1 "" 0 "" 0
+Bp19=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.673.3" 0 0 1 "" 0 "" 0
+Bp20=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.197.11" 0 0 1 "" 0 "" 0
+Bp21=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.180.7" 0 0 1 "" 0 "" 0
+Bp22=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.181.7" 0 0 1 "" 0 "" 0
+Count=23
+[Log file]
+LoggingEnabled=_ 0
+LogFile=_ ""
+Category=_ 0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
 [Aliases]
 Count=0
 SuppressDialog=0
+[DriverProfiling]
+Enabled=0
+Mode=1
+Graph=0
+Symbiont=0
+Exclusions=
+[CallStackLog]
+Enabled=0
+[CallStackStripe]
+ShowTiming=1
