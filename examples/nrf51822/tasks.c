@@ -95,7 +95,7 @@ PROCESS_THREAD(ethernet_process, ev, data)
   static struct etimer et_ethernet;
   uint8_t dhcpret = 0;
   //static uint8_t localip[4] = {10,51,11,172};
-  uint8 ret;
+  static uint8 ret;
   uint16_t len = 0;
   static uint16_t loop = 0;
   
@@ -194,7 +194,14 @@ PROCESS_THREAD(ethernet_process, ev, data)
         loop ++;
         if(loop > 50)
         {
-          NVIC_SystemReset();
+          //NVIC_SystemReset();
+          nrf_gpio_pin_clear(W5500_RST);
+          etimer_set(&et_ethernet, CLOCK_SECOND / 100);
+          PROCESS_WAIT_EVENT();
+          nrf_gpio_pin_set(W5500_RST);
+          etimer_set(&et_ethernet, CLOCK_SECOND * 2);
+          PROCESS_WAIT_EVENT();
+          break;
         }
       }
       //ENABLE_INTERRUPTS();
