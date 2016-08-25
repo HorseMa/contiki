@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=-1786436551
+Checksum=-1783738936
 [CodeCoverage]
 Enabled=_ 0
 [Exceptions]
@@ -182,23 +182,18 @@ Bp10=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.245.3" 0 0 1 "" 0 "" 0
 Bp11=_ 0 "EMUL_CODE" "{\\vmware-host\Shared Folders}.266.11" 0 0 1 "" 0 "" 0
 Bp12=_ 0 "EMUL_CODE" "{}.20.3" 0 0 1 "" 0 "" 0
 Bp13=_ 0 "EMUL_CODE" "{}.53.5" 0 0 1 "" 0 "" 0
-Bp14=_ 0 "EMUL_CODE" "{$PROJ_DIR$\ad_hoc.c}.65.1" 0 0 1 "" 0 "" 0
-Bp15=_ 0 "EMUL_CODE" "{$PROJ_DIR$\ad_hoc.c}.65.1" 0 0 1 "" 0 "" 0
-Bp16=_ 0 "EMUL_CODE" "{$PROJ_DIR$\ad_hoc.c}.65.1" 0 0 1 "" 0 "" 0
-Bp17=_ 0 "EMUL_CODE" "{$PROJ_DIR$\ad_hoc.c}.65.1" 0 0 1 "" 0 "" 0
-Bp18=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.639.13" 0 0 1 "" 0 "" 0
-Bp19=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.673.3" 0 0 1 "" 0 "" 0
-Bp20=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.197.11" 0 0 1 "" 0 "" 0
-Bp21=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.180.7" 0 0 1 "" 0 "" 0
-Bp22=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.181.7" 0 0 1 "" 0 "" 0
-Count=23
+Bp14=_ 0 "EMUL_CODE" "{$PROJ_DIR$\ad_hoc.c}.64.1" 0 0 1 "" 0 "" 0
+Bp15=_ 0 "EMUL_CODE" "{$PROJ_DIR$\ad_hoc.c}.64.1" 0 0 1 "" 0 "" 0
+Bp16=_ 0 "EMUL_CODE" "{$PROJ_DIR$\ad_hoc.c}.64.1" 0 0 1 "" 0 "" 0
+Bp17=_ 0 "EMUL_CODE" "{$PROJ_DIR$\ad_hoc.c}.64.1" 0 0 1 "" 0 "" 0
+Bp18=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.651.13" 0 0 1 "" 0 "" 0
+Bp19=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.680.3" 0 0 1 "" 0 "" 0
+Bp20=_ 1 "EMUL_CODE" "{$PROJ_DIR$\tasks.c}.580.5" 0 0 1 "" 0 "" 0
+Count=21
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
 Category=_ 0
-[TermIOLog]
-LoggingEnabled=_ 0
-LogFile=_ ""
 [Aliases]
 Count=0
 SuppressDialog=0
@@ -212,3 +207,6 @@ Exclusions=
 Enabled=0
 [CallStackStripe]
 ShowTiming=1
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
