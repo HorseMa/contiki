@@ -255,9 +255,27 @@ PROCESS_THREAD(ethernet_process, ev, data)
           
           memcpy((uint8_t*)&stDevCfg,pkg->data,sizeof(st_DevCfg) - 2);
           stDevCfg.server_port = pkg->data[9] + (pkg->data[10] * 256);
+          stDevCfg.dev_id = pkg->data[0] + pkg->data[1] * 256;
+          stDevCfg.tx_gain = pkg->data[2];
+          stDevCfg.rx_gain = pkg->data[3];
+          stDevCfg.net_433_channel = pkg->data[4];
+          stDevCfg.server_ip[0] = pkg->data[5];
+          stDevCfg.server_ip[1] = pkg->data[6];
+          stDevCfg.server_ip[2] = pkg->data[7];
+          stDevCfg.server_ip[3] = pkg->data[8];
+          
+          stDevCfg.server_port = pkg->data[9] + pkg->data[10] * 256;
+          stDevCfg.tag_type = pkg->data[11];
+          stDevCfg.reserved1 = pkg->data[12] + pkg->data[13] * 256;
+          stDevCfg.reserved2 = pkg->data[14] + pkg->data[15] * 256;
+          
           memcpy(stDefaultCfg.server_ip,stDevCfg.server_ip,4);
           stDefaultCfg.server_port = stDevCfg.server_port;
           stDefaultCfg.dev_id = stDevCfg.dev_id;
+          //stDefaultCfg.dev_id = stDevCfg.dev_id;
+          //stDefaultCfg.dev_id = stDevCfg.dev_id;
+          //stDefaultCfg.dev_id = stDevCfg.dev_id;
+          //stDefaultCfg.dev_id = stDevCfg.dev_id;
           write_cfg();
           pkg->data[0] = 'o';
           pkg->data[1] = 'k';
