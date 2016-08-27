@@ -124,6 +124,8 @@ void set_default(void)
   uint8 sub[4]={255,255,255,0};
   uint8 gw[4]={10,51,11,1};
   uint8 dns[4]={8,8,8,8};
+  mac[4] = stDevCfg.dev_id >> 8;
+  mac[5] = stDevCfg.dev_id;
   memcpy(lip, stDefaultCfg.local_ip, 4);
   memcpy(sub, stDefaultCfg.sub, 4);
   memcpy(gw, stDefaultCfg.gw, 4);

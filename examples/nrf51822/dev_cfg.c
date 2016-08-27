@@ -59,6 +59,8 @@ void read_cfg(void)
     stDefaultCfg.local_ip[2] = 1;
     stDefaultCfg.local_ip[3] = 254;
     stDefaultCfg.local_port = 32100;
+    memcpy(stDevCfg.local_ip,stDefaultCfg.local_ip,4);
+    stDevCfg.local_port = stDefaultCfg.local_port;
     
     stDefaultCfg.sub[0] = 255;
     stDefaultCfg.sub[1] = 255;
@@ -90,6 +92,8 @@ void read_cfg(void)
     stDefaultCfg.local_ip[2] = 0;
     stDefaultCfg.local_ip[3] = 254;
     stDefaultCfg.local_port = 32100;
+    memcpy(stDevCfg.local_ip,stDefaultCfg.local_ip,4);
+    stDevCfg.local_port = stDefaultCfg.local_port;
     
     stDefaultCfg.sub[0] = 255;
     stDefaultCfg.sub[1] = 255;
@@ -104,7 +108,7 @@ void read_cfg(void)
     stDevCfg.server_ip[0] = 192;
     stDevCfg.server_ip[1] = 168;
     stDevCfg.server_ip[2] = 0;
-    stDevCfg.server_ip[3] = 113;
+    stDevCfg.server_ip[3] = 114;
     stDevCfg.server_port = 32500;
     
     stDevCfg.net_433_channel = 0x01;

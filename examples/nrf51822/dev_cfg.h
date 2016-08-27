@@ -12,6 +12,8 @@
    uint8 tag_type;
    uint16 reserved1;
    uint16 reserved2;
+   uint8 local_ip[4];
+   uint16 local_port;
  }st_DevCfg,*pst_DevCfg;// 总大小保证是4的倍数
 extern st_DevCfg stDevCfg;
 
