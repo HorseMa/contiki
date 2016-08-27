@@ -96,7 +96,7 @@ PROCESS_THREAD(ethernet_process, ev, data)
   uint8_t dhcpret = 0;
   //static uint8_t localip[4] = {10,51,11,172};
   static uint8 ret;
-  uint16_t len = 0;
+  static uint16_t len = 0;
   static uint16_t loop = 0;
   
   static pst_EthPkgFormat pkg;
@@ -235,6 +235,12 @@ PROCESS_THREAD(ethernet_process, ev, data)
           continue;
         }
         checksum = 0;
+        uint8 array[27] = {0x02 ,0x03 ,0x04 ,0x05 ,0x17 ,0x00 ,0x58 ,0x00 ,0x43 ,0x01 ,0x57 ,0x00 ,0x01 ,0x01 ,0x01 ,0xC0 ,0xA8 ,0x00 ,0x71 ,0xF4 ,0x7E ,0x01 ,0x00 ,0x00 ,0x00,0x00,0x66};
+        for(loop = 0;loop < 26;loop ++)
+        {
+          checksum += array[loop];
+        }
+        checksum = 0;
         for(loop = 0;loop < pkg->len - 1 + 4;loop ++)
         {
           checksum += *((uint8_t*)pkg + loop);
@@ -246,13 +252,15 @@ PROCESS_THREAD(ethernet_process, ev, data)
         if(pkg->cmd == 0x43)//ÅäÖÃ²ÎÊý
         {
           pkg->sn = global_sn ++;
+          
           memcpy((uint8_t*)&stDevCfg,pkg->data,sizeof(st_DevCfg) - 2);
+          stDevCfg.server_port = pkg->data[9] + (pkg->data[10] * 256);
           memcpy(stDefaultCfg.server_ip,stDevCfg.server_ip,4);
           stDefaultCfg.server_port = stDevCfg.server_port;
           stDefaultCfg.dev_id = stDevCfg.dev_id;
           write_cfg();
           pkg->data[0] = 'o';
-          pkg->data[0] = 'k';
+          pkg->data[1] = 'k';
           pkg->len = 9;
           checksum = 0;
           for(loop = 0;loop < pkg->len - 1 + 4;loop++)

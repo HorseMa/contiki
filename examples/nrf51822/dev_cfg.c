@@ -53,7 +53,7 @@ void read_cfg(void)
     stDevCfg.dev_id = 0x58;
     stDevCfg.tag_type = 1;
     stDefaultCfg.dev_id = 0x58;
-#if 1
+#if 0
     stDefaultCfg.local_ip[0] = 192;
     stDefaultCfg.local_ip[1] = 168;
     stDefaultCfg.local_ip[2] = 1;
@@ -87,8 +87,8 @@ void read_cfg(void)
 #else
     stDefaultCfg.local_ip[0] = 192;
     stDefaultCfg.local_ip[1] = 168;
-    stDefaultCfg.local_ip[2] = 2;
-    stDefaultCfg.local_ip[3] = 120;
+    stDefaultCfg.local_ip[2] = 0;
+    stDefaultCfg.local_ip[3] = 254;
     stDefaultCfg.local_port = 32100;
     
     stDefaultCfg.sub[0] = 255;
@@ -98,13 +98,13 @@ void read_cfg(void)
     
     stDefaultCfg.gw[0] = 192;
     stDefaultCfg.gw[1] = 168;
-    stDefaultCfg.gw[2] = 2;
+    stDefaultCfg.gw[2] = 0;
     stDefaultCfg.gw[3] = 1;
     
     stDevCfg.server_ip[0] = 192;
     stDevCfg.server_ip[1] = 168;
-    stDevCfg.server_ip[2] = 2;
-    stDevCfg.server_ip[3] = 106;
+    stDevCfg.server_ip[2] = 0;
+    stDevCfg.server_ip[3] = 113;
     stDevCfg.server_port = 32500;
     
     stDevCfg.net_433_channel = 0x01;
