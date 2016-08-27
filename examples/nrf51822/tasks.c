@@ -77,7 +77,18 @@ PROCESS_THREAD(led_process, ev, data)
   int i = 0;
   PROCESS_BEGIN();
   ev_2_4g_rcv = process_alloc_event();
-  radio_configure();
+  if(stDevCfg.tag_type == 1)
+  {
+    radio_configure();
+  }
+  else if(stDevCfg.tag_type == 2)
+  {
+    radio_configure2();
+  }
+  else
+  {
+    
+  }
 
   while(1)
   {

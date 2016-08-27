@@ -51,7 +51,7 @@ void read_cfg(void)
   //if(loop >= 1024)//初次上电，需要写入默认值
   {
     stDevCfg.dev_id = 0x58;
-    stDevCfg.tag_type = 1;
+    stDevCfg.tag_type = 2;
     stDefaultCfg.dev_id = 0x58;
 #if 0
     stDefaultCfg.local_ip[0] = 192;

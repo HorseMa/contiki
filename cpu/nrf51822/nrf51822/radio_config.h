@@ -13,5 +13,5 @@
 #define RADIO_CONFIG_H
 
 void radio_configure(void);
-
+void radio_configure2(void);
 #endif
