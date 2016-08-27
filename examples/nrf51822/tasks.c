@@ -246,8 +246,8 @@ PROCESS_THREAD(ethernet_process, ev, data)
           continue;
         }
         checksum = 0;
-        uint8 array[33] = {0x02 ,0x03 ,0x04 ,0x05 ,0x1d ,0x00 ,0x58 ,0x00 ,0x43 ,0x01 ,0x57 ,0x00 ,0x01 ,0x01 ,0x01 ,0xC0 ,0xA8 ,0x00 ,0x72 ,0xF4 ,0x7E ,0x01 ,0x00 ,0x00 ,0x00,0x00,0xC0 ,0xA8 ,0x00 ,0x70 ,0xF4 ,0x7E,0xB8};
-        for(loop = 0;loop < 32;loop ++)
+        uint8 array[31] = {0x02 ,0x03 ,0x04 ,0x05 ,0x1b ,0x00 ,0x58 ,0x00 ,0x43 ,0x01 ,0x57 ,0x00 ,0x01 ,0x01 ,0x01 ,0xC0 ,0xA8 ,0x00 ,0x71 ,0xF4 ,0x7E ,0xC0 ,0xA8 ,0x00 ,0x72 ,0xF4 ,0x7E, 0x02, 0x00, 0x00 ,0xB8};
+        for(loop = 0;loop < 30;loop ++)
         {
           checksum += array[loop];
         }
@@ -270,21 +270,21 @@ PROCESS_THREAD(ethernet_process, ev, data)
           stDevCfg.tx_gain = pkg->data[2];
           stDevCfg.rx_gain = pkg->data[3];
           stDevCfg.net_433_channel = pkg->data[4];
-          stDevCfg.server_ip[0] = pkg->data[5];
-          stDevCfg.server_ip[1] = pkg->data[6];
-          stDevCfg.server_ip[2] = pkg->data[7];
-          stDevCfg.server_ip[3] = pkg->data[8];
+          stDevCfg.server_ip[0] = pkg->data[11];
+          stDevCfg.server_ip[1] = pkg->data[12];
+          stDevCfg.server_ip[2] = pkg->data[13];
+          stDevCfg.server_ip[3] = pkg->data[14];
           
-          stDevCfg.server_port = pkg->data[9] + pkg->data[10] * 256;
-          stDevCfg.tag_type = pkg->data[11];
-          stDevCfg.reserved1 = pkg->data[12] + pkg->data[13] * 256;
-          stDevCfg.reserved2 = pkg->data[14] + pkg->data[15] * 256;
+          stDevCfg.server_port = pkg->data[15] + pkg->data[16] * 256;
+          stDevCfg.tag_type = pkg->data[17];
+          stDevCfg.reserved1 = pkg->data[18] + pkg->data[19] * 256;
+          //stDevCfg.reserved2 = pkg->data[14] + pkg->data[15] * 256;
           
-          stDevCfg.local_ip[0] = pkg->data[16];
-          stDevCfg.local_ip[1] = pkg->data[17];
-          stDevCfg.local_ip[2] = pkg->data[18];
-          stDevCfg.local_ip[3] = pkg->data[19];
-          stDevCfg.local_port = pkg->data[20] + pkg->data[21] * 256;
+          stDevCfg.local_ip[0] = pkg->data[5];
+          stDevCfg.local_ip[1] = pkg->data[6];
+          stDevCfg.local_ip[2] = pkg->data[7];
+          stDevCfg.local_ip[3] = pkg->data[8];
+          stDevCfg.local_port = pkg->data[9] + pkg->data[10] * 256;
           
           memcpy(stDefaultCfg.local_ip,stDevCfg.local_ip,4);
           memcpy(stDefaultCfg.server_ip,stDevCfg.server_ip,4);
