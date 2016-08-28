@@ -249,10 +249,10 @@ void RADIO_IRQHandler(void)
         //*((volatile uint32_t *)((uint8_t *)NRF_TIMERx + (uint32_t)timer_event)) = 0x0UL;
     if (NRF_RADIO->CRCSTATUS == 1U)
     {
-      while(!NRF_RADIO->EVENTS_RSSIEND);
+      /*while(!NRF_RADIO->EVENTS_RSSIEND);
       packet[0] = NRF_RADIO->RSSISAMPLE;
       packet[1] = NRF_RADIO->RSSISAMPLE >> 8;
-      NRF_RADIO->EVENTS_RSSIEND = 0;
+      NRF_RADIO->EVENTS_RSSIEND = 0;*/
       //memcpy(&packet[2],&packet[3],7);
       packet[2] = packet[3];
       packet[3] = packet[4];
@@ -269,6 +269,12 @@ void RADIO_IRQHandler(void)
     }
     NRF_RADIO->EVENTS_END = 0U;  					 // ?¨¢¨º?¨º??t			
     NRF_RADIO->TASKS_START = 1U;           // ?a¨º?
+  }
+  if(NRF_RADIO->EVENTS_RSSIEND)
+  {
+      packet[0] = NRF_RADIO->RSSISAMPLE;
+      packet[1] = NRF_RADIO->RSSISAMPLE >> 8;
+      NRF_RADIO->EVENTS_RSSIEND = 0;
   }
   ENERGEST_OFF(ENERGEST_TYPE_IRQ);
   ENABLE_INTERRUPTS();

@@ -206,12 +206,12 @@ PROCESS_THREAD(ethernet_process, ev, data)
         if(loop > 50)
         {
           //NVIC_SystemReset();
-          nrf_gpio_pin_clear(W5500_RST);
+          /*nrf_gpio_pin_clear(W5500_RST);
           etimer_set(&et_ethernet, CLOCK_SECOND / 100);
           PROCESS_WAIT_EVENT();
           nrf_gpio_pin_set(W5500_RST);
           etimer_set(&et_ethernet, CLOCK_SECOND * 2);
-          PROCESS_WAIT_EVENT();
+          PROCESS_WAIT_EVENT();*/
           break;
         }
       }
