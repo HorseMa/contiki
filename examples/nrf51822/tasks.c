@@ -241,18 +241,16 @@ PROCESS_THREAD(ethernet_process, ev, data)
       {
         memset(socket_buf,0,2048);
         recv(SOCK_SERVER,socket_buf,len);/*W5500????Sever???*/
-        if(pkg->head != 0x05040302)
+        if(pkg->head != 0xaa55)
         {
           continue;
         }
-        checksum = 0;
-        uint8 array[31] = {0x02 ,0x03 ,0x04 ,0x05 ,0x1b ,0x00 ,0x58 ,0x00 ,0x43 ,0x01 ,0x57 ,0x00 ,0x01 ,0x01 ,0x01 ,0xC0 ,0xA8 ,0x00 ,0x71 ,0xF4 ,0x7E ,0xC0 ,0xA8 ,0x00 ,0x72 ,0xF4 ,0x7E, 0x02, 0x00, 0x00 ,0xB8};
-        for(loop = 0;loop < 30;loop ++)
+        if(pkg->dev_id != stDefaultCfg.dev_id)
         {
-          checksum += array[loop];
+            continue;
         }
         checksum = 0;
-        for(loop = 0;loop < pkg->len - 1 + 4;loop ++)
+        for(loop = 0;loop < pkg->len - 1 + 2;loop ++)
         {
           checksum += *((uint8_t*)pkg + loop);
         }
@@ -260,96 +258,89 @@ PROCESS_THREAD(ethernet_process, ev, data)
         {
           continue;
         }
-        if(pkg->cmd == 0x43)//配置参数
+        if(pkg->cmd == 0x03)//配置参数
         {
           pkg->sn = global_sn ++;
-          
-          memcpy((uint8_t*)&stDevCfg,pkg->data,sizeof(st_DevCfg) - 2);
-          stDevCfg.server_port = pkg->data[9] + (pkg->data[10] * 256);
-          stDevCfg.dev_id = pkg->data[0] + pkg->data[1] * 256;
-          stDevCfg.tx_gain = pkg->data[2];
-          stDevCfg.rx_gain = pkg->data[3];
-          stDevCfg.net_433_channel = pkg->data[4];
-          stDevCfg.server_ip[0] = pkg->data[11];
-          stDevCfg.server_ip[1] = pkg->data[12];
-          stDevCfg.server_ip[2] = pkg->data[13];
-          stDevCfg.server_ip[3] = pkg->data[14];
-          
-          stDevCfg.server_port = pkg->data[15] + pkg->data[16] * 256;
-          stDevCfg.tag_type = pkg->data[17];
-          stDevCfg.reserved1 = pkg->data[18] + pkg->data[19] * 256;
-          //stDevCfg.reserved2 = pkg->data[14] + pkg->data[15] * 256;
-          
-          stDevCfg.local_ip[0] = pkg->data[5];
-          stDevCfg.local_ip[1] = pkg->data[6];
-          stDevCfg.local_ip[2] = pkg->data[7];
-          stDevCfg.local_ip[3] = pkg->data[8];
-          stDevCfg.local_port = pkg->data[9] + pkg->data[10] * 256;
-          
-          memcpy(stDefaultCfg.local_ip,stDevCfg.local_ip,4);
-          memcpy(stDefaultCfg.server_ip,stDevCfg.server_ip,4);
-          stDefaultCfg.server_port = stDevCfg.server_port;
-          stDefaultCfg.local_port = stDevCfg.local_port;
-          stDefaultCfg.dev_id = stDevCfg.dev_id;
-          //stDefaultCfg.dev_id = stDevCfg.dev_id;
-          //stDefaultCfg.dev_id = stDevCfg.dev_id;
-          //stDefaultCfg.dev_id = stDevCfg.dev_id;
-          //stDefaultCfg.dev_id = stDevCfg.dev_id;
+          pkg->dev_id = stDefaultCfg.dev_id;
+          stDevCfg.rx_gain = pkg->data[0];
+          stDevCfg.local_ip[0] = pkg->data[1];
+          stDevCfg.local_ip[1] = pkg->data[2];
+          stDevCfg.local_ip[2] = pkg->data[3];
+          stDevCfg.local_ip[3] = pkg->data[4];
+          stDevCfg.local_port = pkg->data[5] + (pkg->data[6] * 256);
+          stDevCfg.server_ip[0] = pkg->data[7];
+          stDevCfg.server_ip[1] = pkg->data[8];
+          stDevCfg.server_ip[2] = pkg->data[9];
+          stDevCfg.server_ip[3] = pkg->data[10];
+          stDevCfg.server_port = pkg->data[11] + (pkg->data[12] * 256);
+          stDevCfg.tag_type = pkg->data[13];
+          stDevCfg.reserved1 = pkg->data[14] + pkg->data[15] * 256;
+
           write_cfg();
           pkg->data[0] = 'o';
           pkg->data[1] = 'k';
-          pkg->len = 9;
+          pkg->len = 7 + 2;
           checksum = 0;
-          for(loop = 0;loop < pkg->len - 1 + 4;loop++)
+          for(loop = 0;loop < pkg->len - 1 + 2;loop++)
           {
             checksum += *((uint8_t*)pkg + loop);
           }
           *((uint8_t*)pkg + loop) = checksum;
-          send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 4);
+          send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 2);
         }
-        if(pkg->cmd == 0x44)//读取参数
+        if(pkg->cmd == 0x04)//读取参数
         {
           pkg->sn = global_sn ++;
-          memcpy(pkg->data,(uint8_t*)&stDevCfg,sizeof(st_DevCfg) - 2);
-          pkg->len = 7 + sizeof(st_DevCfg) - 2;
+          pkg->dev_id = stDefaultCfg.dev_id;
+          memcpy(pkg->data,(uint8_t*)&stDevCfg,sizeof(st_DevCfg));
+          pkg->len = 7 + sizeof(st_DevCfg);
           checksum = 0;
-          for(loop = 0;loop < pkg->len - 1 + 4;loop++)
+          for(loop = 0;loop < pkg->len - 1 + 2;loop++)
           {
             checksum += *((uint8_t*)pkg + loop);
           }
           *((uint8_t*)pkg + loop) = checksum;
-          send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 4);
+          send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 2);
 
         }
-        if(pkg->cmd == 0x45)//控制指令
+        if(pkg->cmd == 0x05)//控制指令
         {
           pkg->sn = global_sn ++;
+          pkg->dev_id = stDefaultCfg.dev_id;
           pkg->data[0] = 'o';
-          pkg->data[0] = 'k';
-          pkg->len = 9;
+          pkg->data[1] = 'k';
+          pkg->len = 7 + 2;
           checksum = 0;
-          for(loop = 0;loop < pkg->len - 1 + 4;loop++)
+          for(loop = 0;loop < pkg->len - 1 + 2;loop++)
           {
             checksum += *((uint8_t*)pkg + loop);
           }
           *((uint8_t*)pkg + loop) = checksum;
-          send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 4);
+          send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 2);
         }
-        if(pkg->cmd == 0x46)//恢复出厂设置
+        if(pkg->cmd == 0x06)//恢复出厂设置
         {
           pkg->sn = global_sn ++;
+          pkg->dev_id = stDefaultCfg.dev_id;
           pkg->data[0] = 'o';
-          pkg->data[0] = 'k';
-          pkg->len = 9;
+          pkg->data[1] = 'k';
+          pkg->len = 7 + 2;
           checksum = 0;
-          for(loop = 0;loop < pkg->len - 1 + 4;loop++)
+          for(loop = 0;loop < pkg->len - 1 + 2;loop++)
           {
             checksum += *((uint8_t*)pkg + loop);
           }
           *((uint8_t*)pkg + loop) = checksum;
-          send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 4);
+          send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 2);
           earase_cfg();
-          read_cfg();
+          stDevCfg.rx_gain = stDefaultCfg.rx_gain;
+          memcpy(stDevCfg.local_ip,stDefaultCfg.local_ip,4);
+          stDevCfg.local_port = stDefaultCfg.local_port;
+          memcpy(stDevCfg.server_ip,stDefaultCfg.server_ip,4);
+          stDevCfg.server_port = stDefaultCfg.server_port;
+          stDevCfg.tag_type = stDefaultCfg.tag_type;
+          stDevCfg.reserved1 = 0;
+          write_cfg();
         }
       }
     }
@@ -507,7 +498,7 @@ PROCESS_THREAD(si4463_center_process, ev, data)
       etimer_set(&et_blink, CLOCK_SECOND / 1);
       PROCESS_WAIT_EVENT();
     }
-    vRadio_StartRX(0);
+    vRadio_StartRX(10);
     funBeaconSend(buf);
     etimer_set(&et_blink, CLOCK_SECOND / 5);
     PROCESS_WAIT_EVENT();
@@ -530,7 +521,7 @@ PROCESS_THREAD(si4463_center_process, ev, data)
       }
       PROCESS_WAIT_EVENT();
     }
-    vRadio_StartRX(stDevCfg.net_433_channel);
+    vRadio_StartRX(channel_433m);
     while(1)
     {
       
@@ -622,7 +613,7 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
       etimer_set(&et_blink, CLOCK_SECOND / 5);
       PROCESS_WAIT_EVENT();
     }
-    vRadio_StartRX(0);
+    vRadio_StartRX(10);
     PROCESS_WAIT_EVENT();
     if(ev == ev_433_rx_over)
     {
@@ -654,14 +645,14 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
         pstPkgFormart = (pst_PkgFormart)data;
         if((pstPkgFormart->cmd == enJoinRsp) && (pstPkgFormart->dest_addr == stDevCfg.dev_id))
         {
-          stDevCfg.net_433_channel = pstPkgFormart->data[0];
+          channel_433m = pstPkgFormart->data[0];
           write_cfg();
-          //vRadio_StartRX(stDevCfg.net_433_channel);
+          //vRadio_StartRX(channel_433m);
           center_addr = pstPkgFormart->src_addr;
         }
       }
     }
-    vRadio_StartRX(stDevCfg.net_433_channel);
+    vRadio_StartRX(channel_433m);
     etimer_set(&et_blink, CLOCK_SECOND * 30);
     while(center_addr != 0xffff)
     {
@@ -688,7 +679,7 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
           //ENABLE_INTERRUPTS();
           if(pstPkgFormarttx->data[0])
           {
-            vRadio_StartTx_Variable_Packet(stDevCfg.net_433_channel,buf,64);
+            vRadio_StartTx_Variable_Packet(channel_433m,buf,64);
             //PROCESS_WAIT_EVENT();
           }
           else
@@ -711,7 +702,7 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
         //ENABLE_INTERRUPTS();
         if(pstPkgFormarttx->data[0])
         {
-          vRadio_StartTx_Variable_Packet(stDevCfg.net_433_channel,buf,64);
+          vRadio_StartTx_Variable_Packet(channel_433m,buf,64);
           //PROCESS_WAIT_EVENT();
         }
         else

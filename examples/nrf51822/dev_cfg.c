@@ -5,6 +5,7 @@
 static uint32 pg_size;
 static uint32 pg_num;  // Use last page in flash
 uint32* addr;
+uint8 channel_433m;
 st_DevCfg stDevCfg;
 st_DefaultCfg stDefaultCfg;
 static uint8 temp[1024];
@@ -35,95 +36,61 @@ void read_cfg(void)
   memset(temp,1,1024);
   //ble_flash_page_erase(pg_num);
   ble_flash_page_read(pg_num,(uint32_t*)temp,(uint8_t*)&count);
-  //memcpy(temp,(uint8*)addr,1024);
-  /*for(loop = 0;loop < 1024;loop ++)
-  {
-    if(temp[loop] != 0xff)
-    {
-      break;
-    }
-  }*/
-  //pstDevCfg = (pst_DevCfg)addr;
-  //pstDefaultCfg = (pst_DefaultCfg)((uint8*)temp + sizeof(st_DevCfg));
   memcpy((uint8_t*)&stDevCfg,(uint8_t*)temp,sizeof(st_DevCfg));
   memcpy((uint8_t*)&stDefaultCfg,(uint8*)temp + sizeof(st_DevCfg),sizeof(st_DefaultCfg));
   if(count == 0)
-  //if(loop >= 1024)//初次上电，需要写入默认值
   {
-    stDevCfg.dev_id = 0x58;
-    stDevCfg.tag_type = 2;
     stDefaultCfg.dev_id = 0x58;
+    stDefaultCfg.rx_gain = 0;
 #if 0
     stDefaultCfg.local_ip[0] = 192;
     stDefaultCfg.local_ip[1] = 168;
     stDefaultCfg.local_ip[2] = 1;
     stDefaultCfg.local_ip[3] = 254;
     stDefaultCfg.local_port = 32100;
-    memcpy(stDevCfg.local_ip,stDefaultCfg.local_ip,4);
-    stDevCfg.local_port = stDefaultCfg.local_port;
-    
     stDefaultCfg.sub[0] = 255;
     stDefaultCfg.sub[1] = 255;
     stDefaultCfg.sub[2] = 255;
-    stDefaultCfg.sub[3] = 0;
-    
+    stDefaultCfg.sub[3] = 0;    
     stDefaultCfg.gw[0] = 192;
     stDefaultCfg.gw[1] = 168;
     stDefaultCfg.gw[2] = 1;
     stDefaultCfg.gw[3] = 1;
-    
-    stDevCfg.server_ip[0] = 192;
-    stDevCfg.server_ip[1] = 168;
-    stDevCfg.server_ip[2] = 1;
-    stDevCfg.server_ip[3] = 253;
-    stDevCfg.server_port = 32500;
-    
-    stDevCfg.net_433_channel = 0x01;
-    
-    stDefaultCfg.server_ip[0] = stDevCfg.server_ip[0];
-    stDefaultCfg.server_ip[1] = stDevCfg.server_ip[1];
-    stDefaultCfg.server_ip[2] = stDevCfg.server_ip[2];
-    stDefaultCfg.server_ip[3] = stDevCfg.server_ip[3];
-    stDefaultCfg.server_port = stDevCfg.server_port;
-    
+    stDefaultCfg.server_ip[0] = 192;
+    stDefaultCfg.server_ip[1] = 168;
+    stDefaultCfg.server_ip[2] = 1;
+    stDefaultCfg.server_ip[3] = 253;
+    stDefaultCfg.server_port = 32500;
+    stDefaultCfg.tag_type = 2;
 #else
     stDefaultCfg.local_ip[0] = 192;
     stDefaultCfg.local_ip[1] = 168;
-    stDefaultCfg.local_ip[2] = 0;
+    stDefaultCfg.local_ip[2] = 1;
     stDefaultCfg.local_ip[3] = 254;
     stDefaultCfg.local_port = 32100;
-    memcpy(stDevCfg.local_ip,stDefaultCfg.local_ip,4);
-    stDevCfg.local_port = stDefaultCfg.local_port;
-    
     stDefaultCfg.sub[0] = 255;
     stDefaultCfg.sub[1] = 255;
     stDefaultCfg.sub[2] = 255;
-    stDefaultCfg.sub[3] = 0;
-    
+    stDefaultCfg.sub[3] = 0;    
     stDefaultCfg.gw[0] = 192;
     stDefaultCfg.gw[1] = 168;
-    stDefaultCfg.gw[2] = 0;
+    stDefaultCfg.gw[2] = 1;
     stDefaultCfg.gw[3] = 1;
-    
-    stDevCfg.server_ip[0] = 192;
-    stDevCfg.server_ip[1] = 168;
-    stDevCfg.server_ip[2] = 0;
-    stDevCfg.server_ip[3] = 114;
-    stDevCfg.server_port = 32500;
-    
-    stDevCfg.net_433_channel = 0x01;
-    
-    stDefaultCfg.server_ip[0] = stDevCfg.server_ip[0];
-    stDefaultCfg.server_ip[1] = stDevCfg.server_ip[1];
-    stDefaultCfg.server_ip[2] = stDevCfg.server_ip[2];
-    stDefaultCfg.server_ip[3] = stDevCfg.server_ip[3];
-    stDefaultCfg.server_port = stDevCfg.server_port;
-
+    stDefaultCfg.server_ip[0] = 192;
+    stDefaultCfg.server_ip[1] = 168;
+    stDefaultCfg.server_ip[2] = 1;
+    stDefaultCfg.server_ip[3] = 253;
+    stDefaultCfg.server_port = 32500;
+    stDefaultCfg.tag_type = 2;
 #endif
-
-
+    stDevCfg.rx_gain = stDefaultCfg.rx_gain;
+    memcpy(stDevCfg.local_ip,stDefaultCfg.local_ip,4);
+    stDevCfg.local_port = stDefaultCfg.local_port;
+    memcpy(stDevCfg.server_ip,stDefaultCfg.server_ip,4);
+    stDevCfg.server_port = stDefaultCfg.server_port;
+    stDevCfg.tag_type = stDefaultCfg.tag_type;
+    stDevCfg.reserved1 = 0;
     write_cfg();
   }
-  //pstDevCfg = (pst_DevCfg)temp;
-  //pstDefaultCfg = (pst_DefaultCfg)(temp + sizeof(st_DevCfg));
+  channel_433m = stDefaultCfg.dev_id % 10;
 }
