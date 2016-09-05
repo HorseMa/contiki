@@ -34,15 +34,15 @@ void read_cfg(void)
   pst_DevCfg pstDevCfg;
   pst_DefaultCfg pstDefaultCfg;
   memset(temp,1,1024);
-  ble_flash_page_erase(pg_num);
+  //ble_flash_page_erase(pg_num);
   ble_flash_page_read(pg_num,(uint32_t*)temp,(uint8_t*)&count);
   memcpy((uint8_t*)&stDevCfg,(uint8_t*)temp,sizeof(st_DevCfg));
   memcpy((uint8_t*)&stDefaultCfg,(uint8*)temp + sizeof(st_DevCfg),sizeof(st_DefaultCfg));
   if(count == 0)
   {
-    stDefaultCfg.dev_id = 0x57;
+    stDefaultCfg.dev_id = 0x58;
     stDefaultCfg.rx_gain = 0;
-#if 0
+#if 1
     stDefaultCfg.local_ip[0] = 192;
     stDefaultCfg.local_ip[1] = 168;
     stDefaultCfg.local_ip[2] = 1;
