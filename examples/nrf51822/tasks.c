@@ -389,8 +389,8 @@ PROCESS_THREAD(data_report_process, ev, data)
     PROCESS_WAIT_EVENT();
     if(ev == PROCESS_EVENT_TIMER)
     {
-      pkg->head = 0x05040302;
-      pkg->dev_id = stDevCfg.dev_id;
+      pkg->head = 0xaa55;
+      pkg->dev_id = stDefaultCfg.dev_id;
       pkg->sn = global_sn ++;
       pkg->cmd = 0x42;
       pkg->len = 7;
@@ -534,8 +534,8 @@ PROCESS_THREAD(si4463_center_process, ev, data)
         if(pkg->len > 0)
         {
           pkg->len += (7 + 1);
-          pkg->head = 0x05040302;
-          pkg->dev_id = stDevCfg.dev_id;
+          pkg->head = 0xaa55;
+          pkg->dev_id = stDefaultCfg.dev_id;
           pkg->sn = global_sn ++;
           pkg->cmd = 0x41;
           checksum = 0;
@@ -564,10 +564,10 @@ PROCESS_THREAD(si4463_center_process, ev, data)
           if(pkg->len > 0)
           {
             pkg->len += (7 + 1);
-            pkg->head = 0x05040302;
+            pkg->head = 0xaa55;
             pkg->dev_id = dev_id;
             pkg->sn = global_sn ++;
-            pkg->cmd = 0x41;
+            pkg->cmd = 0x01;
             checksum = 0;
             for(loop = 0;loop < pkg->len - 1 + 4;loop++)
             {
@@ -643,7 +643,7 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
       if(ev == ev_433_rx_over)
       {
         pstPkgFormart = (pst_PkgFormart)data;
-        if((pstPkgFormart->cmd == enJoinRsp) && (pstPkgFormart->dest_addr == stDevCfg.dev_id))
+        if((pstPkgFormart->cmd == enJoinRsp) && (pstPkgFormart->dest_addr == stDefaultCfg.dev_id))
         {
           channel_433m = pstPkgFormart->data[0];
           write_cfg();
@@ -665,14 +665,14 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
       if(ev == ev_433_rx_over)
       {
         pstPkgFormart = (pst_PkgFormart)data;
-        if((pstPkgFormart->cmd == enDataReq) && (pstPkgFormart->dest_addr == stDevCfg.dev_id) && (pstPkgFormart->src_addr == center_addr))
+        if((pstPkgFormart->cmd == enDataReq) && (pstPkgFormart->dest_addr == stDefaultCfg.dev_id) && (pstPkgFormart->src_addr == center_addr))
         {
           //etimer_set(&et_blink, CLOCK_SECOND * 30);
           etimer_restart(&et_blink);
           pstPkgFormarttx = (pst_PkgFormart)buf;
           pstPkgFormarttx->cmd = enDataRsp;
           pstPkgFormarttx->dest_addr = center_addr;
-          pstPkgFormarttx->src_addr = stDevCfg.dev_id;
+          pstPkgFormarttx->src_addr = stDefaultCfg.dev_id;
           //DISABLE_INTERRUPTS();
           NVIC_DisableIRQ(RADIO_IRQn);
           get_tags_2_4(&pstPkgFormarttx->data[1],&pstPkgFormarttx->data[0],FIX_LEN);
@@ -696,7 +696,7 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
         pstPkgFormarttx = (pst_PkgFormart)buf;
         pstPkgFormarttx->cmd = enDataRsp;
         pstPkgFormarttx->dest_addr = center_addr;
-        pstPkgFormarttx->src_addr = stDevCfg.dev_id;
+        pstPkgFormarttx->src_addr = stDefaultCfg.dev_id;
         //DISABLE_INTERRUPTS();
         get_tags_2_4(&pstPkgFormarttx->data[1],&pstPkgFormarttx->data[0],FIX_LEN);
         //ENABLE_INTERRUPTS();
