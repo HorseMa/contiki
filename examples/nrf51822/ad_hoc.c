@@ -35,7 +35,7 @@ void funJoinRspSend(uint8 *buf,uint16 dev_id)
   pstPkgFormarttx->cmd = enJoinRsp;
   pstPkgFormarttx->src_addr = stDefaultCfg.dev_id;
   pstPkgFormarttx->dest_addr = dev_id;
-  pstPkgFormarttx->data[0] = channel_433m;
+  pstPkgFormarttx->data[0] = stDefaultCfg.dev_id % 10;
   vRadio_StartTx_Variable_Packet(10,buf,64);
 }
 

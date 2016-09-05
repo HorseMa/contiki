@@ -392,15 +392,15 @@ PROCESS_THREAD(data_report_process, ev, data)
       pkg->head = 0xaa55;
       pkg->dev_id = stDefaultCfg.dev_id;
       pkg->sn = global_sn ++;
-      pkg->cmd = 0x42;
+      pkg->cmd = 0x02;
       pkg->len = 7;
       checksum = 0;
-      for(loop = 0;loop < pkg->len - 1 + 4;loop++)
+      for(loop = 0;loop < pkg->len - 1 + 2;loop++)
       {
         checksum += *((uint8_t*)pkg + loop);
       }
       *((uint8_t*)pkg + loop) = checksum;
-      send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 4);
+      send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 2);
     }
     else
     {
@@ -569,12 +569,12 @@ PROCESS_THREAD(si4463_center_process, ev, data)
             pkg->sn = global_sn ++;
             pkg->cmd = 0x01;
             checksum = 0;
-            for(loop = 0;loop < pkg->len - 1 + 4;loop++)
+            for(loop = 0;loop < pkg->len - 1 + 2;loop++)
             {
               checksum += *((uint8_t*)pkg + loop);
             }
             *((uint8_t*)pkg + loop) = checksum;
-            send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 4);
+            send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 2);
             process_post(&data_report_process,ev_data_report_start,NULL);
           }
           break;
@@ -646,7 +646,7 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
         if((pstPkgFormart->cmd == enJoinRsp) && (pstPkgFormart->dest_addr == stDefaultCfg.dev_id))
         {
           channel_433m = pstPkgFormart->data[0];
-          write_cfg();
+          //write_cfg();
           //vRadio_StartRX(channel_433m);
           center_addr = pstPkgFormart->src_addr;
         }

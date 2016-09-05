@@ -180,7 +180,7 @@ uint8 add_tags_433(uint8 *tag)
   {
     if(stDevCfg.tag_type == 1)
     {
-      memcpy(tags_2_4[tags_index_2_4++],tag,5);
+      memcpy(tags_433[tags_index_433++],tag,5);
     }
     else if(stDevCfg.tag_type == 2)
     {
