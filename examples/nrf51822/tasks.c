@@ -537,14 +537,14 @@ PROCESS_THREAD(si4463_center_process, ev, data)
           pkg->head = 0xaa55;
           pkg->dev_id = stDefaultCfg.dev_id;
           pkg->sn = global_sn ++;
-          pkg->cmd = 0x41;
+          pkg->cmd = 0x01;
           checksum = 0;
-          for(loop = 0;loop < pkg->len - 1 + 4;loop++)
+          for(loop = 0;loop < pkg->len - 1 + 2;loop++)
           {
             checksum += *((uint8_t*)pkg + loop);
           }
           *((uint8_t*)pkg + loop) = checksum;
-          send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 4);
+          send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 2);
           process_post(&data_report_process,ev_data_report_start,NULL);
         }
         break;
