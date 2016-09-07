@@ -95,12 +95,12 @@ void main(void)
   //BUTTON_SENSOR_ACTIVATE();
   //ADC_SENSOR_ACTIVATE();
 #endif
-  /*p_config.behaviour = NRF_WDT_BEHAVIOUR_PAUSE_SLEEP_HALT;
+  p_config.behaviour = NRF_WDT_BEHAVIOUR_PAUSE_SLEEP_HALT;
   p_config.reload_value = 3000;
   p_config.interrupt_priority = 0;
   nrf_drv_wdt_init(&p_config,nrf_wdt_event_handler);
   nrf_drv_wdt_channel_alloc(&m_channel_id);
-  nrf_drv_wdt_enable();*/
+  nrf_drv_wdt_enable();
   autostart_start(autostart_processes);
   //watchdog_start();
   while(1) {

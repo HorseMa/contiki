@@ -16,7 +16,7 @@ extern st_DevCfg stDevCfg;
 typedef struct default_cfg
 {
   uint16 dev_id;
-  uint8 rx_gain;
+  int8 rx_gain;
   uint8 local_ip[4];
   uint16 local_port;
   uint8 sub[4];

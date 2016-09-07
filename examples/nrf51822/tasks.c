@@ -93,7 +93,7 @@ PROCESS_THREAD(led_process, ev, data)
   while(1)
   {
     dev_list_timer_update();
-    //nrf_drv_wdt_channel_feed(m_channel_id);
+    nrf_drv_wdt_channel_feed(m_channel_id);
     etimer_set(&et_blink, CLOCK_SECOND / 5);
     PROCESS_WAIT_EVENT();  
   }  
@@ -287,6 +287,9 @@ PROCESS_THREAD(ethernet_process, ev, data)
           }
           *((uint8_t*)pkg + loop) = checksum;
           send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 2);
+          etimer_set(&et_ethernet, CLOCK_SECOND / 1);
+          PROCESS_WAIT_EVENT();
+          NVIC_SystemReset();
         }
         if(pkg->cmd == 0x04)//¶ÁÈ¡²ÎÊı
         {

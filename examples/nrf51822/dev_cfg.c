@@ -10,6 +10,7 @@ st_DevCfg stDevCfg;
 st_DefaultCfg stDefaultCfg;
 static uint8 temp[1024];
 static uint8 count;
+const unsigned char blemac[8]@".MYSEG"={0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff};
 void flash_init(void)
 {
   pg_size = NRF_FICR->CODEPAGESIZE;
@@ -40,8 +41,8 @@ void read_cfg(void)
   memcpy((uint8_t*)&stDefaultCfg,(uint8*)temp + sizeof(st_DevCfg),sizeof(st_DefaultCfg));
   if(count == 0)
   {
-    stDefaultCfg.dev_id = 0x58;
-    stDefaultCfg.rx_gain = 0;
+    stDefaultCfg.dev_id = *(uint16*)blemac;
+    stDefaultCfg.rx_gain = -127;
 #if 1
     stDefaultCfg.local_ip[0] = 192;
     stDefaultCfg.local_ip[1] = 168;
