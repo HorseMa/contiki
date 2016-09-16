@@ -44,7 +44,7 @@ PROCESS(si4463_enddev_process,"si4463");
 PROCESS(ethernet_process,"ethernet");
 PROCESS(data_report_process,"data_report");
 
-AUTOSTART_PROCESSES(&uartRecv_process,&led_process,&ethernet_process,&data_report_process,&si4463_center_process,&si4463_enddev_process);
+AUTOSTART_PROCESSES(&uartRecv_process,&led_process,&data_report_process,&si4463_center_process,&si4463_enddev_process);
 
 void clockInit(void)
 {
@@ -624,6 +624,14 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
   PROCESS_BEGIN();
   while(1)
   {
+    while(1)
+    {
+      funFactoryResetSend(stDefaultCfg.dev_id,buf);
+      //funInactiveSend(stDefaultCfg.dev_id,buf);
+      //funActiveSend(stDefaultCfg.dev_id,buf);
+      etimer_set(&et_blink, CLOCK_SECOND / 50);
+      PROCESS_WAIT_EVENT();
+    }
     while(stDefaultCfg.active == 0)
     {
       etimer_set(&et_blink, CLOCK_SECOND / 2);
