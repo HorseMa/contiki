@@ -22,7 +22,10 @@ typedef enum cmd
   enJoinReq = 0x02,
   enJoinRsp = 0x03,
   enDataReq = 0x04,
-  enDataRsp = 0x05
+  enDataRsp = 0x05,
+  enFactoryReset = 0x06,
+  enInactive = 0x07,
+  enActive = 0x08
 }en_cmd,*pen_cmd;
 
 typedef enum net_center_state
@@ -49,5 +52,7 @@ void funBeaconSend(uint8 *buf);
 void funJoinRspSend(uint8 *buf,uint16 dev_id);
 void funDataReqSend(uint8* buf,uint16 dev_id);
 void funJoinReqSend(uint16 dev_id,uint8* buf);
-
+void funFactoryResetSend(uint16 dev_id,uint8* buf);
+void funInactiveSend(uint16 dev_id,uint8* buf);
+void funActiveSend(uint16 dev_id,uint8* buf);
 #endif

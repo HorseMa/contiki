@@ -43,6 +43,7 @@ void read_cfg(void)
   {
     stDefaultCfg.dev_id = *(uint16*)blemac;
     stDefaultCfg.rx_gain = -127;
+    stDefaultCfg.active = 1;
 #if 1
     stDefaultCfg.local_ip[0] = 192;
     stDefaultCfg.local_ip[1] = 168;

@@ -25,6 +25,7 @@ typedef struct default_cfg
   uint8 server_ip[4];
   uint16 server_port;
   uint8 tag_type;
+  uint8 active;
 }st_DefaultCfg,*pst_DefaultCfg;
 extern st_DefaultCfg stDefaultCfg;
 

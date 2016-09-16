@@ -21,6 +21,7 @@
 #include "dev_cfg.h"
 #include "tasks.h"
 #include "ad_hoc.h"
+#include <string.h>
 /*****************************************************************************
  *  Local Macros & Definitions
  *****************************************************************************/
@@ -112,6 +113,7 @@ U8 bRadio_Check_Tx_RX(void)
 {
   //static unsigned char data[64];
   unsigned char loop = 0;
+  pst_PkgFormart pstPkgFormart;
   if (radio_hal_NirqLevel() == 0)
   {
       /* Read ITs, clear pending ones */
@@ -170,6 +172,42 @@ U8 bRadio_Check_Tx_RX(void)
         /* Get payload length */
         si446x_fifo_info(0x00);
         si446x_read_rx_fifo(Si446xCmd.FIFO_INFO.RX_FIFO_COUNT, buffer_433m);
+        pstPkgFormart = (pst_PkgFormart)buffer_433m;
+        switch(pstPkgFormart->cmd)
+        {
+          case enFactoryReset:
+            earase_cfg();
+            stDevCfg.rx_gain = stDefaultCfg.rx_gain;
+            memcpy(stDevCfg.local_ip,stDefaultCfg.local_ip,4);
+            stDevCfg.local_port = stDefaultCfg.local_port;
+            memcpy(stDevCfg.server_ip,stDefaultCfg.server_ip,4);
+            stDevCfg.server_port = stDefaultCfg.server_port;
+            stDevCfg.tag_type = stDefaultCfg.tag_type;
+            stDevCfg.reserved1 = 0;
+            write_cfg();
+            NVIC_SystemReset();
+            return 0;
+          case enInactive:
+            if(stDefaultCfg.active == 1)
+            {
+              stDefaultCfg.active = 0;
+              earase_cfg();
+              write_cfg();
+              NVIC_SystemReset();
+            }
+            return 0;
+          case enActive:
+            if(stDefaultCfg.active == 0)
+            {
+              stDefaultCfg.active = 1;
+              earase_cfg();
+              write_cfg();
+              NVIC_SystemReset();
+            }
+            return 0;
+          default:
+            break;
+        }
         //if(net_flag == 1)
         if(adhocGetWorkMode() == WORK_MODE_CENTER)
         {

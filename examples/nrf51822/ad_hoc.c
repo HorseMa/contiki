@@ -61,3 +61,29 @@ void funDataRspSend(void)
 {
   
 }
+
+void funFactoryResetSend(uint16 dev_id,uint8* buf)
+{
+  pst_PkgFormart pstPkgFormart = (pst_PkgFormart)buf;
+  pstPkgFormart->cmd = enFactoryReset;
+  pstPkgFormart->dest_addr = dev_id;
+  pstPkgFormart->src_addr = stDefaultCfg.dev_id;
+  vRadio_StartTx_Variable_Packet(10,buf,64);
+}
+void funInactiveSend(uint16 dev_id,uint8* buf)
+{
+  pst_PkgFormart pstPkgFormart = (pst_PkgFormart)buf;
+  pstPkgFormart->cmd = enInactive;
+  pstPkgFormart->dest_addr = dev_id;
+  pstPkgFormart->src_addr = stDefaultCfg.dev_id;
+  vRadio_StartTx_Variable_Packet(10,buf,64);
+}
+
+void funActiveSend(uint16 dev_id,uint8* buf)
+{
+  pst_PkgFormart pstPkgFormart = (pst_PkgFormart)buf;
+  pstPkgFormart->cmd = enActive;
+  pstPkgFormart->dest_addr = dev_id;
+  pstPkgFormart->src_addr = stDefaultCfg.dev_id;
+  vRadio_StartTx_Variable_Packet(10,buf,64);
+}

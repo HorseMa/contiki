@@ -164,6 +164,11 @@ PROCESS_THREAD(ethernet_process, ev, data)
   //getGAR(ip);
   while(1)
   {
+    while(stDefaultCfg.active == 0)
+    {
+      etimer_set(&et_ethernet, CLOCK_SECOND / 2);
+      PROCESS_WAIT_EVENT();
+    }
     etimer_set(&et_ethernet, CLOCK_SECOND / 2);
     PROCESS_WAIT_EVENT();
     ret = getSn_SR(SOCK_SERVER);
@@ -344,6 +349,9 @@ PROCESS_THREAD(ethernet_process, ev, data)
           stDevCfg.tag_type = stDefaultCfg.tag_type;
           stDevCfg.reserved1 = 0;
           write_cfg();
+          etimer_set(&et_ethernet, CLOCK_SECOND / 1);
+          PROCESS_WAIT_EVENT();
+          NVIC_SystemReset();
         }
       }
     }
@@ -496,6 +504,11 @@ PROCESS_THREAD(si4463_center_process, ev, data)
   dev_list_init();
   while(1)
   {
+    while(stDefaultCfg.active == 0)
+    {
+      etimer_set(&et_blink, CLOCK_SECOND / 2);
+      PROCESS_WAIT_EVENT();
+    }
     while(adhocGetWorkMode() == WORK_MODE_END_DEVICE)
     {
       etimer_set(&et_blink, CLOCK_SECOND / 1);
@@ -611,8 +624,14 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
   PROCESS_BEGIN();
   while(1)
   {
+    while(stDefaultCfg.active == 0)
+    {
+      etimer_set(&et_blink, CLOCK_SECOND / 2);
+      PROCESS_WAIT_EVENT();
+    }
     while(adhocGetWorkMode() == WORK_MODE_CENTER)
     {
+      center_addr = 0xffff;
       etimer_set(&et_blink, CLOCK_SECOND / 5);
       PROCESS_WAIT_EVENT();
     }
