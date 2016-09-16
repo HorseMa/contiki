@@ -622,6 +622,7 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
   pst_PkgFormart pstPkgFormarttx = (pst_PkgFormart)buf;
 
   PROCESS_BEGIN();
+  vRadio_StartRX(10);
   while(1)
   {
     while(1)
