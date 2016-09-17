@@ -176,6 +176,10 @@ U8 bRadio_Check_Tx_RX(void)
         switch(pstPkgFormart->cmd)
         {
           case enFactoryReset:
+            if((pstPkgFormart->dest_addr != stDefaultCfg.dev_id) && (pstPkgFormart->dest_addr != 0xffff))
+            {
+              return 0;
+            }
             earase_cfg();
             stDevCfg.rx_gain = stDefaultCfg.rx_gain;
             memcpy(stDevCfg.local_ip,stDefaultCfg.local_ip,4);
@@ -188,6 +192,10 @@ U8 bRadio_Check_Tx_RX(void)
             NVIC_SystemReset();
             return 0;
           case enInactive:
+            if((pstPkgFormart->dest_addr != stDefaultCfg.dev_id) && (pstPkgFormart->dest_addr != 0xffff))
+            {
+              return 0;
+            }
             if(stDefaultCfg.active == 1)
             {
               stDefaultCfg.active = 0;
@@ -197,6 +205,10 @@ U8 bRadio_Check_Tx_RX(void)
             }
             return 0;
           case enActive:
+            if((pstPkgFormart->dest_addr != stDefaultCfg.dev_id) && (pstPkgFormart->dest_addr != 0xffff))
+            {
+              return 0;
+            }
             if(stDefaultCfg.active == 0)
             {
               stDefaultCfg.active = 1;
