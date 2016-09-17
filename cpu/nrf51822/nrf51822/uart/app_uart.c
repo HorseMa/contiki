@@ -241,7 +241,7 @@ static void gpiote_uart_event_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polar
  */
 extern uint8_t pc_ip[];
 void uart_put_string(const char str[]);
-
+uint16 dest_dev = 0xffff;
 void UART0_IRQHandler(void)
 {
     static uint8_t buf[50];
@@ -266,7 +266,9 @@ void UART0_IRQHandler(void)
         {
           buf[i] = '\0';
           i = 0;
-          inet_addr_(&buf[1],pc_ip);
+          dest_dev = (buf[1] - 0x30) * 16 + (buf[2] - 0x30);
+          dest_dev += ((buf[3] - 0x30) * 16 + (buf[4] - 0x30)) * 256;
+          //inet_addr_(&buf[1],pc_ip);
         }
         i++;
         if(i >= 50)

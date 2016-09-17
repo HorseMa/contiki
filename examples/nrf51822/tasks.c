@@ -614,6 +614,7 @@ PROCESS_THREAD(si4463_center_process, ev, data)
   }
   PROCESS_END();
 }
+extern uint16 dest_dev;
 PROCESS_THREAD(si4463_enddev_process, ev, data)
 {
   static struct etimer et_blink;
@@ -623,6 +624,14 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
   static uint8 loop1,loop2;
   PROCESS_BEGIN();
   vRadio_StartRX(10);
+  
+  /*buf[1] = '5';
+  buf[2] = '8';
+  buf[3] = '0';
+  buf[4] = '0';
+  dest_dev = (buf[1] - 0x30) * 16 + (buf[2] - 0x30);
+  dest_dev += ((buf[3] - 0x30) * 16 + (buf[4] - 0x30)) * 256;
+*/
   while(1)
   {
     while(1)
@@ -631,9 +640,9 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
       {
         for(loop2 = 0;loop2 < 5;loop2 ++)
         {
-          funFactoryResetSend(loop1,0xffff,buf);
-          //funInactiveSend(loop1,0xffff,buf);
-          //funActiveSend(loop1,0xffff,buf);
+          //funFactoryResetSend(loop1,dest_dev,buf);
+          //funInactiveSend(loop1,dest_dev,buf);
+          funActiveSend(loop1,dest_dev,buf);
           etimer_set(&et_blink, CLOCK_SECOND / 50);
           PROCESS_WAIT_EVENT();
         }
