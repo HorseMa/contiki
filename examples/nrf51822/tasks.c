@@ -620,18 +620,24 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
   static uint8 buf[64];
   pst_PkgFormart pstPkgFormart;
   pst_PkgFormart pstPkgFormarttx = (pst_PkgFormart)buf;
-
+  static uint8 loop1,loop2;
   PROCESS_BEGIN();
   vRadio_StartRX(10);
   while(1)
   {
     while(1)
     {
-      funFactoryResetSend(stDefaultCfg.dev_id,buf);
-      //funInactiveSend(stDefaultCfg.dev_id,buf);
-      //funActiveSend(stDefaultCfg.dev_id,buf);
-      etimer_set(&et_blink, CLOCK_SECOND / 50);
-      PROCESS_WAIT_EVENT();
+      for(loop1 = 0;loop1 < 11;loop1 ++)
+      {
+        for(loop2 = 0;loop2 < 5;loop2 ++)
+        {
+          funFactoryResetSend(loop1,0xffff,buf);
+          //funInactiveSend(loop1,0xffff,buf);
+          //funActiveSend(loop1,0xffff,buf);
+          etimer_set(&et_blink, CLOCK_SECOND / 50);
+          PROCESS_WAIT_EVENT();
+        }
+      }
     }
     while(stDefaultCfg.active == 0)
     {

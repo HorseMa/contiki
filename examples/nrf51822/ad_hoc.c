@@ -62,28 +62,28 @@ void funDataRspSend(void)
   
 }
 
-void funFactoryResetSend(uint16 dev_id,uint8* buf)
+void funFactoryResetSend(uint8 channel,uint16 dev_id,uint8* buf)
 {
   pst_PkgFormart pstPkgFormart = (pst_PkgFormart)buf;
   pstPkgFormart->cmd = enFactoryReset;
   pstPkgFormart->dest_addr = dev_id;
   pstPkgFormart->src_addr = stDefaultCfg.dev_id;
-  vRadio_StartTx_Variable_Packet(10,buf,64);
+  vRadio_StartTx_Variable_Packet(channel,buf,64);
 }
-void funInactiveSend(uint16 dev_id,uint8* buf)
+void funInactiveSend(uint8 channel,uint16 dev_id,uint8* buf)
 {
   pst_PkgFormart pstPkgFormart = (pst_PkgFormart)buf;
   pstPkgFormart->cmd = enInactive;
   pstPkgFormart->dest_addr = dev_id;
   pstPkgFormart->src_addr = stDefaultCfg.dev_id;
-  vRadio_StartTx_Variable_Packet(10,buf,64);
+  vRadio_StartTx_Variable_Packet(channel,buf,64);
 }
 
-void funActiveSend(uint16 dev_id,uint8* buf)
+void funActiveSend(uint8 channel,uint16 dev_id,uint8* buf)
 {
   pst_PkgFormart pstPkgFormart = (pst_PkgFormart)buf;
   pstPkgFormart->cmd = enActive;
   pstPkgFormart->dest_addr = dev_id;
   pstPkgFormart->src_addr = stDefaultCfg.dev_id;
-  vRadio_StartTx_Variable_Packet(10,buf,64);
+  vRadio_StartTx_Variable_Packet(channel,buf,64);
 }

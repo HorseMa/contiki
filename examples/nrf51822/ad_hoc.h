@@ -52,7 +52,7 @@ void funBeaconSend(uint8 *buf);
 void funJoinRspSend(uint8 *buf,uint16 dev_id);
 void funDataReqSend(uint8* buf,uint16 dev_id);
 void funJoinReqSend(uint16 dev_id,uint8* buf);
-void funFactoryResetSend(uint16 dev_id,uint8* buf);
-void funInactiveSend(uint16 dev_id,uint8* buf);
-void funActiveSend(uint16 dev_id,uint8* buf);
+void funFactoryResetSend(uint8 channel,uint16 dev_id,uint8* buf);
+void funInactiveSend(uint8 channel,uint16 dev_id,uint8* buf);
+void funActiveSend(uint8 channel,uint16 dev_id,uint8* buf);
 #endif
