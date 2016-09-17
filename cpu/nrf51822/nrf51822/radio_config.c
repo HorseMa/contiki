@@ -262,7 +262,10 @@ void RADIO_IRQHandler(void)
       packet[7] = packet[8];
       packet[8] = packet[9];
       packet[9] = packet[10];
-      add_tags_2_4(packet);
+      if((int8)packet[0] < stDefaultCfg.rx_gain)
+      {
+        add_tags_2_4(packet);
+      }
 
       //process_post(&led_process,ev_2_4g_rcv,NULL);
 
