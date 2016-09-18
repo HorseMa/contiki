@@ -615,6 +615,7 @@ PROCESS_THREAD(si4463_center_process, ev, data)
   PROCESS_END();
 }
 extern uint16 dest_dev;
+extern uint8 send_flag;
 PROCESS_THREAD(si4463_enddev_process, ev, data)
 {
   static struct etimer et_blink;
@@ -636,16 +637,25 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
   {
     while(1)
     {
-      for(loop1 = 0;loop1 < 11;loop1 ++)
+      if(send_flag)
       {
-        for(loop2 = 0;loop2 < 5;loop2 ++)
+        for(loop1 = 0;loop1 < 11;loop1 ++)
         {
-          //funFactoryResetSend(loop1,dest_dev,buf);
-          //funInactiveSend(loop1,dest_dev,buf);
-          funActiveSend(loop1,dest_dev,buf);
-          etimer_set(&et_blink, CLOCK_SECOND / 50);
-          PROCESS_WAIT_EVENT();
+          for(loop2 = 0;loop2 < 5;loop2 ++)
+          {
+            funFactoryResetSend(loop1,dest_dev,buf);
+            //funInactiveSend(loop1,dest_dev,buf);
+            //funActiveSend(loop1,dest_dev,buf);
+            etimer_set(&et_blink, CLOCK_SECOND / 50);
+            PROCESS_WAIT_EVENT();
+          }
         }
+        send_flag  = 0;
+      }
+      else
+      {
+        etimer_set(&et_blink, CLOCK_SECOND / 50);
+        PROCESS_WAIT_EVENT();
       }
     }
     while(stDefaultCfg.active == 0)
