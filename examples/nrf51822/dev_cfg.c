@@ -31,9 +31,13 @@ void earase_cfg(void)
 }
 void read_cfg(void)
 {
+  //int len;
   uint16 loop = 0;
   pst_DevCfg pstDevCfg;
   pst_DefaultCfg pstDefaultCfg;
+  //len = sizeof(st_DevCfg);
+  //len = sizeof(st_DefaultCfg);
+
   memset(temp,1,1024);
   //ble_flash_page_erase(pg_num);
   ble_flash_page_read(pg_num,(uint32_t*)temp,(uint8_t*)&count);

@@ -9,7 +9,7 @@
    uint8 server_ip[4];
    uint16 server_port;
    uint8 tag_type;
-   uint16 reserved1;
+   uint32 reserved1;
  }st_DevCfg,*pst_DevCfg;// 总大小保证是4的倍数
 extern st_DevCfg stDevCfg;
 
@@ -25,7 +25,7 @@ typedef struct default_cfg
   uint8 server_ip[4];
   uint16 server_port;
   uint8 tag_type;
-  uint8 active;
+  uint32 active;
 }st_DefaultCfg,*pst_DefaultCfg;
 extern st_DefaultCfg stDefaultCfg;
 

@@ -22,6 +22,8 @@
 #include "tasks.h"
 #include "ad_hoc.h"
 #include <string.h>
+#include "nrf_delay.h"
+
 /*****************************************************************************
  *  Local Macros & Definitions
  *****************************************************************************/
@@ -180,7 +182,7 @@ U8 bRadio_Check_Tx_RX(void)
             {
               return 0;
             }
-            earase_cfg();
+            //earase_cfg();
             stDevCfg.rx_gain = stDefaultCfg.rx_gain;
             memcpy(stDevCfg.local_ip,stDefaultCfg.local_ip,4);
             stDevCfg.local_port = stDefaultCfg.local_port;
@@ -189,6 +191,7 @@ U8 bRadio_Check_Tx_RX(void)
             stDevCfg.tag_type = stDefaultCfg.tag_type;
             stDevCfg.reserved1 = 0;
             write_cfg();
+            nrf_delay_ms(1000);
             NVIC_SystemReset();
             return 0;
           case enInactive:
@@ -199,8 +202,9 @@ U8 bRadio_Check_Tx_RX(void)
             if(stDefaultCfg.active == 1)
             {
               stDefaultCfg.active = 0;
-              earase_cfg();
+              //earase_cfg();
               write_cfg();
+              nrf_delay_ms(1000);
               NVIC_SystemReset();
             }
             return 0;
@@ -212,8 +216,9 @@ U8 bRadio_Check_Tx_RX(void)
             if(stDefaultCfg.active == 0)
             {
               stDefaultCfg.active = 1;
-              earase_cfg();
+              //earase_cfg();
               write_cfg();
+              nrf_delay_ms(1000);
               NVIC_SystemReset();
             }
             return 0;
