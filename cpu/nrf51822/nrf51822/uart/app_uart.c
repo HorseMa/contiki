@@ -267,8 +267,68 @@ void UART0_IRQHandler(void)
         {
           buf[i] = '\0';
           i = 0;
-          dest_dev = (buf[1] - 0x30) * 16 + (buf[2] - 0x30);
-          dest_dev += ((buf[3] - 0x30) * 16 + (buf[4] - 0x30)) * 256;
+          if((buf[1] > '9') || (buf[1] < '0'))
+          {
+            if((buf[1] > 'F') || (buf[1] < 'A'))
+            {
+              return;
+            }
+            else
+            {
+              buf[1] -= 55;
+            }
+          }
+          else
+          {
+            buf[1] -= '0';
+          }
+          if((buf[2] > '9') || (buf[2] < '0'))
+          {
+            if((buf[2] > 'F') || (buf[2] < 'A'))
+            {
+              return;
+            }
+            else
+            {
+              buf[2] -= 55;
+            }
+          }
+          else
+          {
+            buf[2] -= '0';
+          }
+          if((buf[3] > '9') || (buf[3] < '0'))
+          {
+            if((buf[3] > 'F') || (buf[3] < 'A'))
+            {
+              return;
+            }
+            else
+            {
+              buf[3] -= 55;
+            }
+          }
+          else
+          {
+            buf[3] -= '0';
+          }
+          if((buf[4] > '9') || (buf[4] < '0'))
+          {
+            if((buf[4] > 'F') || (buf[4] < 'A'))
+            {
+              return;
+            }
+            else
+            {
+              buf[4] -= 55;
+            }
+          }
+          else
+          {
+            buf[4] -= '0';
+          }
+          dest_dev = buf[1] * 16 + buf[2];
+          dest_dev += (buf[3] * 16 + buf[4]) * 256;
           send_flag = 1;
           //inet_addr_(&buf[1],pc_ip);
         }

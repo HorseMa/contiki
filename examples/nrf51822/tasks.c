@@ -626,20 +626,80 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
   PROCESS_BEGIN();
   vRadio_StartRX(10);
   
-  /*buf[1] = '5';
-  buf[2] = '8';
-  buf[3] = '0';
-  buf[4] = '0';
-  dest_dev = (buf[1] - 0x30) * 16 + (buf[2] - 0x30);
-  dest_dev += ((buf[3] - 0x30) * 16 + (buf[4] - 0x30)) * 256;
-*/
+  /*buf[1] = 'A';
+  buf[2] = 'B';
+  buf[3] = 'E';
+  buf[4] = 'F';
+  if((buf[1] > '9') || (buf[1] < '0'))
+          {
+            if((buf[1] > 'F') || (buf[1] < 'A'))
+            {
+              return 0;
+            }
+            else
+            {
+              buf[1] -= 55;
+            }
+          }
+          else
+          {
+            buf[1] -= '0';
+          }
+          if((buf[2] > '9') || (buf[2] < '0'))
+          {
+            if((buf[2] > 'F') || (buf[2] < 'A'))
+            {
+              return 0;
+            }
+            else
+            {
+              buf[2] -= 55;
+            }
+          }
+          else
+          {
+            buf[2] -= '0';
+          }
+          if((buf[3] > '9') || (buf[3] < '0'))
+          {
+            if((buf[3] > 'F') || (buf[3] < 'A'))
+            {
+              return 0;
+            }
+            else
+            {
+              buf[3] -= 55;
+            }
+          }
+          else
+          {
+            buf[3] -= '0';
+          }
+          if((buf[4] > '9') || (buf[4] < '0'))
+          {
+            if((buf[4] > 'F') || (buf[4] < 'A'))
+            {
+              return 0;
+            }
+            else
+            {
+              buf[4] -= 55;
+            }
+          }
+          else
+          {
+            buf[4] -= '0';
+          }
+          dest_dev = buf[1] * 16 + buf[2];
+          dest_dev += (buf[3] * 16 + buf[4]) * 256;
+  */
   while(1)
   {
     while(1)
     {
       if(send_flag)
       {
-        for(loop1 = 0;loop1 < 11;loop1 ++)
+        for(loop1 = 0;loop1 < 17;loop1 ++)
         {
           for(loop2 = 0;loop2 < 5;loop2 ++)
           {
