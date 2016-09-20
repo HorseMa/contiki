@@ -180,6 +180,7 @@ U8 bRadio_Check_Tx_RX(void)
           case enFactoryReset:
             if((pstPkgFormart->dest_addr != stDefaultCfg.dev_id) && (pstPkgFormart->dest_addr != 0xffff))
             {
+              si446x_change_state(SI446X_CMD_CHANGE_STATE_ARG_NEW_STATE_ENUM_RX);
               return 0;
             }
             //earase_cfg();
@@ -197,6 +198,7 @@ U8 bRadio_Check_Tx_RX(void)
           case enInactive:
             if((pstPkgFormart->dest_addr != stDefaultCfg.dev_id) && (pstPkgFormart->dest_addr != 0xffff))
             {
+              si446x_change_state(SI446X_CMD_CHANGE_STATE_ARG_NEW_STATE_ENUM_RX);
               return 0;
             }
             if(stDefaultCfg.active == 1)
@@ -207,10 +209,12 @@ U8 bRadio_Check_Tx_RX(void)
               nrf_delay_ms(1000);
               NVIC_SystemReset();
             }
+            si446x_change_state(SI446X_CMD_CHANGE_STATE_ARG_NEW_STATE_ENUM_RX);
             return 0;
           case enActive:
             if((pstPkgFormart->dest_addr != stDefaultCfg.dev_id) && (pstPkgFormart->dest_addr != 0xffff))
             {
+              si446x_change_state(SI446X_CMD_CHANGE_STATE_ARG_NEW_STATE_ENUM_RX);
               return 0;
             }
             if(stDefaultCfg.active == 0)
@@ -221,6 +225,7 @@ U8 bRadio_Check_Tx_RX(void)
               nrf_delay_ms(1000);
               NVIC_SystemReset();
             }
+            si446x_change_state(SI446X_CMD_CHANGE_STATE_ARG_NEW_STATE_ENUM_RX);
             return 0;
           default:
             break;

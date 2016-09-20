@@ -26,7 +26,7 @@ void funBeaconSend(uint8 *buf)
   pstPkgFormart->cmd = enBeacon;
   pstPkgFormart->src_addr = stDefaultCfg.dev_id;
   pstPkgFormart->dest_addr = 0xFFFF;
-  vRadio_StartTx_Variable_Packet(10,buf,64);
+  vRadio_StartTx_Variable_Packet(16,buf,64);
 }
 
 void funJoinRspSend(uint8 *buf,uint16 dev_id)
@@ -35,8 +35,8 @@ void funJoinRspSend(uint8 *buf,uint16 dev_id)
   pstPkgFormarttx->cmd = enJoinRsp;
   pstPkgFormarttx->src_addr = stDefaultCfg.dev_id;
   pstPkgFormarttx->dest_addr = dev_id;
-  pstPkgFormarttx->data[0] = stDefaultCfg.dev_id % 10;
-  vRadio_StartTx_Variable_Packet(10,buf,64);
+  pstPkgFormarttx->data[0] = stDefaultCfg.dev_id % 16;
+  vRadio_StartTx_Variable_Packet(16,buf,64);
 }
 
 void funDataReqSend(uint8* buf,uint16 dev_id)
@@ -54,7 +54,7 @@ void funJoinReqSend(uint16 dev_id,uint8* buf)
   pstPkgFormart->cmd = enJoinReq;
   pstPkgFormart->dest_addr = dev_id;
   pstPkgFormart->src_addr = stDefaultCfg.dev_id;
-  vRadio_StartTx_Variable_Packet(10,buf,64);
+  vRadio_StartTx_Variable_Packet(16,buf,64);
 }
 
 void funDataRspSend(void)
@@ -68,7 +68,7 @@ void funFactoryResetSend(uint16 dev_id,uint8* buf)
   pstPkgFormart->cmd = enFactoryReset;
   pstPkgFormart->dest_addr = dev_id;
   pstPkgFormart->src_addr = stDefaultCfg.dev_id;
-  vRadio_StartTx_Variable_Packet(10,buf,64);
+  vRadio_StartTx_Variable_Packet(16,buf,64);
 }
 void funInactiveSend(uint16 dev_id,uint8* buf)
 {
@@ -76,7 +76,7 @@ void funInactiveSend(uint16 dev_id,uint8* buf)
   pstPkgFormart->cmd = enInactive;
   pstPkgFormart->dest_addr = dev_id;
   pstPkgFormart->src_addr = stDefaultCfg.dev_id;
-  vRadio_StartTx_Variable_Packet(10,buf,64);
+  vRadio_StartTx_Variable_Packet(16,buf,64);
 }
 
 void funActiveSend(uint16 dev_id,uint8* buf)
@@ -85,5 +85,5 @@ void funActiveSend(uint16 dev_id,uint8* buf)
   pstPkgFormart->cmd = enActive;
   pstPkgFormart->dest_addr = dev_id;
   pstPkgFormart->src_addr = stDefaultCfg.dev_id;
-  vRadio_StartTx_Variable_Packet(10,buf,64);
+  vRadio_StartTx_Variable_Packet(16,buf,64);
 }
