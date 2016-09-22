@@ -262,9 +262,58 @@ void RADIO_IRQHandler(void)
       packet[7] = packet[8];
       packet[8] = packet[9];
       packet[9] = packet[10];
-      if((int8)packet[0] < stDefaultCfg.rx_gain)
+      switch(stDefaultCfg.rx_gain)
       {
-        add_tags_2_4(packet);
+        case 0:
+          if(packet[0] < 95)
+          {
+            add_tags_2_4(packet);
+          }
+          break;
+        case 1:
+          if(packet[0] < 90)
+          {
+            add_tags_2_4(packet);
+          }
+          break;
+        case 2:
+          if(packet[0] < 85)
+          {
+            add_tags_2_4(packet);
+          }
+          break;
+        case 3:
+          if(packet[0] < 80)
+          {
+            add_tags_2_4(packet);
+          }
+          break;
+        case 4:
+          if(packet[0] < 75)
+          {
+            add_tags_2_4(packet);
+          }
+          break;
+        case 5:
+          if(packet[0] < 70)
+          {
+            add_tags_2_4(packet);
+          }
+          break;
+        case 6:
+          if(packet[0] < 65)
+          {
+            add_tags_2_4(packet);
+          }
+          break;
+        case 7:
+          if(packet[0] < 60)
+          {
+            add_tags_2_4(packet);
+          }
+          break;
+        default:
+          break;
       }
 
       //process_post(&led_process,ev_2_4g_rcv,NULL);

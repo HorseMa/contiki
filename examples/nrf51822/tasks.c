@@ -300,8 +300,23 @@ PROCESS_THREAD(ethernet_process, ev, data)
         {
           pkg->sn = global_sn ++;
           pkg->dev_id = stDefaultCfg.dev_id;
-          memcpy(pkg->data,(uint8_t*)&stDevCfg,sizeof(st_DevCfg));
-          pkg->len = 7 + sizeof(st_DevCfg);
+          pkg->data[0] = stDevCfg.rx_gain;
+          pkg->data[1] = stDevCfg.local_ip[0];
+          pkg->data[2] = stDevCfg.local_ip[1];
+          pkg->data[3] = stDevCfg.local_ip[2];
+          pkg->data[4] = stDevCfg.local_ip[3];
+          pkg->data[5] = (uint8)stDevCfg.local_port;
+          pkg->data[6] = (uint8)(stDevCfg.local_port >> 8);
+          pkg->data[7] = stDevCfg.server_ip[0];
+          pkg->data[8] = stDevCfg.server_ip[1];
+          pkg->data[9] = stDevCfg.server_ip[2];
+          pkg->data[10] = stDevCfg.server_ip[3];
+          pkg->data[11] = (uint8)stDevCfg.server_port;
+          pkg->data[12] = (uint8)(stDevCfg.server_port >> 8);
+          pkg->data[13] = stDevCfg.tag_type;
+          pkg->data[14] = (uint8)stDevCfg.reserved1;
+          pkg->data[15] = (uint8)(stDevCfg.reserved1 >> 8);
+          pkg->len = 7 + 16;
           checksum = 0;
           for(loop = 0;loop < pkg->len - 1 + 2;loop++)
           {
