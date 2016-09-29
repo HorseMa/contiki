@@ -45,7 +45,14 @@ void read_cfg(void)
   memcpy((uint8_t*)&stDefaultCfg,(uint8*)temp + sizeof(st_DevCfg),sizeof(st_DefaultCfg));
   if(count == 0)
   {
-    stDefaultCfg.dev_id = *(uint16*)blemac;
+    if(*(uint16*)blemac == 0xffff)
+    {
+      stDefaultCfg.dev_id = 0x0058;
+    }
+    else
+    {
+      stDefaultCfg.dev_id = *(uint16*)blemac;
+    }
     stDefaultCfg.rx_gain = 0;
     stDefaultCfg.active = 1;
 #if 1
