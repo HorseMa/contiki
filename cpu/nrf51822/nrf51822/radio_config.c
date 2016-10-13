@@ -260,6 +260,7 @@ PROCESS_NAME(led_process);
 void RADIO_IRQHandler(void)
 {
   int i = 0;
+  static uint8 flg = 0;
   DISABLE_INTERRUPTS();
   ENERGEST_ON(ENERGEST_TYPE_IRQ);
   //nrf_delay_ms(3);
@@ -279,6 +280,7 @@ void RADIO_IRQHandler(void)
         //*((volatile uint32_t *)((uint8_t *)NRF_TIMERx + (uint32_t)timer_event)) = 0x0UL;
     if (NRF_RADIO->CRCSTATUS == 1U)
     {
+      flg = 1;
       /*while(!NRF_RADIO->EVENTS_RSSIEND);
       packet[0] = NRF_RADIO->RSSISAMPLE;
       packet[1] = NRF_RADIO->RSSISAMPLE >> 8;
@@ -351,6 +353,7 @@ void RADIO_IRQHandler(void)
     }
     else
     {
+      flg = 0;
       NRF_RADIO->TASKS_RSSISTOP = 1;
       NRF_RADIO->EVENTS_RSSIEND = 0;
     }
@@ -359,73 +362,80 @@ void RADIO_IRQHandler(void)
   }
   if(NRF_RADIO->EVENTS_RSSIEND)
   {
-      packet[0] = NRF_RADIO->RSSISAMPLE;
-      packet[1] = NRF_RADIO->RSSISAMPLE >> 8;
+    if(flg)
+    {
+        packet[0] = NRF_RADIO->RSSISAMPLE;
+        packet[1] = NRF_RADIO->RSSISAMPLE >> 8;
+        NRF_RADIO->EVENTS_RSSIEND = 0;
+        if(stDevCfg.tag_type == 2)
+        {
+          packet[2] = packet[3];
+          packet[3] = packet[4];
+          packet[4] = packet[5];
+          packet[5] = packet[6];
+          packet[6] = packet[7];
+          packet[7] = packet[8];
+          packet[8] = packet[9];
+          packet[9] = packet[10];
+        }
+        switch(stDevCfg.rx_gain)
+        {
+          case 0:
+            if(packet[0] < 95)
+            {
+              add_tags_2_4(packet);
+            }
+            break;
+          case 1:
+            if(packet[0] < 90)
+            {
+              add_tags_2_4(packet);
+            }
+            break;
+          case 2:
+            if(packet[0] < 85)
+            {
+              add_tags_2_4(packet);
+            }
+            break;
+          case 3:
+            if(packet[0] < 80)
+            {
+              add_tags_2_4(packet);
+            }
+            break;
+          case 4:
+            if(packet[0] < 75)
+            {
+              add_tags_2_4(packet);
+            }
+            break;
+          case 5:
+            if(packet[0] < 70)
+            {
+              add_tags_2_4(packet);
+            }
+            break;
+          case 6:
+            if(packet[0] < 65)
+            {
+              add_tags_2_4(packet);
+            }
+            break;
+          case 7:
+            if(packet[0] < 60)
+            {
+              add_tags_2_4(packet);
+            }
+            break;
+          default:
+            break;
+        }
+    }
+    else
+    {
       NRF_RADIO->EVENTS_RSSIEND = 0;
-      if(stDevCfg.tag_type == 2)
-      {
-        packet[2] = packet[3];
-        packet[3] = packet[4];
-        packet[4] = packet[5];
-        packet[5] = packet[6];
-        packet[6] = packet[7];
-        packet[7] = packet[8];
-        packet[8] = packet[9];
-        packet[9] = packet[10];
-      }
-      switch(stDevCfg.rx_gain)
-      {
-        case 0:
-          if(packet[0] < 95)
-          {
-            add_tags_2_4(packet);
-          }
-          break;
-        case 1:
-          if(packet[0] < 90)
-          {
-            add_tags_2_4(packet);
-          }
-          break;
-        case 2:
-          if(packet[0] < 85)
-          {
-            add_tags_2_4(packet);
-          }
-          break;
-        case 3:
-          if(packet[0] < 80)
-          {
-            add_tags_2_4(packet);
-          }
-          break;
-        case 4:
-          if(packet[0] < 75)
-          {
-            add_tags_2_4(packet);
-          }
-          break;
-        case 5:
-          if(packet[0] < 70)
-          {
-            add_tags_2_4(packet);
-          }
-          break;
-        case 6:
-          if(packet[0] < 65)
-          {
-            add_tags_2_4(packet);
-          }
-          break;
-        case 7:
-          if(packet[0] < 60)
-          {
-            add_tags_2_4(packet);
-          }
-          break;
-        default:
-          break;
-      }
+    }
   }
   ENERGEST_OFF(ENERGEST_TYPE_IRQ);
   ENABLE_INTERRUPTS();
