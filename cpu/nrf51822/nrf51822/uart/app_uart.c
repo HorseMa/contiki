@@ -497,6 +497,16 @@ void uart_put_string(const char str[])
     i++;
   }
 }
+
+void uart_put_bytes(const char str[],int len)
+{
+  uint16_t i = 0;
+  while(i < len)
+  {
+    while(app_uart_put(str[i]) != NRF_SUCCESS);
+    i++;
+  }
+}
 uint32_t app_uart_flush(void)
 {
     return NRF_SUCCESS;

@@ -77,6 +77,8 @@ PROCESS_THREAD(led_process, ev, data)
   int i = 0;
   PROCESS_BEGIN();
   ev_2_4g_rcv = process_alloc_event();
+  if(adhocGetWorkMode() == WORK_MODE_END_DEVICE)
+  {
   if(stDevCfg.tag_type == 1)
   {
     radio_configure();
@@ -88,6 +90,7 @@ PROCESS_THREAD(led_process, ev, data)
   else
   {
     
+  }
   }
 
   while(1)
@@ -125,6 +128,11 @@ PROCESS_THREAD(ethernet_process, ev, data)
   PROCESS_WAIT_EVENT();
   //read_cfg();
   set_default();
+  while(1)
+  {
+    etimer_set(&et_ethernet, CLOCK_SECOND / 1);
+    PROCESS_WAIT_EVENT();
+  }
   #if 0
   while(1)
   {
@@ -426,7 +434,8 @@ PROCESS_THREAD(data_report_process, ev, data)
         checksum += *((uint8_t*)pkg + loop);
       }
       *((uint8_t*)pkg + loop) = checksum;
-      send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 2);
+      //send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 2);
+      uart_put_bytes((const uint8_t*)pkg,pkg->len + 2);
     }
     else
     {
@@ -575,7 +584,8 @@ PROCESS_THREAD(si4463_center_process, ev, data)
             checksum += *((uint8_t*)pkg + loop);
           }
           *((uint8_t*)pkg + loop) = checksum;
-          send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 2);
+          //send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 2);
+          uart_put_bytes((const uint8_t*)pkg,pkg->len + 2);
           process_post(&data_report_process,ev_data_report_start,NULL);
         }
         break;
@@ -605,7 +615,8 @@ PROCESS_THREAD(si4463_center_process, ev, data)
               checksum += *((uint8_t*)pkg + loop);
             }
             *((uint8_t*)pkg + loop) = checksum;
-            send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 2);
+            //send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 2);
+            uart_put_bytes((const uint8_t*)pkg,pkg->len + 2);
             process_post(&data_report_process,ev_data_report_start,NULL);
           }
           break;

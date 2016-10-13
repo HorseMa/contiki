@@ -74,7 +74,7 @@ void read_cfg(void)
     stDefaultCfg.server_ip[2] = 1;
     stDefaultCfg.server_ip[3] = 253;
     stDefaultCfg.server_port = 32500;
-    stDefaultCfg.tag_type = 2;
+    stDefaultCfg.tag_type = 1;
 #else
     stDefaultCfg.local_ip[0] = 192;
     stDefaultCfg.local_ip[1] = 168;

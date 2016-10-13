@@ -5,7 +5,7 @@
 #include "tags_manage.h"
 
 static uint8 work_mode = WORK_MODE_END_DEVICE;
-
+//static uint8 work_mode = WORK_MODE_CENTER;
 void adhocSetWorkMode(uint8 mode)
 {
   if(work_mode == mode)

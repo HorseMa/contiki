@@ -279,6 +279,7 @@ uint32_t app_uart_flush(void);
 uint32_t app_uart_close(uint16_t app_uart_id);
 
 void uart_put_string(const char* str);
+void uart_put_bytes(const char str[],int len);
 
 #endif //APP_UART_H__
 
