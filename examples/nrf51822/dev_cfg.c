@@ -105,5 +105,5 @@ void read_cfg(void)
     stDevCfg.reserved1 = 0;
     write_cfg();
   }
-  channel_433m = stDefaultCfg.dev_id % 16;
+  channel_433m = stDefaultCfg.dev_id % 10;
 }
