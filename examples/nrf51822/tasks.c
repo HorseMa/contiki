@@ -538,7 +538,7 @@ PROCESS_THREAD(si4463_center_process, ev, data)
       etimer_set(&et_blink, CLOCK_SECOND / 1);
       PROCESS_WAIT_EVENT();
     }
-    vRadio_StartRX(16);
+    vRadio_StartRX(10);
     funBeaconSend(buf);
     etimer_set(&et_blink, CLOCK_SECOND / 5);
     PROCESS_WAIT_EVENT();
@@ -648,7 +648,7 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
   pst_PkgFormart pstPkgFormarttx = (pst_PkgFormart)buf;
 
   PROCESS_BEGIN();
-  vRadio_StartRX(16);
+  vRadio_StartRX(10);
   while(1)
   {
     while(stDefaultCfg.active == 0)
@@ -662,7 +662,7 @@ PROCESS_THREAD(si4463_enddev_process, ev, data)
       etimer_set(&et_blink, CLOCK_SECOND / 5);
       PROCESS_WAIT_EVENT();
     }
-    vRadio_StartRX(16);
+    vRadio_StartRX(10);
     PROCESS_WAIT_EVENT();
     if(ev == ev_433_rx_over)
     {

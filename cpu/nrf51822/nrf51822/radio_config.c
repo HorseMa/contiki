@@ -381,48 +381,54 @@ void RADIO_IRQHandler(void)
         switch(stDevCfg.rx_gain)
         {
           case 0:
-            if(packet[0] < 95)
+            //if(packet[0] < 95)
             {
               add_tags_2_4(packet);
             }
             break;
           case 1:
-            if(packet[0] < 90)
+            if(packet[0] < 95)
             {
               add_tags_2_4(packet);
             }
             break;
           case 2:
-            if(packet[0] < 85)
+            if(packet[0] < 90)
             {
               add_tags_2_4(packet);
             }
             break;
           case 3:
-            if(packet[0] < 80)
+            if(packet[0] < 85)
             {
               add_tags_2_4(packet);
             }
             break;
           case 4:
-            if(packet[0] < 75)
+            if(packet[0] < 80)
             {
               add_tags_2_4(packet);
             }
             break;
           case 5:
-            if(packet[0] < 70)
+            if(packet[0] < 75)
             {
               add_tags_2_4(packet);
             }
             break;
           case 6:
-            if(packet[0] < 65)
+            if(packet[0] < 70)
             {
               add_tags_2_4(packet);
             }
             break;
           case 7:
+            if(packet[0] < 65)
+            {
+              add_tags_2_4(packet);
+            }
+            break;
+          case 8:
             if(packet[0] < 60)
             {
               add_tags_2_4(packet);
