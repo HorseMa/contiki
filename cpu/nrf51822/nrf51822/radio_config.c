@@ -261,6 +261,7 @@ void RADIO_IRQHandler(void)
 {
   int i = 0;
   static uint8 flg = 0;
+  uint8 temp[10];
   DISABLE_INTERRUPTS();
   ENERGEST_ON(ENERGEST_TYPE_IRQ);
   //nrf_delay_ms(3);
@@ -367,8 +368,14 @@ void RADIO_IRQHandler(void)
         packet[0] = NRF_RADIO->RSSISAMPLE;
         packet[1] = NRF_RADIO->RSSISAMPLE >> 8;
         NRF_RADIO->EVENTS_RSSIEND = 0;
+        memcpy(temp,packet,10);
         if(stDevCfg.tag_type == 2)
         {
+          for(i = 2;i < 9;i++)
+          {
+            temp[i] = temp[i+1];
+          }
+          /*
           packet[2] = packet[3];
           packet[3] = packet[4];
           packet[4] = packet[5];
@@ -377,61 +384,62 @@ void RADIO_IRQHandler(void)
           packet[7] = packet[8];
           packet[8] = packet[9];
           packet[9] = packet[10];
+          */
         }
         switch(stDevCfg.rx_gain)
         {
           case 0:
             //if(packet[0] < 95)
             {
-              add_tags_2_4(packet);
+              add_tags_2_4(temp);
             }
             break;
           case 1:
             if(packet[0] < 95)
             {
-              add_tags_2_4(packet);
+              add_tags_2_4(temp);
             }
             break;
           case 2:
             if(packet[0] < 90)
             {
-              add_tags_2_4(packet);
+              add_tags_2_4(temp);
             }
             break;
           case 3:
             if(packet[0] < 85)
             {
-              add_tags_2_4(packet);
+              add_tags_2_4(temp);
             }
             break;
           case 4:
             if(packet[0] < 80)
             {
-              add_tags_2_4(packet);
+              add_tags_2_4(temp);
             }
             break;
           case 5:
             if(packet[0] < 75)
             {
-              add_tags_2_4(packet);
+              add_tags_2_4(temp);
             }
             break;
           case 6:
             if(packet[0] < 70)
             {
-              add_tags_2_4(packet);
+              add_tags_2_4(temp);
             }
             break;
           case 7:
             if(packet[0] < 65)
             {
-              add_tags_2_4(packet);
+              add_tags_2_4(temp);
             }
             break;
           case 8:
             if(packet[0] < 60)
             {
-              add_tags_2_4(packet);
+              add_tags_2_4(temp);
             }
             break;
           default:
