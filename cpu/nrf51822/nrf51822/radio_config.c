@@ -369,21 +369,22 @@ void RADIO_IRQHandler(void)
         packet[1] = NRF_RADIO->RSSISAMPLE >> 8;
         NRF_RADIO->EVENTS_RSSIEND = 0;
         memcpy(temp,packet,10);
-        for(i = 2;i < 9;i ++)
+        
+        if(stDevCfg.tag_type == 2)
         {
-          temp[i] = temp[i+1];
-        }
-        /*if(stDevCfg.tag_type == 2)
-        {
-          packet[2] = packet[3];
+          for(i = 2;i < 9;i ++)
+          {
+            temp[i] = temp[i+1];
+          }
+          /*packet[2] = packet[3];
           packet[3] = packet[4];
           packet[4] = packet[5];
           packet[5] = packet[6];
           packet[6] = packet[7];
           packet[7] = packet[8];
           packet[8] = packet[9];
-          packet[9] = packet[10];
-        }*/
+          packet[9] = packet[10];*/
+        }
         switch(stDevCfg.rx_gain)
         {
           case 0:
