@@ -35,7 +35,7 @@ void radio_configure()
 {
   // Radio config
     NRF_RADIO->TXPOWER   = (RADIO_TXPOWER_TXPOWER_0dBm << RADIO_TXPOWER_TXPOWER_Pos);
-    NRF_RADIO->FREQUENCY = 12UL;  // Frequency bin 2, 2412MHz
+    NRF_RADIO->FREQUENCY = 15UL;  // Frequency bin 2, 2412MHz
     NRF_RADIO->MODE      = (RADIO_MODE_MODE_Nrf_250Kbit << RADIO_MODE_MODE_Pos);
 
     // Radio address config
@@ -192,7 +192,7 @@ void radio_configure2()
 {
       // Radio config
     NRF_RADIO->TXPOWER   = (RADIO_TXPOWER_TXPOWER_0dBm << RADIO_TXPOWER_TXPOWER_Pos);
-    NRF_RADIO->FREQUENCY = 12UL;  // Frequency bin 2, 2412MHz
+    NRF_RADIO->FREQUENCY = 15UL;  // Frequency bin 2, 2412MHz
     NRF_RADIO->MODE      = (RADIO_MODE_MODE_Nrf_250Kbit << RADIO_MODE_MODE_Pos);
 
     // Radio address config

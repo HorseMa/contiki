@@ -44,7 +44,7 @@ PROCESS(si4463_enddev_process,"si4463");
 PROCESS(ethernet_process,"ethernet");
 PROCESS(data_report_process,"data_report");
 
-AUTOSTART_PROCESSES(&uartRecv_process,&led_process,&ethernet_process,&data_report_process,&si4463_center_process,&si4463_enddev_process);
+AUTOSTART_PROCESSES(&uartRecv_process,&led_process,&ethernet_process,&data_report_process,&si4463_center_process);
 
 void clockInit(void)
 {
@@ -517,45 +517,24 @@ PROCESS_THREAD(si4463_center_process, ev, data)
   //vRadio_Init();
   si4463_irq_cfg();
   dev_list_init();
-  while(1)
-  {
-    while(stDefaultCfg.active == 0)
-    {
-      etimer_set(&et_blink, CLOCK_SECOND / 2);
-      PROCESS_WAIT_EVENT();
-    }
-    while(adhocGetWorkMode() == WORK_MODE_END_DEVICE)
-    {
-      etimer_set(&et_blink, CLOCK_SECOND / 1);
-      PROCESS_WAIT_EVENT();
-    }
-    vRadio_StartRX(10);
-    funBeaconSend(buf);
-    etimer_set(&et_blink, CLOCK_SECOND / 5);
-    PROCESS_WAIT_EVENT();
     while(1)
     {
-      if(ev == ev_433_rx_over)
+      while(1)
       {
-        pstPkgFormart = (pst_PkgFormart)data;
-        if(pstPkgFormart->cmd == enJoinReq)
+        if(adhocGetWorkMode() == WORK_MODE_END_DEVICE)
         {
-          if(dev_list_add_node(pstPkgFormart->src_addr))
-          {
-            funJoinRspSend(buf,pstPkgFormart->src_addr);
-          }
+          etimer_set(&et_blink, CLOCK_SECOND / 1);
+          PROCESS_WAIT_EVENT();
+          continue;
+        }
+        else
+        {
+          break;
         }
       }
-      if(ev == PROCESS_EVENT_TIMER)
-      {
-        break;
-      }
+
+      etimer_set(&et_blink, CLOCK_SECOND / 2);
       PROCESS_WAIT_EVENT();
-    }
-    vRadio_StartRX(channel_433m);
-    while(1)
-    {
-      
       if(!dev_list_get_node(&dev_id))
       {
         pst_EthPkgFormat pkg = (pst_EthPkgFormat)socket_buf;
@@ -578,55 +557,9 @@ PROCESS_THREAD(si4463_center_process, ev, data)
           send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 2);
           process_post(&data_report_process,ev_data_report_start,NULL);
         }
-        break;
-      }
-      funDataReqSend(buf,dev_id);//请求中继书据
-      etimer_set(&et_blink, CLOCK_SECOND / 10);
-      while(1)
-      {
-        //etimer_set(&et_blink, CLOCK_SECOND / 10);
-        PROCESS_WAIT_EVENT();
-        if(ev == PROCESS_EVENT_TIMER)
-        {
-          pst_EthPkgFormat pkg = (pst_EthPkgFormat)socket_buf;;
-          //DISABLE_INTERRUPTS();
-          pkg->len = get_tags_433(&pkg->data[1],&pkg->data[0],MAX_LEN);
-          //ENABLE_INTERRUPTS();
-          if(pkg->len > 0)
-          {
-            pkg->len += (7 + 1);
-            pkg->head = 0xaa55;
-            pkg->dev_id = dev_id;
-            pkg->sn = global_sn ++;
-            pkg->cmd = 0x01;
-            checksum = 0;
-            for(loop = 0;loop < pkg->len - 1 + 2;loop++)
-            {
-              checksum += *((uint8_t*)pkg + loop);
-            }
-            *((uint8_t*)pkg + loop) = checksum;
-            send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 2);
-            process_post(&data_report_process,ev_data_report_start,NULL);
-          }
-          break;
-        }
-        if(ev == ev_433_rx_over)
-        {
-          pstPkgFormart = (pst_PkgFormart)data;
-          if((pstPkgFormart->cmd == enDataRsp) && (pstPkgFormart->src_addr == dev_id))
-          {
-            dev_list_timer_reset(dev_id);
-            etimer_restart(&et_blink);
-            uint8 *p = &pstPkgFormart->data[1];
-            for(uint8 loop = 0;loop < pstPkgFormart->data[0];loop ++)
-            {
-              p += add_tags_433(p);
-            }
-          }
-        }
+        //break;
       }
     }
-  }
   PROCESS_END();
 }
 PROCESS_THREAD(si4463_enddev_process, ev, data)

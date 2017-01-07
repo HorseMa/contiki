@@ -85,6 +85,7 @@ void vRadio_PowerUp(void)
  */
 void vRadio_Init(void)
 {
+#if 0
   U16 wDelay;
   si4463_spi_init();
   /* Power Up the radio chip */
@@ -100,6 +101,7 @@ void vRadio_Init(void)
 
   // Read ITs, clear pending ones
   si446x_get_int_status(0u, 0u, 0u);
+#endif
 }
 
 /*!
