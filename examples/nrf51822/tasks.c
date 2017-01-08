@@ -24,7 +24,8 @@
 #include "ad_hoc.h"
 #include "tags_manage.h"
 #include "dev_list.h"
-
+#include "systemrun.h"
+process_event_t uart_rcv;
 process_event_t ev_433_tx_over;
 process_event_t ev_433_rx_over;
 process_event_t ev_checkw5500;
@@ -44,7 +45,7 @@ PROCESS(si4463_enddev_process,"si4463");
 PROCESS(ethernet_process,"ethernet");
 PROCESS(data_report_process,"data_report");
 
-AUTOSTART_PROCESSES(&uartRecv_process,&led_process,&ethernet_process,&data_report_process,&si4463_center_process,&si4463_enddev_process);
+AUTOSTART_PROCESSES(&uartRecv_process,&led_process,&data_report_process,&si4463_center_process,&si4463_enddev_process);
 
 void clockInit(void)
 {
@@ -466,13 +467,22 @@ PROCESS_THREAD(uartRecv_process, ev, data)
   app_uart_comm_params.tx_pin_no = TX_PIN_NUMBER;
   app_uart_comm_params.flow_control = APP_UART_FLOW_CONTROL_DISABLED;
   app_uart_comm_params.use_parity = false;
-  app_uart_comm_params.baud_rate = UART_BAUDRATE_BAUDRATE_Baud38400;
+  app_uart_comm_params.baud_rate = UART_BAUDRATE_BAUDRATE_Baud57600;
   app_uart_buffers.rx_buf = rxbuf;
   app_uart_buffers.tx_buf = txbuf;
   app_uart_buffers.rx_buf_size = 50;
   app_uart_buffers.tx_buf_size = 50;
   app_uart_init(&app_uart_comm_params,&app_uart_buffers,uart_event_handle,APP_IRQ_PRIORITY_LOW,NULL);
-  uart_put_string("NRF TEST!");
+  //uart_put_string("NRF TEST!");
+  nrf_gpio_cfg_output(0);// rst
+  nrf_gpio_pin_clear(0);
+  etimer_set(&et_blink, CLOCK_SECOND / 5);
+  PROCESS_WAIT_EVENT();    
+  nrf_gpio_cfg_output(0);// rst
+  nrf_gpio_pin_set(0);
+  etimer_set(&et_blink, CLOCK_SECOND * 15);
+  PROCESS_WAIT_EVENT();    
+  systemrun();
   while(1)//∆•≈‰≤®Ãÿ¬ 
   {
     if(adhocGetWorkMode() == WORK_MODE_CENTER)

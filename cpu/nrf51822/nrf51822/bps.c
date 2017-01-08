@@ -31,7 +31,10 @@ void gipo_init(void)
 	//nrf_gpio_pin_set(SPI_PSELMISO1);
 	nrf_gpio_cfg_output(SPI_PSELSS1);
 	nrf_gpio_pin_set(SPI_PSELSS1);
-
+        nrf_gpio_cfg_output(9);// wps
+	nrf_gpio_pin_set(9);
+        nrf_gpio_cfg_output(0);// rst
+	nrf_gpio_pin_set(0);
         nrf_gpio_cfg_output(LED3);
 	nrf_gpio_pin_set(LED3);
         nrf_gpio_cfg_output(LED4);

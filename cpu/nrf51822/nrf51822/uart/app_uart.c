@@ -241,7 +241,7 @@ static void gpiote_uart_event_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polar
  */
 extern uint8_t pc_ip[];
 void uart_put_string(const char str[]);
-
+uint8_t systemrun_d = 0;
 void UART0_IRQHandler(void)
 {
     static uint8_t buf[50];
@@ -257,20 +257,26 @@ void UART0_IRQHandler(void)
         // Clear UART RX event flag
         NRF_UART0->EVENTS_RXDRDY  = 0;
         m_rx_byte                 = (uint8_t)NRF_UART0->RXD;
-        if(m_rx_byte == 's')
+        /*if(m_rx_byte == 's')
         {
           i = 0;
-        }
+        }*/
         buf[i] = m_rx_byte;
-        if(m_rx_byte == 'e')
+        /*if(m_rx_byte == 'e')
         {
           buf[i] = '\0';
           i = 0;
           inet_addr_(&buf[1],pc_ip);
-        }
+        }*/
         i++;
         if(i >= 50)
+        {
           i = 0;
+          //if(strstr(buf,"mjsmart.net"))
+          {
+            systemrun_d = 1;
+          }
+        }
         app_uart_event.evt_type   = APP_UART_DATA;
         app_uart_event.data.value = m_rx_byte;
         m_event_handler(&app_uart_event);

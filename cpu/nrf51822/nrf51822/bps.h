@@ -6,8 +6,8 @@
 #define W5500_RST 02
 #define LED3    27
 #define LED4    27
-#define RX_PIN_NUMBER  12
-#define TX_PIN_NUMBER  11
+#define RX_PIN_NUMBER  8
+#define TX_PIN_NUMBER  10
 //#define CTS_PIN_NUMBER 6
 //#define RTS_PIN_NUMBER 7
 #define SI4463_INT      26
