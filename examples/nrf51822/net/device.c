@@ -116,13 +116,12 @@ void write_config_to_eeprom(void)
     j +=1;
   }
 }
-void set_default(void)
+void set_default1(void)
 {
-  
   uint8 mac[6]={0x00,0x08,0xdc,0x11,0x11,0x15};
-  uint8 lip[4]={10,51,11,172};
+  uint8 lip[4]={192,168,10,111};
   uint8 sub[4]={255,255,255,0};
-  uint8 gw[4]={10,51,11,1};
+  uint8 gw[4]={192,168,10,1};
   uint8 dns[4]={8,8,8,8};
   mac[4] = stDefaultCfg.dev_id >> 8;
   mac[5] = stDefaultCfg.dev_id;
@@ -130,6 +129,36 @@ void set_default(void)
   memcpy(sub, stDefaultCfg.sub, 4);
   memcpy(gw, stDefaultCfg.gw, 4);
   memcpy(dns, stDefaultCfg.dns, 4);
+  memcpy(ConfigMsg.lip, lip, 4);
+  memcpy(ConfigMsg.sub, sub, 4);
+  memcpy(ConfigMsg.gw,  gw, 4);
+  memcpy(ConfigMsg.mac, mac,6);
+  memcpy(ConfigMsg.dns,dns,4);
+  /*
+  uint8 dhcp;
+  uint8 debug;
+
+  uint16 fw_len;
+  uint8 state;
+  */
+  ConfigMsg.dhcp=0;
+  ConfigMsg.debug=1;
+  ConfigMsg.fw_len=0;
+  
+  ConfigMsg.state=NORMAL_STATE;
+  ConfigMsg.sw_ver[0]=FW_VER_HIGH;
+  ConfigMsg.sw_ver[1]=FW_VER_LOW;
+}
+void set_default(void)
+{
+  
+  uint8 mac[6]={0x00,0x08,0xdc,0x11,0x11,0x15};
+  uint8 lip[4]={192,168,10,111};
+  uint8 sub[4]={255,255,255,0};
+  uint8 gw[4]={192,168,10,1};
+  uint8 dns[4]={8,8,8,8};
+  mac[4] = stDefaultCfg.dev_id >> 8;
+  mac[5] = stDefaultCfg.dev_id;
   memcpy(ConfigMsg.lip, lip, 4);
   memcpy(ConfigMsg.sub, sub, 4);
   memcpy(ConfigMsg.gw,  gw, 4);

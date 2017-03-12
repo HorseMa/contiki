@@ -10,6 +10,7 @@ typedef  void (*pFunction)(void);
 
 void set_network(void);
 void set_default(void);
+void set_default1(void);
 void write_config_to_eeprom(void);
 
 void Reset_W5500(void);

@@ -42,9 +42,10 @@ PROCESS(uartRecv_process,"uartRecv");
 PROCESS(si4463_center_process,"si4463");
 PROCESS(si4463_enddev_process,"si4463");
 PROCESS(ethernet_process,"ethernet");
+PROCESS(dhcp_process,"dhcp");
 PROCESS(data_report_process,"data_report");
 
-AUTOSTART_PROCESSES(&uartRecv_process,&led_process,&ethernet_process,&data_report_process,&si4463_center_process);
+AUTOSTART_PROCESSES(&uartRecv_process,&led_process,&dhcp_process,&ethernet_process,&data_report_process,&si4463_center_process);
 
 void clockInit(void)
 {
@@ -100,11 +101,59 @@ PROCESS_THREAD(led_process, ev, data)
   PROCESS_END();
 }
 
+PROCESS_THREAD(dhcp_process, ev, data)
+{
+  static struct etimer et_dhcp;
+  uint8_t dhcpret = 0;
+  PROCESS_BEGIN();
+  gipo_init();
+  //w5500_irq_cfg();
+  spi_w5500_init();
+  nrf_gpio_pin_clear(W5500_RST);
+  etimer_set(&et_dhcp, CLOCK_SECOND / 100);
+  PROCESS_WAIT_EVENT();
+  nrf_gpio_pin_set(W5500_RST);
+  etimer_set(&et_dhcp, CLOCK_SECOND * 2);
+  PROCESS_WAIT_EVENT();
+  //read_cfg();
+  if(memcmp(stDefaultCfg.server_ip,stDevCfg.server_ip,4))
+  {
+  set_default();
+  init_dhcp_client();
+  while(1)
+  {
+    //init_dhcp_client();
+    /*etimer_set(&et_dhcp, CLOCK_SECOND / 100);
+    PROCESS_WAIT_EVENT();*/
+    dhcpret = check_DHCP_state(SOCK_DHCP);
+    if(dhcpret == DHCP_RET_NONE)
+    {
+    }
+    if(dhcpret == DHCP_RET_TIMEOUT)
+    {
+    }
+    if(dhcpret == DHCP_RET_UPDATE)
+    {
+      break;
+    }
+    if(dhcpret == DHCP_RET_CONFLICT)
+    {
+    }
+  }
+  }
+  else
+  {
+    set_default1();
+  }
+  process_post(&ethernet_process,ev_data_report_start,NULL);
+  PROCESS_END();
+}
+
 static uint8_t global_sn = 0;
 PROCESS_THREAD(ethernet_process, ev, data)
 {
   static struct etimer et_ethernet;
-  uint8_t dhcpret = 0;
+  //uint8_t dhcpret = 0;
   //static uint8_t localip[4] = {10,51,11,172};
   static uint8 ret;
   static uint16_t len = 0;
@@ -114,7 +163,7 @@ PROCESS_THREAD(ethernet_process, ev, data)
   uint8_t checksum;
   
   PROCESS_BEGIN();
-  gipo_init();
+  /*gipo_init();
   //w5500_irq_cfg();
   spi_w5500_init();
   nrf_gpio_pin_clear(W5500_RST);
@@ -124,7 +173,8 @@ PROCESS_THREAD(ethernet_process, ev, data)
   etimer_set(&et_ethernet, CLOCK_SECOND * 2);
   PROCESS_WAIT_EVENT();
   //read_cfg();
-  set_default();
+  set_default();*/
+  PROCESS_WAIT_EVENT();
   #if 0
   while(1)
   {
@@ -151,6 +201,10 @@ PROCESS_THREAD(ethernet_process, ev, data)
     if(loop >= 5)
     {
       continue;
+    }
+    else
+    {
+      break;
     }
   }
 #endif
