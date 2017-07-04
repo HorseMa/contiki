@@ -48,10 +48,14 @@ void read_cfg(void)
     if(*(uint16*)blemac == 0xffff)
     {
       stDefaultCfg.dev_id = 0x0058;
+      stDefaultCfg.mac[4] = stDefaultCfg.dev_id >> 8;
+      stDefaultCfg.mac[5] = stDefaultCfg.dev_id;
     }
     else
     {
       stDefaultCfg.dev_id = *(uint16*)blemac;
+      stDefaultCfg.mac[4] = stDefaultCfg.dev_id >> 8;
+      stDefaultCfg.mac[5] = stDefaultCfg.dev_id;
     }
     stDefaultCfg.rx_gain = 0;
     stDefaultCfg.active = 1;
@@ -98,6 +102,8 @@ void read_cfg(void)
 #endif
     stDevCfg.rx_gain = stDefaultCfg.rx_gain;
     memcpy(stDevCfg.local_ip,stDefaultCfg.local_ip,4);
+    memcpy(stDevCfg.gw,stDefaultCfg.gw,4);
+    memcpy(stDevCfg.mac,stDefaultCfg.mac,8);
     stDevCfg.local_port = stDefaultCfg.local_port;
     memcpy(stDevCfg.server_ip,stDefaultCfg.server_ip,4);
     stDevCfg.server_port = stDefaultCfg.server_port;

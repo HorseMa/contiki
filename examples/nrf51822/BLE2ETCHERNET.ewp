@@ -728,7 +728,7 @@
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state>C:\contiki\examples\nrf51822\nRF51822_QFAA.icf</state>
+          <state>Y:\Downloads\lora\contiki\examples\nrf51822\nRF51822_QFAA.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>

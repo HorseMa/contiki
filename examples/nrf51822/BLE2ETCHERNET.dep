@@ -2,732 +2,383 @@
 
 <project>
   <fileVersion>2</fileVersion>
-  <fileChecksum>3585518478</fileChecksum>
+  <fileChecksum>714180535</fileChecksum>
   <configuration>
     <name>Debug</name>
     <outputs>
-      <file>$PROJ_DIR$\..\..\core\lib\me_tabs.c</file>
-      <file>$PROJ_DIR$\..\..\core\lib\memb.c</file>
-      <file>$PROJ_DIR$\..\..\core\lib\mmem.c</file>
-      <file>$PROJ_DIR$\..\..\core\lib\petsciiconv.c</file>
-      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio_hal.c</file>
-      <file>$PROJ_DIR$\..\..\core\lib\me.c</file>
-      <file>$PROJ_DIR$\..\..\core\lib\settings.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\assert.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\aes-128.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\sensors.o</file>
-      <file>$TOOLKIT_DIR$\lib\rt6M_tl.a</file>
-      <file>$PROJ_DIR$\Debug\Obj\list.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\util.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\settings.pbi</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\radio_config.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\device.o</file>
-      <file>$PROJ_DIR$\..\..\core\lib\trickle-timer.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\arg.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\app_simple_timer.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\tasks.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\si446x_api_lib.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\util.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\app_util_platform.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\compower.o</file>
-      <file>$TOOLKIT_DIR$\inc\c\stddef.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\spi_master.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\crc16.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\nrf_delay.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\system_nrf51.pbi</file>
-      <file>$PROJ_DIR$\w5500\w5500.c</file>
-      <file>$PROJ_DIR$\spi_master\spi_master.c</file>
-      <file>$PROJ_DIR$\..\..\core\net\linkaddr.h</file>
-      <file>$TOOLKIT_DIR$\inc\c\stdio.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\arg.pbi</file>
-      <file>$PROJ_DIR$\..\..\core\net\ip\uip.h</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\core_cm0.h</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf51.h</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\compiler_abstraction.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\trickle-timer.pbi</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\bps.c</file>
-      <file>$PROJ_DIR$\w5500\socket.c</file>
-      <file>$PROJ_DIR$\stm32f10x_it.c</file>
-      <file>$PROJ_DIR$\tasks.c</file>
-      <file>$PROJ_DIR$\main.c</file>
-      <file>$PROJ_DIR$\..\..\core\lib\memb.h</file>
-      <file>$PROJ_DIR$\tags_manage.c</file>
-      <file>$PROJ_DIR$\mai_no_os.c</file>
-      <file>$PROJ_DIR$\Debug\Obj\etimer.o</file>
-      <file>$PROJ_DIR$\..\..\core\lib\ringbuf.h</file>
-      <file>$PROJ_DIR$\w5500\md5.c</file>
-      <file>$PROJ_DIR$\dev_cfg.c</file>
-      <file>$PROJ_DIR$\w5500\SPI2.c</file>
-      <file>$PROJ_DIR$\Debug\Obj\petsciiconv.o</file>
-      <file>$PROJ_DIR$\ad_hoc.c</file>
-      <file>$PROJ_DIR$\dev_list.c</file>
-      <file>$PROJ_DIR$\Debug\Obj\radio_config.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\main.o</file>
-      <file>$TOOLKIT_DIR$\lib\dl6M_tln.a</file>
-      <file>$PROJ_DIR$\Debug\Obj\radio_hal.o</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf.h</file>
-      <file>$PROJ_DIR$\net\Types.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\app_uart.pbi</file>
-      <file>$PROJ_DIR$\..\..\core\contiki-version.h</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_uart.h</file>
-      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio_config.h</file>
       <file>$PROJ_DIR$\Debug\Obj\socket.o</file>
-      <file>$PROJ_DIR$\..\..\core\sys\clock.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\settings.o</file>
       <file>$PROJ_DIR$\Debug\Obj\me.o</file>
-      <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\ble_flash.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\radio_comm.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\crc16.o</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Config_Normal.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\stimer.o</file>
+      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio_config.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\radio_hal.o</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\sdk_errors.h</file>
       <file>$PROJ_DIR$\net\util.h</file>
-      <file>$TOOLKIT_DIR$\inc\c\DLib_Config_Normal.h</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\bps.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\stimer.o</file>
-      <file>$TOOLKIT_DIR$\inc\c\DLib_Threads.h</file>
-      <file>$PROJ_DIR$\..\..\core\sys\loader.h</file>
-      <file>$TOOLKIT_DIR$\inc\c\string.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\radio_comm.pbi</file>
-      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\compiler_defs.h</file>
-      <file>$PROJ_DIR$\w5500\md5.h</file>
-      <file>$TOOLKIT_DIR$\inc\c\ystdio.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\process.o</file>
-      <file>$PROJ_DIR$\..\..\core\contiki.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\dev_cfg.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\memb.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\energest.o</file>
-      <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_assert.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\dev_list.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\radio_config.o</file>
-      <file>$TOOLKIT_DIR$\lib\m6M_tl.a</file>
-      <file>$PROJ_DIR$\spi_master\spi_master.h</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\nrf_delay.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\petsciiconv.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\radio_config.pbi</file>
+      <file>$PROJ_DIR$\net\Types.h</file>
+      <file>$TOOLKIT_DIR$\lib\dl6M_tln.a</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\crc16.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\system_nrf51.pbi</file>
+      <file>$PROJ_DIR$\..\..\core\net\linkaddr.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\arg.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\compower.o</file>
+      <file>$PROJ_DIR$\..\..\core\net\ip\uip.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\app_simple_timer.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\spi_master.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\app_util_platform.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\aes-128.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\si446x_api_lib.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\sensors.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\util.o</file>
+      <file>$TOOLKIT_DIR$\inc\c\stddef.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\list.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\util.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\device.o</file>
+      <file>$PROJ_DIR$\..\..\core\sys\clock.h</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\radio_config.h</file>
+      <file>$PROJ_DIR$\..\..\core\lib\trickle-timer.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\tasks.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdio.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\ble_flash.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\trickle-timer.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\arg.o</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\core_cm0.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\app_uart.pbi</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf51.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
+      <file>$PROJ_DIR$\..\..\core\lib\settings.h</file>
+      <file>$PROJ_DIR$\..\..\core\contiki-version.h</file>
+      <file>$TOOLKIT_DIR$\lib\rt6M_tl.a</file>
+      <file>$PROJ_DIR$\Debug\Obj\settings.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\assert.o</file>
       <file>$PROJ_DIR$\..\..\core\sys\lc.h</file>
+      <file>$TOOLKIT_DIR$\lib\m6M_tl.a</file>
+      <file>$PROJ_DIR$\Debug\Obj\radio_config.o</file>
+      <file>$PROJ_DIR$\..\..\core\contiki.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\ystdio.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\dev_cfg.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\dev_list.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\memb.pbi</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\compiler_abstraction.h</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_assert.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\process.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\energest.o</file>
+      <file>$PROJ_DIR$\..\..\core\lib\memb.h</file>
+      <file>$PROJ_DIR$\..\..\core\lib\ringbuf.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\etimer.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\settings.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\etimer.pbi</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_uart.h</file>
+      <file>$PROJ_DIR$\spi_master\spi_master.h</file>
       <file>$PROJ_DIR$\..\..\core\sys\mt.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\nrf_drv_wdt.o</file>
       <file>$PROJ_DIR$\Debug\Obj\rtimer.o</file>
       <file>$PROJ_DIR$\Debug\Obj\mt.pbi</file>
       <file>$PROJ_DIR$\..\..\core\sys\pt.h</file>
       <file>$TOOLKIT_DIR$\inc\c\stdint.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\nrf_drv_wdt.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\app_error.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\md5.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\etimer.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\md5.o</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\timer\nrf_drv_config.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\rtimer-arch.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\md5.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\assert.pbi</file>
       <file>$PROJ_DIR$\..\..\platform\nrf51822\rtimer-arch.h</file>
       <file>$PROJ_DIR$\nRF51822_QFAA.icf</file>
-      <file>$PROJ_DIR$\Debug\Obj\app_error.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\rtimer-arch.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdbool.h</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_soc.h</file>
       <file>$PROJ_DIR$\Debug\Obj\mmem.o</file>
       <file>$PROJ_DIR$\Debug\Obj\ad_hoc.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\nrf_soc.o</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\contiki-conf.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\assert.pbi</file>
       <file>$PROJ_DIR$\Debug\Exe\BLE2ETCHERNET.hex</file>
-      <file>$TOOLKIT_DIR$\inc\c\stdbool.h</file>
       <file>$PROJ_DIR$\Debug\Obj\timer.pbi</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\timer\nrf_drv_timer.h</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf51_bitfields.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\nrf_soc.o</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\timer\nrf_drv_timer.h</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\contiki-conf.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\socket.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\procinit.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\tags_manage.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\clock.o</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_drv_wdt.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\tags_manage.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\socket.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\ad_hoc.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\sockutil.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\system_nrf51.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\si446x_api_lib.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\app_error.o</file>
       <file>$PROJ_DIR$\Debug\Obj\gcr.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\si446x_api_lib.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\system_nrf51.o</file>
       <file>$PROJ_DIR$\..\..\core\sys\autostart.h</file>
       <file>$PROJ_DIR$\Debug\Obj\autostart.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\procinit.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\BLE2ETCHERNET.pbd</file>
-      <file>$PROJ_DIR$\Debug\Obj\sockutil.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\ad_hoc.pbi</file>
       <file>$PROJ_DIR$\..\..\core\contiki-default-conf.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\BLE2ETCHERNET.pbd</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_error.h</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\core_cmFunc.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\me_tabs.o</file>
       <file>$TOOLKIT_DIR$\inc\c\DLib_Product_string.h</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\app_error.h</file>
-      <file>$PROJ_DIR$\..\..\core\dev\eeprom.h</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\core_cmFunc.h</file>
       <file>$PROJ_DIR$\Debug\Obj\nrf_drv_wdt.pbi</file>
+      <file>$PROJ_DIR$\..\..\core\dev\eeprom.h</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\app_error.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\me_tabs.o</file>
       <file>$PROJ_DIR$\Debug\Obj\compower.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\dev_list.o</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_timer.h</file>
+      <file>$PROJ_DIR$\..\..\core\lib\random.h</file>
       <file>$PROJ_DIR$\..\..\core\sys\cc.h</file>
       <file>$PROJ_DIR$\Debug\Obj\memb.o</file>
-      <file>$PROJ_DIR$\..\..\core\lib\random.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\dhcp.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\app_gpiote.o</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_wdt.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\dhcp.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\app_simple_timer.o</file>
-      <file>$PROJ_DIR$\..\..\core\net\mac\frame802154.h</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_wdt.h</file>
       <file>$PROJ_DIR$\Debug\Obj\petsciiconv.pbi</file>
-      <file>$PROJ_DIR$\..\..\core\net\packetbuf.h</file>
       <file>$PROJ_DIR$\net\sockutil.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\mmem.pbi</file>
-      <file>$PROJ_DIR$\dev_list.h</file>
+      <file>$PROJ_DIR$\..\..\core\net\mac\frame802154.h</file>
       <file>$PROJ_DIR$\Debug\Obj\ble_flash.o</file>
-      <file>$PROJ_DIR$\net\device.h</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\common.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\mmem.pbi</file>
+      <file>$PROJ_DIR$\..\..\core\net\packetbuf.h</file>
       <file>$PROJ_DIR$\Debug\Obj\nrf_delay.o</file>
-      <file>$PROJ_DIR$\..\..\core\sys\lc-switch.h</file>
-      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\si446x_api_lib.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\nrf_drv_timer.o</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\common.h</file>
+      <file>$PROJ_DIR$\dev_list.h</file>
+      <file>$PROJ_DIR$\net\device.h</file>
       <file>$PROJ_DIR$\Debug\Obj\rtimer.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\nrf_drv_timer.o</file>
       <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio.h</file>
       <file>$PROJ_DIR$\Debug\Obj\tags_manage.o</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_util.h</file>
+      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio_hal.h</file>
+      <file>$PROJ_DIR$\..\..\core\sys\lc-switch.h</file>
+      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\si446x_api_lib.h</file>
       <file>$PROJ_DIR$\Debug\Obj\autostart.pbi</file>
+      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\si446x_defs.h</file>
       <file>$PROJ_DIR$\Debug\Obj\radio_comm.o</file>
       <file>$PROJ_DIR$\Debug\Obj\trickle-timer.o</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_util.h</file>
       <file>$PROJ_DIR$\Debug\Obj\si446x_nirq.pbi</file>
-      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio_hal.h</file>
-      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\si446x_defs.h</file>
       <file>$TOOLKIT_DIR$\inc\c\xencoding_limits.h</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\nrf_gpiote.h</file>
       <file>$PROJ_DIR$\Debug\Exe\BLE2ETCHERNET.out</file>
       <file>$PROJ_DIR$\Debug\Obj\ringbuf.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\rtimer-arch.o</file>
       <file>$PROJ_DIR$\Debug\Obj\ctimer.o</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_gpio.h</file>
-      <file>$PROJ_DIR$\w5500\socket.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\ifft.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\random.pbi</file>
-      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio_comm.h</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\nrf_drv_gpiote.h</file>
-      <file>$PROJ_DIR$\net\dhcp.h</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_gpio.h</file>
+      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio_comm.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\random.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\nrf_soc.pbi</file>
+      <file>$PROJ_DIR$\w5500\socket.h</file>
       <file>$PROJ_DIR$\Debug\Obj\device.pbi</file>
+      <file>$PROJ_DIR$\net\dhcp.h</file>
       <file>$PROJ_DIR$\Debug\Obj\app_gpiote.pbi</file>
-      <file>$PROJ_DIR$\..\..\core\lib\me_tabs.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\ifft.o</file>
       <file>$PROJ_DIR$\Debug\Obj\ringbuf.o</file>
       <file>$PROJ_DIR$\..\..\core\sys\procinit.h</file>
       <file>$PROJ_DIR$\Debug\Obj\nrf_drv_common.o</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\spi_master.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\random.o</file>
-      <file>$PROJ_DIR$\tags_manage.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\timer.o</file>
       <file>$PROJ_DIR$\Debug\Obj\si446x_nirq.o</file>
-      <file>$PROJ_DIR$\..\..\core\sys\process.h</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\core_cmInstr.h</file>
+      <file>$PROJ_DIR$\..\..\core\lib\me_tabs.h</file>
+      <file>$PROJ_DIR$\tags_manage.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\random.o</file>
       <file>$TOOLKIT_DIR$\inc\c\cmsis_iar.h</file>
-      <file>$PROJ_DIR$\..\..\core\lib\mmem.h</file>
-      <file>$TOOLKIT_DIR$\inc\c\intrinsics.h</file>
-      <file>$PROJ_DIR$\ad_hoc.h</file>
+      <file>$PROJ_DIR$\..\..\core\sys\process.h</file>
       <file>$TOOLKIT_DIR$\inc\c\stdarg.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\timer.o</file>
+      <file>$PROJ_DIR$\ad_hoc.h</file>
       <file>$TOOLKIT_DIR$\inc\c\ycheck.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\radio_hal.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\c\intrinsics.h</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\core_cmInstr.h</file>
+      <file>$PROJ_DIR$\..\..\core\lib\mmem.h</file>
       <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\radio_hal.pbi</file>
       <file>$PROJ_DIR$\..\..\core\sys\etimer.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\tasks.o</file>
-      <file>$PROJ_DIR$\tasks.h</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf51_deprecated.h</file>
-      <file>$PROJ_DIR$\..\..\core\lib\sensors.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\w5500.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\ifft.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\gcr.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\dev_cfg.o</file>
       <file>$PROJ_DIR$\Debug\Obj\stimer.pbi</file>
-      <file>$PROJ_DIR$\..\..\core\net\ip\uipopt.h</file>
       <file>$PROJ_DIR$\Debug\Obj\ctimer.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\tasks.o</file>
+      <file>$PROJ_DIR$\..\..\core\lib\sensors.h</file>
+      <file>$PROJ_DIR$\tasks.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\gcr.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\w5500.pbi</file>
       <file>$TOOLKIT_DIR$\inc\c\stdlib.h</file>
-      <file>$PROJ_DIR$\..\..\core\sys\timer.h</file>
       <file>$PROJ_DIR$\Debug\Obj\app_uart.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\mt.o</file>
-      <file>$PROJ_DIR$\..\..\core\lib\aes-128.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\radio.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\clock.pbi</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_delay.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\ifft.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\dev_cfg.o</file>
       <file>$PROJ_DIR$\Debug\Obj\process.pbi</file>
-      <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
-      <file>$TOOLKIT_DIR$\lib\shb_l.a</file>
+      <file>$PROJ_DIR$\Debug\Obj\mt.o</file>
+      <file>$PROJ_DIR$\..\..\core\net\ip\uipopt.h</file>
+      <file>$PROJ_DIR$\..\..\core\sys\timer.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\clock.pbi</file>
+      <file>$PROJ_DIR$\..\..\core\lib\aes-128.h</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\simple_timer\app_simple_timer.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\radio.pbi</file>
+      <file>$PROJ_DIR$\..\..\core\net\ip\tcpip.h</file>
+      <file>$TOOLKIT_DIR$\lib\shb_l.a</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_delay.h</file>
+      <file>$PROJ_DIR$\..\..\core\sys\ctimer.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\system_nrf51.h</file>
       <file>$PROJ_DIR$\net\socket.h</file>
-      <file>$PROJ_DIR$\..\..\core\sys\ctimer.h</file>
       <file>$PROJ_DIR$\..\..\core\sys\energest.h</file>
-      <file>$PROJ_DIR$\..\..\core\net\ip\tcpip.h</file>
       <file>$PROJ_DIR$\..\..\core\lib\list.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\me.pbi</file>
       <file>$PROJ_DIR$\..\..\core\sys\stimer.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\w5500.o</file>
-      <file>$PROJ_DIR$\dev_cfg.h</file>
       <file>$PROJ_DIR$\Debug\Obj\energest.pbi</file>
-      <file>$PROJ_DIR$\..\..\core\net\llsec\llsec802154.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\sockutil.pbi</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nordic_common.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\me.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\sensors.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\w5500.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\sockutil.pbi</file>
+      <file>$PROJ_DIR$\dev_cfg.h</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\app_util_platform.h</file>
       <file>$PROJ_DIR$\Debug\Obj\procinit.pbi</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\mtarch.h</file>
+      <file>$PROJ_DIR$\..\..\core\net\llsec\llsec802154.h</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nordic_common.h</file>
       <file>$PROJ_DIR$\Debug\Obj\dhcp.o</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\mtarch.h</file>
+      <file>$PROJ_DIR$\w5500\w5500.h</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_gpiote.h</file>
       <file>$PROJ_DIR$\Debug\Obj\app_util_platform.o</file>
-      <file>$PROJ_DIR$\w5500\w5500.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\bps.o</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\spi_master_config.h</file>
-      <file>$PROJ_DIR$\net\config.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\radio.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\nrf_drv_timer.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\nrf_drv_common.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\bps.o</file>
       <file>$TOOLKIT_DIR$\inc\c\DLib_Product.h</file>
+      <file>$PROJ_DIR$\net\config.h</file>
       <file>$PROJ_DIR$\..\..\core\lib\ifft.h</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\ble_flash.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\nrf_drv_common.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\radio.o</file>
       <file>$PROJ_DIR$\Debug\Obj\spi_master.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\aes-128.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\list.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\nrf_drv_timer.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\bps.pbi</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_drv_common.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\bps.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\me_tabs.pbi</file>
       <file>$PROJ_DIR$\..\..\core\sys\arg.h</file>
       <file>$PROJ_DIR$\..\..\core\sys\rtimer.h</file>
       <file>$PROJ_DIR$\Debug\Obj\iar_startup_nrf51.o</file>
+      <file>$PROJ_DIR$\..\..\core\sys\loader.h</file>
       <file>$PROJ_DIR$\..\..\core\sys\compower.h</file>
+      <file>$PROJ_DIR$\w5500\md5.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\string.h</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\bps.h</file>
+      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\compiler_defs.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Threads.h</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\app_error.c</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_fifo.c</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\iar_startup_nrf51.s</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\app_util_platform.c</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\ble_flash.c</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_delay.c</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_soc.c</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_uart.c</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\timer\nrf_drv_timer.c</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\nrf_drv_gpiote.c</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\radio_config.c</file>
       <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\simple_uart.c</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_uart_fifo.c</file>
-      <file>$PROJ_DIR$\..\..\core\lib\assert.c</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\timer\nrf_drv_timer.c</file>
-      <file>$PROJ_DIR$\..\..\core\lib\list.c</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\ble_flash.c</file>
-      <file>$PROJ_DIR$\..\..\core\lib\aes-128.c</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_drv_wdt.c</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_fifo.c</file>
-      <file>$PROJ_DIR$\..\..\core\lib\crc16.c</file>
       <file>$PROJ_DIR$\..\..\core\lib\gcr.c</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\system_nrf51.c</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\simple_timer\app_simple_timer.c</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\app_util_platform.c</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_gpiote.c</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_drv_common.c</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\app_error.c</file>
       <file>$PROJ_DIR$\..\..\core\lib\ifft.c</file>
-      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\nrf_drv_gpiote.c</file>
+      <file>$PROJ_DIR$\..\..\core\lib\me_tabs.c</file>
+      <file>$PROJ_DIR$\..\..\core\lib\mmem.c</file>
+      <file>$PROJ_DIR$\..\..\core\lib\ringbuf.c</file>
+      <file>$PROJ_DIR$\..\..\core\lib\petsciiconv.c</file>
+      <file>$PROJ_DIR$\..\..\core\lib\random.c</file>
+      <file>$PROJ_DIR$\..\..\core\lib\print-stats.c</file>
       <file>$PROJ_DIR$\..\..\core\lib\sensors.c</file>
       <file>$PROJ_DIR$\..\..\core\lib\trickle-timer.c</file>
-      <file>$PROJ_DIR$\..\..\core\sys\arg.c</file>
-      <file>$PROJ_DIR$\..\..\core\sys\autostart.c</file>
-      <file>$PROJ_DIR$\..\..\core\sys\ctimer.c</file>
       <file>$PROJ_DIR$\..\..\core\lib\settings.c</file>
-      <file>$PROJ_DIR$\..\..\core\sys\mt.c</file>
-      <file>$PROJ_DIR$\..\..\core\sys\rtimer.c</file>
-      <file>$PROJ_DIR$\net\dns.c</file>
       <file>$PROJ_DIR$\..\..\core\sys\compower.c</file>
-      <file>$PROJ_DIR$\net\device.c</file>
-      <file>$PROJ_DIR$\..\..\platform\nrf51822\rtimer-arch.c</file>
-      <file>$PROJ_DIR$\net\sockutil.c</file>
-      <file>$PROJ_DIR$\net\util.c</file>
-      <file>$PROJ_DIR$\..\..\core\sys\process.c</file>
-      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio.c</file>
-      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio_comm.c</file>
-      <file>$PROJ_DIR$\..\..\core\sys\procinit.c</file>
-      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\si446x_api_lib.c</file>
-      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\si446x_nirq.c</file>
+      <file>$PROJ_DIR$\..\..\core\sys\ctimer.c</file>
       <file>$PROJ_DIR$\..\..\core\sys\etimer.c</file>
-      <file>$PROJ_DIR$\..\..\core\lib\print-stats.c</file>
-      <file>$PROJ_DIR$\..\..\core\lib\ringbuf.c</file>
+      <file>$PROJ_DIR$\..\..\core\sys\mt.c</file>
+      <file>$PROJ_DIR$\..\..\core\sys\procinit.c</file>
+      <file>$PROJ_DIR$\..\..\platform\nrf51822\clock.c</file>
+      <file>$PROJ_DIR$\net\dns.c</file>
+      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio_comm.c</file>
+      <file>$PROJ_DIR$\w5500\w5500.c</file>
+      <file>$PROJ_DIR$\w5500\md5.c</file>
+      <file>$PROJ_DIR$\w5500\socket.c</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\bps.c</file>
+      <file>$PROJ_DIR$\mai_no_os.c</file>
+      <file>$PROJ_DIR$\main.c</file>
+      <file>$PROJ_DIR$\tasks.c</file>
+      <file>$PROJ_DIR$\stm32f10x_it.c</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_gpiote.c</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_uart_fifo.c</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\simple_timer\app_simple_timer.c</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_uart.c</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_drv_common.c</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_soc.c</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_drv_wdt.c</file>
+      <file>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\system_nrf51.c</file>
+      <file>$PROJ_DIR$\..\..\core\lib\assert.c</file>
+      <file>$PROJ_DIR$\..\..\core\lib\aes-128.c</file>
+      <file>$PROJ_DIR$\..\..\core\lib\crc16.c</file>
+      <file>$PROJ_DIR$\..\..\core\lib\list.c</file>
+      <file>$PROJ_DIR$\..\..\core\lib\me.c</file>
+      <file>$PROJ_DIR$\..\..\core\lib\memb.c</file>
+      <file>$PROJ_DIR$\..\..\core\sys\autostart.c</file>
+      <file>$PROJ_DIR$\..\..\core\sys\arg.c</file>
       <file>$PROJ_DIR$\..\..\core\sys\energest.c</file>
+      <file>$PROJ_DIR$\..\..\core\sys\process.c</file>
+      <file>$PROJ_DIR$\..\..\core\sys\rtimer.c</file>
       <file>$PROJ_DIR$\..\..\core\sys\stimer.c</file>
       <file>$PROJ_DIR$\..\..\core\sys\timer.c</file>
-      <file>$PROJ_DIR$\..\..\platform\nrf51822\clock.c</file>
       <file>$PROJ_DIR$\net\dhcp.c</file>
-      <file>$PROJ_DIR$\..\..\core\lib\random.c</file>
+      <file>$PROJ_DIR$\..\..\platform\nrf51822\rtimer-arch.c</file>
+      <file>$PROJ_DIR$\net\device.c</file>
+      <file>$PROJ_DIR$\net\sockutil.c</file>
+      <file>$PROJ_DIR$\net\util.c</file>
+      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio.c</file>
+      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\si446x_api_lib.c</file>
+      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio_hal.c</file>
+      <file>$PROJ_DIR$\..\..\platform\nrf51822\Radio\si446x_nirq.c</file>
+      <file>$PROJ_DIR$\spi_master\spi_master.c</file>
+      <file>$PROJ_DIR$\ad_hoc.c</file>
+      <file>$PROJ_DIR$\dev_list.c</file>
+      <file>$PROJ_DIR$\dev_cfg.c</file>
+      <file>$PROJ_DIR$\tags_manage.c</file>
     </outputs>
-    <file>
-      <name>$PROJ_DIR$\..\..\core\lib\me_tabs.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 271</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 138</file>
-        </tool>
-      </outputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\core\lib\memb.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 87</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 147</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 66 176 208 129 201 44 232 62 273 146 114 85 89 139 135 237 194 205 211 79 69 77 74 261 224 99 78 238 100 95 163 106</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 79 208 232 69 74 261 176 77 89 139 85 62 114 205 100 135 201 99 95 163 146 129 224 66 237 211 273 106 194 78 238 44</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\core\lib\mmem.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 157</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 111</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 176 114 205 261 232 240 79 100 208 77 74 204 69 89 139</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 204 240 114 205 208 100 232 69 74 261 176 77 79 89 139</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\core\lib\petsciiconv.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 154</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 52</file>
-        </tool>
-      </outputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio_hal.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 209</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 58</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 77 35 182 117 235 208 69 36 258 137 74 232 205 175 75 94 261 100 81 202 176 203 120</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 81 36 35 100 208 232 69 74 261 176 77 202 203 205 137 235 117 175 75 182 120 94 258</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\core\lib\me.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 241</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 68</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 192</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 192</file>
-        </tool>
-      </inputs>
-    </file>
     <file>
       <name>[ROOT_NODE]</name>
       <outputs>
         <tool>
           <name>ILINK</name>
-          <file> 178</file>
+          <file> 152</file>
         </tool>
       </outputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\w5500\w5500.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 216</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 243</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 59 205 183 208 79 232 176 120 100 94 83 160 37 202 32 259 256 182 89 69 77 74 261 139 60 36 214 35 235 137 203 117</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 32 208 232 69 74 261 176 77 89 83 79 139 259 59 36 35 100 202 203 205 137 235 120 214 37 60 160 94 117 256 183 182</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\spi_master\spi_master.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 265</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 25</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 203 117 232 74 100 258 77 120 205 208 182 176 261 37 35 235 202 230 161 69 59 36 214 137 94</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 94 117 100 208 232 69 74 261 176 77 230 59 36 35 202 203 205 137 235 120 214 37 182 161 258</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\bps.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 269</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 257</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 232 77 235 258 74 35 202 203 182 196 176 261 36 100 205 208 117 75 167 69 120 137 81</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 117 100 208 232 69 74 261 176 77 182 36 35 202 203 205 137 235 120 75 258 167 81 196</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\w5500\socket.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 124</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 65</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 208 183 120 100 69 83 32 114 37 35 235 202 59 259 256 73 244 36 214 137 232 176 77 74 261 203 205 160 60 89</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 59 36 35 100 208 232 69 74 261 176 77 202 203 205 137 235 120 214 37 259 60 160 32 89 83 256 183 73 114 244</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\tasks.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 19</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 212</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 106 99 208 37 114 100 94 167 163 160 117 60 240 156 73 224 238 95 273 139 205 120 151 213 14 188 32 122 201 211 78 176 66 89 202 59 35 232 85 75 79 36 259 256 236 182 63 244 206 198 158 62 135 129 237 194 69 77 74 261 146 235 137 203 214 136 250 83 81 72 105 24</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 85 62 114 205 208 100 232 69 74 261 176 77 135 201 99 95 163 146 129 224 66 237 211 273 106 194 78 238 213 75 240 79 89 139 14 36 35 202 203 137 235 94 117 160 188 60 259 59 120 214 37 156 256 236 182 73 63 250 32 83 167 81 244 122 72 136 151 24 105 206 198 158</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\main.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 210</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 56</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 232 194 114 135 205 208 74 201 117 89 100 122 237 77 99 163 72 136 120 234 62 129 273 66 176 261 106 60 59 37 35 235 148 244 224 211 78 238 69 146 95 151 24 36 214 137 203 85 105 202</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 85 62 114 205 208 100 232 69 74 261 176 77 135 201 99 95 163 146 129 224 66 237 211 273 106 194 78 238 148 234 244 60 122 117 72 136 151 24 89 59 36 35 202 203 137 235 120 214 37 105</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\tags_manage.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 123</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 168</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 139 208 261 244 60 89 79 232 69 77 74 198 176</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 198 60 244 79 208 232 69 74 261 176 77 89 139</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\w5500\md5.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 102</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 104</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 261 139 208 82 89 69 60 232 176 77 74 79</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 79 208 232 69 74 261 176 77 89 139 60 82</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\dev_cfg.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 86</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 219</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 263 35 202 261 36 79 235 100 208 69 77 74 232 205 117 244 60 137 176 203 89 139</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 244 60 36 35 100 208 232 69 74 261 176 77 202 203 205 137 235 263 117 79 89 139</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\ad_hoc.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 134</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 112</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 224 273 100 238 208 99 95 198 60 114 163 106 203 213 201 211 78 176 66 205 244 167 85 62 135 129 237 194 232 69 77 74 261 146 81 36 117 35 235 202 206 137</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 206 85 62 114 205 208 100 232 69 74 261 176 77 135 201 99 95 163 146 129 224 66 237 211 273 106 194 78 238 60 244 213 167 81 36 35 202 203 137 235 117 198</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\dev_list.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 91</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 144</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 60 158</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 158 60</file>
-        </tool>
-      </inputs>
     </file>
     <file>
       <name>$PROJ_DIR$\Debug\Exe\BLE2ETCHERNET.out</name>
       <outputs>
         <tool>
           <name>OBJCOPY</name>
-          <file> 116</file>
+          <file> 89</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>ILINK</name>
-          <file> 107 112 8 125 150 152 225 255 17 7 130 159 257 121 23 71 181 219 144 15 253 88 47 126 274 184 267 56 104 68 138 147 111 226 162 195 165 101 113 52 84 131 260 170 92 58 197 193 180 97 9 67 20 200 65 133 25 76 128 168 212 199 171 12 243 233 10 93 57</file>
+          <file> 84 88 26 104 123 125 195 230 41 50 107 130 234 98 21 3 155 197 118 33 226 63 66 105 248 165 242 16 81 1 116 122 87 199 133 168 138 72 92 12 62 96 239 147 53 7 173 166 154 73 28 67 27 170 0 101 24 5 102 140 189 177 148 29 219 207 48 52 15</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\app_error.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 104</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 77</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 10 44 42 76 179 210 45 4 235 150 255 181 174 180 112 211 91 186 60 115 85 110 225</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 4 186 210 112 255 174 110 60 44 150 235 180 179 76 115 225 91 42 211 181 45 10 85</file>
         </tool>
       </inputs>
     </file>
@@ -736,168 +387,30 @@
       <outputs>
         <tool>
           <name>AARM</name>
-          <file> 274</file>
+          <file> 248</file>
         </tool>
       </outputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_delay.c</name>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\app_util_platform.c</name>
       <outputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 27</file>
+          <name>ICCARM</name>
+          <file> 230</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 162</file>
+          <name>BICOMP</name>
+          <file> 25</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 232 35 100 74 214 202 203 208 77 235 205 59 89 176 261 36 37 83 69 120 137 32 230</file>
-        </tool>
-        <tool>
           <name>ICCARM</name>
-          <file> 32 208 232 69 74 261 176 77 89 83 37 59 36 35 100 202 203 205 137 235 120 214 230</file>
+          <file> 222 76 179 210 45 4 235 150 255 60 44 42 181 174 180 112 211</file>
         </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_soc.c</name>
-      <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 189</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 113</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 235 89 176 261 232 208 77 74 36 100 110 69 35 202 223 136 137 203 205</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 223 208 232 69 74 261 176 77 89 110 100 36 35 202 203 205 137 235 136</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_uart.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 61</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 225</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 176 187 36 208 205 72 60 89 172 238 100 117 114 140 182 250 232 202 214 120 63 59 73 79 69 77 74 261 37 35 235 137 203 139 136 177 105 24 273 106</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 63 100 208 232 69 74 261 176 77 117 250 37 36 35 202 203 205 137 235 59 120 214 140 136 172 182 187 177 24 89 105 72 238 273 114 106 73 60 79 139</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\radio_config.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 55</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 92</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 146 208 205 176 273 99 85 36 261 203 114 66 238 244 59 214 137 232 77 74 224 230 270 79 198 120 37 35 235 100 202 69 201 211 78 95 14 106 62 135 129 237 194 163 89 139 60</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 14 230 59 36 35 100 208 232 69 74 261 176 77 202 203 205 137 235 120 214 37 238 273 114 106 270 85 62 135 201 99 95 163 146 129 224 66 237 211 194 78 79 89 139 244 60 198</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\core\lib\assert.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 115</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 7</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 208 89 69 232 83 32 176 77 74 261</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 32 208 232 69 74 261 176 77 89 83</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\timer\nrf_drv_timer.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 268</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 165</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 232 208 238 176 205 37 248 145 100 120 119 250 117 24 89 202 59 114 90 270 105 72 69 77 74 261 36 214 35 235 137 203 136 106 273</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 119 117 105 145 24 208 232 69 74 261 176 77 89 100 59 36 35 202 203 205 137 235 120 214 37 72 136 90 248 270 250 238 273 114 106</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\core\lib\list.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 11</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 267</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 240</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 240</file>
+          <file> 45 210 44 179 76 42 60 181 222 150 255 4 235 211 112 174 180</file>
         </tool>
       </inputs>
     </file>
@@ -905,715 +418,163 @@
       <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\ble_flash.c</name>
       <outputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 70</file>
+          <name>ICCARM</name>
+          <file> 130</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 159</file>
+          <name>BICOMP</name>
+          <file> 39</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 205 100 261 208 120 232 110 117 176 203 136 77 74 35 235 202 36 223 79 248 59 172 69 137 89 214 37 263 139</file>
+          <name>ICCARM</name>
+          <file> 238 76 179 210 45 4 235 150 255 85 44 42 181 174 180 112 211 194 55 252 111 86 225 110 10 91 186 60 141</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 263 100 208 232 69 74 261 176 77 117 36 35 202 203 205 137 235 223 89 79 139 110 248 136 59 120 214 37 172</file>
+          <name>BICOMP</name>
+          <file> 180 76 235 179 91 210 86 85 150 174 110 255 4 42 211 181 44 194 252 225 10 141 45 112 55 186 60 238 111</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\..\core\lib\aes-128.c</name>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_delay.c</name>
       <outputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 266</file>
+          <name>ICCARM</name>
+          <file> 133</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 8</file>
+          <name>BICOMP</name>
+          <file> 11</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 163 62 273 114 106 129 66 208 99 95 224 79 135 237 194 205 176 232 227 85 201 211 78 238 100 69 77 74 261 146 89 139</file>
+          <name>ICCARM</name>
+          <file> 38 179 210 45 4 235 150 255 55 56 60 10 44 42 76 181 174 180 112 211 91 186 208</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 227 85 62 114 205 208 100 232 69 74 261 176 77 135 201 99 95 163 146 129 224 66 237 211 273 106 194 78 238 79 89 139</file>
+          <name>BICOMP</name>
+          <file> 210 42 76 4 186 181 174 179 255 211 180 10 55 150 235 44 60 56 45 91 112 38 208</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_drv_wdt.c</name>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\timer\nrf_drv_timer.c</name>
       <outputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 142</file>
+          <name>ICCARM</name>
+          <file> 138</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 101</file>
+          <name>BICOMP</name>
+          <file> 232</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 89 35 208 37 202 203 100 136 235 151 69 24 120 205 59 270 117 72 105 232 176 77 74 261 36 214 137 122 90 250</file>
+          <name>ICCARM</name>
+          <file> 93 85 79 119 30 179 210 45 4 235 150 255 55 76 10 44 42 181 174 180 112 211 91 186 60 8 110 61 225 243 222 213 247 94 83</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 122 117 100 208 232 69 74 261 176 77 72 136 151 24 89 59 36 35 202 203 205 137 235 120 214 37 105 270 90 250</file>
+          <name>BICOMP</name>
+          <file> 210 179 213 150 180 60 225 119 76 91 93 222 85 30 55 181 10 94 61 243 79 8 45 255 4 235 44 186 42 211 112 174 110 83 247</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\..\core\lib\crc16.c</name>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\radio_config.c</name>
       <outputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 26</file>
+          <name>ICCARM</name>
+          <file> 53</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 71</file>
+          <name>BICOMP</name>
+          <file> 13</file>
         </tool>
       </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 35 208 10 44 42 76 179 210 45 4 235 150 255 181 174 180 112 211 91 186 60 213 247 94 83 243 54 47 108 175 75 51 143 121 106 201 34 209 185 167 249 252 55 111 221 14 172</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 108 76 210 174 143 35 221 60 181 167 94 179 14 54 91 150 42 209 75 51 201 111 208 213 243 252 172 10 44 186 211 112 45 255 4 235 180 47 106 247 34 55 83 175 185 249 121</file>
+        </tool>
+      </inputs>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\core\lib\gcr.c</name>
       <outputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 218</file>
+          <name>ICCARM</name>
+          <file> 105</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 126</file>
+          <name>BICOMP</name>
+          <file> 192</file>
         </tool>
       </outputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\system_nrf51.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 28</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 128</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 261 176 59 232 77 74 120 137 117 208 69 36 214 35 235 100 202 203 205 37</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 100 208 232 69 74 261 176 77 117 59 36 35 202 203 205 137 235 120 214 37</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\simple_timer\app_simple_timer.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 18</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 152</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 203 176 137 100 117 208 140 214 35 232 72 248 119 36 235 59 250 145 79 69 77 74 261 120 37 202 205 105 234 136 24 89 139</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 234 100 208 232 69 74 261 176 77 59 36 35 202 203 205 137 235 120 214 37 248 250 140 117 136 145 24 89 119 105 72 79 139</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\app_util_platform.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 22</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 255</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 69 232 36 208 100 35 37 202 250 176 77 74 261 235 137 203 205</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 250 100 208 232 69 74 261 176 77 37 36 35 202 203 205 137 235</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_gpiote.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 191</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 150</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 77 232 37 201 100 66 85 172 120 137 114 205 250 74 129 79 182 59 176 261 35 235 89 62 273 99 163 223 136 238 167 117 140 208 69 36 214 135 237 194 81 254 202 203 139 106 224 211 78 146 95</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 254 100 208 232 69 74 261 176 77 117 59 36 35 202 203 205 137 235 120 214 37 140 136 172 223 89 79 139 250 182 238 273 114 106 85 62 135 201 99 95 163 146 129 224 66 237 211 194 78 167 81</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_drv_common.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 264</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 195</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 137 203 232 77 59 214 74 136 36 176 261 205 208 100 35 37 90 120 235 202 69 270</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 270 59 36 35 100 208 232 69 74 261 176 77 202 203 205 137 235 120 214 37 90 136</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\app_error.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 108</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 125</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 74 214 232 137 77 203 136 37 36 176 261 205 208 100 140 248 120 35 235 202 69 59 117</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 59 36 35 100 208 232 69 74 261 176 77 202 203 205 137 235 120 214 37 140 117 136 248</file>
-        </tool>
-      </inputs>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\core\lib\ifft.c</name>
       <outputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 217</file>
+          <name>ICCARM</name>
+          <file> 165</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 184</file>
+          <name>BICOMP</name>
+          <file> 196</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 208 232 176 100 114 205 262 69 77 74 261</file>
+          <name>ICCARM</name>
+          <file> 237 94 180 179 76 210 45 4 235 150 255</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 262 114 205 208 100 232 69 74 261 176 77</file>
+          <name>BICOMP</name>
+          <file> 179 210 150 76 94 180 237 45 255 4 235</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\..\core\lib\sensors.c</name>
+      <name>$PROJ_DIR$\..\..\core\lib\me_tabs.c</name>
       <outputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 249</file>
+          <name>ICCARM</name>
+          <file> 116</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 9</file>
+          <name>BICOMP</name>
+          <file> 245</file>
         </tool>
       </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 208 129 201 232 176 66 215 62 273 146 114 85 89 139 135 237 194 205 211 79 69 77 74 261 224 99 78 238 100 95 163 106</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 79 208 232 69 74 261 176 77 89 139 85 62 114 205 100 135 201 99 95 163 146 129 224 66 237 211 273 106 194 78 238 215</file>
-        </tool>
-      </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\..\core\lib\trickle-timer.c</name>
+      <name>$PROJ_DIR$\..\..\core\lib\mmem.c</name>
       <outputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 38</file>
-        </tool>
-        <tool>
           <name>ICCARM</name>
-          <file> 171</file>
+          <file> 87</file>
         </tool>
-      </outputs>
-      <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 146 232 211 205 74 77 95 114 16 100 208 176 261 237 224 69 201 66 99 163 148</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 114 205 208 100 232 69 74 261 176 77 16 237 211 224 66 201 99 95 163 146 148</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\core\sys\arg.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 33</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 17</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 208 232 201 238 224 114 99 261 146 211 78 100 272 62 135 129 237 273 194 66 205 69 77 74 85 176 95 163 106</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 85 62 114 205 208 100 232 69 74 261 176 77 135 201 99 95 163 146 129 224 66 237 211 273 106 194 78 238 272</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\core\sys\autostart.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 169</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 130</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 77 99 100 208 201 163 74 232 146 95 114 205 176 261 129 69</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 129 201 99 95 163 146 114 205 208 100 232 69 74 261 176 77</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\core\sys\ctimer.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 222</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 181</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 224 95 77 99 211 114 100 208 69 240 74 232 163 201 78 85 66 205 261 238 237 176 146 62 135 129 273 194 106</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 237 211 224 66 114 205 208 100 232 69 74 261 176 77 201 99 95 163 146 85 62 135 129 273 106 194 78 238 240</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\core\lib\settings.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 13</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 67</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 78 232 201 100 211 74 6 114 224 99 238 208 69 77 141 85 62 135 129 237 273 194 66 205 261 146 176 95 163 106 79 89 139</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 85 62 114 205 208 100 232 69 74 261 176 77 135 201 99 95 163 146 129 224 66 237 211 273 106 194 78 238 6 79 89 139 141</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\core\sys\mt.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 98</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 226</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 224 238 208 232 99 95 114 273 146 201 211 78 100 163 106 96 62 135 129 237 194 66 205 176 85 69 77 74 261 252</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 85 62 114 205 208 100 232 69 74 261 176 77 135 201 99 95 163 146 129 224 66 237 211 273 106 194 78 238 96 252</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\core\sys\rtimer.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 166</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 97</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 146 176 99 100 208 114 66 261 224 238 85 106 205 77 74 232 201 211 78 95 273 69 62 135 129 237 194 163</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 273 114 205 208 100 232 69 74 261 176 77 106 85 62 135 201 99 95 163 146 129 224 66 237 211 194 78 238</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\core\sys\compower.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 143</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 23</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 114 34 99 208 232 261 246 275 100 69 77 74 273 106 89 224 238 211 155 205 176 31 221 139 85 201 78 146 153 79 239 62 135 129 237 194 66 95 163</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 114 205 208 100 232 69 74 261 176 77 238 273 106 275 155 31 246 153 34 221 79 89 139 239 85 62 135 201 99 95 163 146 129 224 66 237 211 194 78</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\net\device.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 190</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 15</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 37 202 60 182 160 232 203 100 208 120 73 79 244 59 176 35 89 236 256 32 75 230 36 214 235 137 69 77 74 261 205 259 83 139</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 259 59 36 35 100 208 232 69 74 261 176 77 202 203 205 137 235 120 214 37 60 160 236 73 256 32 89 83 79 139 75 182 230 244</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\platform\nrf51822\rtimer-arch.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 109</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 180</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 208 114 205 261 32 106 176 238 100 77 74 232 89 273 69 83</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 273 114 205 208 100 232 69 74 261 176 77 106 238 32 89 83</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\net\sockutil.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 247</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 133</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 232 89 74 73 208 69 77 60 261 79 256 156 83 176 139 32</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 32 208 232 69 74 261 176 77 89 83 79 139 60 256 73 156</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\net\util.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 21</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 12</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 208 232 137 205 74 79 60 214 35 69 77 36 235 261 73 32 207 59 160 120 37 100 202 176 203 89 259 83 139</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 259 59 36 35 100 208 232 69 74 261 176 77 202 203 205 137 235 120 214 37 60 160 73 32 89 83 79 139</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\core\sys\process.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 231</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 84</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 208 261 201 89 100 32 272 232 83 69 77 74 146 176 99 95 163 114 205</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 32 208 232 69 74 261 176 77 89 83 201 99 95 163 146 114 205 100 272</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 228</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 260</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 117 273 244 232 203 37 167 230 100 62 164 48 206 36 202 129 66 175 174 64 85 213 79 205 176 208 135 237 194 99 95 163 114 224 106 60 120 35 81 235 137 69 77 74 261 201 211 78 238 146 89 139 59 214</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 81 36 35 100 208 232 69 74 261 176 77 202 203 205 137 235 117 175 164 174 167 64 48 114 85 62 135 201 99 95 163 146 129 224 66 237 211 273 106 194 78 238 244 60 213 206 79 89 139 230 59 120 214 37</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio_comm.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 80</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 170</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 137 232 203 100 186 205 176 208 175 174 36 117 35 235 202 69 77 74 261 81</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 81 36 35 100 208 232 69 74 261 176 77 202 203 205 137 235 117 175 186 174</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\core\sys\procinit.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 251</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
           <file> 131</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 224 78 201 100 208 273 211 99 95 114 238 232 163 106 194 62 135 129 237 66 205 176 85 69 77 74 261 146</file>
-        </tool>
-        <tool>
           <name>ICCARM</name>
-          <file> 85 62 114 205 208 100 232 69 74 261 176 77 135 201 99 95 163 146 129 224 66 237 211 273 106 194 78 238</file>
+          <file> 182 214 94 180 179 76 210 45 4 235 150 255 252 55 111</file>
         </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\platform\nrf51822\Radio\si446x_api_lib.c</name>
-      <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 127</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 20</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 186 205 176 208 203 164 207 137 232 100 175 174 36 117 35 235 202 69 77 74 261 81</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 81 36 35 100 208 232 69 74 261 176 77 202 203 205 137 235 117 175 164 186 174</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\platform\nrf51822\Radio\si446x_nirq.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 173</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 200</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 176 203 205 208 164 137 232 100 175 36 117 35 235 202 69 77 74 261 81</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 81 36 35 100 208 232 69 74 261 176 77 202 203 205 137 235 117 175 164</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\core\sys\etimer.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 103</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 47</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 201 208 232 261 99 95 114 100 163 211 205 69 77 74 224 176 66 146</file>
-        </tool>
-        <tool>
-          <name>ICCARM</name>
-          <file> 114 205 208 100 232 69 74 261 176 77 211 224 66 201 99 95 163 146</file>
+          <file> 150 94 180 235 210 214 252 76 179 255 4 182 45 55 111</file>
         </tool>
       </inputs>
     </file>
@@ -1621,91 +582,242 @@
       <name>$PROJ_DIR$\..\..\core\lib\ringbuf.c</name>
       <outputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 179</file>
+          <name>ICCARM</name>
+          <file> 166</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 193</file>
+          <name>BICOMP</name>
+          <file> 153</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 208 114 205 176 100 232 69 48 77 74 261</file>
+          <name>ICCARM</name>
+          <file> 65 94 180 179 76 210 45 4 235 150 255</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 48 114 205 208 100 232 69 74 261 176 77</file>
+          <name>BICOMP</name>
+          <file> 179 94 180 150 76 210 45 65 255 4 235</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\..\core\sys\energest.c</name>
+      <name>$PROJ_DIR$\..\..\core\lib\petsciiconv.c</name>
       <outputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 245</file>
+          <name>ICCARM</name>
+          <file> 12</file>
         </tool>
         <tool>
+          <name>BICOMP</name>
+          <file> 127</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\core\lib\random.c</name>
+      <outputs>
+        <tool>
           <name>ICCARM</name>
-          <file> 88</file>
+          <file> 173</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 159</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 176 232 77 114 273 205 74 100 208 69 261 238 106</file>
+          <name>ICCARM</name>
+          <file> 120 34 94 180 179 76 210 45 4 235 150 255 194 55</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 238 273 114 205 208 100 232 69 74 261 176 77 106</file>
+          <name>BICOMP</name>
+          <file> 210 179 194 94 76 34 180 45 55 120 150 255 4 235</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\..\core\sys\stimer.c</name>
+      <name>$PROJ_DIR$\..\..\core\lib\sensors.c</name>
       <outputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 220</file>
+          <name>ICCARM</name>
+          <file> 28</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 76</file>
+          <name>BICOMP</name>
+          <file> 218</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 77 232 176 205 74 100 208 69 261 114 66 242</file>
+          <name>ICCARM</name>
+          <file> 252 179 210 45 4 235 150 255 55 111 54 47 94 180 76 108 175 75 51 143 121 106 201 34 209 185 247 83 167 249 213 190</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 114 205 208 100 232 69 74 261 176 77 66 242</file>
+          <name>BICOMP</name>
+          <file> 179 106 175 210 150 34 190 47 247 121 94 54 55 111 108 209 167 180 185 252 45 255 4 235 201 75 249 213 76 51 143 83</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\..\core\sys\timer.c</name>
+      <name>$PROJ_DIR$\..\..\core\lib\trickle-timer.c</name>
       <outputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 118</file>
+          <name>ICCARM</name>
+          <file> 148</file>
         </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 40</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 94 180 179 76 210 45 4 235 150 255 36 209 185 201 34 175 75 51 143 121 120</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 121 210 185 180 4 255 51 94 36 76 179 150 235 209 201 45 175 34 75 143 120</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\core\lib\settings.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 67</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 49</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 54 47 94 180 179 76 210 45 4 235 150 255 108 175 75 51 143 121 106 201 34 209 185 247 83 167 249 213 46 252 55 111 114</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 249 210 175 76 185 4 46 94 201 75 213 179 45 255 114 54 47 108 106 209 247 167 34 180 235 121 150 51 143 83 252 55 111</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\core\sys\compower.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 21</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 117</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 94 180 179 76 210 45 4 235 150 255 213 247 83 250 132 19 224 129 22 200 252 55 111 206 54 47 108 175 75 51 143 121 106 201 34 209 185 167 249</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 94 22 75 179 210 235 224 250 76 45 255 4 247 83 55 201 213 185 132 180 150 19 200 111 54 175 249 121 129 252 206 47 108 106 209 167 34 51 143</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\core\sys\ctimer.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 155</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 188</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 209 185 201 34 94 180 179 76 210 45 4 235 150 255 175 75 51 143 121 54 47 108 106 247 83 167 249 213 214</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 201 51 255 75 185 94 76 179 45 214 4 210 143 175 249 54 34 180 235 213 209 150 121 47 108 106 247 167 83</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\core\sys\etimer.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 66</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 68</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 94 180 179 76 210 45 4 235 150 255 185 201 34 175 75 51 143 121</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 175 179 210 235 75 51 94 76 143 185 180 45 255 4 201 150 34 121</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\core\sys\mt.c</name>
+      <outputs>
         <tool>
           <name>ICCARM</name>
           <file> 199</file>
         </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 74</file>
+        </tool>
       </outputs>
       <inputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 77 232 176 205 74 100 208 69 261 114 66 224</file>
+          <name>ICCARM</name>
+          <file> 54 47 94 180 179 76 210 45 4 235 150 255 108 175 75 51 143 121 106 201 34 209 185 247 83 167 249 213 71 227</file>
         </tool>
         <tool>
+          <name>BICOMP</name>
+          <file> 201 213 179 210 75 51 94 247 121 175 185 249 76 143 83 71 47 108 106 209 167 34 180 150 54 45 255 4 235 227</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\core\sys\procinit.c</name>
+      <outputs>
+        <tool>
           <name>ICCARM</name>
-          <file> 114 205 208 100 232 69 74 261 176 77 66 224</file>
+          <file> 96</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 223</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 54 47 94 180 179 76 210 45 4 235 150 255 108 175 75 51 143 121 106 201 34 209 185 247 83 167 249 213</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 201 249 175 76 179 247 185 75 51 94 213 210 143 83 167 47 108 106 209 34 180 150 54 45 255 4 235 121</file>
         </tool>
       </inputs>
     </file>
@@ -1713,22 +825,633 @@
       <name>$PROJ_DIR$\..\..\platform\nrf51822\clock.c</name>
       <outputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 229</file>
+          <name>ICCARM</name>
+          <file> 98</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 121</file>
+          <name>BICOMP</name>
+          <file> 202</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 95 74 99 114 100 208 69 232 224 238 77 163 211 205 176 261 66 201 146 273 106</file>
+          <name>ICCARM</name>
+          <file> 34 94 180 179 76 210 45 4 235 150 255 185 201 175 75 51 143 121 213 247 83</file>
         </tool>
         <tool>
+          <name>BICOMP</name>
+          <file> 51 4 75 94 76 179 45 210 201 213 255 143 185 180 150 235 34 175 121 247 83</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio_comm.c</name>
+      <outputs>
+        <tool>
           <name>ICCARM</name>
-          <file> 66 114 205 208 100 232 69 74 261 176 77 211 224 201 99 95 163 146 238 273 106</file>
+          <file> 147</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 2</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 254 44 42 76 179 210 45 4 235 150 255 181 174 180 112 211 85 146 158 142</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 112 210 174 76 158 180 150 179 146 142 44 85 42 211 181 45 255 4 235 254</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\w5500\w5500.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 219</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 193</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 38 179 210 45 4 235 150 255 55 56 252 111 236 10 44 42 76 181 174 180 112 211 91 186 60 14 136 70 85 228 161 157</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 10 180 161 179 252 210 150 91 76 70 56 136 60 181 38 236 228 157 55 45 255 4 235 111 14 44 186 42 211 112 174 85</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\w5500\md5.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 81</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 78</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 252 179 210 45 4 235 150 255 55 111 14 251</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 235 111 179 251 55 45 14 210 150 255 4 252</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\w5500\socket.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 0</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 10 44 42 76 179 210 45 4 235 150 255 181 174 180 112 211 91 186 60 236 14 136 38 55 56 228 161 9 94 221</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 112 180 179 210 94 4 161 186 42 45 255 14 38 9 221 44 211 235 136 56 236 228 91 60 76 181 150 174 10 55</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\bps.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 234</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 244</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 85 76 179 210 45 4 235 150 255 157 44 42 181 174 180 112 211 91 253 231 139 254 169</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 210 255 211 231 4 42 181 174 157 169 150 235 44 76 180 179 85 253 139 45 91 112 254</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\main.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 16</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 183</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 54 47 94 180 179 76 210 45 4 235 150 255 108 175 75 51 143 121 106 201 34 209 185 247 83 167 249 213 120 204 221 14 99 85 8 110 126 30 55 10 44 42 181 174 112 211 91 186 60 79</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 210 76 175 249 99 185 150 179 44 204 94 201 75 213 121 14 120 221 47 108 106 209 247 167 34 180 45 255 4 235 126 85 10 186 112 174 42 54 51 143 83 8 79 110 30 55 91 60 211 181</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\tasks.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 189</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 37</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 54 47 94 180 179 76 210 45 4 235 150 255 108 175 75 51 143 121 106 201 34 209 185 247 83 167 249 213 191 253 214 252 55 111 35 44 42 181 174 112 211 70 85 136 163 14 236 10 91 186 60 128 228 212 157 9 69 222 38 56 139 254 221 99 8 110 126 30 79 178 172 135</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 34 175 228 76 14 139 249 55 181 42 214 163 69 172 185 150 179 10 91 180 126 252 70 128 157 99 94 201 75 213 51 143 83 247 111 136 60 210 191 253 35 44 236 212 9 38 221 178 135 47 108 106 209 167 45 255 4 235 121 211 112 174 85 186 110 54 222 56 254 8 79 30</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_gpiote.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 123</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 164</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 229 76 179 210 45 4 235 150 255 85 10 44 42 181 174 180 112 211 91 186 60 115 110 141 194 55 252 111 222 157 213 247 94 83 54 47 108 175 75 51 143 121 106 201 34 209 185 167 249 139 254</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 255 210 60 175 76 34 54 141 91 112 94 180 222 4 106 252 157 10 150 235 42 211 55 47 247 75 143 194 110 213 139 85 115 179 45 44 186 108 209 167 254 229 181 174 111 83 201 185 249 121 51</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\simple_timer\app_simple_timer.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 125</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 23</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 204 76 179 210 45 4 235 150 255 10 44 42 181 174 180 112 211 91 186 60 225 222 115 85 110 119 30 55 93 79 8 252 111</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 174 150 112 76 85 179 115 186 42 210 8 225 93 44 211 10 222 119 252 45 255 4 235 91 60 181 180 79 204 110 30 55 111</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_uart.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 195</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 43</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 69 76 179 210 45 4 235 150 255 85 222 60 44 42 181 174 180 112 211 10 91 186 115 110 141 157 156 151 30 55 79 8 213 247 94 83 9 14 252 111</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 150 156 44 179 180 8 14 55 141 213 76 85 94 115 157 222 210 181 186 91 69 10 9 252 45 255 4 235 60 42 211 112 174 111 110 151 79 30 247 83</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_drv_common.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 168</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 233</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 243 10 44 42 76 179 210 45 4 235 150 255 181 174 180 112 211 91 186 60 61 110</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 112 174 210 255 10 186 4 110 44 150 235 180 179 76 42 60 61 91 211 181 45 243</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_soc.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 92</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 160</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 194 179 210 45 4 235 150 255 55 86 76 44 42 181 174 180 112 211 110</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 211 55 150 235 210 179 255 4 44 76 86 45 42 181 194 110 112 174 180</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\nrf_drv_wdt.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 72</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 113</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 99 85 76 179 210 45 4 235 150 255 8 110 126 30 55 10 44 42 181 174 180 112 211 91 186 60 79 243 61 222</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 55 42 179 60 181 174 76 110 211 126 45 30 91 180 10 243 85 8 79 210 150 255 4 235 44 186 112 99 61 222</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\system_nrf51.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 102</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 18</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 76 179 210 45 4 235 150 255 85 10 44 42 181 174 180 112 211 91 186 60</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 235 150 10 210 255 4 91 112 85 179 45 44 186 42 211 76 181 174 180 60</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\core\lib\assert.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 50</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 38 179 210 45 4 235 150 255 55 56</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 179 55 45 210 56 38 150 255 4 235</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\core\lib\aes-128.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 26</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 241</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 203 54 47 94 180 179 76 210 45 4 235 150 255 108 175 75 51 143 121 106 201 34 209 185 247 83 167 249 213 252 55 111</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 143 47 247 94 83 106 34 179 75 51 201 252 108 209 167 180 150 210 203 54 175 185 249 213 76 45 255 4 235 121 55 111</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\core\lib\crc16.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 3</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 17</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\core\lib\list.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 242</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 31</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 214</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 214</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\core\lib\me.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 1</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 217</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 171</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 171</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\core\lib\memb.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 122</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 59</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 252 179 210 45 4 235 150 255 55 111 54 47 94 180 76 108 175 75 51 143 121 106 201 34 209 185 247 83 167 249 213 64</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 34 150 179 106 175 64 210 47 247 121 94 54 55 111 108 209 167 180 185 252 45 255 4 235 201 75 249 213 76 51 143 83</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\core\sys\autostart.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 107</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 145</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 106 175 75 51 143 121 94 180 179 76 210 45 4 235 150 255</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 255 75 76 179 175 143 4 210 121 51 94 180 150 235 106 45</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\core\sys\arg.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 41</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 20</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 54 47 94 180 179 76 210 45 4 235 150 255 108 175 75 51 143 121 106 201 34 209 185 247 83 167 249 213 246</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 179 210 175 213 201 94 75 235 121 185 249 76 246 47 108 106 209 247 167 34 180 45 255 4 54 150 51 143 83</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\core\sys\energest.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 63</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 216</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 213 247 94 180 179 76 210 45 4 235 150 255 83</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 150 210 255 94 247 180 4 76 179 45 235 213 83</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\core\sys\process.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 62</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 198</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 38 179 210 45 4 235 150 255 55 56 175 75 51 143 121 94 180 76 246</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 179 235 175 55 76 38 246 210 56 45 255 4 121 150 75 51 143 94 180</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\core\sys\rtimer.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 73</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 137</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 247 94 180 179 76 210 45 4 235 150 255 83 54 47 108 175 75 51 143 121 106 201 34 209 185 167 249 213</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 121 150 75 76 179 94 34 235 201 213 54 83 180 255 4 210 175 185 249 51 247 45 47 108 106 209 167 143</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\core\sys\stimer.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 5</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 187</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 94 180 179 76 210 45 4 235 150 255 34 215</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 255 210 150 180 4 76 179 45 235 94 34 215</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\core\sys\timer.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 177</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 90</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 94 180 179 76 210 45 4 235 150 255 34 201</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 255 210 150 180 4 76 179 45 235 94 34 201</file>
         </tool>
       </inputs>
     </file>
@@ -1736,68 +1459,324 @@
       <name>$PROJ_DIR$\net\dhcp.c</name>
       <outputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 149</file>
+          <name>ICCARM</name>
+          <file> 226</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 253</file>
+          <name>BICOMP</name>
+          <file> 124</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 256 208 232 176 59 120 100 205 60 79 160 156 83 37 202 259 236 188 73 89 69 77 74 261 139 36 214 35 235 137 203 32</file>
+          <name>ICCARM</name>
+          <file> 38 179 210 45 4 235 150 255 55 56 252 111 236 10 44 42 76 181 174 180 112 211 91 186 60 14 136 212 228 163 128 9</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 32 208 232 69 74 261 176 77 89 83 79 139 259 59 36 35 100 202 203 205 137 235 120 214 37 60 160 236 256 188 156 73</file>
+          <name>BICOMP</name>
+          <file> 228 179 210 150 10 91 76 180 14 252 136 128 56 60 181 236 212 163 9 55 45 255 4 235 111 44 186 42 211 112 174 38</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\..\core\lib\random.c</name>
+      <name>$PROJ_DIR$\..\..\platform\nrf51822\rtimer-arch.c</name>
       <outputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 185</file>
+          <name>ICCARM</name>
+          <file> 154</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 197</file>
+          <name>BICOMP</name>
+          <file> 80</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
-          <name>BICOMP</name>
-          <file> 232 208 223 114 100 66 205 69 89 148 176 77 74 261</file>
+          <name>ICCARM</name>
+          <file> 247 94 180 179 76 210 45 4 235 150 255 83 213 38 55 56</file>
         </tool>
         <tool>
-          <name>ICCARM</name>
-          <file> 148 66 114 205 208 100 232 69 74 261 176 77 223 89</file>
+          <name>BICOMP</name>
+          <file> 179 94 180 235 38 83 150 213 76 255 4 210 55 247 45 56</file>
         </tool>
       </inputs>
     </file>
-    <forcedrebuild>
-      <name>$PROJ_DIR$\stm32f10x_it.c</name>
-      <tool>ICCARM</tool>
-    </forcedrebuild>
-    <forcedrebuild>
-      <name>$PROJ_DIR$\mai_no_os.c</name>
-      <tool>ICCARM</tool>
-    </forcedrebuild>
-    <forcedrebuild>
-      <name>$PROJ_DIR$\w5500\SPI2.c</name>
-      <tool>ICCARM</tool>
-    </forcedrebuild>
-    <forcedrebuild>
-      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\simple_uart.c</name>
-      <tool>ICCARM</tool>
-    </forcedrebuild>
-    <forcedrebuild>
-      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_uart_fifo.c</name>
-      <tool>ICCARM</tool>
-    </forcedrebuild>
+    <file>
+      <name>$PROJ_DIR$\net\device.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 33</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 162</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 236 10 44 42 76 179 210 45 4 235 150 255 181 174 180 112 211 91 186 60 14 136 212 9 228 38 55 56 252 111 253 157 208 221</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 235 157 211 136 44 9 252 221 14 186 42 112 179 45 255 4 210 180 212 228 38 253 208 10 91 60 76 181 150 174 55 236 56 111</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\net\sockutil.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 101</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 220</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 38 179 210 45 4 235 150 255 55 56 252 111 14 228 9 128</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 210 55 4 9 179 45 255 14 235 252 228 128 56 150 111 38</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\net\util.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 29</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 32</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 236 10 44 42 76 179 210 45 4 235 150 255 181 174 180 112 211 91 186 60 14 136 9 38 55 56 252 111</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 179 210 112 180 4 252 14 186 42 45 255 44 211 235 9 38 176 10 136 91 60 76 181 150 174 55 236 56 111</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 239</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 205</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 254 44 42 76 179 210 45 4 235 150 255 181 174 180 112 211 85 146 144 142 139 6 65 94 54 47 108 175 75 51 143 121 106 201 34 209 185 247 83 167 249 213 221 14 191 178 252 55 111 208 10 91 186 60</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 150 85 221 174 75 51 60 139 208 179 76 209 201 247 144 65 178 44 108 167 143 94 83 146 142 6 54 191 252 180 181 210 47 106 34 14 91 42 254 211 112 45 255 4 235 175 185 249 213 121 55 111 10 186</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\platform\nrf51822\Radio\si446x_api_lib.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 27</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 103</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 254 44 42 76 179 210 45 4 235 150 255 181 174 180 112 211 85 146 144 158 142</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 158 180 150 179 174 144 176 112 210 76 146 142 44 85 42 211 181 45 255 4 235 254</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\platform\nrf51822\Radio\radio_hal.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 7</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 184</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 254 44 42 76 179 210 45 4 235 150 255 181 174 180 112 211 85 146 253 157 91 70 231</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 255 42 157 85 211 179 45 44 231 112 4 210 180 146 253 70 235 76 254 181 150 174 91</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\platform\nrf51822\Radio\si446x_nirq.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 170</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 149</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 254 44 42 76 179 210 45 4 235 150 255 181 174 180 112 211 85 146 144</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 150 174 180 179 144 112 210 76 146 44 85 42 211 181 45 255 4 235 254</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\spi_master\spi_master.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 24</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 240</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 70 85 76 179 210 45 4 235 150 255 208 10 44 42 181 174 180 112 211 91 186 60 157 134 231</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 174 85 210 4 76 231 255 91 180 179 157 150 235 60 42 211 181 208 134 45 10 44 186 112 70</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\ad_hoc.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 88</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 100</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 178 54 47 94 180 179 76 210 45 4 235 150 255 108 175 75 51 143 121 106 201 34 209 185 247 83 167 249 213 14 221 191 139 254 44 42 181 174 112 211 85 172</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 201 247 76 213 179 75 51 172 14 94 143 83 180 174 191 175 185 249 150 34 221 139 54 47 108 106 209 167 210 45 255 4 235 121 254 44 85 42 211 181 178 112</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\dev_list.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 118</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 58</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 135 14</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 14 135</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\dev_cfg.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 197</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 57</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 221 14 44 42 76 179 210 45 4 235 150 255 181 174 180 112 211 238 85 252 55 111</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 238 42 181 235 44 252 211 76 179 45 255 4 210 180 85 221 14 112 150 174 55 111</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\tags_manage.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 140</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 97</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 172 14 221 252 179 210 45 4 235 150 255 55 111</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 179 55 235 221 14 111 252 210 45 255 4 172 150</file>
+        </tool>
+      </inputs>
+    </file>
     <forcedrebuild>
       <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_fifo.c</name>
       <tool>ICCARM</tool>
@@ -1807,11 +1786,31 @@
       <tool>ICCARM</tool>
     </forcedrebuild>
     <forcedrebuild>
-      <name>$PROJ_DIR$\net\dns.c</name>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\simple_uart.c</name>
       <tool>ICCARM</tool>
     </forcedrebuild>
     <forcedrebuild>
       <name>$PROJ_DIR$\..\..\core\lib\print-stats.c</name>
+      <tool>ICCARM</tool>
+    </forcedrebuild>
+    <forcedrebuild>
+      <name>$PROJ_DIR$\net\dns.c</name>
+      <tool>ICCARM</tool>
+    </forcedrebuild>
+    <forcedrebuild>
+      <name>$PROJ_DIR$\mai_no_os.c</name>
+      <tool>ICCARM</tool>
+    </forcedrebuild>
+    <forcedrebuild>
+      <name>$PROJ_DIR$\stm32f10x_it.c</name>
+      <tool>ICCARM</tool>
+    </forcedrebuild>
+    <forcedrebuild>
+      <name>$PROJ_DIR$\..\..\cpu\nrf51822\nrf51822\uart\app_uart_fifo.c</name>
+      <tool>ICCARM</tool>
+    </forcedrebuild>
+    <forcedrebuild>
+      <name>$PROJ_DIR$\w5500\SPI2.c</name>
       <tool>ICCARM</tool>
     </forcedrebuild>
   </configuration>

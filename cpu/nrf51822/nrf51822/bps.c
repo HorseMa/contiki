@@ -10,6 +10,7 @@
 
 void gipo_init(void)
 {
+        nrf_gpio_cfg_input(16,GPIO_PIN_CNF_PULL_Pullup);
 	nrf_gpio_cfg_output(W5500_CS);
 	nrf_gpio_pin_set(W5500_CS);
 	nrf_gpio_cfg_output(W5500_RST);

@@ -44,7 +44,7 @@ PROCESS(si4463_enddev_process,"si4463");
 PROCESS(ethernet_process,"ethernet");
 PROCESS(data_report_process,"data_report");
 
-AUTOSTART_PROCESSES(&uartRecv_process,&led_process,&ethernet_process,&data_report_process,&si4463_center_process);
+AUTOSTART_PROCESSES(&uartRecv_process,&led_process,&ethernet_process,&data_report_process,&si4463_center_process,&read_gpio_process);
 
 void clockInit(void)
 {
@@ -326,6 +326,79 @@ PROCESS_THREAD(ethernet_process, ev, data)
           send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 2);
 
         }
+        if(pkg->cmd == 0x0B)//配置参数
+        {
+          pkg->sn = global_sn ++;
+          pkg->dev_id = stDefaultCfg.dev_id;
+          stDevCfg.rx_gain = pkg->data[0];
+          stDevCfg.local_ip[0] = pkg->data[1];
+          stDevCfg.local_ip[1] = pkg->data[2];
+          stDevCfg.local_ip[2] = pkg->data[3];
+          stDevCfg.local_ip[3] = pkg->data[4];
+          stDevCfg.local_port = pkg->data[5] + (pkg->data[6] * 256);
+          stDevCfg.gw[0] = pkg->data[7];
+          stDevCfg.gw[1] = pkg->data[8];
+          stDevCfg.gw[2] = pkg->data[9];
+          stDevCfg.gw[3] = pkg->data[10];
+          memcpy(stDevCfg.mac,&pkg->data[11],6);
+          stDevCfg.server_ip[0] = pkg->data[7 + 4 + 6];
+          stDevCfg.server_ip[1] = pkg->data[8  + 4 + 6];
+          stDevCfg.server_ip[2] = pkg->data[9  + 4 + 6];
+          stDevCfg.server_ip[3] = pkg->data[10  + 4 + 6];
+          stDevCfg.server_port = pkg->data[11  + 4 + 6] + (pkg->data[12  + 4 + 6] * 256);
+          stDevCfg.tag_type = pkg->data[13  + 4 + 6];
+          stDevCfg.reserved1 = pkg->data[14  + 4 + 6] + pkg->data[15  + 4 + 6] * 256;
+
+          write_cfg();
+          pkg->data[0] = 'o';
+          pkg->data[1] = 'k';
+          pkg->len = 7 + 2;
+          checksum = 0;
+          for(loop = 0;loop < pkg->len - 1 + 2;loop++)
+          {
+            checksum += *((uint8_t*)pkg + loop);
+          }
+          *((uint8_t*)pkg + loop) = checksum;
+          send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 2);
+          etimer_set(&et_ethernet, CLOCK_SECOND / 1);
+          PROCESS_WAIT_EVENT();
+          NVIC_SystemReset();
+        }
+        if(pkg->cmd == 0x0C)//读取参数
+        {
+          pkg->sn = global_sn ++;
+          pkg->dev_id = stDefaultCfg.dev_id;
+          pkg->data[0] = stDevCfg.rx_gain;
+          pkg->data[1] = stDevCfg.local_ip[0];
+          pkg->data[2] = stDevCfg.local_ip[1];
+          pkg->data[3] = stDevCfg.local_ip[2];
+          pkg->data[4] = stDevCfg.local_ip[3];
+          pkg->data[5] = (uint8)stDevCfg.local_port;
+          pkg->data[6] = (uint8)(stDevCfg.local_port >> 8);
+          pkg->data[7] = stDevCfg.gw[0];
+          pkg->data[8] = stDevCfg.gw[1];
+          pkg->data[9] = stDevCfg.gw[2];
+          pkg->data[10] = stDevCfg.gw[3];
+          memcpy(&pkg->data[11],stDevCfg.mac,6);
+          pkg->data[7 + 10] = stDevCfg.server_ip[0];
+          pkg->data[8 + 10] = stDevCfg.server_ip[1];
+          pkg->data[9 + 10] = stDevCfg.server_ip[2];
+          pkg->data[10 + 10] = stDevCfg.server_ip[3];
+          pkg->data[11 + 10] = (uint8)stDevCfg.server_port;
+          pkg->data[12 + 10] = (uint8)(stDevCfg.server_port >> 8);
+          pkg->data[13 + 10] = stDevCfg.tag_type;
+          pkg->data[14 + 10] = (uint8)stDevCfg.reserved1;
+          pkg->data[15 + 10] = (uint8)(stDevCfg.reserved1 >> 8);
+          pkg->len = 7 + 16 + 10;
+          checksum = 0;
+          for(loop = 0;loop < pkg->len - 1 + 2;loop++)
+          {
+            checksum += *((uint8_t*)pkg + loop);
+          }
+          *((uint8_t*)pkg + loop) = checksum;
+          send(SOCK_SERVER,(uint8_t*)pkg,pkg->len + 2);
+
+        }
         if(pkg->cmd == 0x05)//控制指令
         {
           pkg->sn = global_sn ++;
@@ -359,6 +432,8 @@ PROCESS_THREAD(ethernet_process, ev, data)
           stDevCfg.rx_gain = stDefaultCfg.rx_gain;
           memcpy(stDevCfg.local_ip,stDefaultCfg.local_ip,4);
           stDevCfg.local_port = stDefaultCfg.local_port;
+          memcpy(stDevCfg.gw,stDefaultCfg.gw,4);
+          memcpy(stDevCfg.mac,stDefaultCfg.mac,8);
           memcpy(stDevCfg.server_ip,stDefaultCfg.server_ip,4);
           stDevCfg.server_port = stDefaultCfg.server_port;
           stDevCfg.tag_type = stDefaultCfg.tag_type;
@@ -439,11 +514,36 @@ PROCESS_THREAD(data_report_process, ev, data)
 PROCESS_THREAD(read_gpio_process, ev, data)
 { 
   static struct etimer et_blink;
-
+  static uint8 cnt = 0;
   PROCESS_BEGIN();
   while(1)
   {
-    etimer_set(&et_blink, CLOCK_SECOND / 2);
+    if(nrf_gpio_pin_read(16) == 0)
+    {
+        cnt ++;
+    }
+    else
+    {
+        cnt = 0;
+    }
+    if(cnt >= 5000 / 100)
+    {
+          earase_cfg();
+          stDevCfg.rx_gain = stDefaultCfg.rx_gain;
+          memcpy(stDevCfg.local_ip,stDefaultCfg.local_ip,4);
+          stDevCfg.local_port = stDefaultCfg.local_port;
+          memcpy(stDevCfg.gw,stDefaultCfg.gw,4);
+          memcpy(stDevCfg.mac,stDefaultCfg.mac,8);
+          memcpy(stDevCfg.server_ip,stDefaultCfg.server_ip,4);
+          stDevCfg.server_port = stDefaultCfg.server_port;
+          stDevCfg.tag_type = stDefaultCfg.tag_type;
+          stDevCfg.reserved1 = 0;
+          write_cfg();
+          etimer_set(&et_blink, CLOCK_SECOND / 1);
+          PROCESS_WAIT_EVENT();
+          NVIC_SystemReset();
+    }
+    etimer_set(&et_blink, CLOCK_SECOND / 10);
     PROCESS_WAIT_EVENT();
   }
   PROCESS_END();

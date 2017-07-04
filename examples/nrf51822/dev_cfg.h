@@ -6,6 +6,8 @@
    uint8 rx_gain;
    uint8 local_ip[4];
    uint16 local_port;
+   uint8 gw[4];
+   uint8 mac[8];
    uint8 server_ip[4];
    uint16 server_port;
    uint8 tag_type;
@@ -19,6 +21,7 @@ typedef struct default_cfg
   int8 rx_gain;
   uint8 local_ip[4];
   uint16 local_port;
+  uint8 mac[8];
   uint8 sub[4];
   uint8 gw[4];
   uint8 dns[4];
