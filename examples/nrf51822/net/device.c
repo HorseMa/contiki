@@ -128,7 +128,7 @@ void set_default(void)
   mac[5] = stDefaultCfg.dev_id;
   memcpy(mac,stDevCfg.mac,6);
   memcpy(lip, stDevCfg.local_ip, 4);
-  memcpy(sub, stDefaultCfg.sub, 4);
+  memcpy(sub, stDevCfg.sub, 4);
   memcpy(gw, stDevCfg.gw, 4);
   memcpy(dns, stDefaultCfg.dns, 4);
   memcpy(ConfigMsg.lip, lip, 4);

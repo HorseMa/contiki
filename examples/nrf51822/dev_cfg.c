@@ -104,6 +104,7 @@ void read_cfg(void)
     memcpy(stDevCfg.local_ip,stDefaultCfg.local_ip,4);
     memcpy(stDevCfg.gw,stDefaultCfg.gw,4);
     memcpy(stDevCfg.mac,stDefaultCfg.mac,8);
+    memcpy(stDevCfg.sub,stDefaultCfg.sub,4);
     stDevCfg.local_port = stDefaultCfg.local_port;
     memcpy(stDevCfg.server_ip,stDefaultCfg.server_ip,4);
     stDevCfg.server_port = stDefaultCfg.server_port;

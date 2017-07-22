@@ -341,13 +341,18 @@ PROCESS_THREAD(ethernet_process, ev, data)
           stDevCfg.gw[2] = pkg->data[9];
           stDevCfg.gw[3] = pkg->data[10];
           memcpy(stDevCfg.mac,&pkg->data[11],6);
-          stDevCfg.server_ip[0] = pkg->data[7 + 4 + 6];
-          stDevCfg.server_ip[1] = pkg->data[8  + 4 + 6];
-          stDevCfg.server_ip[2] = pkg->data[9  + 4 + 6];
-          stDevCfg.server_ip[3] = pkg->data[10  + 4 + 6];
-          stDevCfg.server_port = pkg->data[11  + 4 + 6] + (pkg->data[12  + 4 + 6] * 256);
-          stDevCfg.tag_type = pkg->data[13  + 4 + 6];
-          stDevCfg.reserved1 = pkg->data[14  + 4 + 6] + pkg->data[15  + 4 + 6] * 256;
+          stDevCfg.sub[0] = pkg->data[7 + 4 + 6];
+          stDevCfg.sub[1] = pkg->data[8  + 4 + 6];
+          stDevCfg.sub[2] = pkg->data[9  + 4 + 6];
+          stDevCfg.sub[3] = pkg->data[10  + 4 + 6];
+          
+          stDevCfg.server_ip[0] = pkg->data[7 + 4 + 6 + 4];
+          stDevCfg.server_ip[1] = pkg->data[8  + 4 + 6 + 4];
+          stDevCfg.server_ip[2] = pkg->data[9  + 4 + 6 + 4];
+          stDevCfg.server_ip[3] = pkg->data[10  + 4 + 6 + 4];
+          stDevCfg.server_port = pkg->data[11  + 4 + 6 + 4] + (pkg->data[12  + 4 + 6 + 4] * 256);
+          stDevCfg.tag_type = pkg->data[13  + 4 + 6 + 4];
+          stDevCfg.reserved1 = pkg->data[14  + 4 + 6 + 4] + pkg->data[15  + 4 + 6 + 4] * 256;
 
           write_cfg();
           pkg->data[0] = 'o';
@@ -380,16 +385,21 @@ PROCESS_THREAD(ethernet_process, ev, data)
           pkg->data[9] = stDevCfg.gw[2];
           pkg->data[10] = stDevCfg.gw[3];
           memcpy(&pkg->data[11],stDevCfg.mac,6);
-          pkg->data[7 + 10] = stDevCfg.server_ip[0];
-          pkg->data[8 + 10] = stDevCfg.server_ip[1];
-          pkg->data[9 + 10] = stDevCfg.server_ip[2];
-          pkg->data[10 + 10] = stDevCfg.server_ip[3];
-          pkg->data[11 + 10] = (uint8)stDevCfg.server_port;
-          pkg->data[12 + 10] = (uint8)(stDevCfg.server_port >> 8);
-          pkg->data[13 + 10] = stDevCfg.tag_type;
-          pkg->data[14 + 10] = (uint8)stDevCfg.reserved1;
-          pkg->data[15 + 10] = (uint8)(stDevCfg.reserved1 >> 8);
-          pkg->len = 7 + 16 + 10;
+          pkg->data[7 + 10] = stDevCfg.sub[0];
+          pkg->data[8 + 10] = stDevCfg.sub[1];
+          pkg->data[9 + 10] = stDevCfg.sub[2];
+          pkg->data[10 + 10] = stDevCfg.sub[3];
+          
+          pkg->data[7 + 10 + 4] = stDevCfg.server_ip[0];
+          pkg->data[8 + 10 + 4] = stDevCfg.server_ip[1];
+          pkg->data[9 + 10 + 4] = stDevCfg.server_ip[2];
+          pkg->data[10 + 10 + 4] = stDevCfg.server_ip[3];
+          pkg->data[11 + 10 + 4] = (uint8)stDevCfg.server_port;
+          pkg->data[12 + 10 + 4] = (uint8)(stDevCfg.server_port >> 8);
+          pkg->data[13 + 10 + 4] = stDevCfg.tag_type;
+          pkg->data[14 + 10 + 4] = (uint8)stDevCfg.reserved1;
+          pkg->data[15 + 10 + 4] = (uint8)(stDevCfg.reserved1 >> 8);
+          pkg->len = 7 + 16 + 10 + 4;
           checksum = 0;
           for(loop = 0;loop < pkg->len - 1 + 2;loop++)
           {
@@ -534,6 +544,7 @@ PROCESS_THREAD(read_gpio_process, ev, data)
           stDevCfg.local_port = stDefaultCfg.local_port;
           memcpy(stDevCfg.gw,stDefaultCfg.gw,4);
           memcpy(stDevCfg.mac,stDefaultCfg.mac,8);
+          memcpy(stDevCfg.sub,stDefaultCfg.sub,4);
           memcpy(stDevCfg.server_ip,stDefaultCfg.server_ip,4);
           stDevCfg.server_port = stDefaultCfg.server_port;
           stDevCfg.tag_type = stDefaultCfg.tag_type;
